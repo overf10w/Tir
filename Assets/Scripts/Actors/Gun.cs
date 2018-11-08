@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.AnimatedValues;
 using UnityEngine;
 
 public class Gun : MonoBehaviour
@@ -19,16 +18,6 @@ public class Gun : MonoBehaviour
     private Ray ray;
     private RaycastHit hit;
 
-    // Update is called once per frame
-    void Update()
-    {
-        UpdateGunRotation();
-        if (Input.GetMouseButton(0) && Time.time > nextShotTime)
-        {
-            Shoot();
-        }
-    }
-
     public void UpdateGunRotation()
     {
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -37,21 +26,24 @@ public class Gun : MonoBehaviour
 
     public void Shoot()
     {
-        // Work only with 'Cube' layer
-        int layerMask = 1 << LayerMask.NameToLayer("Cube");
-
-        if (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, layerMask))
+        if (Time.time > nextShotTime)
         {
-            nextShotTime = Time.time + msBetweenShots / 1000;
+            // Work only with 'Cube' layer
+            int layerMask = 1 << LayerMask.NameToLayer("Cube");
 
-            IDestroyable target = hit.transform.GetComponent<IDestroyable>();
-            if (target != null)
+            if (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, layerMask))
             {
-                target.TakeDamage(110.0f);
-            }
+                nextShotTime = Time.time + msBetweenShots / 1000;
 
-            Debug.DrawRay(ray.origin, ray.direction * 10000, Color.red, 0.5f);
-            Debug.DrawRay(muzzle.position, hit.point - muzzle.position, Color.green, 0.7f);
+                IDestroyable target = hit.transform.GetComponent<IDestroyable>();
+                if (target != null)
+                {
+                    target.TakeDamage(110.0f);
+                }
+
+                Debug.DrawRay(ray.origin, ray.direction * 10000, Color.red, 0.5f);
+                Debug.DrawRay(muzzle.position, hit.point - muzzle.position, Color.green, 0.7f);
+            }
         }
     }
 

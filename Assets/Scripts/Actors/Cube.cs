@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.TestTools;
 
 
 public class Cube : MonoBehaviour, IDestroyable
 {
+    private int gold = 2;
+
     [SerializeField] private float health = 100.0f;
 
     public void Start()
@@ -20,6 +21,7 @@ public class Cube : MonoBehaviour, IDestroyable
         {
             Message cubeDeath = new Message();
             cubeDeath.Type = MessageType.CubeDeath;
+            cubeDeath.IntValue = gold;
             MessageBus.Instance.SendMessage(cubeDeath);
             Destroy(this.gameObject);
         }

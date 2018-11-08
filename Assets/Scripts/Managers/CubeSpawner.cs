@@ -22,7 +22,6 @@ public class CubeSpawner : MessageHandler
         currentWave = waves[currentWaveIndex];
         var go = Instantiate(currentWave, currentWave.transform.position, Quaternion.identity) as Wave;
         cubesRemainingAlive = go.cubesNumber;
-        Debug.Log("Cube Spawner: Cubes remaining alive: " + cubesRemainingAlive); 
     }
 
     public override void HandleMessage(Message message)
@@ -38,6 +37,7 @@ public class CubeSpawner : MessageHandler
                     MessageBus.Instance.SendMessage(deathMessage);
                     return;
                 }
+                PlayerData.currentWave = currentWaveIndex;
                 SpawnWave();
             }
         }

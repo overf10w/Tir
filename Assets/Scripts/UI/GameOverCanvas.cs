@@ -39,8 +39,8 @@ public class GameOverCanvas : MessageHandler
     public void LoadScene(string sceneName)
     {
         MessageBus.Nullify();
+        PlayerData.Nullify();
         SceneManager.LoadScene(sceneName);
-        Debug.Log("Restart was pressed!");
     }
 
     public void OnExitButtonClick()
