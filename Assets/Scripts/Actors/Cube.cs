@@ -3,16 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.TestTools;
 
+
 public class Cube : MonoBehaviour, IDestroyable
 {
     [SerializeField] private float health = 100.0f;
 
-    // Update is called once per frame
+    public void Start()
+    {
+        health = 100.0f;
+    }
+
     public void TakeDamage(float damage)
     {
         health -= damage;
         if (health <= 0.0f)
         {
+            Message cubeDeath = new Message();
+            cubeDeath.Type = MessageType.CubeDeath;
+            MessageBus.Instance.SendMessage(cubeDeath);
             Destroy(this.gameObject);
         }
     }

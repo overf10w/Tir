@@ -43,13 +43,16 @@ public class Gun : MonoBehaviour
         if (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, layerMask))
         {
             nextShotTime = Time.time + msBetweenShots / 1000;
+
+            IDestroyable target = hit.transform.GetComponent<IDestroyable>();
+            if (target != null)
+            {
+                target.TakeDamage(110.0f);
+            }
+
             Debug.DrawRay(ray.origin, ray.direction * 10000, Color.red, 0.5f);
             Debug.DrawRay(muzzle.position, hit.point - muzzle.position, Color.green, 0.7f);
-            Debug.Log("hit.point: " + hit.point);
         }
-
-        //var projectile = Instantiate(Resources.Load<GameObject>("Prefabs/Kek"), muzzle.position, muzzle.rotation);
-        //projectile.GetComponent<Rigidbody>().AddForce(projectile.transform.forward * 300);
     }
 
     void OnDrawGizmos()
