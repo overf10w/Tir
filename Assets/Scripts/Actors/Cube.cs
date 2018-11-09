@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class Cube : MonoBehaviour, IDestroyable
 {
     private int gold = 2;
@@ -19,10 +18,7 @@ public class Cube : MonoBehaviour, IDestroyable
         health -= damage;
         if (health <= 0.0f)
         {
-            Message cubeDeath = new Message();
-            cubeDeath.Type = MessageType.CubeDeath;
-            cubeDeath.IntValue = gold;
-            MessageBus.Instance.SendMessage(cubeDeath);
+            MessageBus.Instance.SendMessage(new Message {Type = MessageType.CubeDeath, IntValue = gold });
             Destroy(this.gameObject);
         }
     }

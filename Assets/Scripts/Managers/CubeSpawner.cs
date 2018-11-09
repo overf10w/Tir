@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class CubeSpawner : MessageHandler
 {
+    public delegate void OnWaveChanged(int wave);
+
+    public event OnWaveChanged onWaveChanged;
+
     public Wave[] waves;
     private Wave currentWave;
 
@@ -32,12 +36,12 @@ public class CubeSpawner : MessageHandler
             {
                 if (++currentWaveIndex > waves.Length - 1)
                 {
-                    Message deathMessage = new Message();
-                    deathMessage.Type = MessageType.GameOver;
-                    MessageBus.Instance.SendMessage(deathMessage);
+                    MessageBus.Instance.SendMessage(new Message() {Type = MessageType.GameOver});
                     return;
                 }
-                PlayerData.currentWave = currentWaveIndex;
+                if (onWaveChanged != null)
+                    onWaveChanged(currentWaveIndex);
+
                 SpawnWave();
             }
         }

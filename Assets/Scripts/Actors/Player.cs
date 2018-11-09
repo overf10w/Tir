@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Player : MessageHandler
 {
+    public PlayerStats playerStats;
     private Gun gunContoller;
 
     [HideInInspector]
     public int gold = 0;
-
 
     void Start()
     {
@@ -31,7 +31,11 @@ public class Player : MessageHandler
         if (message.Type == MessageType.CubeDeath)
         {
             gold += message.IntValue;
-            PlayerData.gold = gold;
+            //PlayerData.gold = gold;
+            //PlayerData.playerData.GetType().GetProperty("gold").SetValue(PlayerData.playerData, gold, null);
+            playerStats.stats.gold += message.IntValue;
         }
     }
+
+
 }

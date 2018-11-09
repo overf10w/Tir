@@ -7,6 +7,8 @@ public class GameOverCanvas : MessageHandler
 {
     private CanvasGroup mainPanel;
 
+
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -39,7 +41,7 @@ public class GameOverCanvas : MessageHandler
     public void LoadScene(string sceneName)
     {
         MessageBus.Nullify();
-        PlayerData.Nullify();
+        //PlayerData.Nullify();
         SceneManager.LoadScene(sceneName);
     }
 
