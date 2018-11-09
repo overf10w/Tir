@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
   stats:
-    gold: 10
-    currentWave: 1
-    attack: 0
-    isShootingAutomatically: 0
+    _gold: 130
+    _currentWave: 3
+    _attack: 12
+    _isAutoShoot: 0

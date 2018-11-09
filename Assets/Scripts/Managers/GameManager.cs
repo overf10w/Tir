@@ -19,7 +19,12 @@ public class GameManager : MonoBehaviour
 
     public void OnNewWave(int wave)
     {
-        playerStats.stats.currentWave = wave;
+        playerStats.stats.CurrentWave = wave;
+    }
+
+    public void OnDisable()
+    {
+        cubeSpawner.onWaveChanged -= OnNewWave;
     }
 }
 

@@ -22,13 +22,18 @@ public class UserStatsCanvas : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        playerGold.text = playerStats.stats.gold.ToString();
-        playerCurrentWave.text = "Round " + playerStats.stats.currentWave.ToString();
-        playerDamage.text = "Dmg: " + playerStats.stats.attack.ToString();
+        playerGold.text = playerStats.stats.Gold.ToString();
+        playerCurrentWave.text = "Round: " + playerStats.stats.CurrentWave.ToString();
+        playerDamage.text = "Dmg: " + playerStats.stats.Attack.ToString();
     }
 
     public void OnUpdateDamage(int kek = 2)
     {
-        playerStats.stats.attack += kek;
+        playerStats.stats.Attack += kek;
+    }
+
+    public void OnIsAutoShoot(bool isAutoShoot)
+    {
+        playerStats.stats.IsAutoShoot = isAutoShoot;
     }
 }

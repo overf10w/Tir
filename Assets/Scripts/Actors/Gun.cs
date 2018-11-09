@@ -24,7 +24,7 @@ public class Gun : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(ray.direction);
     }
 
-    public void Shoot()
+    public void Shoot(float playerAttack)
     {
         if (Time.time > nextShotTime)
         {
@@ -34,11 +34,10 @@ public class Gun : MonoBehaviour
             if (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, layerMask))
             {
                 nextShotTime = Time.time + msBetweenShots / 1000;
-
                 IDestroyable target = hit.transform.GetComponent<IDestroyable>();
                 if (target != null)
                 {
-                    target.TakeDamage(110.0f);
+                    target.TakeDamage(playerAttack);
                 }
 
                 Debug.DrawRay(ray.origin, ray.direction * 10000, Color.red, 0.5f);
