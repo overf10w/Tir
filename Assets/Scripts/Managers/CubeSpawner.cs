@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class CubeSpawner : MessageHandler
@@ -19,7 +18,7 @@ public class CubeSpawner : MessageHandler
     // Use this for initialization
     void Start()
     {
-        playerStats = AssetDatabase.LoadAssetAtPath<PlayerStats>("Assets/PlayerStats.Asset");
+        playerStats = Resources.Load<PlayerStats>("SO/PlayerStats");
         if (playerStats != null)
         {
             currentWaveIndex = playerStats.stats.CurrentWave;

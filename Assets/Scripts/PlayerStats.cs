@@ -150,7 +150,7 @@ public struct Stats
 
     public void Nullify()
     {
-        // TODO: uncomment for final build
+        //TODO: uncomment for final build
         _gold = 0;
         _attack = 2;
         _currentWave = 0;
@@ -165,7 +165,7 @@ public class PlayerStats : ScriptableObject
 {
     public Stats stats;
 
-    // TODO: remove it for dev build
+    //TODO: remove it for dev build
     void OnDisable()
     {
         Reset();

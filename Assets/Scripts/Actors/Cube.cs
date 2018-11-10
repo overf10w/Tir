@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class Cube : MonoBehaviour, IDestroyable
@@ -12,7 +11,7 @@ public class Cube : MonoBehaviour, IDestroyable
 
     public void Awake()
     {
-        cubeStats = AssetDatabase.LoadAssetAtPath<CubeStats>("Assets/CubeStats.Asset");
+        cubeStats = Resources.Load<CubeStats>("SO/CubeStats");
         //Debug.Log("cubeStats == null: " + cubeStats == null);
         gold = cubeStats.stats.gold;
         health = cubeStats.stats.HP;
