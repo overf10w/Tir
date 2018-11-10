@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using UnityEngine;
@@ -24,11 +25,10 @@ public struct Stats
 {
     [Header("Skills")]
     [SerializeField]
-    private int _attackSkillIndex;
+    public int _attackSkillIndex;
 
     [SerializeField]
-    private int _autoClickSkillIndex;
-
+    public int _autoClickSkillIndex;
 
     [SerializeField]
     public AttackSkill[] attackSkills;
@@ -75,6 +75,11 @@ public struct Stats
         get { return _attack; }
         set
         {
+            if (_attackSkillIndex > attackSkills.Length - 1)
+            {
+                Debug.LogWarning("There's no more skills to unlock");
+                return;
+            }
             if (_gold >= attackSkills[_attackSkillIndex].goldWorth)
             {
                 _attack = attackSkills[_attackSkillIndex].attack;
@@ -121,7 +126,7 @@ public struct Stats
         {
             _gold -= autoClickSkills[_autoClickSkillIndex].goldWorth;
 
-            _attack = attackSkills[_attackSkillIndex].attack;
+            _attack = attackSkills[_autoClickSkillIndex].attack;
             if (onIsAutoShootChanged != null)
                 onIsAutoShootChanged(true); // TODO: dafuq is true?
 
@@ -160,15 +165,63 @@ public struct Stats
     }
 }
 
+[Serializable]
+public class PlayerCurrentData
+{
+    //public Stats stats;
+
+    public int _gold = 0;
+    public int _attack = 2;
+    public int _currentWave = 0;
+    public int _attackSkillIndex = 0;
+    public int _autoClickSkillIndex = 0;
+    public bool _isAutoShoot = false;
+}
+
 [CreateAssetMenu(fileName = "Stats.Asset", menuName = "Character/Stats")]
 public class PlayerStats : ScriptableObject
 {
+    private string gameDataProjectFilePath = "/StreamingAssets/data.json";
+
     public Stats stats;
+
+    void OnEnable()
+    {
+        string dataAsJson = File.ReadAllText(Application.dataPath + gameDataProjectFilePath);
+        PlayerCurrentData pcd = JsonUtility.FromJson<PlayerCurrentData>(dataAsJson);
+        if (pcd != null)
+        {
+            Debug.Log("PLAYERCURRENTDATA: loaded: " + pcd);
+            // Init stats's playerCurrentData
+            stats.Gold = pcd._gold;
+            stats.Attack = pcd._attack;
+            stats.CurrentWave = pcd._currentWave;
+            stats._attackSkillIndex = pcd._attackSkillIndex;
+            stats._autoClickSkillIndex = pcd._autoClickSkillIndex;
+            stats.IsAutoShoot = false;
+        }
+        else
+        {
+            stats.Nullify();
+        }
+    }
 
     //TODO: remove it for dev build
     void OnDisable()
     {
-        Reset();
+        //Reset();
+        PlayerCurrentData playerCurrentData = new PlayerCurrentData();
+        playerCurrentData._gold = stats.Gold;
+        playerCurrentData._attack = stats.Attack;
+        playerCurrentData._currentWave = stats.CurrentWave;
+        playerCurrentData._attackSkillIndex = stats._attackSkillIndex;
+        playerCurrentData._autoClickSkillIndex = stats._autoClickSkillIndex;
+        playerCurrentData._isAutoShoot = false;
+
+        string dataAsJson = JsonUtility.ToJson(playerCurrentData);
+        string filePath = Application.dataPath + gameDataProjectFilePath;
+        Debug.Log("DataAsJson: " + dataAsJson);
+        File.WriteAllText(filePath, dataAsJson);
     }
 
     public void Reset()
