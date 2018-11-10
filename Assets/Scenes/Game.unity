@@ -401,7 +401,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Round 1
+  m_Text: Round ~
 --- !u!222 &577692611
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1098,6 +1098,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05cd5d2760fece24ba94ee91feaf0561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStats: {fileID: 0}
   waves:
   - {fileID: 114398338289295854, guid: a25dde7d4b7c9e044b54efe80e940491, type: 2}
   - {fileID: 114806106804193404, guid: b5002e0348733b347b446dfdc52b70bd, type: 2}

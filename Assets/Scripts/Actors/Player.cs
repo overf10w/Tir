@@ -35,8 +35,6 @@ public class Player : MessageHandler
         if (message.Type == MessageType.CubeDeath)
         {
             gold += message.IntValue;
-            //PlayerData.gold = gold;
-            //PlayerData.playerData.GetType().GetProperty("gold").SetValue(PlayerData.playerData, gold, null);
             playerStats.stats.Gold += message.IntValue;
         }
     }

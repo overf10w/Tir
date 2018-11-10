@@ -39,7 +39,6 @@ public class Gun : MonoBehaviour
                 {
                     target.TakeDamage(playerAttack);
                 }
-
                 Debug.DrawRay(ray.origin, ray.direction * 10000, Color.red, 0.5f);
                 Debug.DrawRay(muzzle.position, hit.point - muzzle.position, Color.green, 0.7f);
             }

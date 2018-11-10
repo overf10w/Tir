@@ -82,9 +82,9 @@ public class PlayerStats : ScriptableObject
     public Stats stats;
 
     // TODO: remove it for dev build
-    void OnEnable()
+    void OnDisable()
     {
-        Reset();
+        //Reset();
     }
 
     public void Reset()

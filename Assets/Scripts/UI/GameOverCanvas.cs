@@ -7,8 +7,6 @@ public class GameOverCanvas : MessageHandler
 {
     private CanvasGroup mainPanel;
 
-
-
 	// Use this for initialization
 	void Start ()
 	{

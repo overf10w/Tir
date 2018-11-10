@@ -8,11 +8,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2056712d6af14df4ebfa2a3166bb86f2, type: 3}
-  m_Name: PlayerStats
+  m_Script: {fileID: 11500000, guid: 22aa9e34fe4bda342ba5ca180ea97bad, type: 3}
+  m_Name: CubeStats
   m_EditorClassIdentifier: 
   stats:
-    _gold: 204
-    _currentWave: 4
-    _attack: 66
-    _isAutoShoot: 1
+    HP: 100
+    gold: 2
