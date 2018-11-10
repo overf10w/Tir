@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Name: CubeStats
   m_EditorClassIdentifier: 
   stats:
-    HP: 100
+    HP: 10
     gold: 2

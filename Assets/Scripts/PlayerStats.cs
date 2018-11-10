@@ -5,9 +5,40 @@ using System.Text;
 using UnityEngine;
 
 [System.Serializable]
+public struct AttackSkill
+{
+    [SerializeField] public int level;
+    [SerializeField] public int attack;
+    [SerializeField] public int goldWorth;
+}
+
+[System.Serializable]
+public struct AutoClickSkill
+{
+    [SerializeField] public int level;
+    [SerializeField] public int goldWorth;
+}
+
+[System.Serializable]
 public struct Stats
 {
+    [Header("Skills")]
+    [SerializeField]
+    private int _attackSkillIndex;
+
+    [SerializeField]
+    private int _autoClickSkillIndex;
+
+
+    [SerializeField]
+    public AttackSkill[] attackSkills;
+
+    [SerializeField]
+    public AutoClickSkill[] autoClickSkills;
+
     // GOLD
+    [Header("Player Stats")]
+    [Space(10)]
     [SerializeField] private int _gold;
     public int Gold
     {
@@ -44,13 +75,63 @@ public struct Stats
         get { return _attack; }
         set
         {
-            _attack = value;
-            if (onAttackChanged != null)
-                onAttackChanged(value);
+            if (_gold >= attackSkills[_attackSkillIndex].goldWorth)
+            {
+                _attack = attackSkills[_attackSkillIndex].attack;
+                if (onAttackChanged != null)
+                    onAttackChanged(value);
+            }
+            else
+            {
+                Debug.LogWarning("Can't update player attack because not enough gold");
+            }
         }
     }
     public delegate void OnAttackChanged(float value);
     public event OnAttackChanged onAttackChanged;
+
+    public void UpdateAttack()
+    {
+        Debug.Log("Update attack called!");
+        if (_attackSkillIndex > attackSkills.Length - 1)
+        {
+            Debug.LogWarning("There's no more skills to unlock");
+            return;
+        }
+        if (_gold >= attackSkills[_attackSkillIndex].goldWorth)
+        {
+            _gold -= attackSkills[_attackSkillIndex].goldWorth;
+
+            _attack = attackSkills[_attackSkillIndex].attack;
+            if (onAttackChanged != null)
+                onAttackChanged(attackSkills[_attackSkillIndex].attack);
+            _attackSkillIndex++;
+        }
+        else
+        {
+            Debug.LogWarning("Sorry bro no money =((");
+        }
+    }
+
+    public void UpdateAutoShoot()
+    {
+        //Debug.Log("Update attack called!");
+        if (_autoClickSkillIndex > autoClickSkills.Length - 1) return;
+        if (_gold >= autoClickSkills[_autoClickSkillIndex].goldWorth)
+        {
+            _gold -= autoClickSkills[_autoClickSkillIndex].goldWorth;
+
+            _attack = attackSkills[_attackSkillIndex].attack;
+            if (onIsAutoShootChanged != null)
+                onIsAutoShootChanged(true); // TODO: dafuq is true?
+
+            _autoClickSkillIndex++;
+        }
+        else
+        {
+            Debug.LogWarning("Sorry bro no money =((");
+        }
+    }
 
     // IS AUTO SHOOT
     [SerializeField] private bool _isAutoShoot;
@@ -69,9 +150,12 @@ public struct Stats
 
     public void Nullify()
     {
+        // TODO: uncomment for final build
         _gold = 0;
+        _attack = 2;
         _currentWave = 0;
-        _attack = 0;
+        _attackSkillIndex = 0;
+        _autoClickSkillIndex = 0;
         _isAutoShoot = false;
     }
 }
@@ -84,7 +168,7 @@ public class PlayerStats : ScriptableObject
     // TODO: remove it for dev build
     void OnDisable()
     {
-        //Reset();
+        Reset();
     }
 
     public void Reset()

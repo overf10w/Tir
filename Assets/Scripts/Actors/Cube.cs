@@ -13,7 +13,7 @@ public class Cube : MonoBehaviour, IDestroyable
     public void Awake()
     {
         cubeStats = AssetDatabase.LoadAssetAtPath<CubeStats>("Assets/CubeStats.Asset");
-        Debug.Log("cubeStats == null: " + cubeStats == null);
+        //Debug.Log("cubeStats == null: " + cubeStats == null);
         gold = cubeStats.stats.gold;
         health = cubeStats.stats.HP;
     }
