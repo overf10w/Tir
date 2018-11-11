@@ -1,1 +1,1 @@
-{"_gold":85,"_attack":30,"_currentWave":4,"_attackSkillIndex":5,"_autoClickSkillIndex":2,"_isAutoShoot":false}
+{"_attackSkillIndex":1,"_autoClickSkillIndex":1,"attackSkills":[{"level":1,"attack":10,"goldWorth":10},{"level":1,"attack":16,"goldWorth":20}],"autoClickSkills":[{"level":1,"goldWorth":10},{"level":2,"goldWorth":26}],"_gold":0,"_currentWave":0,"_attack":2,"_isAutoShoot":false}

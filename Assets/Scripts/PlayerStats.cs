@@ -21,7 +21,7 @@ public struct AutoClickSkill
 }
 
 [System.Serializable]
-public struct Stats
+public class Stats
 {
     [Header("Skills")]
     [SerializeField]
@@ -188,40 +188,25 @@ public class PlayerStats : ScriptableObject
     void OnEnable()
     {
         string dataAsJson = File.ReadAllText(Application.dataPath + gameDataProjectFilePath);
-        PlayerCurrentData pcd = JsonUtility.FromJson<PlayerCurrentData>(dataAsJson);
+        Stats pcd = JsonUtility.FromJson<Stats>(dataAsJson);
         if (pcd != null)
         {
-            Debug.Log("PLAYERCURRENTDATA: loaded: " + pcd);
-            // Init stats's playerCurrentData
-            stats.Gold = pcd._gold;
-            stats.Attack = pcd._attack;
-            stats.CurrentWave = pcd._currentWave;
-            stats._attackSkillIndex = pcd._attackSkillIndex;
-            stats._autoClickSkillIndex = pcd._autoClickSkillIndex;
-            stats.IsAutoShoot = false;
+            this.stats = pcd;
         }
         else
         {
-            stats.Nullify();
+            Debug.Log("NULLLLLLLL =((((((((((((((((");
+            //stats.Nullify();
         }
     }
 
     //TODO: remove it for dev build
     void OnDisable()
     {
-        //Reset();
-        PlayerCurrentData playerCurrentData = new PlayerCurrentData();
-        playerCurrentData._gold = stats.Gold;
-        playerCurrentData._attack = stats.Attack;
-        playerCurrentData._currentWave = stats.CurrentWave;
-        playerCurrentData._attackSkillIndex = stats._attackSkillIndex;
-        playerCurrentData._autoClickSkillIndex = stats._autoClickSkillIndex;
-        playerCurrentData._isAutoShoot = false;
-
-        string dataAsJson = JsonUtility.ToJson(playerCurrentData);
-        string filePath = Application.dataPath + gameDataProjectFilePath;
-        Debug.Log("DataAsJson: " + dataAsJson);
-        File.WriteAllText(filePath, dataAsJson);
+        //string dataAsJson = JsonUtility.ToJson(stats);
+        //string filePath = Application.dataPath + gameDataProjectFilePath;
+        //Debug.Log("DataAsJson: " + dataAsJson);
+        //File.WriteAllText(filePath, dataAsJson);
     }
 
     public void Reset()
