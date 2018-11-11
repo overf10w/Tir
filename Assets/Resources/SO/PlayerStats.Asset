@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
   stats:
-    _attackSkillIndex: 0
-    _autoClickSkillIndex: 0
+    _attackSkillIndex: 2
+    _autoClickSkillIndex: 1
     attackSkills:
     - level: 1
       attack: 10
@@ -26,7 +26,7 @@ MonoBehaviour:
       goldWorth: 10
     - level: 2
       goldWorth: 26
-    _gold: 0
-    _currentWave: 0
-    _attack: 2
+    _gold: 218
+    _currentWave: 5
+    _attack: 10
     _isAutoShoot: 0

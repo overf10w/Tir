@@ -187,6 +187,30 @@ public class PlayerStats : ScriptableObject
 
     void OnEnable()
     {
+        //string dataAsJson = File.ReadAllText(Application.dataPath + gameDataProjectFilePath);
+        //Stats pcd = JsonUtility.FromJson<Stats>(dataAsJson);
+        //if (pcd != null)
+        //{
+        //    this.stats = pcd;
+        //}
+        //else
+        //{
+        //    Debug.Log("NULLLLLLLL =((((((((((((((((");
+        //    //stats.Nullify();
+        //}
+    }
+
+    //TODO: remove it for dev build
+    void OnDisable()
+    {
+        //string dataAsJson = JsonUtility.ToJson(stats);
+        //string filePath = Application.dataPath + gameDataProjectFilePath;
+        //Debug.Log("DataAsJson: " + dataAsJson);
+        //File.WriteAllText(filePath, dataAsJson);
+    }
+
+    public void ReadSelf()
+    {
         string dataAsJson = File.ReadAllText(Application.dataPath + gameDataProjectFilePath);
         Stats pcd = JsonUtility.FromJson<Stats>(dataAsJson);
         if (pcd != null)
@@ -200,13 +224,12 @@ public class PlayerStats : ScriptableObject
         }
     }
 
-    //TODO: remove it for dev build
-    void OnDisable()
+    public void WriteSelf()
     {
-        //string dataAsJson = JsonUtility.ToJson(stats);
-        //string filePath = Application.dataPath + gameDataProjectFilePath;
-        //Debug.Log("DataAsJson: " + dataAsJson);
-        //File.WriteAllText(filePath, dataAsJson);
+        string dataAsJson = JsonUtility.ToJson(stats);
+        string filePath = Application.dataPath + gameDataProjectFilePath;
+        Debug.Log("DataAsJson: " + dataAsJson);
+        File.WriteAllText(filePath, dataAsJson);
     }
 
     public void Reset()
