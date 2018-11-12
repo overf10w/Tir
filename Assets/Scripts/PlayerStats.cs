@@ -6,17 +6,10 @@ using System.Text;
 using UnityEngine;
 
 [System.Serializable]
-public struct AttackSkill
+public class Skill
 {
     [SerializeField] public int level;
-    [SerializeField] public int attack;
-    [SerializeField] public int goldWorth;
-}
-
-[System.Serializable]
-public struct AutoClickSkill
-{
-    [SerializeField] public int level;
+    [SerializeField] public int value;
     [SerializeField] public int goldWorth;
 }
 
@@ -24,22 +17,20 @@ public struct AutoClickSkill
 public class Stats
 {
     [Header("Skills")]
-    [SerializeField]
-    public int _attackSkillIndex;
+    public int _attackLvl;
+    public int _autoShootLvl;
 
-    [SerializeField]
-    public int _autoClickSkillIndex;
+    public Skill[] attackSkills;        // TODO: attackLvls
+    public Skill[] autoClickSkills;     // TODO: autoClickLvls
 
-    [SerializeField]
-    public AttackSkill[] attackSkills;
-
-    [SerializeField]
-    public AutoClickSkill[] autoClickSkills;
+    public Skill currentAttack;
+    public Skill currentAutoClick;
 
     // GOLD
     [Header("Player Stats")]
     [Space(10)]
-    [SerializeField] private int _gold;
+    [SerializeField]
+    private int _gold;
     public int Gold
     {
         get { return _gold; }
@@ -54,7 +45,8 @@ public class Stats
     public event OnGoldChanged onGoldChanged;
 
     // CURRENT WAVE
-    [SerializeField] private int _currentWave;
+    [SerializeField]
+    private int _currentWave;
     public int CurrentWave
     {
         get { return _currentWave; }
@@ -69,48 +61,48 @@ public class Stats
     public event OnCurrentWaveChanged onCurrentWaveChanged;
 
     // ATTACK
-    [SerializeField] private int _attack;
-    public int Attack
+    [SerializeField]
+    private int _attack;                // TODO: we don't need backing fields (_attack no more)
+
+    public Skill Attack
     {
-        get { return _attack; }
-        set
+        get { return attackSkills[_attackLvl]; }
+    }
+
+    public Skill NextAttack
+    {
+        get
         {
-            if (_attackSkillIndex > attackSkills.Length - 1)
+            int nextInd = _attackLvl + 1;
+            if (nextInd > attackSkills.Length - 1)
             {
-                Debug.LogWarning("There's no more skills to unlock");
-                return;
-            }
-            if (_gold >= attackSkills[_attackSkillIndex].goldWorth)
-            {
-                _attack = attackSkills[_attackSkillIndex].attack;
-                if (onAttackChanged != null)
-                    onAttackChanged(value);
+                return attackSkills[_attackLvl];
             }
             else
             {
-                Debug.LogWarning("Can't update player attack because not enough gold");
+                return attackSkills[nextInd];
             }
-        }
+        }   
     }
     public delegate void OnAttackChanged(float value);
     public event OnAttackChanged onAttackChanged;
 
     public void UpdateAttack()
     {
-        Debug.Log("Update attack called!");
-        if (_attackSkillIndex > attackSkills.Length - 1)
+        int nextInd = _attackLvl + 1;
+        if (nextInd > attackSkills.Length - 1)
         {
             Debug.LogWarning("There's no more skills to unlock");
             return;
         }
-        if (_gold >= attackSkills[_attackSkillIndex].goldWorth)
+        if (_gold >= attackSkills[nextInd].goldWorth)
         {
-            _gold -= attackSkills[_attackSkillIndex].goldWorth;
+            _gold -= attackSkills[nextInd].goldWorth;
 
-            _attack = attackSkills[_attackSkillIndex].attack;
+            _attack = attackSkills[nextInd].value;
             if (onAttackChanged != null)
-                onAttackChanged(attackSkills[_attackSkillIndex].attack);
-            _attackSkillIndex++;
+                onAttackChanged(attackSkills[nextInd].value);
+            _attackLvl = nextInd;
         }
         else
         {
@@ -118,39 +110,31 @@ public class Stats
         }
     }
 
+    [SerializeField] private float _autoShootDuration;
     public void UpdateAutoShoot()
     {
-        //Debug.Log("Update attack called!");
-        if (_autoClickSkillIndex > autoClickSkills.Length - 1) return;
-        if (_gold >= autoClickSkills[_autoClickSkillIndex].goldWorth)
+        int _nextInd = _autoShootLvl + 1;
+        if (_nextInd > autoClickSkills.Length - 1)
         {
-            _gold -= autoClickSkills[_autoClickSkillIndex].goldWorth;
+            Debug.Log("AutoShoot: there's no more levels to unlock");
+            return;
+        }
+        if (_gold >= autoClickSkills[_nextInd].goldWorth)
+        {
+            _gold -= autoClickSkills[_nextInd].goldWorth;
 
-            _attack = attackSkills[_autoClickSkillIndex].attack;
+            _autoShootDuration = autoClickSkills[_nextInd].value;
             if (onIsAutoShootChanged != null)
-                onIsAutoShootChanged(true); // TODO: dafuq is true?
+                onIsAutoShootChanged(_autoShootDuration); // TODO: dafuq is true?
 
-            _autoClickSkillIndex++;
+            _autoShootLvl = _nextInd;
         }
         else
         {
             Debug.LogWarning("Sorry bro no money =((");
         }
     }
-
-    // IS AUTO SHOOT
-    [SerializeField] private bool _isAutoShoot;
-    public bool IsAutoShoot
-    {
-        get { return _isAutoShoot; }
-        set
-        {
-            _isAutoShoot = value;
-            if (onIsAutoShootChanged != null)
-                onIsAutoShootChanged(value);
-        }
-    }
-    public delegate void OnIsAutoShootChanged(bool value);
+    public delegate void OnIsAutoShootChanged(float seconds);
     public event OnIsAutoShootChanged onIsAutoShootChanged;
 
     public void Nullify()
@@ -159,23 +143,10 @@ public class Stats
         _gold = 0;
         _attack = 2;
         _currentWave = 0;
-        _attackSkillIndex = 0;
-        _autoClickSkillIndex = 0;
-        _isAutoShoot = false;
+        _attackLvl = 0;
+        _autoShootLvl = 0;
+        _autoShootDuration = 0.0f;
     }
-}
-
-[Serializable]
-public class PlayerCurrentData
-{
-    //public Stats stats;
-
-    public int _gold = 0;
-    public int _attack = 2;
-    public int _currentWave = 0;
-    public int _attackSkillIndex = 0;
-    public int _autoClickSkillIndex = 0;
-    public bool _isAutoShoot = false;
 }
 
 [CreateAssetMenu(fileName = "Stats.Asset", menuName = "Character/Stats")]
@@ -187,26 +158,13 @@ public class PlayerStats : ScriptableObject
 
     void OnEnable()
     {
-        //string dataAsJson = File.ReadAllText(Application.dataPath + gameDataProjectFilePath);
-        //Stats pcd = JsonUtility.FromJson<Stats>(dataAsJson);
-        //if (pcd != null)
-        //{
-        //    this.stats = pcd;
-        //}
-        //else
-        //{
-        //    Debug.Log("NULLLLLLLL =((((((((((((((((");
-        //    //stats.Nullify();
-        //}
+        
     }
 
     //TODO: remove it for dev build
     void OnDisable()
     {
-        //string dataAsJson = JsonUtility.ToJson(stats);
-        //string filePath = Application.dataPath + gameDataProjectFilePath;
-        //Debug.Log("DataAsJson: " + dataAsJson);
-        //File.WriteAllText(filePath, dataAsJson);
+
     }
 
     public void ReadSelf()

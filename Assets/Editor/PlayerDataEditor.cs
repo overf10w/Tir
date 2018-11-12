@@ -21,6 +21,10 @@ public class PlayerDataEditor : Editor
         DrawDefaultInspector();
         //Editor tmpEditor = null;
         //tmpEditor = Editor.CreateEditor(ps.stats);
+        if (GUILayout.Button("Reset Data"))
+        {
+            ps.Reset();
+        }
         if (GUILayout.Button("Write Data"))
         {
             ps.WriteSelf();
