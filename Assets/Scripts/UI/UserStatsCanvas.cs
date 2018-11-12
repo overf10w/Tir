@@ -29,12 +29,12 @@ public class UserStatsCanvas : MonoBehaviour
 
     public void OnUpdateDamage(int kek = 2)
     {
-        playerStats.stats.UpdateAttack();
+        playerStats.stats.UpdateDamage();
     }
 
     public void OnIsAutoShoot(bool isAutoShoot)
     {
         //playerStats.stats.IsAutoShoot = isAutoShoot;
-        playerStats.stats.UpdateAutoShoot();
+        playerStats.stats.UpdateAutoFire();
     }
 }

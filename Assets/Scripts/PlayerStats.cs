@@ -27,7 +27,7 @@ public class Stats
     public Skill currentDamage;
     public Skill currentAutoFire;
 
-    public void InitStats()
+    public void UpdateCurrentSkills()
     {
         currentDamage = damageLvls[_damageLvl];
         currentAutoFire = autoFireLvls[_autoFireLvl];
@@ -96,7 +96,7 @@ public class Stats
     public delegate void AttackUpdated(float value);
     public event AttackUpdated OnAttackUpdated;
 
-    public void UpdateAttack()
+    public void UpdateDamage()
     {
         int nextInd = _damageLvl + 1;
         if (nextInd > damageLvls.Length - 1)
@@ -112,6 +112,9 @@ public class Stats
             if (OnAttackUpdated != null)
                 OnAttackUpdated(damageLvls[nextInd].value);
             _damageLvl = nextInd;
+
+            //
+            currentDamage = damageLvls[_damageLvl];
         }
         else
         {
@@ -121,7 +124,7 @@ public class Stats
 
     // AUTOFIRE
     [SerializeField] private float _autoFireDuration;
-    public void UpdateAutoShoot()
+    public void UpdateAutoFire()
     {
         int _nextInd = _autoFireLvl + 1;
         if (_nextInd > autoFireLvls.Length - 1)
@@ -138,6 +141,7 @@ public class Stats
                 OnAutoFireUpdated(_autoFireDuration); // TODO: dafuq is true?
 
             _autoFireLvl = _nextInd;
+            currentAutoFire = autoFireLvls[_autoFireLvl];
         }
         else
         {
@@ -147,7 +151,7 @@ public class Stats
     public delegate void AutoFireUpdated(float seconds);
     public event AutoFireUpdated OnAutoFireUpdated;
 
-    public void Nullify()
+    public void ResetPlayerStats()
     {
         //TODO: uncomment for final build
         _gold = 0;
@@ -156,6 +160,7 @@ public class Stats
         _damageLvl = 0;
         _autoFireLvl = 0;
         _autoFireDuration = 0.0f;
+        UpdateCurrentSkills();
     }
 }
 
@@ -168,13 +173,20 @@ public class PlayerStats : ScriptableObject
 
     void OnEnable()
     {
-        
+        #if UNITY_EDITOR
+        stats.UpdateCurrentSkills();
+        #endif
+        #if UNITY_STANDALONE
+        ReadSelf();
+        #endif
     }
 
-    //TODO: remove it for dev build
+    //TODO: you'd better write this logic somewhere in monobehaviour
     void OnDisable()
     {
-
+        #if UNITY_STANDALONE
+        WriteSelf();
+        #endif
     }
 
     public void ReadSelf()
@@ -202,7 +214,7 @@ public class PlayerStats : ScriptableObject
 
     public void Reset()
     {
-        stats.Nullify();
+        stats.ResetPlayerStats();
     }
 }
 
