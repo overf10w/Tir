@@ -15,7 +15,7 @@ public class Player : MessageHandler
     void Start()
     {
         isAutoShoot = false;
-        playerStats.stats.onIsAutoShootChanged += OnIsAutoShoot;
+        playerStats.stats.OnAutoFireUpdated += OnAutoShoot;
         gold = 0;
         gunContoller = GetComponentInChildren<Gun>();
     }
@@ -39,7 +39,7 @@ public class Player : MessageHandler
         }
     }
 
-    public void OnIsAutoShoot(float _autoShootDuration)
+    public void OnAutoShoot(float _autoShootDuration)
     {
         //this.isAutoShoot = isAuthoShoot;
         StartCoroutine(AutoShoot(_autoShootDuration));
@@ -67,6 +67,6 @@ public class Player : MessageHandler
 
     public void OnDisable()
     {
-        playerStats.stats.onIsAutoShootChanged -= OnIsAutoShoot;
+        playerStats.stats.OnAutoFireUpdated -= OnAutoShoot;
     }
 }

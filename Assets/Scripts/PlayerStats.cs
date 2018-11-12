@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -17,14 +18,20 @@ public class Skill
 public class Stats
 {
     [Header("Skills")]
-    public int _attackLvl;
-    public int _autoShootLvl;
+    public int _damageLvl;
+    public int _autoFireLvl;
 
-    public Skill[] attackSkills;        // TODO: attackLvls
-    public Skill[] autoClickSkills;     // TODO: autoClickLvls
+    public Skill[] damageLvls;        // TODO: attackLvls
+    public Skill[] autoFireLvls;      // TODO: autoClickLvls
 
-    public Skill currentAttack;
-    public Skill currentAutoClick;
+    public Skill currentDamage;
+    public Skill currentAutoFire;
+
+    public void InitStats()
+    {
+        currentDamage = damageLvls[_damageLvl];
+        currentAutoFire = autoFireLvls[_autoFireLvl];
+    }
 
     // GOLD
     [Header("Player Stats")]
@@ -37,12 +44,12 @@ public class Stats
         set
         {
             _gold = value;
-            if (onGoldChanged != null)
-                onGoldChanged(value);
+            if (OnGoldChanged != null)
+                OnGoldChanged(value);
         }
     }
-    public delegate void OnGoldChanged(float value);
-    public event OnGoldChanged onGoldChanged;
+    public delegate void GoldChanged(float value);
+    public event GoldChanged OnGoldChanged;
 
     // CURRENT WAVE
     [SerializeField]
@@ -53,12 +60,12 @@ public class Stats
         set
         {
             _currentWave = value;
-            if (onCurrentWaveChanged != null)
-                onCurrentWaveChanged(value);
+            if (OnCurrentWaveChanged != null)
+                OnCurrentWaveChanged(value);
         }
     }
-    public delegate void OnCurrentWaveChanged(float value);
-    public event OnCurrentWaveChanged onCurrentWaveChanged;
+    public delegate void CurrentWaveChanged(float value);
+    public event CurrentWaveChanged OnCurrentWaveChanged;
 
     // ATTACK
     [SerializeField]
@@ -66,43 +73,45 @@ public class Stats
 
     public Skill Attack
     {
-        get { return attackSkills[_attackLvl]; }
+        get
+        {
+            return damageLvls[_damageLvl];
+        }
     }
-
     public Skill NextAttack
     {
         get
         {
-            int nextInd = _attackLvl + 1;
-            if (nextInd > attackSkills.Length - 1)
+            int nextInd = _damageLvl + 1;
+            if (nextInd > damageLvls.Length - 1)
             {
-                return attackSkills[_attackLvl];
+                return damageLvls[_damageLvl];
             }
             else
             {
-                return attackSkills[nextInd];
+                return damageLvls[nextInd];
             }
         }   
     }
-    public delegate void OnAttackChanged(float value);
-    public event OnAttackChanged onAttackChanged;
+    public delegate void AttackUpdated(float value);
+    public event AttackUpdated OnAttackUpdated;
 
     public void UpdateAttack()
     {
-        int nextInd = _attackLvl + 1;
-        if (nextInd > attackSkills.Length - 1)
+        int nextInd = _damageLvl + 1;
+        if (nextInd > damageLvls.Length - 1)
         {
             Debug.LogWarning("There's no more skills to unlock");
             return;
         }
-        if (_gold >= attackSkills[nextInd].goldWorth)
+        if (_gold >= damageLvls[nextInd].goldWorth)
         {
-            _gold -= attackSkills[nextInd].goldWorth;
+            _gold -= damageLvls[nextInd].goldWorth;
 
-            _attack = attackSkills[nextInd].value;
-            if (onAttackChanged != null)
-                onAttackChanged(attackSkills[nextInd].value);
-            _attackLvl = nextInd;
+            _attack = damageLvls[nextInd].value;
+            if (OnAttackUpdated != null)
+                OnAttackUpdated(damageLvls[nextInd].value);
+            _damageLvl = nextInd;
         }
         else
         {
@@ -110,32 +119,33 @@ public class Stats
         }
     }
 
-    [SerializeField] private float _autoShootDuration;
+    // AUTOFIRE
+    [SerializeField] private float _autoFireDuration;
     public void UpdateAutoShoot()
     {
-        int _nextInd = _autoShootLvl + 1;
-        if (_nextInd > autoClickSkills.Length - 1)
+        int _nextInd = _autoFireLvl + 1;
+        if (_nextInd > autoFireLvls.Length - 1)
         {
             Debug.Log("AutoShoot: there's no more levels to unlock");
             return;
         }
-        if (_gold >= autoClickSkills[_nextInd].goldWorth)
+        if (_gold >= autoFireLvls[_nextInd].goldWorth)
         {
-            _gold -= autoClickSkills[_nextInd].goldWorth;
+            _gold -= autoFireLvls[_nextInd].goldWorth;
 
-            _autoShootDuration = autoClickSkills[_nextInd].value;
-            if (onIsAutoShootChanged != null)
-                onIsAutoShootChanged(_autoShootDuration); // TODO: dafuq is true?
+            _autoFireDuration = autoFireLvls[_nextInd].value;
+            if (OnAutoFireUpdated != null)
+                OnAutoFireUpdated(_autoFireDuration); // TODO: dafuq is true?
 
-            _autoShootLvl = _nextInd;
+            _autoFireLvl = _nextInd;
         }
         else
         {
             Debug.LogWarning("Sorry bro no money =((");
         }
     }
-    public delegate void OnIsAutoShootChanged(float seconds);
-    public event OnIsAutoShootChanged onIsAutoShootChanged;
+    public delegate void AutoFireUpdated(float seconds);
+    public event AutoFireUpdated OnAutoFireUpdated;
 
     public void Nullify()
     {
@@ -143,9 +153,9 @@ public class Stats
         _gold = 0;
         _attack = 2;
         _currentWave = 0;
-        _attackLvl = 0;
-        _autoShootLvl = 0;
-        _autoShootDuration = 0.0f;
+        _damageLvl = 0;
+        _autoFireLvl = 0;
+        _autoFireDuration = 0.0f;
     }
 }
 
