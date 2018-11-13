@@ -29,8 +29,8 @@ public class Stats
 
     public void UpdateCurrentSkills()
     {
-        currentDamage = skills.damageLvls[_damageLvl];
-        currentAutoFire = skills.autoFireLvls[_autoFireLvl];
+        currentDamage = skills.DamageLvls[_damageLvl];
+        currentAutoFire = skills.AutoFireLvls[_autoFireLvl];
     }
 
     [Header("Player Stats")]
@@ -70,7 +70,7 @@ public class Stats
     {
         get
         {
-            return skills.damageLvls[_damageLvl];
+            return skills.DamageLvls[_damageLvl];
         }
     }
     public Skill NextDamage
@@ -78,13 +78,13 @@ public class Stats
         get
         {
             int nextInd = _damageLvl + 1;
-            if (nextInd > skills.damageLvls.Length - 1)
+            if (nextInd > skills.DamageLvls.Length - 1)
             {
-                return skills.damageLvls[_damageLvl];
+                return skills.DamageLvls[_damageLvl];
             }
             else
             {
-                return skills.damageLvls[nextInd];
+                return skills.DamageLvls[nextInd];
             }
         }   
     }
@@ -94,20 +94,20 @@ public class Stats
     public void UpdateDamage()
     {
         int nextInd = _damageLvl + 1;
-        if (nextInd > skills.damageLvls.Length - 1)
+        if (nextInd > skills.DamageLvls.Length - 1)
         {
             Debug.LogWarning("There's no more skills to unlock");
             return;
         }
-        if (_gold >= skills.damageLvls[nextInd].goldWorth)
+        if (_gold >= skills.DamageLvls[nextInd].goldWorth)
         {
-            _gold -= skills.damageLvls[nextInd].goldWorth;
+            _gold -= skills.DamageLvls[nextInd].goldWorth;
 
             if (OnAttackUpdated != null)
-                OnAttackUpdated(skills.damageLvls[nextInd].value);
+                OnAttackUpdated(skills.DamageLvls[nextInd].value);
             _damageLvl = nextInd;
 
-            currentDamage = skills.damageLvls[_damageLvl];
+            currentDamage = skills.DamageLvls[_damageLvl];
         }
         else
         {
@@ -120,21 +120,21 @@ public class Stats
     public void UpdateAutoFire()
     {
         int _nextInd = _autoFireLvl + 1;
-        if (_nextInd > skills.autoFireLvls.Length - 1)
+        if (_nextInd > skills.AutoFireLvls.Length - 1)
         {
             Debug.Log("AutoShoot: there's no more levels to unlock");
             return;
         }
-        if (_gold >= skills.autoFireLvls[_nextInd].goldWorth)
+        if (_gold >= skills.AutoFireLvls[_nextInd].goldWorth)
         {
-            _gold -= skills.autoFireLvls[_nextInd].goldWorth;
+            _gold -= skills.AutoFireLvls[_nextInd].goldWorth;
 
-            _autoFireDuration = skills.autoFireLvls[_nextInd].value;
+            _autoFireDuration = skills.AutoFireLvls[_nextInd].value;
             if (OnAutoFireUpdated != null)
                 OnAutoFireUpdated(_autoFireDuration);
 
             _autoFireLvl = _nextInd;
-            currentAutoFire = skills.autoFireLvls[_autoFireLvl];
+            currentAutoFire = skills.AutoFireLvls[_autoFireLvl];
         }
         else
         {

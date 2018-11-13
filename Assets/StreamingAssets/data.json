@@ -1,1 +1,1 @@
-{"_damageLvl":0,"_autoFireLvl":0,"skills":{"instanceID":10382},"currentDamage":{"level":1,"value":2,"goldWorth":0},"currentAutoFire":{"level":0,"value":0,"goldWorth":0},"_gold":0,"_currentWave":0,"_autoFireDuration":0.0}
+{"_damageLvl":2,"_autoFireLvl":2,"skills":{"instanceID":10382},"currentDamage":{"level":3,"value":10,"goldWorth":20},"currentAutoFire":{"level":2,"value":20,"goldWorth":40},"_gold":278,"_currentWave":5,"_autoFireDuration":20.0}

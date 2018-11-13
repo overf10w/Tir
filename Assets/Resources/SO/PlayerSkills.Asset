@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e54495521d829394daa27f59c35a9684, type: 3}
   m_Name: PlayerSkills
   m_EditorClassIdentifier: 
-  damageLvls:
+  _damageLvls:
   - level: 1
     value: 2
     goldWorth: 0
@@ -21,7 +21,7 @@ MonoBehaviour:
   - level: 3
     value: 10
     goldWorth: 20
-  autoFireLvls:
+  _autoFireLvls:
   - level: 0
     value: 0
     goldWorth: 0
@@ -29,5 +29,5 @@ MonoBehaviour:
     value: 10
     goldWorth: 10
   - level: 2
-    value: 14
-    goldWorth: 30
+    value: 20
+    goldWorth: 40
