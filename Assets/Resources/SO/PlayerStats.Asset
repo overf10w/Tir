@@ -12,37 +12,17 @@ MonoBehaviour:
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
   stats:
-    _damageLvl: 2
-    _autoFireLvl: 2
-    damageLvls:
-    - level: 1
+    _damageLvl: 0
+    _autoFireLvl: 0
+    skills: {fileID: 11400000, guid: b0401cd66a469594ba7c94d432c58e59, type: 2}
+    currentDamage:
+      level: 1
       value: 2
       goldWorth: 0
-    - level: 2
-      value: 6
-      goldWorth: 10
-    - level: 3
-      value: 10
-      goldWorth: 20
-    autoFireLvls:
-    - level: 0
+    currentAutoFire:
+      level: 0
       value: 0
       goldWorth: 0
-    - level: 1
-      value: 10
-      goldWorth: 10
-    - level: 2
-      value: 14
-      goldWorth: 30
-    currentDamage:
-      level: 3
-      value: 10
-      goldWorth: 20
-    currentAutoFire:
-      level: 2
-      value: 14
-      goldWorth: 30
-    _gold: 228
-    _currentWave: 5
-    _attack: 10
-    _autoFireDuration: 14
+    _gold: 2
+    _currentWave: 0
+    _autoFireDuration: 0
