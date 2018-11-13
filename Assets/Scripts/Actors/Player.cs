@@ -26,7 +26,7 @@ public class Player : MessageHandler
         gunContoller.UpdateGunRotation();
         if (Input.GetMouseButton(0))
         {
-            gunContoller.Shoot(playerStats.stats.Attack.value);
+            gunContoller.Shoot(playerStats.stats.Damage.value);
         }
     }
 
@@ -56,7 +56,7 @@ public class Player : MessageHandler
             timeBetweenShots++;
             if (timeBetweenShots >= 0.2f)
             {
-                gunContoller.Shoot(playerStats.stats.Attack.value);
+                gunContoller.Shoot(playerStats.stats.Damage.value);
                 timeBetweenShots = 0.0f;
             }
             yield return null;

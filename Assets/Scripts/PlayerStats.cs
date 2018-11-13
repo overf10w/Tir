@@ -21,8 +21,8 @@ public class Stats
     public int _damageLvl;
     public int _autoFireLvl;
 
-    public Skill[] damageLvls;        // TODO: attackLvls
-    public Skill[] autoFireLvls;      // TODO: autoClickLvls
+    public Skill[] damageLvls;
+    public Skill[] autoFireLvls;
 
     public Skill currentDamage;
     public Skill currentAutoFire;
@@ -33,9 +33,7 @@ public class Stats
         currentAutoFire = autoFireLvls[_autoFireLvl];
     }
 
-    // GOLD
     [Header("Player Stats")]
-    [Space(10)]
     [SerializeField]
     private int _gold;
     public int Gold
@@ -51,7 +49,6 @@ public class Stats
     public delegate void GoldChanged(float value);
     public event GoldChanged OnGoldChanged;
 
-    // CURRENT WAVE
     [SerializeField]
     private int _currentWave;
     public int CurrentWave
@@ -69,16 +66,14 @@ public class Stats
 
     // ATTACK
     [SerializeField]
-    private int _attack;                // TODO: we don't need backing fields (_attack no more)
-
-    public Skill Attack
+    public Skill Damage
     {
         get
         {
             return damageLvls[_damageLvl];
         }
     }
-    public Skill NextAttack
+    public Skill NextDamage
     {
         get
         {
@@ -108,12 +103,10 @@ public class Stats
         {
             _gold -= damageLvls[nextInd].goldWorth;
 
-            _attack = damageLvls[nextInd].value;
             if (OnAttackUpdated != null)
                 OnAttackUpdated(damageLvls[nextInd].value);
             _damageLvl = nextInd;
 
-            //
             currentDamage = damageLvls[_damageLvl];
         }
         else
@@ -138,7 +131,7 @@ public class Stats
 
             _autoFireDuration = autoFireLvls[_nextInd].value;
             if (OnAutoFireUpdated != null)
-                OnAutoFireUpdated(_autoFireDuration); // TODO: dafuq is true?
+                OnAutoFireUpdated(_autoFireDuration);
 
             _autoFireLvl = _nextInd;
             currentAutoFire = autoFireLvls[_autoFireLvl];
@@ -155,7 +148,6 @@ public class Stats
     {
         //TODO: uncomment for final build
         _gold = 0;
-        _attack = 2;
         _currentWave = 0;
         _damageLvl = 0;
         _autoFireLvl = 0;
@@ -181,7 +173,8 @@ public class PlayerStats : ScriptableObject
         #endif
     }
 
-    //TODO: you'd better write this logic somewhere in monobehaviour
+    // TODO: you'd better write this logic somewhere in monobehaviour,
+    // as SO's OnDisable() not always called(?)
     void OnDisable()
     {
         #if UNITY_STANDALONE

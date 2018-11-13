@@ -24,7 +24,7 @@ public class UserStatsCanvas : MonoBehaviour
     {
         playerGold.text = playerStats.stats.Gold.ToString();
         playerCurrentWave.text = "Round: " + playerStats.stats.CurrentWave.ToString();
-        playerAttack.text = "Dmg: " + playerStats.stats.Attack.value + " (" + playerStats.stats.Attack.level + "lvl) " + ". Next attack: " + playerStats.stats.NextAttack.goldWorth + " gold";
+        playerAttack.text = "Dmg: " + playerStats.stats.Damage.value + " (" + playerStats.stats.Damage.level + "lvl) " + ". Next attack: " + playerStats.stats.NextDamage.goldWorth + " gold";
     }
 
     public void OnUpdateDamage(int kek = 2)
