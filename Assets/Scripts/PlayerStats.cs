@@ -52,9 +52,16 @@ public class Stats
     private PlayerWeapons pw;
 
     // Pistol
-    [SerializeField] private WeaponData pistolData;
+    [SerializeField]
+    private WeaponData pistolData;
     public WeaponCharacteristics currentPistol;
-    public int _pistolLvl;
+    public int _pistolLvl;    
+    
+    // M4A1
+    [SerializeField]
+    private WeaponData doublePistolData;
+    public WeaponCharacteristics currentDoublePistol;
+    public int _doublePistolLvl;
 
     public void UpdateCurrentSkills()
     {
@@ -64,7 +71,8 @@ public class Stats
         pistolData = pw.weapons.Find(i => i.name == "Pistol");
         currentPistol = pistolData.lvls[_pistolLvl];
 
-
+        doublePistolData = pw.weapons.Find(i => i.name == "DoublePistol");
+        currentDoublePistol = doublePistolData.lvls[_doublePistolLvl];
     }
 
     [Header("Player Stats")]
@@ -86,13 +94,12 @@ public class Stats
     #endregion
 
     #region PISTOL
-    public delegate void PistolChanged(CustomArgs e);
-    public event PistolChanged OnPistolChanged;
+    public delegate void WeaponChanged(CustomArgs e);
+    public event WeaponChanged OnWeaponChanged;
     public WeaponCharacteristics Pistol
     {
         get
         {
-            Debug.LogWarning("_pistolLvl" + _pistolLvl);
             return pistolData.lvls[_pistolLvl]; 
         }
     }
@@ -101,19 +108,53 @@ public class Stats
         int nextInd = _pistolLvl + 1;
         if (nextInd > pistolData.lvls.Length - 1)
         {
-            Debug.LogWarning("The money to upgrade pistol isn't enough");
+            Debug.LogWarning("This is the highest level");
             return;
         }
         if (_gold >= pistolData.lvls[nextInd].goldWorth)
         {
             _gold -= pistolData.lvls[nextInd].goldWorth;
-            if (OnPistolChanged != null)
+            if (OnWeaponChanged != null)
             {
-                OnPistolChanged(new CustomArgs(pistolData, pistolData.lvls[nextInd]));
+                OnWeaponChanged(new CustomArgs(pistolData, pistolData.lvls[nextInd]));
             }
             //OnPistolChanged(pistolData.lvls[nextInd]);
             _pistolLvl = nextInd;
             currentPistol = pistolData.lvls[_pistolLvl];
+        }
+        else
+        {
+            Debug.LogWarning("Sorry bro no money =((");
+        }
+    }
+    #endregion
+
+    #region DOUBLE_PISTOL
+    public WeaponCharacteristics DoublePistol
+    {
+        get
+        {
+            return doublePistolData.lvls[_doublePistolLvl]; 
+        }
+    }
+    public void UpdateDoublePistol()
+    {
+        int nextInd = _doublePistolLvl + 1;
+        if (nextInd > doublePistolData.lvls.Length - 1)
+        {
+            Debug.LogWarning("This is the highest level");
+            return;
+        }
+        if (_gold >= doublePistolData.lvls[nextInd].goldWorth)
+        {
+            _gold -= doublePistolData.lvls[nextInd].goldWorth;
+            if (OnWeaponChanged != null)
+            {
+                OnWeaponChanged(new CustomArgs(doublePistolData, doublePistolData.lvls[nextInd]));
+            }
+            //OnPistolChanged(pistolData.lvls[nextInd]);
+            _doublePistolLvl = nextInd;
+            currentDoublePistol = doublePistolData.lvls[_doublePistolLvl];
         }
         else
         {

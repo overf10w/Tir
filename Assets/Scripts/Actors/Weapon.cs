@@ -15,7 +15,7 @@ public class Weapon : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        ps.stats.OnPistolChanged += PistolDataChanged;
+        ps.stats.OnWeaponChanged += WeaponDataChanged;
         weaponCharacteristics = (WeaponCharacteristics)ps.stats.GetType().GetProperty(weaponName).GetValue(ps.stats, null);
     }
     
@@ -25,7 +25,7 @@ public class Weapon : MonoBehaviour
 
     }
 
-    public void PistolDataChanged(CustomArgs kek)
+    public void WeaponDataChanged(CustomArgs kek)
     {
         if (kek.weaponData.name == weaponName)
         {

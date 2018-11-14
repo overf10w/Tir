@@ -42,11 +42,16 @@ public class UserStatsCanvas : MonoBehaviour
 
     public void UpdatePistol()
     {
-        Debug.Log(playerStats.stats.Pistol.value);
+        //Debug.Log(playerStats.stats.Pistol.value);
         playerStats.stats.UpdatePistol();
-        Debug.Log(playerStats.stats.Pistol.value);
+        //Debug.Log(playerStats.stats.Pistol.value);
         //Debug.Log("BEFORE: Pistol lvl: " + pistolWD.lvls[pistolWD.lvlInd].level);   // TODO: 
         //pistolWD.lvlInd++;
         //Debug.Log("AFTER: Pistol lvl: " + pistolWD.lvls[pistolWD.lvlInd].level);
+    }
+
+    public void UpdateDoublePistol()
+    {
+        playerStats.stats.UpdateDoublePistol();
     }
 }
