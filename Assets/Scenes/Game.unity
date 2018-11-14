@@ -193,15 +193,15 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1459244228}
-        m_MethodName: OnIsAutoShoot
-        m_Mode: 6
+        m_MethodName: UpdatePistol
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Game
-          m_BoolArgument: 1
+          m_StringArgument: 
+          m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
@@ -956,8 +956,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1893d447fd355b442af63e6859e96398, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ps: {fileID: 11400000, guid: 24c36831a2b8e2f4d9db94ea91f2866d, type: 2}
   weaponName: Pistol
-  playerWeapons: {fileID: 11400000, guid: ec3451a70c3c3fb4bb4f92ac60c7e37c, type: 2}
 --- !u!4 &988287999
 Transform:
   m_ObjectHideFlags: 0

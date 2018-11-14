@@ -11,12 +11,14 @@ public class UserStatsCanvas : MonoBehaviour
     public Text playerCurrentWave;
     public Text playerAttack;
 
+    private WeaponData pistolWD;
     // Use this for initialization
     void Start()
     {
         playerGold = GameObject.Find("GoldTxt").GetComponent<Text>();
         playerCurrentWave = GameObject.Find("CurrentWaveLbl").GetComponent<Text>();
         playerAttack = GameObject.Find("DamageTxt").GetComponent<Text>();
+        // --------------- //
     }
 
     // TODO: this shouldn't be in update
@@ -36,5 +38,15 @@ public class UserStatsCanvas : MonoBehaviour
     {
         //playerStats.stats.IsAutoShoot = isAutoShoot;
         playerStats.stats.UpdateAutoFire();
+    }
+
+    public void UpdatePistol()
+    {
+        Debug.Log(playerStats.stats.Pistol.value);
+        playerStats.stats.UpdatePistol();
+        Debug.Log(playerStats.stats.Pistol.value);
+        //Debug.Log("BEFORE: Pistol lvl: " + pistolWD.lvls[pistolWD.lvlInd].level);   // TODO: 
+        //pistolWD.lvlInd++;
+        //Debug.Log("AFTER: Pistol lvl: " + pistolWD.lvls[pistolWD.lvlInd].level);
     }
 }

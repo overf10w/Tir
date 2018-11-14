@@ -2,23 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// TODO: forget about PlayerWeapons and access everything through PlayerStats: ps.weaponList. ...
 public class Weapon : MonoBehaviour
 {
+    public PlayerStats ps;
+
     public string weaponName;
 
-    public PlayerWeapons playerWeapons;
-    private List<WeaponData> weaponList;
-    private WeaponData weaponData;
+    [SerializeField]
+    private WeaponCharacteristics weaponCharacteristics;
 
     // Use this for initialization
     void Start()
     {
-        weaponList = playerWeapons.weapons;
-        weaponData = weaponList.Find(i => i.name == weaponName);
+        ps.stats.OnPistolChanged += PistolDataChanged;
+        weaponCharacteristics = (WeaponCharacteristics)ps.stats.GetType().GetProperty(weaponName).GetValue(ps.stats, null);
     }
-
+    
     // Update is called once per frame
     void Update()
     {
+
+    }
+
+    public void PistolDataChanged(CustomArgs kek)
+    {
+        if (kek.weaponData.name == weaponName)
+        {
+            weaponCharacteristics = kek.currentPistolCharacteristics;
+        }
     }
 }

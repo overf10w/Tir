@@ -14,26 +14,61 @@ public class Skill
     [SerializeField] public int goldWorth;
 }
 
+// TODO: 
+// (1)
+// public PlayerWeapons pw;                 // assign in editor
+// public List<WeaponData> weapons = pw.weapons;
+// then
+// (2)
+// public WeaponData gun; ---> gun = 
+
+public class CustomArgs : EventArgs
+{
+    public WeaponData weaponData;
+
+    public WeaponCharacteristics currentPistolCharacteristics;
+
+    public CustomArgs(WeaponData weaponData, WeaponCharacteristics weaponCharacteristics)
+    {
+        this.weaponData = weaponData;
+        this.currentPistolCharacteristics = weaponCharacteristics;
+    }
+}
+
 [System.Serializable]
 public class Stats
 {
     [Header("Skills")]
+    [SerializeField]
+    private PlayerSkills skills;
+    public Skill currentDamage;
+    public Skill currentAutoFire;
+
     public int _damageLvl;
     public int _autoFireLvl;
 
+    [Header("Guns")]
     [SerializeField]
-    private PlayerSkills skills;
+    private PlayerWeapons pw;
 
-    public Skill currentDamage;
-    public Skill currentAutoFire;
+    // Pistol
+    [SerializeField] private WeaponData pistolData;
+    public WeaponCharacteristics currentPistol;
+    public int _pistolLvl;
 
     public void UpdateCurrentSkills()
     {
         currentDamage = skills.DamageLvls[_damageLvl];
         currentAutoFire = skills.AutoFireLvls[_autoFireLvl];
+
+        pistolData = pw.weapons.Find(i => i.name == "Pistol");
+        currentPistol = pistolData.lvls[_pistolLvl];
+
+
     }
 
     [Header("Player Stats")]
+    #region GOLD
     [SerializeField]
     private int _gold;
     public int Gold
@@ -48,7 +83,46 @@ public class Stats
     }
     public delegate void GoldChanged(float value);
     public event GoldChanged OnGoldChanged;
+    #endregion
 
+    #region PISTOL
+    public delegate void PistolChanged(CustomArgs e);
+    public event PistolChanged OnPistolChanged;
+    public WeaponCharacteristics Pistol
+    {
+        get
+        {
+            Debug.LogWarning("_pistolLvl" + _pistolLvl);
+            return pistolData.lvls[_pistolLvl]; 
+        }
+    }
+    public void UpdatePistol()
+    {
+        int nextInd = _pistolLvl + 1;
+        if (nextInd > pistolData.lvls.Length - 1)
+        {
+            Debug.LogWarning("The money to upgrade pistol isn't enough");
+            return;
+        }
+        if (_gold >= pistolData.lvls[nextInd].goldWorth)
+        {
+            _gold -= pistolData.lvls[nextInd].goldWorth;
+            if (OnPistolChanged != null)
+            {
+                OnPistolChanged(new CustomArgs(pistolData, pistolData.lvls[nextInd]));
+            }
+            //OnPistolChanged(pistolData.lvls[nextInd]);
+            _pistolLvl = nextInd;
+            currentPistol = pistolData.lvls[_pistolLvl];
+        }
+        else
+        {
+            Debug.LogWarning("Sorry bro no money =((");
+        }
+    }
+    #endregion
+
+    #region CURRENT_WAVE
     [SerializeField]
     private int _currentWave;
     public int CurrentWave
@@ -63,8 +137,11 @@ public class Stats
     }
     public delegate void CurrentWaveChanged(float value);
     public event CurrentWaveChanged OnCurrentWaveChanged;
+    #endregion
 
-    // ATTACK
+    #region DAMAGE_SKILL
+    public delegate void AttackUpdated(float value);
+    public event AttackUpdated OnAttackUpdated;
     [SerializeField]
     public Skill Damage
     {
@@ -86,11 +163,8 @@ public class Stats
             {
                 return skills.DamageLvls[nextInd];
             }
-        }   
+        }
     }
-    public delegate void AttackUpdated(float value);
-    public event AttackUpdated OnAttackUpdated;
-
     public void UpdateDamage()
     {
         int nextInd = _damageLvl + 1;
@@ -114,8 +188,9 @@ public class Stats
             Debug.LogWarning("Sorry bro no money =((");
         }
     }
+    #endregion
 
-    // AUTOFIRE
+    #region AUTOFIRE_SKILL
     [SerializeField] private float _autoFireDuration;
     public void UpdateAutoFire()
     {
@@ -143,6 +218,7 @@ public class Stats
     }
     public delegate void AutoFireUpdated(float seconds);
     public event AutoFireUpdated OnAutoFireUpdated;
+    #endregion
 
     public void ResetPlayerStats()
     {
@@ -150,6 +226,7 @@ public class Stats
         _gold = 0;
         _currentWave = 0;
         _damageLvl = 0;
+        _pistolLvl = 0;
         _autoFireLvl = 0;
         _autoFireDuration = 0.0f;
         UpdateCurrentSkills();
@@ -210,4 +287,3 @@ public class PlayerStats : ScriptableObject
         stats.ResetPlayerStats();
     }
 }
-

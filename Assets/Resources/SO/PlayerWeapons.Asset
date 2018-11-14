@@ -13,6 +13,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapons:
   - lvls:
+    - level: 1
+      value: 20
+      goldWorth: 10
+    - level: 2
+      value: 30
+      goldWorth: 40
+    lvl:
+      level: 0
+      value: 0
+      goldWorth: 0
+    lvlInd: 1
+    name: Pistol
+  - lvls:
+    - level: 0
+      value: 0
+      goldWorth: 0
+    - level: 0
+      value: 0
+      goldWorth: 0
+    - level: 0
+      value: 0
+      goldWorth: 0
+    - level: 0
+      value: 0
+      goldWorth: 0
     - level: 0
       value: 0
       goldWorth: 0
@@ -20,16 +45,12 @@ MonoBehaviour:
       level: 0
       value: 0
       goldWorth: 0
-    name: Pistol
-  - lvls: []
-    lvl:
-      level: 0
-      value: 0
-      goldWorth: 0
+    lvlInd: 0
     name: 
   - lvls: []
     lvl:
       level: 0
       value: 0
       goldWorth: 0
+    lvlInd: 0
     name: 

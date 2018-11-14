@@ -13,7 +13,6 @@ public class WeaponCharacteristics
 public class WeaponData
 {
     public WeaponCharacteristics[] lvls;
-    public WeaponCharacteristics   lvl;
     public string name;
 }
 
@@ -21,6 +20,4 @@ public class WeaponData
 public class PlayerWeapons : ScriptableObject
 {
     public List<WeaponData> weapons;
-
-
 }
