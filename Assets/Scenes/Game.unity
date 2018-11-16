@@ -866,7 +866,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 878512646}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1053.7311, y: 211.00179, z: 17.854456}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -958,6 +958,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ps: {fileID: 11400000, guid: 24c36831a2b8e2f4d9db94ea91f2866d, type: 2}
   weaponName: Pistol
+  currentWave: {fileID: 0}
   weaponCharacteristics:
     level: 0
     value: 0
@@ -969,7 +970,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 988287997}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 190.09358, y: 139.30952, z: 5.84116}
+  m_LocalPosition: {x: -3.64, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1205,15 +1206,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05cd5d2760fece24ba94ee91feaf0561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStats: {fileID: 0}
-  waves:
-  - {fileID: 114398338289295854, guid: a25dde7d4b7c9e044b54efe80e940491, type: 2}
-  - {fileID: 114806106804193404, guid: b5002e0348733b347b446dfdc52b70bd, type: 2}
-  - {fileID: 114952456820162096, guid: 59ad701161217494aa0e5eabf547c392, type: 2}
-  - {fileID: 114948033291413872, guid: 9631ac8dea143694ca75a6980f587f5c, type: 2}
-  - {fileID: 114972621102968608, guid: cca7ee59466a8eb4fa2beb3f0c452824, type: 2}
-  - {fileID: 114114548324586004, guid: fe18f7fdca9672e408ac7b3feab948c8, type: 2}
-  - {fileID: 114409261074709380, guid: 04110bd56dbe14343aca256a62edd241, type: 2}
+  playerStats: {fileID: 11400000, guid: 24c36831a2b8e2f4d9db94ea91f2866d, type: 2}
+  waves: {fileID: 11400000, guid: 32a584db6d08c78418b23be599e7843f, type: 2}
 --- !u!114 &1079165210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2016,6 +2010,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ps: {fileID: 11400000, guid: 24c36831a2b8e2f4d9db94ea91f2866d, type: 2}
   weaponName: DoublePistol
+  currentWave: {fileID: 0}
   weaponCharacteristics:
     level: 0
     value: 0
@@ -2027,7 +2022,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1863443331}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 363.14694, y: 270.4642, z: -2.875}
+  m_LocalPosition: {x: 4.69, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

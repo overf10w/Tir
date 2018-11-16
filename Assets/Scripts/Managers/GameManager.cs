@@ -19,7 +19,8 @@ public class GameManager : MonoBehaviour
 
     public void OnNewWave(int wave)
     {
-        playerStats.stats.CurrentWave = wave;
+        //playerStats.stats.UpdateCurrentWave();
+        //playerStats.stats.CurrentWave = wave.index;
     }
 
     public void OnDisable()

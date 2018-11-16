@@ -7,7 +7,11 @@ public class Weapon : MonoBehaviour
 {
     public PlayerStats ps;
 
+    //private int currentWave;
+
     public string weaponName;
+
+    public Wave currentWave;
 
     [SerializeField]
     private WeaponCharacteristics weaponCharacteristics;
@@ -15,8 +19,9 @@ public class Weapon : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        ps.stats.OnWeaponChanged += WeaponDataChanged;
-        weaponCharacteristics = (WeaponCharacteristics)ps.stats.GetType().GetProperty(weaponName).GetValue(ps.stats, null);
+        ps.playerDb.OnWeaponChanged += WeaponDataChanged;
+        ps.playerDb.OnCurrentWaveChanged += CurrentWaveChanged;
+        weaponCharacteristics = (WeaponCharacteristics)ps.playerDb.GetType().GetProperty(weaponName).GetValue(ps.playerDb, null);
     }
     
     // Update is called once per frame
@@ -31,5 +36,11 @@ public class Weapon : MonoBehaviour
         {
             weaponCharacteristics = kek.currentPistolCharacteristics;
         }
+    }
+
+    public void CurrentWaveChanged(Wave value)
+    {
+        this.currentWave = value;
+        Debug.Log("Weapon: " + weaponName + ": Current Wave Cubes Number: " + this.currentWave.cubesNumber);
     }
 }

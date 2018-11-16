@@ -1,9 +1,5 @@
 ﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using UnityEngine;
 
 [System.Serializable]
@@ -36,8 +32,10 @@ public class CustomArgs : EventArgs
 }
 
 [System.Serializable]
-public class Stats
+public class PlayerDB
 {
+    public Stats stats;
+
     [Header("Skills")]
     [SerializeField]
     private PlayerSkills skills;
@@ -47,7 +45,12 @@ public class Stats
     public int _damageLvl;
     public int _autoFireLvl;
 
-    [Header("Guns")]
+    [Header("Waves")]
+    [SerializeField]
+    public PlayerWaves playerWaves;
+
+
+    [Header("Weapons")]
     [SerializeField]
     private PlayerWeapons pw;
 
@@ -73,6 +76,8 @@ public class Stats
 
         doublePistolData = pw.weapons.Find(i => i.name == "DoublePistol");
         currentDoublePistol = doublePistolData.lvls[_doublePistolLvl];
+
+        //_currentWave = 
     }
 
     [Header("Player Stats")]
@@ -166,17 +171,25 @@ public class Stats
     #region CURRENT_WAVE
     [SerializeField]
     private int _currentWave;
-    public int CurrentWave
+    public Wave CurrentWave
     {
-        get { return _currentWave; }
-        set
+        get { return playerWaves.waves[_currentWave]; }
+    }
+    public void UpdateCurrentWave()
+    {
+        int nextInd = _currentWave + 1;
+        if (nextInd > playerWaves.waves.Length - 1)
         {
-            _currentWave = value;
-            if (OnCurrentWaveChanged != null)
-                OnCurrentWaveChanged(value);
+            Debug.LogWarning("This is the highest wave level");
+            return;
+        }
+        _currentWave = nextInd;
+        if (OnCurrentWaveChanged != null)
+        {
+            OnCurrentWaveChanged(playerWaves.waves[_currentWave]);
         }
     }
-    public delegate void CurrentWaveChanged(float value);
+    public delegate void CurrentWaveChanged(Wave value);
     public event CurrentWaveChanged OnCurrentWaveChanged;
     #endregion
 
@@ -268,10 +281,50 @@ public class Stats
         _currentWave = 0;
         _damageLvl = 0;
         _pistolLvl = 0;
+        _doublePistolLvl = 0;
         _autoFireLvl = 0;
         _autoFireDuration = 0.0f;
+
+        //UpdatePlayerStats();
         UpdateCurrentSkills();
     }
+
+    public void InitStats(Stats stats)
+    {
+        _gold = stats._gold;
+        _currentWave = stats._currentWave;
+        _damageLvl = stats._damageLvl;
+        _pistolLvl = stats._pistolLvl;
+        _doublePistolLvl = stats._doublePistolLvl;
+        _autoFireLvl = stats._autoFireLvl;
+        _autoFireDuration = stats._autoFireDuration;
+    }
+
+    public Stats ReturnStats()
+    {
+        Stats playerStats = new Stats();
+        playerStats._gold = _gold;
+        playerStats._currentWave = _currentWave;
+        playerStats._damageLvl = _damageLvl;
+        playerStats._pistolLvl = _pistolLvl;
+        playerStats._doublePistolLvl = _doublePistolLvl;
+        playerStats._autoFireLvl = _autoFireLvl;
+        playerStats._autoFireDuration = _autoFireDuration;
+
+        return playerStats;
+    }
+}
+
+[System.Serializable]
+public class Stats
+{
+    public int _gold;
+    public int _currentWave;
+    public int _damageLvl;
+    public int _pistolLvl;
+    public int _doublePistolLvl;
+    public int _autoFireLvl;
+    public float _autoFireDuration;
 }
 
 [CreateAssetMenu(fileName = "Stats.Asset", menuName = "Character/Stats")]
@@ -279,15 +332,16 @@ public class PlayerStats : ScriptableObject
 {
     private string gameDataProjectFilePath = "/StreamingAssets/data.json";
 
-    public Stats stats;
+    public PlayerDB playerDb;
 
     void OnEnable()
     {
         #if UNITY_EDITOR
-        stats.UpdateCurrentSkills();
+        playerDb.UpdateCurrentSkills();
         #endif
         #if UNITY_STANDALONE
         ReadSelf();
+        playerDb.UpdateCurrentSkills();
         #endif
     }
 
@@ -303,21 +357,21 @@ public class PlayerStats : ScriptableObject
     public void ReadSelf()
     {
         string dataAsJson = File.ReadAllText(Application.dataPath + gameDataProjectFilePath);
-        Stats pcd = JsonUtility.FromJson<Stats>(dataAsJson);
-        if (pcd != null)
+        Stats stats = JsonUtility.FromJson<Stats>(dataAsJson);
+        if (stats != null)
         {
-            this.stats = pcd;
+            playerDb.InitStats(stats);
         }
         else
         {
             Debug.Log("NULLLLLLLL =((((((((((((((((");
-            //stats.Nullify();
         }
     }
 
     public void WriteSelf()
     {
-        string dataAsJson = JsonUtility.ToJson(stats);
+        Stats save = playerDb.ReturnStats();
+        string dataAsJson = JsonUtility.ToJson(save);
         string filePath = Application.dataPath + gameDataProjectFilePath;
         Debug.Log("DataAsJson: " + dataAsJson);
         File.WriteAllText(filePath, dataAsJson);
@@ -325,6 +379,12 @@ public class PlayerStats : ScriptableObject
 
     public void Reset()
     {
-        stats.ResetPlayerStats();
+        // Write resetted stats
+        Stats resettedStats = new Stats();
+        string dataAsJson = JsonUtility.ToJson(resettedStats);
+        string filePath = Application.dataPath + gameDataProjectFilePath;
+        File.WriteAllText(filePath, dataAsJson);
+
+        playerDb.ResetPlayerStats();
     }
 }

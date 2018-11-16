@@ -15,7 +15,7 @@ public class Player : MessageHandler
     void Start()
     {
         isAutoShoot = false;
-        playerStats.stats.OnAutoFireUpdated += OnAutoShoot;
+        playerStats.playerDb.OnAutoFireUpdated += OnAutoShoot;
         gold = 0;
         gunContoller = GetComponentInChildren<Gun>();
     }
@@ -26,7 +26,7 @@ public class Player : MessageHandler
         gunContoller.UpdateGunRotation();
         if (Input.GetMouseButton(0))
         {
-            gunContoller.Shoot(playerStats.stats.Damage.value);
+            gunContoller.Shoot(playerStats.playerDb.Damage.value);
         }
     }
 
@@ -35,7 +35,7 @@ public class Player : MessageHandler
         if (message.Type == MessageType.CubeDeath)
         {
             gold += message.IntValue;
-            playerStats.stats.Gold += message.IntValue;
+            playerStats.playerDb.Gold += message.IntValue;
         }
     }
 
@@ -56,7 +56,7 @@ public class Player : MessageHandler
             timeBetweenShots++;
             if (timeBetweenShots >= 0.2f)
             {
-                gunContoller.Shoot(playerStats.stats.Damage.value);
+                gunContoller.Shoot(playerStats.playerDb.Damage.value);
                 timeBetweenShots = 0.0f;
             }
             yield return null;
@@ -67,6 +67,6 @@ public class Player : MessageHandler
 
     public void OnDisable()
     {
-        playerStats.stats.OnAutoFireUpdated -= OnAutoShoot;
+        playerStats.playerDb.OnAutoFireUpdated -= OnAutoShoot;
     }
 }
