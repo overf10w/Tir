@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UserStatsCanvas : MonoBehaviour
+public class UserStatsCanvas : MessageHandler
 {
     public PlayerStats playerStats;
 
     public Text playerGold;
     public Text playerCurrentWave;
     public Text playerAttack;
+
+    // GUNS
+    public Text pistolTxt;
+    public Text doublePistolTxt;
 
     private WeaponData pistolWD;
     // Use this for initialization
@@ -18,15 +22,17 @@ public class UserStatsCanvas : MonoBehaviour
         playerGold = GameObject.Find("GoldTxt").GetComponent<Text>();
         playerCurrentWave = GameObject.Find("CurrentWaveLbl").GetComponent<Text>();
         playerAttack = GameObject.Find("DamageTxt").GetComponent<Text>();
+
+        pistolTxt = GameObject.Find("PistolTxt").GetComponent<Text>();
+        doublePistolTxt = GameObject.Find("DoublePistolTxt").GetComponent<Text>();
         // --------------- //
-        // TODO: subscribe to playerStats.OnCurrentWaveChanged() += ...
+        playerStats.playerDb.OnWeaponChanged += HandleWeaponChanged;
     }
 
     // TODO: this shouldn't be in update
     void Update()
     {
         playerGold.text = playerStats.playerDb.Gold.ToString();
-        playerCurrentWave.text = "Round: " + playerStats.playerDb.CurrentWave.index.ToString();
         playerAttack.text = "Dmg: " + playerStats.playerDb.Damage.value + " (" + playerStats.playerDb.Damage.level + "lvl) " + ". Next attack: " + playerStats.playerDb.NextDamage.goldWorth + " gold";
     }
 
@@ -37,22 +43,42 @@ public class UserStatsCanvas : MonoBehaviour
 
     public void OnIsAutoShoot(bool isAutoShoot)
     {
-        //playerStats.stats.IsAutoShoot = isAutoShoot;
         playerStats.playerDb.UpdateAutoFire();
     }
 
     public void UpdatePistol()
     {
-        //Debug.Log(playerStats.stats.Pistol.value);
         playerStats.playerDb.UpdatePistol();
-        //Debug.Log(playerStats.stats.Pistol.value);
-        //Debug.Log("BEFORE: Pistol lvl: " + pistolWD.lvls[pistolWD.lvlInd].level);   // TODO: 
-        //pistolWD.lvlInd++;
-        //Debug.Log("AFTER: Pistol lvl: " + pistolWD.lvls[pistolWD.lvlInd].level);
     }
 
     public void UpdateDoublePistol()
     {
         playerStats.playerDb.UpdateDoublePistol();
+    }
+
+    public override void HandleMessage(Message message)
+    {
+        if (message.Type == MessageType.WaveChanged)
+        {
+            Wave tmpWave = (Wave) message.objectValue;
+            playerCurrentWave.text = "Round: " + tmpWave.index;
+        }
+    }
+
+    public void HandleWeaponChanged(CustomArgs weapon)
+    {
+        WeaponCharacteristics w = weapon.weaponCharacteristics;
+        string str = w.cost.ToString() + "$, " + w.dps.ToString() + " dps";
+        switch (w.weaponType)
+        {
+            case WeaponType.PISTOL:
+                pistolTxt.text = str;
+                break;
+            case WeaponType.DOUBLE_PISTOL:
+                doublePistolTxt.text = str;
+                break;
+            default:
+                break;
+        }
     }
 }

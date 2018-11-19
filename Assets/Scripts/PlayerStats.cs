@@ -22,12 +22,12 @@ public class CustomArgs : EventArgs
 {
     public WeaponData weaponData;
 
-    public WeaponCharacteristics currentPistolCharacteristics;
+    public WeaponCharacteristics weaponCharacteristics;
 
     public CustomArgs(WeaponData weaponData, WeaponCharacteristics weaponCharacteristics)
     {
         this.weaponData = weaponData;
-        this.currentPistolCharacteristics = weaponCharacteristics;
+        this.weaponCharacteristics = weaponCharacteristics;
     }
 }
 
@@ -57,13 +57,13 @@ public class PlayerDB
     // Pistol
     [SerializeField]
     private WeaponData pistolData;
-    public WeaponCharacteristics currentPistol;
+    public WeaponCharacteristics pistol;
     public int _pistolLvl;    
     
     // M4A1
     [SerializeField]
     private WeaponData doublePistolData;
-    public WeaponCharacteristics currentDoublePistol;
+    public WeaponCharacteristics doublePistol;
     public int _doublePistolLvl;
 
     public void UpdateCurrentSkills()
@@ -72,10 +72,10 @@ public class PlayerDB
         currentAutoFire = skills.AutoFireLvls[_autoFireLvl];
 
         pistolData = pw.weapons.Find(i => i.name == "Pistol");
-        currentPistol = pistolData.lvls[_pistolLvl];
+        pistol = new WeaponCharacteristics(12, 1, WeaponType.PISTOL);
 
         doublePistolData = pw.weapons.Find(i => i.name == "DoublePistol");
-        currentDoublePistol = doublePistolData.lvls[_doublePistolLvl];
+        doublePistol = new WeaponCharacteristics(10, 4, WeaponType.DOUBLE_PISTOL);
 
         //_currentWave = 
     }
@@ -83,8 +83,8 @@ public class PlayerDB
     [Header("Player Stats")]
     #region GOLD
     [SerializeField]
-    private int _gold;
-    public int Gold
+    private float _gold;
+    public float Gold
     {
         get { return _gold; }
         set
@@ -105,27 +105,23 @@ public class PlayerDB
     {
         get
         {
-            return pistolData.lvls[_pistolLvl]; 
+            return pistol; 
         }
     }
     public void UpdatePistol()
     {
         int nextInd = _pistolLvl + 1;
-        if (nextInd > pistolData.lvls.Length - 1)
+
+        if (_gold >= pistol.cost)
         {
-            Debug.LogWarning("This is the highest level");
-            return;
-        }
-        if (_gold >= pistolData.lvls[nextInd].goldWorth)
-        {
-            _gold -= pistolData.lvls[nextInd].goldWorth;
+            _gold -= pistol.cost;
+            pistol.cost = (int)Math.Floor(pistol.baseCost * (float)Math.Pow(1.5f, _pistolLvl));
+            pistol.dps = 3 * nextInd;
             if (OnWeaponChanged != null)
             {
-                OnWeaponChanged(new CustomArgs(pistolData, pistolData.lvls[nextInd]));
+                OnWeaponChanged(new CustomArgs(pistolData, pistol));
             }
-            //OnPistolChanged(pistolData.lvls[nextInd]);
             _pistolLvl = nextInd;
-            currentPistol = pistolData.lvls[_pistolLvl];
         }
         else
         {
@@ -137,29 +133,22 @@ public class PlayerDB
     #region DOUBLE_PISTOL
     public WeaponCharacteristics DoublePistol
     {
-        get
-        {
-            return doublePistolData.lvls[_doublePistolLvl]; 
-        }
+        get { return doublePistol; }
     }
     public void UpdateDoublePistol()
     {
         int nextInd = _doublePistolLvl + 1;
-        if (nextInd > doublePistolData.lvls.Length - 1)
+
+        if (_gold >= doublePistol.cost)
         {
-            Debug.LogWarning("This is the highest level");
-            return;
-        }
-        if (_gold >= doublePistolData.lvls[nextInd].goldWorth)
-        {
-            _gold -= doublePistolData.lvls[nextInd].goldWorth;
+            _gold -= doublePistol.baseCost;
+            doublePistol.cost = (int)Math.Floor(doublePistol.baseCost * (float)Math.Pow(1.10f, _doublePistolLvl));
+            doublePistol.dps = 5 * nextInd;
             if (OnWeaponChanged != null)
             {
-                OnWeaponChanged(new CustomArgs(doublePistolData, doublePistolData.lvls[nextInd]));
+                OnWeaponChanged(new CustomArgs(doublePistolData, doublePistol));
             }
-            //OnPistolChanged(pistolData.lvls[nextInd]);
             _doublePistolLvl = nextInd;
-            currentDoublePistol = doublePistolData.lvls[_doublePistolLvl];
         }
         else
         {
@@ -170,27 +159,7 @@ public class PlayerDB
 
     #region CURRENT_WAVE
     [SerializeField]
-    private int _currentWave;
-    public Wave CurrentWave
-    {
-        get { return playerWaves.waves[_currentWave]; }
-    }
-    public void UpdateCurrentWave()
-    {
-        int nextInd = _currentWave + 1;
-        if (nextInd > playerWaves.waves.Length - 1)
-        {
-            Debug.LogWarning("This is the highest wave level");
-            return;
-        }
-        _currentWave = nextInd;
-        if (OnCurrentWaveChanged != null)
-        {
-            OnCurrentWaveChanged(playerWaves.waves[_currentWave]);
-        }
-    }
-    public delegate void CurrentWaveChanged(Wave value);
-    public event CurrentWaveChanged OnCurrentWaveChanged;
+    public int _currentWave;
     #endregion
 
     #region DAMAGE_SKILL
@@ -318,7 +287,7 @@ public class PlayerDB
 [System.Serializable]
 public class Stats
 {
-    public int _gold;
+    public float _gold;
     public int _currentWave;
     public int _damageLvl;
     public int _pistolLvl;

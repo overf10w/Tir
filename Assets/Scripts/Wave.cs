@@ -6,21 +6,13 @@ using UnityEngine;
 
 public class Wave : MessageHandler
 {
-    public PlayerStats playerStats;
-
     [HideInInspector]
     public int cubesNumber;
-
     public int index;
 
     void Awake()
     {
         Init();
-    }
-
-    public void Update()
-    {
-
     }
 
     private void Init()
@@ -31,18 +23,5 @@ public class Wave : MessageHandler
         }
     }
 
-    public override void HandleMessage(Message message)
-    {
-        if (message.Type == MessageType.CubeDeath)
-        {
-            if (playerStats.playerDb.CurrentWave.index == index)
-            {
-                cubesNumber -= 1;
-                if (cubesNumber <= 0)
-                {
-                    playerStats.playerDb.UpdateCurrentWave();
-                }
-            }
-        }
-    }
+    public override void HandleMessage(Message message) { }
 }

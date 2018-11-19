@@ -2,16 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// TODO: forget about PlayerWeapons and access everything through PlayerStats: ps.weaponList. ...
-public class Weapon : MonoBehaviour
+public class Weapon : MessageHandler
 {
     public PlayerStats ps;
-
-    //private int currentWave;
-
     public string weaponName;
-
-    public Wave currentWave;
+    private Wave currentWave;
 
     [SerializeField]
     private WeaponCharacteristics weaponCharacteristics;
@@ -20,27 +15,23 @@ public class Weapon : MonoBehaviour
     void Start()
     {
         ps.playerDb.OnWeaponChanged += WeaponDataChanged;
-        ps.playerDb.OnCurrentWaveChanged += CurrentWaveChanged;
         weaponCharacteristics = (WeaponCharacteristics)ps.playerDb.GetType().GetProperty(weaponName).GetValue(ps.playerDb, null);
     }
     
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void WeaponDataChanged(CustomArgs kek)
     {
         if (kek.weaponData.name == weaponName)
         {
-            weaponCharacteristics = kek.currentPistolCharacteristics;
+            weaponCharacteristics = kek.weaponCharacteristics;
+            Debug.Log("Weapon " + weaponName + " updated: " + kek.weaponCharacteristics.cost);
         }
     }
 
-    public void CurrentWaveChanged(Wave value)
+    public override void HandleMessage(Message message)
     {
-        this.currentWave = value;
-        Debug.Log("Weapon: " + weaponName + ": Current Wave Cubes Number: " + this.currentWave.cubesNumber);
+        if (message.Type == MessageType.WaveChanged)
+        {
+            this.currentWave = (Wave)message.objectValue;
+        }
     }
 }

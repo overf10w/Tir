@@ -7,6 +7,7 @@ public enum MessageType
     NONE,
     GameOver,
     CubeDeath,
+    WaveChanged,
     PointAdded
 }
 
@@ -17,4 +18,5 @@ public struct Message
     public float FloatValue;
     public Vector3 Vector3Value;
     public GameObject GameObjectValue;
+    public object objectValue;
 }
