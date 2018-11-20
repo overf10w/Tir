@@ -14,8 +14,6 @@ MonoBehaviour:
   waves:
   - {fileID: 114398338289295854, guid: a25dde7d4b7c9e044b54efe80e940491, type: 2}
   - {fileID: 114806106804193404, guid: b5002e0348733b347b446dfdc52b70bd, type: 2}
-  - {fileID: 114952456820162096, guid: 59ad701161217494aa0e5eabf547c392, type: 2}
-  - {fileID: 114948033291413872, guid: 9631ac8dea143694ca75a6980f587f5c, type: 2}
-  - {fileID: 114972621102968608, guid: cca7ee59466a8eb4fa2beb3f0c452824, type: 2}
-  - {fileID: 114114548324586004, guid: fe18f7fdca9672e408ac7b3feab948c8, type: 2}
-  - {fileID: 114409261074709380, guid: 04110bd56dbe14343aca256a62edd241, type: 2}
+  - {fileID: 114806106804193404, guid: dfb9ce294eedea5418917538899b6812, type: 2}
+  - {fileID: 114806106804193404, guid: a7f9c37dfd5f20141a9a3d06f8c6b730, type: 2}
+  - {fileID: 114806106804193404, guid: f4230a42b37cc214aad8d01df21e9768, type: 2}

@@ -17,6 +17,21 @@ public class CubeSpawner : MessageHandler
         SpawnWave();
     }
 
+    public void Update()
+    {
+        Debug.Log(wave.Cubes.Count);
+        if (wave.Cubes.Count <= 0)
+        {
+            if (waveInd > playerStats.playerDb.playerWaves.waves.Length - 1)
+            {
+                MessageBus.Instance.SendMessage(new Message() { Type = MessageType.GameOver });
+                return;
+            }
+            Debug.Log("CubeSpawner: " + cubes);
+            SpawnWave();
+        }
+    }
+
     void SpawnWave()
     {
         var wavePrefab = playerStats.playerDb.playerWaves.waves[waveInd];
@@ -28,18 +43,23 @@ public class CubeSpawner : MessageHandler
 
     public override void HandleMessage(Message message)
     {
-        if (message.Type == MessageType.CubeDeath)
-        {
-            if (--cubes <= 0)
-            {
-                if (waveInd > playerStats.playerDb.playerWaves.waves.Length - 1)
-                {
-                    MessageBus.Instance.SendMessage(new Message() { Type = MessageType.GameOver });
-                    return;
-                }
-                
-                SpawnWave();
-            }
-        }
+        //if (message.Type == MessageType.CubeDeath)
+        //{
+        //    if (--cubes <= 0)
+        //    {
+        //        if (waveInd > playerStats.playerDb.playerWaves.waves.Length - 1)
+        //        {
+        //            MessageBus.Instance.SendMessage(new Message() { Type = MessageType.GameOver });
+        //            return;
+        //        }
+        //        Debug.Log("CubeSpawner: " + cubes);
+        //        SpawnWave();
+        //    }
+        //}
+    }
+
+    public void OnDisable()
+    {
+        playerStats.playerDb._currentWave = waveInd;
     }
 }

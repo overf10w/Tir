@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Weapon : MessageHandler
@@ -32,6 +33,20 @@ public class Weapon : MessageHandler
         if (message.Type == MessageType.WaveChanged)
         {
             this.currentWave = (Wave)message.objectValue;
+        }
+    }
+    float timer = 0;
+    public void Update()
+    {
+        timer += Time.deltaTime;
+        if (timer >= 0.4f)
+        {
+            IDestroyable cube = currentWave.Cubes.ElementAtOrDefault(new System.Random().Next(currentWave.Cubes.Count));
+            if ((MonoBehaviour)cube != null)
+            {
+                cube.TakeDamage(2.0f);
+            }
+            timer = 0.0f;
         }
     }
 }

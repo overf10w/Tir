@@ -14,8 +14,12 @@ public class UserStatsCanvas : MessageHandler
     // GUNS
     public Text pistolTxt;
     public Text doublePistolTxt;
+    public Text teamDPSTxt;
 
     private WeaponData pistolWD;
+
+    public float pistolDps;
+    public float doublePistolDps;
     // Use this for initialization
     void Start()
     {
@@ -25,6 +29,8 @@ public class UserStatsCanvas : MessageHandler
 
         pistolTxt = GameObject.Find("PistolTxt").GetComponent<Text>();
         doublePistolTxt = GameObject.Find("DoublePistolTxt").GetComponent<Text>();
+
+        teamDPSTxt = GameObject.Find("TeamDPSTxt").GetComponent<Text>();
         // --------------- //
         playerStats.playerDb.OnWeaponChanged += HandleWeaponChanged;
     }
@@ -72,13 +78,21 @@ public class UserStatsCanvas : MessageHandler
         switch (w.weaponType)
         {
             case WeaponType.PISTOL:
+                pistolDps = w.dps;
                 pistolTxt.text = str;
                 break;
             case WeaponType.DOUBLE_PISTOL:
+                doublePistolDps = w.dps;
                 doublePistolTxt.text = str;
                 break;
             default:
                 break;
         }
+        teamDPSTxt.text = (pistolDps + doublePistolDps).ToString();
+    }
+
+    public void UpdateTeamDPSTxt(string text)
+    {
+        
     }
 }

@@ -12,7 +12,6 @@ public class Cube : MonoBehaviour, IDestroyable
     public void Awake()
     {
         cubeStats = Resources.Load<CubeStats>("SO/CubeStats");
-        //Debug.Log("cubeStats == null: " + cubeStats == null);
         gold = cubeStats.stats.gold;
         health = cubeStats.stats.HP;
     }
@@ -22,7 +21,8 @@ public class Cube : MonoBehaviour, IDestroyable
         health -= damage;
         if (health <= 0.0f)
         {
-            MessageBus.Instance.SendMessage(new Message {Type = MessageType.CubeDeath, IntValue = gold });
+            MessageBus.Instance.SendMessage(new Message { Type = MessageType.CubeDeath, objectValue = (Cube)this});
+            //Debug.Log("CUBE DEAAAAAAAAAAAAAAATH");
             Destroy(this.gameObject);
         }
     }
