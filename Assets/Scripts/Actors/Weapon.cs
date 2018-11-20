@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Weapon : MessageHandler
 {
-    public PlayerStats ps;
+    public GameManager gameManager;
     public string weaponName;
     private Wave currentWave;
 
@@ -15,8 +15,8 @@ public class Weapon : MessageHandler
     // Use this for initialization
     void Start()
     {
-        ps.playerDb.OnWeaponChanged += WeaponDataChanged;
-        weaponCharacteristics = (WeaponCharacteristics)ps.playerDb.GetType().GetProperty(weaponName).GetValue(ps.playerDb, null);
+        gameManager.playerDb.OnWeaponChanged += WeaponDataChanged;
+        weaponCharacteristics = (WeaponCharacteristics)gameManager.playerDb.GetType().GetProperty(weaponName).GetValue(gameManager.playerDb, null);
     }
     
     public void WeaponDataChanged(CustomArgs kek)

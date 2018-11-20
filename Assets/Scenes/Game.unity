@@ -282,14 +282,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1893d447fd355b442af63e6859e96398, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ps: {fileID: 11400000, guid: 24c36831a2b8e2f4d9db94ea91f2866d, type: 2}
+  gameManager: {fileID: 667130461}
   weaponName: DoublePistol
   weaponCharacteristics:
     level: 0
     baseDps: 0
     baseCost: 0
     dps: 0
+    nextDps: 0
     cost: 0
+    nextCost: 0
     weaponType: 0
 --- !u!4 &132268234
 Transform:
@@ -468,6 +470,10 @@ Prefab:
       propertyPath: MessageTypes.Array.data[1]
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1455737356191348, guid: 18312f5a131d2584983fcfd1980d51ca, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 18312f5a131d2584983fcfd1980d51ca, type: 2}
   m_IsPrefabParent: 0
@@ -512,14 +518,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1893d447fd355b442af63e6859e96398, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ps: {fileID: 11400000, guid: 24c36831a2b8e2f4d9db94ea91f2866d, type: 2}
+  gameManager: {fileID: 667130461}
   weaponName: Pistol
   weaponCharacteristics:
     level: 0
     baseDps: 0
     baseCost: 0
     dps: 0
+    nextDps: 0
     cost: 0
+    nextCost: 0
     weaponType: 0
 --- !u!4 &305551808
 Transform:
@@ -851,6 +859,98 @@ Transform:
   m_PrefabParentObject: {fileID: 4498710882700830, guid: 3b40b67c2c13f604eb6b1a4656ced532,
     type: 2}
   m_PrefabInternal: {fileID: 1425754865}
+--- !u!1 &667130460
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 667130462}
+  - component: {fileID: 667130461}
+  m_Layer: 0
+  m_Name: _GM
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &667130461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 667130460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 389d241b800125942a9a3130ba39bfa8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kek: 0
+  playerDb:
+    stats:
+      _gold: 0
+      _currentWave: 0
+      _damageLvl: 0
+      _pistolLvl: 0
+      _doublePistolLvl: 0
+      _autoFireLvl: 0
+      _autoFireDuration: 0
+    skills: {fileID: 11400000, guid: b0401cd66a469594ba7c94d432c58e59, type: 2}
+    currentDamage:
+      level: 0
+      value: 0
+      goldWorth: 0
+    currentAutoFire:
+      level: 0
+      value: 0
+      goldWorth: 0
+    _damageLvl: 0
+    _autoFireLvl: 0
+    playerWaves: {fileID: 11400000, guid: 32a584db6d08c78418b23be599e7843f, type: 2}
+    pw: {fileID: 11400000, guid: ec3451a70c3c3fb4bb4f92ac60c7e37c, type: 2}
+    pistolData:
+      lvls: []
+      name: 
+    pistol:
+      level: 0
+      baseDps: 0
+      baseCost: 0
+      dps: 0
+      nextDps: 0
+      cost: 0
+      nextCost: 0
+      weaponType: 0
+    _pistolLvl: 0
+    doublePistolData:
+      lvls: []
+      name: 
+    doublePistol:
+      level: 0
+      baseDps: 0
+      baseCost: 0
+      dps: 0
+      nextDps: 0
+      cost: 0
+      nextCost: 0
+      weaponType: 0
+    _doublePistolLvl: 0
+    _gold: 0
+    _currentWave: 0
+    _autoFireDuration: 0
+--- !u!4 &667130462
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 667130460}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 107.941246, y: 172.12051, z: 5.7172093}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &684694560
 GameObject:
   m_ObjectHideFlags: 0
@@ -1083,8 +1183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 193d60ceb587e8a4dba7ce481233ced7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStats: {fileID: 11400000, guid: 24c36831a2b8e2f4d9db94ea91f2866d, type: 2}
-  gold: 0
+  gameManager: {fileID: 667130461}
 --- !u!114 &933382495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1323,7 +1422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05cd5d2760fece24ba94ee91feaf0561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStats: {fileID: 11400000, guid: 24c36831a2b8e2f4d9db94ea91f2866d, type: 2}
+  gameManager: {fileID: 667130461}
 --- !u!114 &1079165210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1349,7 +1448,7 @@ GameObject:
   - component: {fileID: 1227886077}
   - component: {fileID: 1227886076}
   m_Layer: 5
-  m_Name: PistolBtn
+  m_Name: DoublePistolTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1649,12 +1748,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6a94ce445a472044813e07a437d5f14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStats: {fileID: 11400000, guid: 24c36831a2b8e2f4d9db94ea91f2866d, type: 2}
+  gameManager: {fileID: 667130461}
   playerGold: {fileID: 0}
   playerCurrentWave: {fileID: 0}
   playerAttack: {fileID: 0}
   pistolTxt: {fileID: 0}
   doublePistolTxt: {fileID: 0}
+  doublePistolNextTxt: {fileID: 0}
   teamDPSTxt: {fileID: 0}
   pistolDps: 0
   doublePistolDps: 0
@@ -2398,7 +2498,7 @@ GameObject:
   - component: {fileID: 1950445445}
   - component: {fileID: 1950445444}
   m_Layer: 5
-  m_Name: DoublePistolTxt
+  m_Name: DoublePistolNextTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

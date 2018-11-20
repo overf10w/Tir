@@ -36,36 +36,76 @@ MonoBehaviour:
     pistolData:
       lvls:
       - level: 1
-        value: 20
-        goldWorth: 10
+        baseDps: 0
+        baseCost: 0
+        dps: 0
+        nextDps: 0
+        cost: 0
+        nextCost: 0
+        weaponType: 0
       - level: 2
-        value: 30
-        goldWorth: 40
+        baseDps: 0
+        baseCost: 0
+        dps: 0
+        nextDps: 0
+        cost: 0
+        nextCost: 0
+        weaponType: 0
       name: Pistol
-    currentPistol:
-      level: 1
-      value: 20
-      goldWorth: 10
+    pistol:
+      level: 0
+      baseDps: 1
+      baseCost: 12
+      dps: 1
+      nextDps: 0
+      cost: 12
+      nextCost: 1
+      weaponType: 1
     _pistolLvl: 0
     doublePistolData:
       lvls:
       - level: 1
-        value: 44
-        goldWorth: 90
+        baseDps: 0
+        baseCost: 0
+        dps: 0
+        nextDps: 0
+        cost: 0
+        nextCost: 0
+        weaponType: 0
       - level: 2
-        value: 25
-        goldWorth: 20
+        baseDps: 0
+        baseCost: 0
+        dps: 0
+        nextDps: 0
+        cost: 0
+        nextCost: 0
+        weaponType: 0
       - level: 3
-        value: 30
-        goldWorth: 30
+        baseDps: 0
+        baseCost: 0
+        dps: 0
+        nextDps: 0
+        cost: 0
+        nextCost: 0
+        weaponType: 0
       - level: 4
-        value: 35
-        goldWorth: 35
+        baseDps: 0
+        baseCost: 0
+        dps: 0
+        nextDps: 0
+        cost: 0
+        nextCost: 0
+        weaponType: 0
       name: DoublePistol
-    currentDoublePistol:
-      level: 1
-      value: 44
-      goldWorth: 90
+    doublePistol:
+      level: 0
+      baseDps: 4
+      baseCost: 10
+      dps: 4
+      nextDps: 0
+      cost: 10
+      nextCost: 4
+      weaponType: 2
     _doublePistolLvl: 0
     _gold: 0
     _currentWave: 0

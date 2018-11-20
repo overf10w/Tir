@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class UserStatsCanvas : MessageHandler
 {
-    public PlayerStats playerStats;
+    public GameManager gameManager;
 
     public Text playerGold;
     public Text playerCurrentWave;
@@ -13,7 +13,11 @@ public class UserStatsCanvas : MessageHandler
 
     // GUNS
     public Text pistolTxt;
+
+    // double pistol
     public Text doublePistolTxt;
+    public Text doublePistolNextTxt;
+
     public Text teamDPSTxt;
 
     private WeaponData pistolWD;
@@ -21,45 +25,48 @@ public class UserStatsCanvas : MessageHandler
     public float pistolDps;
     public float doublePistolDps;
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         playerGold = GameObject.Find("GoldTxt").GetComponent<Text>();
         playerCurrentWave = GameObject.Find("CurrentWaveLbl").GetComponent<Text>();
         playerAttack = GameObject.Find("DamageTxt").GetComponent<Text>();
 
         pistolTxt = GameObject.Find("PistolTxt").GetComponent<Text>();
+
+        //doublePistol
         doublePistolTxt = GameObject.Find("DoublePistolTxt").GetComponent<Text>();
+        doublePistolNextTxt = GameObject.Find("DoublePistolNextTxt").GetComponent<Text>();
 
         teamDPSTxt = GameObject.Find("TeamDPSTxt").GetComponent<Text>();
         // --------------- //
-        playerStats.playerDb.OnWeaponChanged += HandleWeaponChanged;
+        gameManager.playerDb.OnWeaponChanged += HandleWeaponChanged;
     }
 
     // TODO: this shouldn't be in update
     void Update()
     {
-        playerGold.text = playerStats.playerDb.Gold.ToString();
-        playerAttack.text = "Dmg: " + playerStats.playerDb.Damage.value + " (" + playerStats.playerDb.Damage.level + "lvl) " + ". Next attack: " + playerStats.playerDb.NextDamage.goldWorth + " gold";
+        playerGold.text = gameManager.playerDb.Gold.ToString();
+        playerAttack.text = "Dmg: " + gameManager.playerDb.Damage.value + " (" + gameManager.playerDb.Damage.level + "lvl) " + ". Next attack: " + gameManager.playerDb.NextDamage.goldWorth + " gold";
     }
 
     public void OnUpdateDamage(int kek = 2)
     {
-        playerStats.playerDb.UpdateDamage();
+        gameManager.playerDb.UpdateDamage();
     }
 
     public void OnIsAutoShoot(bool isAutoShoot)
     {
-        playerStats.playerDb.UpdateAutoFire();
+        gameManager.playerDb.UpdateAutoFire();
     }
 
     public void UpdatePistol()
     {
-        playerStats.playerDb.UpdatePistol();
+        gameManager.playerDb.UpdatePistol();
     }
 
     public void UpdateDoublePistol()
     {
-        playerStats.playerDb.UpdateDoublePistol();
+        gameManager.playerDb.UpdateDoublePistol();
     }
 
     public override void HandleMessage(Message message)
@@ -75,6 +82,7 @@ public class UserStatsCanvas : MessageHandler
     {
         WeaponCharacteristics w = weapon.weaponCharacteristics;
         string str = w.cost.ToString() + "$, " + w.dps.ToString() + " dps";
+        string strNxt = w.nextCost.ToString() + "$, " + w.nextDps.ToString() + " dps";
         switch (w.weaponType)
         {
             case WeaponType.PISTOL:
@@ -83,7 +91,8 @@ public class UserStatsCanvas : MessageHandler
                 break;
             case WeaponType.DOUBLE_PISTOL:
                 doublePistolDps = w.dps;
-                doublePistolTxt.text = str;
+                doublePistolTxt.text = "DP" + str;
+                doublePistolNextTxt.text = "DP: " + strNxt;
                 break;
             default:
                 break;

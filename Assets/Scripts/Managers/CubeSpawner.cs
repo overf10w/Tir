@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CubeSpawner : MessageHandler
 {
-    public PlayerStats playerStats;
+    public GameManager gameManager;
     private Wave wave;
     private int cubes;
     private int waveInd;
@@ -13,16 +13,16 @@ public class CubeSpawner : MessageHandler
     // Use this for initialization
     void Start()
     {
-        waveInd = playerStats.playerDb._currentWave;
+        waveInd = gameManager.playerDb._currentWave;
         SpawnWave();
     }
 
     public void Update()
     {
-        Debug.Log(wave.Cubes.Count);
+        //Debug.Log(wave.Cubes.Count);
         if (wave.Cubes.Count <= 0)
         {
-            if (waveInd > playerStats.playerDb.playerWaves.waves.Length - 1)
+            if (waveInd > gameManager.playerDb.playerWaves.waves.Length - 1)
             {
                 MessageBus.Instance.SendMessage(new Message() { Type = MessageType.GameOver });
                 return;
@@ -34,7 +34,7 @@ public class CubeSpawner : MessageHandler
 
     void SpawnWave()
     {
-        var wavePrefab = playerStats.playerDb.playerWaves.waves[waveInd];
+        var wavePrefab = gameManager.playerDb.playerWaves.waves[waveInd];
         wave = Instantiate(wavePrefab, wavePrefab.transform.position, Quaternion.identity) as Wave;
         cubes = wave.cubesNumber;
         waveInd += 1;
@@ -60,6 +60,6 @@ public class CubeSpawner : MessageHandler
 
     public void OnDisable()
     {
-        playerStats.playerDb._currentWave = waveInd;
+        gameManager.playerDb._currentWave = waveInd;
     }
 }

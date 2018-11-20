@@ -4,19 +4,12 @@ using UnityEngine;
 
 public class Player : MessageHandler
 {
-    public PlayerStats playerStats;
+    public GameManager gameManager;
     private Gun gunContoller;
-
-    private bool isAutoShoot;
-
-    [HideInInspector]
-    public int gold = 0;
 
     void Start()
     {
-        isAutoShoot = false;
-        playerStats.playerDb.OnAutoFireUpdated += OnAutoShoot;
-        gold = 0;
+        gameManager.playerDb.OnAutoFireUpdated += OnAutoShoot;
         gunContoller = GetComponentInChildren<Gun>();
     }
 
@@ -26,7 +19,7 @@ public class Player : MessageHandler
         gunContoller.UpdateGunRotation();
         if (Input.GetMouseButton(0))
         {
-            gunContoller.Shoot(playerStats.playerDb.Damage.value);
+            gunContoller.Shoot(gameManager.playerDb.Damage.value);
         }
     }
 
@@ -34,8 +27,8 @@ public class Player : MessageHandler
     {
         if (message.Type == MessageType.CubeDeath)
         {
-            gold += message.IntValue;
-            playerStats.playerDb.Gold += message.IntValue;
+            Cube cube = (Cube)message.objectValue;
+            gameManager.playerDb.Gold += cube.Gold;
         }
     }
 
@@ -56,7 +49,7 @@ public class Player : MessageHandler
             timeBetweenShots++;
             if (timeBetweenShots >= 0.2f)
             {
-                gunContoller.Shoot(playerStats.playerDb.Damage.value);
+                gunContoller.Shoot(gameManager.playerDb.Damage.value);
                 timeBetweenShots = 0.0f;
             }
             yield return null;
@@ -67,6 +60,6 @@ public class Player : MessageHandler
 
     public void OnDisable()
     {
-        playerStats.playerDb.OnAutoFireUpdated -= OnAutoShoot;
+        gameManager.playerDb.OnAutoFireUpdated -= OnAutoShoot;
     }
 }

@@ -22,8 +22,11 @@ public class Cube : MonoBehaviour, IDestroyable
         if (health <= 0.0f)
         {
             MessageBus.Instance.SendMessage(new Message { Type = MessageType.CubeDeath, objectValue = (Cube)this});
-            //Debug.Log("CUBE DEAAAAAAAAAAAAAAATH");
             Destroy(this.gameObject);
         }
+    }
+    public int Gold
+    {
+        get { return gold; }
     }
 }

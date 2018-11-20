@@ -49,20 +49,19 @@ public class PlayerDB
     [SerializeField]
     public PlayerWaves playerWaves;
 
-
     [Header("Weapons")]
     [SerializeField]
     private PlayerWeapons pw;
 
     // Pistol
     [SerializeField]
-    private WeaponData pistolData;
+    public WeaponData pistolData;
     public WeaponCharacteristics pistol;
     public int _pistolLvl;    
     
     // M4A1
     [SerializeField]
-    private WeaponData doublePistolData;
+    public WeaponData doublePistolData;
     public WeaponCharacteristics doublePistol;
     public int _doublePistolLvl;
 
@@ -77,7 +76,8 @@ public class PlayerDB
         doublePistolData = pw.weapons.Find(i => i.name == "DoublePistol");
         doublePistol = new WeaponCharacteristics(10, 4, WeaponType.DOUBLE_PISTOL);
 
-        //_currentWave = 
+        OnWeaponChanged?.Invoke(new CustomArgs(pistolData, pistol));
+        OnWeaponChanged?.Invoke(new CustomArgs(doublePistolData, doublePistol));
     }
 
     [Header("Player Stats")]
@@ -137,13 +137,19 @@ public class PlayerDB
     }
     public void UpdateDoublePistol()
     {
-        int nextInd = _doublePistolLvl + 1;
-
         if (_gold >= doublePistol.cost)
         {
-            _gold -= doublePistol.baseCost;
+            // update 
+            _gold -= doublePistol.cost;
+
+            // update next parameters
             doublePistol.cost = (int)Math.Floor(doublePistol.baseCost * (float)Math.Pow(1.10f, _doublePistolLvl));
-            doublePistol.dps = 5 * nextInd;
+            doublePistol.dps = 5 * _doublePistolLvl;
+            // update current parameters
+            int nextInd = _doublePistolLvl + 1;
+            doublePistol.nextCost = (int) Math.Floor(doublePistol.baseCost * (float) Math.Pow(1.10f, nextInd));
+            doublePistol.nextDps = 5 * nextInd;
+
             if (OnWeaponChanged != null)
             {
                 OnWeaponChanged(new CustomArgs(doublePistolData, doublePistol));
@@ -299,61 +305,61 @@ public class Stats
 [CreateAssetMenu(fileName = "Stats.Asset", menuName = "Character/Stats")]
 public class PlayerStats : ScriptableObject
 {
-    private string gameDataProjectFilePath = "/StreamingAssets/data.json";
+    //private string gameDataProjectFilePath = "/StreamingAssets/data.json";
 
-    public PlayerDB playerDb;
+    //public PlayerDB playerDb;
 
-    void OnEnable()
-    {
-        #if UNITY_EDITOR
-        playerDb.UpdateCurrentSkills();
-        #endif
-        #if UNITY_STANDALONE
-        ReadSelf();
-        playerDb.UpdateCurrentSkills();
-        #endif
-    }
+    //void OnEnable()
+    //{
+    //#if UNITY_EDITOR
+    //    playerDb.UpdateCurrentSkills();
+    //#endif
+    //#if UNITY_STANDALONE
+    //    ReadSelf();
+    //    playerDb.UpdateCurrentSkills();
+    //#endif
+    //}
 
-    // TODO: you'd better write this logic somewhere in monobehaviour,
-    // as SO's OnDisable() not always called(?)
-    void OnDisable()
-    {
-        #if UNITY_STANDALONE
-        WriteSelf();
-        #endif
-    }
+    //// TODO: you'd better write this logic somewhere in monobehaviour,
+    //// as SO's OnDisable() not always called(?)
+    //void OnDisable()
+    //{
+    //#if UNITY_STANDALONE
+    //    WriteSelf();
+    //#endif
+    //}
 
-    public void ReadSelf()
-    {
-        string dataAsJson = File.ReadAllText(Application.dataPath + gameDataProjectFilePath);
-        Stats stats = JsonUtility.FromJson<Stats>(dataAsJson);
-        if (stats != null)
-        {
-            playerDb.InitStats(stats);
-        }
-        else
-        {
-            Debug.Log("NULLLLLLLL =((((((((((((((((");
-        }
-    }
+    //public void ReadSelf()
+    //{
+    //    string dataAsJson = File.ReadAllText(Application.dataPath + gameDataProjectFilePath);
+    //    Stats stats = JsonUtility.FromJson<Stats>(dataAsJson);
+    //    if (stats != null)
+    //    {
+    //        playerDb.InitStats(stats);
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("NULLLLLLLL =((((((((((((((((");
+    //    }
+    //}
 
-    public void WriteSelf()
-    {
-        Stats save = playerDb.ReturnStats();
-        string dataAsJson = JsonUtility.ToJson(save);
-        string filePath = Application.dataPath + gameDataProjectFilePath;
-        Debug.Log("DataAsJson: " + dataAsJson);
-        File.WriteAllText(filePath, dataAsJson);
-    }
+    //public void WriteSelf()
+    //{
+    //    Stats save = playerDb.ReturnStats();
+    //    string dataAsJson = JsonUtility.ToJson(save);
+    //    string filePath = Application.dataPath + gameDataProjectFilePath;
+    //    Debug.Log("DataAsJson: " + dataAsJson);
+    //    File.WriteAllText(filePath, dataAsJson);
+    //}
 
-    public void Reset()
-    {
-        // Write resetted stats
-        Stats resettedStats = new Stats();
-        string dataAsJson = JsonUtility.ToJson(resettedStats);
-        string filePath = Application.dataPath + gameDataProjectFilePath;
-        File.WriteAllText(filePath, dataAsJson);
+    //public void Reset()
+    //{
+    //    // Write resetted stats
+    //    Stats resettedStats = new Stats();
+    //    string dataAsJson = JsonUtility.ToJson(resettedStats);
+    //    string filePath = Application.dataPath + gameDataProjectFilePath;
+    //    File.WriteAllText(filePath, dataAsJson);
 
-        playerDb.ResetPlayerStats();
-    }
+    //    playerDb.ResetPlayerStats();
+    //}
 }
