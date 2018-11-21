@@ -16,7 +16,7 @@ public class Weapon : MessageHandler
     void Start()
     {
         gameManager.playerDb.OnWeaponChanged += WeaponDataChanged;
-        weaponCharacteristics = (WeaponCharacteristics)gameManager.playerDb.GetType().GetProperty(weaponName).GetValue(gameManager.playerDb, null);
+        //weaponCharacteristics = (WeaponCharacteristics)gameManager.playerDb.GetType().GetProperty(weaponName).GetValue(gameManager.playerDb, null);
     }
     
     public void WeaponDataChanged(CustomArgs kek)
@@ -24,7 +24,6 @@ public class Weapon : MessageHandler
         if (kek.weaponData.name == weaponName)
         {
             weaponCharacteristics = kek.weaponCharacteristics;
-            Debug.Log("Weapon " + weaponName + " updated: " + kek.weaponCharacteristics.cost);
         }
     }
 
@@ -35,18 +34,39 @@ public class Weapon : MessageHandler
             this.currentWave = (Wave)message.objectValue;
         }
     }
-    float timer = 0;
-    public void Update()
+    //float timer = 0;
+    //public void Update()
+    //{
+    //    timer += Time.deltaTime;
+    //    if (timer >= 0.4f)
+    //    {
+    //        IDestroyable cube = currentWave.Cubes.ElementAtOrDefault(new System.Random().Next(currentWave.Cubes.Count));
+    //        if ((MonoBehaviour)cube != null)
+    //        {
+    //            cube.TakeDamage(2.0f);
+    //        }
+    //        timer = 0.0f;
+    //    }
+    //}
+
+    public float nextShotTime;
+
+    public float msBetweenShots = 200;
+
+    public void Fire()
     {
-        timer += Time.deltaTime;
-        if (timer >= 0.4f)
+        if (Time.time > nextShotTime)
         {
+            nextShotTime = Time.time + msBetweenShots / 1000;
             IDestroyable cube = currentWave.Cubes.ElementAtOrDefault(new System.Random().Next(currentWave.Cubes.Count));
-            if ((MonoBehaviour)cube != null)
+            if ((MonoBehaviour) cube != null)
             {
-                cube.TakeDamage(2.0f);
+                cube.TakeDamage(weaponCharacteristics.dps);
             }
-            timer = 0.0f;
+            else
+            {
+                Debug.Log("Weapon: " + weaponName + ": There's no cube there!");
+            }
         }
     }
 }

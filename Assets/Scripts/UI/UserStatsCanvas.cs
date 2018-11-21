@@ -11,8 +11,9 @@ public class UserStatsCanvas : MessageHandler
     public Text playerCurrentWave;
     public Text playerAttack;
 
-    // GUNS
+    // pistol
     public Text pistolTxt;
+    public Text pistolNextTxt;
 
     // double pistol
     public Text doublePistolTxt;
@@ -31,7 +32,9 @@ public class UserStatsCanvas : MessageHandler
         playerCurrentWave = GameObject.Find("CurrentWaveLbl").GetComponent<Text>();
         playerAttack = GameObject.Find("DamageTxt").GetComponent<Text>();
 
+        // pistol
         pistolTxt = GameObject.Find("PistolTxt").GetComponent<Text>();
+        pistolNextTxt = GameObject.Find("PistolNextTxt").GetComponent<Text>();
 
         //doublePistol
         doublePistolTxt = GameObject.Find("DoublePistolTxt").GetComponent<Text>();
@@ -87,12 +90,13 @@ public class UserStatsCanvas : MessageHandler
         {
             case WeaponType.PISTOL:
                 pistolDps = w.dps;
-                pistolTxt.text = str;
+                pistolTxt.text = "Pistol: " + str;
+                pistolNextTxt.text = strNxt;
                 break;
             case WeaponType.DOUBLE_PISTOL:
                 doublePistolDps = w.dps;
-                doublePistolTxt.text = "DP" + str;
-                doublePistolNextTxt.text = "DP: " + strNxt;
+                doublePistolTxt.text = "DP: " + str;
+                doublePistolNextTxt.text = strNxt;
                 break;
             default:
                 break;

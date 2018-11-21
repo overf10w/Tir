@@ -5,12 +5,17 @@ using UnityEngine;
 public class Player : MessageHandler
 {
     public GameManager gameManager;
+
+    public Weapon[] weapons;
+
     private Gun gunContoller;
 
     void Start()
     {
         gameManager.playerDb.OnAutoFireUpdated += OnAutoShoot;
         gunContoller = GetComponentInChildren<Gun>();
+        weapons = GetComponentsInChildren<Weapon>();
+        StartCoroutine(FireWeapons());
     }
 
     // Update is called once per frame
@@ -40,7 +45,6 @@ public class Player : MessageHandler
 
     public IEnumerator AutoShoot(float _autoShootDuration)
     {
-        Debug.Log("Player: Autoshoot: START");
         float timer = 0.0f;
         float timeBetweenShots = 0.2f;
         while (timer <= _autoShootDuration)
@@ -54,12 +58,23 @@ public class Player : MessageHandler
             }
             yield return null;
         }
-        //yield return new WaitForSeconds(3.0f);
-        Debug.Log("Player: Autoshoot: START");
     }
 
     public void OnDisable()
     {
         gameManager.playerDb.OnAutoFireUpdated -= OnAutoShoot;
+    }
+
+    public IEnumerator FireWeapons()
+    {
+        while (true)
+        {
+            foreach (var weapon in weapons)
+            {
+                weapon.Fire();
+                yield return null;
+            }
+            yield return null;
+        }
     }
 }

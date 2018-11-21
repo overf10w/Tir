@@ -293,18 +293,20 @@ MonoBehaviour:
     cost: 0
     nextCost: 0
     weaponType: 0
+  nextShotTime: 0
+  msBetweenShots: 200
 --- !u!4 &132268234
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 132268231}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -3.64, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_Father: {fileID: 933382493}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &249377748
 GameObject:
@@ -529,18 +531,20 @@ MonoBehaviour:
     cost: 0
     nextCost: 0
     weaponType: 0
+  nextShotTime: 0
+  msBetweenShots: 200
 --- !u!4 &305551808
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 305551805}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -3.64, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_Father: {fileID: 933382493}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &334688022
 GameObject:
@@ -898,8 +902,8 @@ MonoBehaviour:
       _autoFireDuration: 0
     skills: {fileID: 11400000, guid: b0401cd66a469594ba7c94d432c58e59, type: 2}
     currentDamage:
-      level: 0
-      value: 0
+      level: 1
+      value: 2
       goldWorth: 0
     currentAutoFire:
       level: 0
@@ -910,30 +914,78 @@ MonoBehaviour:
     playerWaves: {fileID: 11400000, guid: 32a584db6d08c78418b23be599e7843f, type: 2}
     pw: {fileID: 11400000, guid: ec3451a70c3c3fb4bb4f92ac60c7e37c, type: 2}
     pistolData:
-      lvls: []
-      name: 
+      lvls:
+      - level: 1
+        baseDps: 0
+        baseCost: 0
+        dps: 0
+        nextDps: 0
+        cost: 0
+        nextCost: 0
+        weaponType: 0
+      - level: 2
+        baseDps: 0
+        baseCost: 0
+        dps: 0
+        nextDps: 0
+        cost: 0
+        nextCost: 0
+        weaponType: 0
+      name: Pistol
     pistol:
       level: 0
-      baseDps: 0
-      baseCost: 0
-      dps: 0
+      baseDps: 2
+      baseCost: 12
+      dps: 2
       nextDps: 0
-      cost: 0
-      nextCost: 0
-      weaponType: 0
+      cost: 12
+      nextCost: 2
+      weaponType: 1
     _pistolLvl: 0
     doublePistolData:
-      lvls: []
-      name: 
+      lvls:
+      - level: 1
+        baseDps: 0
+        baseCost: 0
+        dps: 0
+        nextDps: 0
+        cost: 0
+        nextCost: 0
+        weaponType: 0
+      - level: 2
+        baseDps: 0
+        baseCost: 0
+        dps: 0
+        nextDps: 0
+        cost: 0
+        nextCost: 0
+        weaponType: 0
+      - level: 3
+        baseDps: 0
+        baseCost: 0
+        dps: 0
+        nextDps: 0
+        cost: 0
+        nextCost: 0
+        weaponType: 0
+      - level: 4
+        baseDps: 0
+        baseCost: 0
+        dps: 0
+        nextDps: 0
+        cost: 0
+        nextCost: 0
+        weaponType: 0
+      name: DoublePistol
     doublePistol:
       level: 0
-      baseDps: 0
-      baseCost: 0
-      dps: 0
+      baseDps: 4
+      baseCost: 20
+      dps: 4
       nextDps: 0
-      cost: 0
-      nextCost: 0
-      weaponType: 0
+      cost: 20
+      nextCost: 4
+      weaponType: 2
     _doublePistolLvl: 0
     _gold: 0
     _currentWave: 0
@@ -949,7 +1001,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &684694560
 GameObject:
@@ -1114,7 +1166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1169,6 +1221,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 598656031}
+  - {fileID: 305551808}
+  - {fileID: 132268234}
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1184,6 +1238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 667130461}
+  weapons: []
 --- !u!114 &933382495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1448,7 +1503,7 @@ GameObject:
   - component: {fileID: 1227886077}
   - component: {fileID: 1227886076}
   m_Layer: 5
-  m_Name: DoublePistolTxt
+  m_Name: DoublePistolNextTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1506,7 +1561,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Double pistol
+  m_Text: 'DP: 20$, 4 dps'
 --- !u!222 &1227886077
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1753,6 +1808,7 @@ MonoBehaviour:
   playerCurrentWave: {fileID: 0}
   playerAttack: {fileID: 0}
   pistolTxt: {fileID: 0}
+  pistolNextTxt: {fileID: 0}
   doublePistolTxt: {fileID: 0}
   doublePistolNextTxt: {fileID: 0}
   teamDPSTxt: {fileID: 0}
@@ -2292,7 +2348,7 @@ GameObject:
   - component: {fileID: 1885659882}
   - component: {fileID: 1885659881}
   m_Layer: 5
-  m_Name: PistolBtn
+  m_Name: PistolNextTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2350,7 +2406,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Pistol
+  m_Text: 'Pistol: 12$, 2 dps'
 --- !u!222 &1885659882
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2498,7 +2554,7 @@ GameObject:
   - component: {fileID: 1950445445}
   - component: {fileID: 1950445444}
   m_Layer: 5
-  m_Name: DoublePistolNextTxt
+  m_Name: DoublePistolTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2537,7 +2593,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []

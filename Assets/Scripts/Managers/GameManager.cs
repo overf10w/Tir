@@ -35,7 +35,6 @@ public class GameManager : MonoBehaviour {
     { 
         #if UNITY_STANDALONE
             WriteSelf();
-            Debug.Log("HELLO FROM GAMEMEMEMAMGER");
         #endif
     }
 
