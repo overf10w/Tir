@@ -21,8 +21,6 @@ public class UserStatsCanvas : MessageHandler
 
     public Text teamDPSTxt;
 
-    private WeaponData pistolWD;
-
     public float pistolDps;
     public float doublePistolDps;
     // Use this for initialization
@@ -86,7 +84,10 @@ public class UserStatsCanvas : MessageHandler
         WeaponCharacteristics w = weapon.weaponCharacteristics;
         string str = w.cost.ToString() + "$, " + w.dps.ToString() + " dps";
         string strNxt = w.nextCost.ToString() + "$, " + w.nextDps.ToString() + " dps";
-        switch (w.weaponType)
+
+        Debug.Log("HANDLE WEAPON CHANGED!: str: " + str);
+        Debug.Log("HANDLE WEAPON CHANGED!: strNxt: " + strNxt);
+        switch (weapon.sender.weaponType)
         {
             case WeaponType.PISTOL:
                 pistolDps = w.dps;

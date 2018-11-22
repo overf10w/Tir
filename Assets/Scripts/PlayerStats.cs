@@ -22,13 +22,13 @@ public class Skill
 
 public class CustomArgs : EventArgs
 {
-    public WeaponData weaponData;
-
     public WeaponCharacteristics weaponCharacteristics;
 
-    public CustomArgs(WeaponData weaponData, WeaponCharacteristics weaponCharacteristics)
+    public Weapon sender;
+
+    public CustomArgs(Weapon sender, WeaponCharacteristics weaponCharacteristics)
     {
-        this.weaponData = weaponData;
+        this.sender = sender;
         this.weaponCharacteristics = weaponCharacteristics;
     }
 }
@@ -52,19 +52,14 @@ public class PlayerDB
     public PlayerWaves playerWaves;
 
     [Header("Weapons")]
-    [SerializeField]
-    private PlayerWeapons pw;
 
     // Pistol
-    [SerializeField]
-    public WeaponData pistolData;
-    public WeaponCharacteristics pistol;
+    public Weapon pistol;
     public int _pistolLvl;    
     
     // M4A1
     [SerializeField]
-    public WeaponData doublePistolData;
-    public WeaponCharacteristics doublePistol;
+    public Weapon doublePistol;
     public int _doublePistolLvl;
 
     public void UpdateCurrentSkills()
@@ -72,11 +67,11 @@ public class PlayerDB
         currentDamage = skills.DamageLvls[_damageLvl];
         currentAutoFire = skills.AutoFireLvls[_autoFireLvl];
 
-        pistolData = pw.weapons.Find(i => i.name == "Pistol");
-        pistol = new WeaponCharacteristics(12, 2, WeaponType.PISTOL);
+        pistol = GameObject.Find("WeaponPistolPrefab").GetComponent<Weapon>();
 
-        doublePistolData = pw.weapons.Find(i => i.name == "DoublePistol");
-        doublePistol = new WeaponCharacteristics(20, 4, WeaponType.DOUBLE_PISTOL);
+        Debug.Log("PISTOL: " + pistol == null);
+
+        doublePistol = GameObject.Find("WeaponPistolDoublePrefab").GetComponent<Weapon>();
 
         _pistolLvl = _doublePistolLvl = 0;
 
@@ -105,36 +100,19 @@ public class PlayerDB
     public event GoldChanged OnGoldChanged;
     #endregion
 
-    #region PISTOL
     public delegate void WeaponChanged(CustomArgs e);
     public event WeaponChanged OnWeaponChanged;
-    public WeaponCharacteristics Pistol
-    {
-        get
-        {
-            return pistol; 
-        }
-    }
+
+    #region PISTOL
     public void UpdatePistol()
     {
-        if (_gold >= pistol.cost)
+        if (_gold >= pistol.weaponCharacteristics.cost)
         {
-            _gold -= pistol.cost;
-            // update next parameters
-            if (_pistolLvl == 0)
-            {
-                pistol.nextCost = pistol.baseCost;
-                pistol.nextDps  = pistol.baseDps;
-                _pistolLvl += 2;
-            }
+            _gold -= pistol.weaponCharacteristics.cost;
 
-            pistol.cost = pistol.nextCost;
-            pistol.dps = pistol.nextDps;
+            pistol.weaponCharacteristics.UpdateSelf();
 
-            pistol.nextCost = (int)Math.Floor(pistol.baseCost * (float)Math.Pow(1.10f, _pistolLvl));
-            pistol.nextDps = pistol.baseDps * _pistolLvl;
-
-            OnWeaponChanged?.Invoke(new CustomArgs(pistolData, pistol));
+            OnWeaponChanged?.Invoke(new CustomArgs(pistol, pistol.weaponCharacteristics));
 
             _pistolLvl++;
         }
@@ -146,30 +124,15 @@ public class PlayerDB
     #endregion
 
     #region DOUBLE_PISTOL
-    public WeaponCharacteristics DoublePistol
-    {
-        get { return doublePistol; }
-    }
     public void UpdateDoublePistol()
     {
-        if (_gold >= doublePistol.cost)
+        if (_gold >= doublePistol.weaponCharacteristics.cost)
         {
-            _gold -= doublePistol.cost;
-            // update next parameters
-            if (_doublePistolLvl == 0)
-            {
-                doublePistol.nextCost = doublePistol.baseCost;
-                doublePistol.nextDps = doublePistol.baseDps;
-                _doublePistolLvl += 2;
-            }
+            _gold -= doublePistol.weaponCharacteristics.cost;
 
-            doublePistol.cost = doublePistol.nextCost;
-            doublePistol.dps = doublePistol.nextDps;
+            doublePistol.weaponCharacteristics.UpdateSelf();
 
-            doublePistol.nextCost = (int)Math.Floor(doublePistol.baseCost * (float)Math.Pow(1.10f, _doublePistolLvl));
-            doublePistol.nextDps = doublePistol.baseDps * _doublePistolLvl;
-
-            OnWeaponChanged?.Invoke(new CustomArgs(doublePistolData, doublePistol));
+            OnWeaponChanged?.Invoke(new CustomArgs(doublePistol, doublePistol.weaponCharacteristics));
 
             _doublePistolLvl++;
         }

@@ -282,8 +282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1893d447fd355b442af63e6859e96398, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 667130461}
-  weaponName: DoublePistol
+  weaponType: 2
   weaponCharacteristics:
     level: 0
     baseDps: 0
@@ -520,8 +519,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1893d447fd355b442af63e6859e96398, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 667130461}
-  weaponName: Pistol
+  weaponType: 1
   weaponCharacteristics:
     level: 0
     baseDps: 0
@@ -890,6 +888,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 389d241b800125942a9a3130ba39bfa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stats:
+    _gold: 0
+    _currentWave: 0
+    _damageLvl: 0
+    _pistolLvl: 0
+    _doublePistolLvl: 0
+    _autoFireLvl: 0
+    _autoFireDuration: 0
   kek: 0
   playerDb:
     stats:
@@ -912,26 +918,6 @@ MonoBehaviour:
     _damageLvl: 0
     _autoFireLvl: 0
     playerWaves: {fileID: 11400000, guid: 32a584db6d08c78418b23be599e7843f, type: 2}
-    pw: {fileID: 11400000, guid: ec3451a70c3c3fb4bb4f92ac60c7e37c, type: 2}
-    pistolData:
-      lvls:
-      - level: 1
-        baseDps: 0
-        baseCost: 0
-        dps: 0
-        nextDps: 0
-        cost: 0
-        nextCost: 0
-        weaponType: 0
-      - level: 2
-        baseDps: 0
-        baseCost: 0
-        dps: 0
-        nextDps: 0
-        cost: 0
-        nextCost: 0
-        weaponType: 0
-      name: Pistol
     pistol:
       level: 0
       baseDps: 2
@@ -942,41 +928,6 @@ MonoBehaviour:
       nextCost: 2
       weaponType: 1
     _pistolLvl: 0
-    doublePistolData:
-      lvls:
-      - level: 1
-        baseDps: 0
-        baseCost: 0
-        dps: 0
-        nextDps: 0
-        cost: 0
-        nextCost: 0
-        weaponType: 0
-      - level: 2
-        baseDps: 0
-        baseCost: 0
-        dps: 0
-        nextDps: 0
-        cost: 0
-        nextCost: 0
-        weaponType: 0
-      - level: 3
-        baseDps: 0
-        baseCost: 0
-        dps: 0
-        nextDps: 0
-        cost: 0
-        nextCost: 0
-        weaponType: 0
-      - level: 4
-        baseDps: 0
-        baseCost: 0
-        dps: 0
-        nextDps: 0
-        cost: 0
-        nextCost: 0
-        weaponType: 0
-      name: DoublePistol
     doublePistol:
       level: 0
       baseDps: 4

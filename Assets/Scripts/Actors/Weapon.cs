@@ -3,70 +3,38 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+// Polymorphic object, it can only contain current wave
 public class Weapon : MessageHandler
 {
-    public GameManager gameManager;
-    public string weaponName;
-    private Wave currentWave;
+    public WeaponType weaponType;
+    private Wave wave;
 
     [SerializeField]
-    private WeaponCharacteristics weaponCharacteristics;
+    public WeaponCharacteristics weaponCharacteristics;
 
     // Use this for initialization
     void Start()
     {
-        gameManager.playerDb.OnWeaponChanged += WeaponDataChanged;
-        //weaponCharacteristics = (WeaponCharacteristics)gameManager.playerDb.GetType().GetProperty(weaponName).GetValue(gameManager.playerDb, null);
-    }
-    
-    public void WeaponDataChanged(CustomArgs kek)
-    {
-        if (kek.weaponData.name == weaponName)
+        if (weaponType == WeaponType.PISTOL)
         {
-            weaponCharacteristics = kek.weaponCharacteristics;
+            weaponCharacteristics = new WeaponCharacteristics(12, 2, 0);
+        }
+        if (weaponType == WeaponType.DOUBLE_PISTOL)
+        {
+            weaponCharacteristics = new WeaponCharacteristics(20, 4, 0);
         }
     }
-
+    
     public override void HandleMessage(Message message)
     {
         if (message.Type == MessageType.WaveChanged)
         {
-            this.currentWave = (Wave)message.objectValue;
+            this.wave = (Wave)message.objectValue;
         }
     }
-    //float timer = 0;
-    //public void Update()
-    //{
-    //    timer += Time.deltaTime;
-    //    if (timer >= 0.4f)
-    //    {
-    //        IDestroyable cube = currentWave.Cubes.ElementAtOrDefault(new System.Random().Next(currentWave.Cubes.Count));
-    //        if ((MonoBehaviour)cube != null)
-    //        {
-    //            cube.TakeDamage(2.0f);
-    //        }
-    //        timer = 0.0f;
-    //    }
-    //}
-
-    public float nextShotTime;
-
-    public float msBetweenShots = 200;
 
     public void Fire()
     {
-        if (Time.time > nextShotTime)
-        {
-            nextShotTime = Time.time + msBetweenShots / 1000;
-            IDestroyable cube = currentWave.Cubes.ElementAtOrDefault(new System.Random().Next(currentWave.Cubes.Count));
-            if ((MonoBehaviour) cube != null)
-            {
-                cube.TakeDamage(weaponCharacteristics.dps);
-            }
-            else
-            {
-                Debug.Log("Weapon: " + weaponName + ": There's no cube there!");
-            }
-        }
+        weaponCharacteristics.Fire(wave);
     }
 }

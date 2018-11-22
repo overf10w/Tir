@@ -3,16 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour {
-
+public class GameManager : MonoBehaviour
+{
     private string gameDataProjectFilePath = "/StreamingAssets/data.json";
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
-    public int kek;
+    public Stats stats;
 
     //[SerializeField]
     public PlayerDB playerDb;
@@ -41,7 +36,7 @@ public class GameManager : MonoBehaviour {
     public void ReadSelf()
     {
         string dataAsJson = File.ReadAllText(Application.dataPath + gameDataProjectFilePath);
-        Stats stats = JsonUtility.FromJson<Stats>(dataAsJson);
+        stats = JsonUtility.FromJson<Stats>(dataAsJson);
         if (stats != null)
         {
             playerDb.InitStats(stats);
