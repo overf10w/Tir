@@ -79,23 +79,23 @@ public class UserStatsCanvas : MessageHandler
         }
     }
 
-    public void HandleWeaponChanged(CustomArgs weapon)
+    public void HandleWeaponChanged(WeaponArgs weapon)
     {
         WeaponCharacteristics w = weapon.weaponCharacteristics;
-        string str = w.cost.ToString() + "$, " + w.dps.ToString() + " dps";
-        string strNxt = w.nextCost.ToString() + "$, " + w.nextDps.ToString() + " dps";
+        string str = w.Cost.ToString() + "$, " + w.Dps.ToString() + " dps";
+        string strNxt = w.NextCost.ToString() + "$, " + w.NextDps.ToString() + " dps";
 
         Debug.Log("HANDLE WEAPON CHANGED!: str: " + str);
         Debug.Log("HANDLE WEAPON CHANGED!: strNxt: " + strNxt);
         switch (weapon.sender.weaponType)
         {
             case WeaponType.PISTOL:
-                pistolDps = w.dps;
+                pistolDps = w.Dps;
                 pistolTxt.text = "Pistol: " + str;
                 pistolNextTxt.text = strNxt;
                 break;
             case WeaponType.DOUBLE_PISTOL:
-                doublePistolDps = w.dps;
+                doublePistolDps = w.Dps;
                 doublePistolTxt.text = "DP: " + str;
                 doublePistolNextTxt.text = strNxt;
                 break;

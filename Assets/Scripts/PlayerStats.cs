@@ -11,32 +11,35 @@ public class Skill
 }
 
 // TODO: 
-// Idea: pistol to contain & calculate all its data, playerStats to write pistolLvl when game closed, read when opened
-// public IWeapon pistol;
-// void UpdatePistol 
-// {
-//     pistol.UpdateSelf();
-//     if (OnWeaponChanged != null) { OnWeaponChanged(new CustomArgs(pistol)) } // OR OnWeaponChanged?.Invoke(pistol.UpdateSelf());
-// }
-// 
+// 1. [+] Event delegates out of class
+// 2. Custom EventArgs for gold, currentDamage, currentAutoFireDuration, etc.
+// 3. [+] In initPlayer, not to FIND weapons, but CREATE the weapons according to State data...
+// 4. Since PlayerDB is non-monobehaviour, TRY to use constructors!!!
 
-public class CustomArgs : EventArgs
+public class WeaponArgs : EventArgs
 {
     public WeaponCharacteristics weaponCharacteristics;
-
     public Weapon sender;
 
-    public CustomArgs(Weapon sender, WeaponCharacteristics weaponCharacteristics)
+    public WeaponArgs(Weapon sender, WeaponCharacteristics weaponCharacteristics)
     {
         this.sender = sender;
         this.weaponCharacteristics = weaponCharacteristics;
     }
 }
 
+public delegate void WeaponChanged(WeaponArgs e);
+public delegate void GoldChanged(float value);
+public delegate void AutoFireUpdated(float seconds);
+public delegate void AttackUpdated(float value);
+
 [System.Serializable]
 public class PlayerDB
 {
-    public Stats stats;
+    public event WeaponChanged OnWeaponChanged;
+    public event GoldChanged OnGoldChanged;
+    public event AutoFireUpdated OnAutoFireUpdated;
+    public event AttackUpdated OnAttackUpdated;
 
     [Header("Skills")]
     [SerializeField]
@@ -44,42 +47,38 @@ public class PlayerDB
     public Skill currentDamage;
     public Skill currentAutoFire;
 
-    public int _damageLvl;
-    public int _autoFireLvl;
+    private int _damageLvl;
+    private int _autoFireLvl;
 
     [Header("Waves")]
     [SerializeField]
     public PlayerWaves playerWaves;
 
-    [Header("Weapons")]
-
-    // Pistol
-    public Weapon pistol;
-    public int _pistolLvl;    
+    private Weapon pistol;
+    private int _pistolLvl;    
     
-    // M4A1
-    [SerializeField]
-    public Weapon doublePistol;
+    private Weapon doublePistol;
     public int _doublePistolLvl;
 
-    public void UpdateCurrentSkills()
+    public void InitPlayer()
     {
+        Debug.Log("Pistol Lvl: " + _pistolLvl);
         currentDamage = skills.DamageLvls[_damageLvl];
         currentAutoFire = skills.AutoFireLvls[_autoFireLvl];
 
-        pistol = GameObject.Find("WeaponPistolPrefab").GetComponent<Weapon>();
+        var pistolPrefab = Resources.Load<Weapon>("Prefabs/WeaponPistolPrefab");
+        pistol = UnityEngine.Object.Instantiate(pistolPrefab, GameObject.FindObjectOfType<Player>().transform) as Weapon;
+        pistol.weaponType = WeaponType.PISTOL;
+        pistol.weaponCharacteristics = new WeaponCharacteristics(12, 2, 0);
+        pistol.weaponCharacteristics.Init(_pistolLvl);
 
-        Debug.Log("PISTOL: " + pistol == null);
+        var doublePistolPrefab = Resources.Load<Weapon>("Prefabs/WeaponPistolDoublePrefab");
+        doublePistol = UnityEngine.Object.Instantiate(doublePistolPrefab, GameObject.FindObjectOfType<Player>().transform) as Weapon;
+        doublePistol.weaponType = WeaponType.DOUBLE_PISTOL;
+        doublePistol.weaponCharacteristics = new WeaponCharacteristics(14, 4, 0);
+        doublePistol.weaponCharacteristics.Init(_doublePistolLvl);
 
-        doublePistol = GameObject.Find("WeaponPistolDoublePrefab").GetComponent<Weapon>();
-
-        _pistolLvl = _doublePistolLvl = 0;
-
-        //UpdatePistol();
-        //UpdateDoublePistol();
-
-        //OnWeaponChanged?.Invoke(new CustomArgs(pistolData, pistol));
-        //OnWeaponChanged?.Invoke(new CustomArgs(doublePistolData, doublePistol));
+        //_pistolLvl = _doublePistolLvl = 0;
     }
 
     [Header("Player Stats")]
@@ -96,25 +95,17 @@ public class PlayerDB
                 OnGoldChanged(value);
         }
     }
-    public delegate void GoldChanged(float value);
-    public event GoldChanged OnGoldChanged;
     #endregion
-
-    public delegate void WeaponChanged(CustomArgs e);
-    public event WeaponChanged OnWeaponChanged;
 
     #region PISTOL
     public void UpdatePistol()
     {
-        if (_gold >= pistol.weaponCharacteristics.cost)
+        if (_gold >= pistol.weaponCharacteristics.Cost)
         {
-            _gold -= pistol.weaponCharacteristics.cost;
-
+            _gold -= pistol.weaponCharacteristics.Cost;
             pistol.weaponCharacteristics.UpdateSelf();
-
-            OnWeaponChanged?.Invoke(new CustomArgs(pistol, pistol.weaponCharacteristics));
-
-            _pistolLvl++;
+            OnWeaponChanged?.Invoke(new WeaponArgs(pistol, pistol.weaponCharacteristics));
+            _pistolLvl = pistol.weaponCharacteristics.level;
         }
         else
         {
@@ -126,15 +117,12 @@ public class PlayerDB
     #region DOUBLE_PISTOL
     public void UpdateDoublePistol()
     {
-        if (_gold >= doublePistol.weaponCharacteristics.cost)
+        if (_gold >= doublePistol.weaponCharacteristics.Cost)
         {
-            _gold -= doublePistol.weaponCharacteristics.cost;
-
+            _gold -= doublePistol.weaponCharacteristics.Cost;
             doublePistol.weaponCharacteristics.UpdateSelf();
-
-            OnWeaponChanged?.Invoke(new CustomArgs(doublePistol, doublePistol.weaponCharacteristics));
-
-            _doublePistolLvl++;
+            OnWeaponChanged?.Invoke(new WeaponArgs(doublePistol, doublePistol.weaponCharacteristics));
+            _doublePistolLvl = doublePistol.weaponCharacteristics.level;
         }
         else
         {
@@ -149,8 +137,6 @@ public class PlayerDB
     #endregion
 
     #region DAMAGE_SKILL
-    public delegate void AttackUpdated(float value);
-    public event AttackUpdated OnAttackUpdated;
     [SerializeField]
     public Skill Damage
     {
@@ -225,8 +211,6 @@ public class PlayerDB
             Debug.LogWarning("Sorry bro no money =((");
         }
     }
-    public delegate void AutoFireUpdated(float seconds);
-    public event AutoFireUpdated OnAutoFireUpdated;
     #endregion
 
     public void ResetPlayerStats()
@@ -241,7 +225,7 @@ public class PlayerDB
         _autoFireDuration = 0.0f;
 
         //UpdatePlayerStats();
-        UpdateCurrentSkills();
+        //InitPlayer();
     }
 
     public void InitStats(Stats stats)
@@ -285,61 +269,5 @@ public class Stats
 [CreateAssetMenu(fileName = "Stats.Asset", menuName = "Character/Stats")]
 public class PlayerStats : ScriptableObject
 {
-    //private string gameDataProjectFilePath = "/StreamingAssets/data.json";
-
-    //public PlayerDB playerDb;
-
-    //void OnEnable()
-    //{
-    //#if UNITY_EDITOR
-    //    playerDb.UpdateCurrentSkills();
-    //#endif
-    //#if UNITY_STANDALONE
-    //    ReadSelf();
-    //    playerDb.UpdateCurrentSkills();
-    //#endif
-    //}
-
-    //// TODO: you'd better write this logic somewhere in monobehaviour,
-    //// as SO's OnDisable() not always called(?)
-    //void OnDisable()
-    //{
-    //#if UNITY_STANDALONE
-    //    WriteSelf();
-    //#endif
-    //}
-
-    //public void ReadSelf()
-    //{
-    //    string dataAsJson = File.ReadAllText(Application.dataPath + gameDataProjectFilePath);
-    //    Stats stats = JsonUtility.FromJson<Stats>(dataAsJson);
-    //    if (stats != null)
-    //    {
-    //        playerDb.InitStats(stats);
-    //    }
-    //    else
-    //    {
-    //        Debug.Log("NULLLLLLLL =((((((((((((((((");
-    //    }
-    //}
-
-    //public void WriteSelf()
-    //{
-    //    Stats save = playerDb.ReturnStats();
-    //    string dataAsJson = JsonUtility.ToJson(save);
-    //    string filePath = Application.dataPath + gameDataProjectFilePath;
-    //    Debug.Log("DataAsJson: " + dataAsJson);
-    //    File.WriteAllText(filePath, dataAsJson);
-    //}
-
-    //public void Reset()
-    //{
-    //    // Write resetted stats
-    //    Stats resettedStats = new Stats();
-    //    string dataAsJson = JsonUtility.ToJson(resettedStats);
-    //    string filePath = Application.dataPath + gameDataProjectFilePath;
-    //    File.WriteAllText(filePath, dataAsJson);
-
-    //    playerDb.ResetPlayerStats();
-    //}
+    
 }

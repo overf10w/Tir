@@ -15,14 +15,14 @@ public class Weapon : MessageHandler
     // Use this for initialization
     void Start()
     {
-        if (weaponType == WeaponType.PISTOL)
-        {
-            weaponCharacteristics = new WeaponCharacteristics(12, 2, 0);
-        }
-        if (weaponType == WeaponType.DOUBLE_PISTOL)
-        {
-            weaponCharacteristics = new WeaponCharacteristics(20, 4, 0);
-        }
+        //if (weaponType == WeaponType.PISTOL)
+        //{
+        //    weaponCharacteristics = new WeaponCharacteristics(12, 2, 0);
+        //}
+        //if (weaponType == WeaponType.DOUBLE_PISTOL)
+        //{
+        //    weaponCharacteristics = new WeaponCharacteristics(20, 4, 0);
+        //}
     }
     
     public override void HandleMessage(Message message)

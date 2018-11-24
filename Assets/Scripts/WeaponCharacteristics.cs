@@ -18,20 +18,62 @@ public class WeaponCharacteristics
     public float baseDps;
     public float baseCost;
 
-    public float dps, nextDps;
-    public float cost, nextCost;
+    private float dps, nextDps;
+    private float cost, nextCost;
 
     public WeaponType weaponType;
 
     public WeaponCharacteristics(float baseCost, float baseDps, int level)
     {
-        this.baseCost = cost = baseCost;
+        this.baseCost = baseCost;
         this.baseDps = baseDps;
         this.level = level;
+
+        this.cost = 0;
+        this.dps = 0;
+    }
+    
+    // TODO: remove these props
+
+    public float Dps
+    {
+        get { return dps; }
+        set { dps = value; }
+    }
+
+    public float Cost
+    {
+        get { return cost; }
+        set { cost = value; }
+    }
+
+    public float NextCost
+    {
+        get { return nextCost; }
+        set { nextCost = value; }
+    }
+
+    public float NextDps
+    {
+        get { return nextDps; }
+        set { nextDps = value; }
+    }
+
+    public void Init(int lvl)
+    {
+        this.level = lvl;
+        cost = (int)Math.Floor(baseCost * (float)Math.Pow(1.10f, lvl));
+        dps = baseDps * lvl;
+
+        ++lvl;
+
+        nextCost = (int)Math.Floor(baseCost * (float)Math.Pow(1.10f, lvl));
+        nextDps = baseDps * lvl;
     }
 
     public void UpdateSelf()
     {
+        Debug.Log("UpdateSelf called!");
         if (level == 0)
         {
             nextCost = baseCost;

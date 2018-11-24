@@ -12,20 +12,21 @@ public class GameManager : MonoBehaviour
     //[SerializeField]
     public PlayerDB playerDb;
 
-    void Start()
+    void Awake()
     {
+        // TODO: dafuq?!
         #if UNITY_EDITOR
-        ReadSelf();
-        playerDb.UpdateCurrentSkills();
+        stats = ReadSelf();
+        playerDb.InitStats(stats);
+        playerDb.InitPlayer();
         #endif
         #if UNITY_STANDALONE
-        ReadSelf();
-        playerDb.UpdateCurrentSkills();
+        stats = ReadSelf();
+        playerDb.InitStats(stats);
+        playerDb.InitPlayer();
         #endif
     }
 
-    // TODO: you'd better write this logic somewhere in monobehaviour,
-    // as SO's OnDisable() not always called(?)
     void OnDisable()
     { 
         #if UNITY_STANDALONE
@@ -33,17 +34,18 @@ public class GameManager : MonoBehaviour
         #endif
     }
 
-    public void ReadSelf()
+    // TODO: try catch stats == null;
+    public Stats ReadSelf()
     {
         string dataAsJson = File.ReadAllText(Application.dataPath + gameDataProjectFilePath);
         stats = JsonUtility.FromJson<Stats>(dataAsJson);
         if (stats != null)
         {
-            playerDb.InitStats(stats);
+            return stats;
         }
         else
         {
-            Debug.Log("NULLLLLLLL =((((((((((((((((");
+            return null;
         }
     }
 

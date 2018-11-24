@@ -241,72 +241,6 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 42457479}
---- !u!1 &132268231
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 132268234}
-  - component: {fileID: 132268233}
-  - component: {fileID: 132268232}
-  m_Layer: 0
-  m_Name: WeaponPistolDoublePrefab
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &132268232
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 132268231}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca612a69d4ac63c418eaf8abaee811fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MessageTypes: 03000000
-  Handler: {fileID: 132268233}
---- !u!114 &132268233
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 132268231}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1893d447fd355b442af63e6859e96398, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponType: 2
-  weaponCharacteristics:
-    level: 0
-    baseDps: 0
-    baseCost: 0
-    dps: 0
-    nextDps: 0
-    cost: 0
-    nextCost: 0
-    weaponType: 0
-  nextShotTime: 0
-  msBetweenShots: 200
---- !u!4 &132268234
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 132268231}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.64, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 933382493}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &249377748
 GameObject:
   m_ObjectHideFlags: 0
@@ -367,7 +301,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &301717169
 Prefab:
@@ -414,7 +348,7 @@ Prefab:
     - target: {fileID: 224903330017633226, guid: 18312f5a131d2584983fcfd1980d51ca,
         type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 224903330017633226, guid: 18312f5a131d2584983fcfd1980d51ca,
         type: 2}
@@ -478,72 +412,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 18312f5a131d2584983fcfd1980d51ca, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &305551805
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 305551808}
-  - component: {fileID: 305551807}
-  - component: {fileID: 305551806}
-  m_Layer: 0
-  m_Name: WeaponPistolPrefab
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &305551806
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 305551805}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca612a69d4ac63c418eaf8abaee811fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MessageTypes: 03000000
-  Handler: {fileID: 305551807}
---- !u!114 &305551807
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 305551805}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1893d447fd355b442af63e6859e96398, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponType: 1
-  weaponCharacteristics:
-    level: 0
-    baseDps: 0
-    baseCost: 0
-    dps: 0
-    nextDps: 0
-    cost: 0
-    nextCost: 0
-    weaponType: 0
-  nextShotTime: 0
-  msBetweenShots: 200
---- !u!4 &305551808
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 305551805}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.64, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 933382493}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &334688022
 GameObject:
   m_ObjectHideFlags: 0
@@ -896,16 +764,7 @@ MonoBehaviour:
     _doublePistolLvl: 0
     _autoFireLvl: 0
     _autoFireDuration: 0
-  kek: 0
   playerDb:
-    stats:
-      _gold: 0
-      _currentWave: 0
-      _damageLvl: 0
-      _pistolLvl: 0
-      _doublePistolLvl: 0
-      _autoFireLvl: 0
-      _autoFireDuration: 0
     skills: {fileID: 11400000, guid: b0401cd66a469594ba7c94d432c58e59, type: 2}
     currentDamage:
       level: 1
@@ -915,28 +774,7 @@ MonoBehaviour:
       level: 0
       value: 0
       goldWorth: 0
-    _damageLvl: 0
-    _autoFireLvl: 0
     playerWaves: {fileID: 11400000, guid: 32a584db6d08c78418b23be599e7843f, type: 2}
-    pistol:
-      level: 0
-      baseDps: 2
-      baseCost: 12
-      dps: 2
-      nextDps: 0
-      cost: 12
-      nextCost: 2
-      weaponType: 1
-    _pistolLvl: 0
-    doublePistol:
-      level: 0
-      baseDps: 4
-      baseCost: 20
-      dps: 4
-      nextDps: 0
-      cost: 20
-      nextCost: 4
-      weaponType: 2
     _doublePistolLvl: 0
     _gold: 0
     _currentWave: 0
@@ -952,7 +790,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &684694560
 GameObject:
@@ -1037,34 +875,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &790553371
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 790553372}
-  m_Layer: 0
-  m_Name: Player
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &790553372
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 790553371}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &890593080
 GameObject:
@@ -1172,10 +982,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 598656031}
-  - {fileID: 305551808}
-  - {fileID: 132268234}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &933382494
 MonoBehaviour:
@@ -1404,7 +1212,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1079165208
 MonoBehaviour:
@@ -1852,41 +1660,13 @@ RectTransform:
   m_Children:
   - {fileID: 1013121936}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1 &1487501797
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1487501798}
-  m_Layer: 0
-  m_Name: Target
-  m_TagString: Untagged
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1487501798
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1487501797}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.91, z: 4.87}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1589548288
 GameObject:
   m_ObjectHideFlags: 0
