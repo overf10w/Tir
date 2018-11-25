@@ -61,35 +61,37 @@ public class WeaponCharacteristics
 
     public void Init(int lvl)
     {
-        this.level = lvl;
-        cost = (int)Math.Floor(baseCost * (float)Math.Pow(1.10f, lvl));
-        dps = baseDps * lvl;
-
-        ++lvl;
-
-        nextCost = (int)Math.Floor(baseCost * (float)Math.Pow(1.10f, lvl));
-        nextDps = baseDps * lvl;
-    }
-
-    public void UpdateSelf()
-    {
-        Debug.Log("UpdateSelf called!");
+        level = lvl;
         if (level == 0)
         {
             nextCost = baseCost;
             nextDps = baseDps;
-            level += 2;
+
+            cost = baseCost;
+            dps = 0;
+
+            return;
         }
+
+        cost = (int)Math.Floor(baseCost * (float)Math.Pow(1.10f, level));
+        dps = baseDps * level;
+
+        var nxtLvl = lvl + 1;
+
+        nextCost = (int)Math.Floor(baseCost * (float)Math.Pow(1.10f, nxtLvl));
+        nextDps = baseDps * nxtLvl;
+    }
+
+    public void UpdateSelf()
+    {
+        level++;
 
         cost = nextCost;
         dps = nextDps;
 
-        nextCost = (int)Math.Floor(baseCost * (float)Math.Pow(1.10f, level));
-        nextDps = baseDps * level;
-
-        level++;
+        nextCost = (int)Math.Floor(baseCost * (float)Math.Pow(1.10f, level + 1));
+        nextDps = baseDps * (level + 1);
     }
-
 
     public float nextShotTime;
 

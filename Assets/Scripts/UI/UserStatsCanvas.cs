@@ -23,9 +23,11 @@ public class UserStatsCanvas : MessageHandler
 
     public float pistolDps;
     public float doublePistolDps;
+
     // Use this for initialization
     void Awake()
     {
+        //yield return new W;
         playerGold = GameObject.Find("GoldTxt").GetComponent<Text>();
         playerCurrentWave = GameObject.Find("CurrentWaveLbl").GetComponent<Text>();
         playerAttack = GameObject.Find("DamageTxt").GetComponent<Text>();

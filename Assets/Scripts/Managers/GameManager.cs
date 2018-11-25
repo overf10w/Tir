@@ -19,12 +19,19 @@ public class GameManager : MonoBehaviour
         stats = ReadSelf();
         playerDb.InitStats(stats);
         playerDb.InitPlayer();
-        #endif
-        #if UNITY_STANDALONE
-        stats = ReadSelf();
-        playerDb.InitStats(stats);
-        playerDb.InitPlayer();
-        #endif
+        StartCoroutine(InitUI());
+        #endif  
+        //#if UNITY_STANDALONE
+        //stats = ReadSelf();
+        //playerDb.InitStats(stats);
+        //playerDb.InitPlayer();
+        //#endif
+    }
+
+    public IEnumerator InitUI()
+    {
+        yield return null;
+        playerDb.InvokeWeaponChanged();
     }
 
     void OnDisable()

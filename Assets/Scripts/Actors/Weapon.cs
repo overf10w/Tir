@@ -24,7 +24,7 @@ public class Weapon : MessageHandler
         //    weaponCharacteristics = new WeaponCharacteristics(20, 4, 0);
         //}
     }
-    
+
     public override void HandleMessage(Message message)
     {
         if (message.Type == MessageType.WaveChanged)

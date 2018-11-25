@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
 using UnityEngine;
 
 [System.Serializable]
@@ -251,6 +252,13 @@ public class PlayerDB
         playerStats._autoFireDuration = _autoFireDuration;
 
         return playerStats;
+    }
+
+    // TODO: we use this shit so UI can be updated when weaponData is loaded
+    public void InvokeWeaponChanged()
+    {
+        OnWeaponChanged?.Invoke(new WeaponArgs(doublePistol, doublePistol.weaponCharacteristics));
+        OnWeaponChanged?.Invoke(new WeaponArgs(pistol, pistol.weaponCharacteristics));
     }
 }
 
