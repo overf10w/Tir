@@ -20,12 +20,13 @@ public class GameManager : MonoBehaviour
         playerDb.InitStats(stats);
         playerDb.InitPlayer();
         StartCoroutine(InitUI());
-        #endif  
-        //#if UNITY_STANDALONE
-        //stats = ReadSelf();
-        //playerDb.InitStats(stats);
-        //playerDb.InitPlayer();
-        //#endif
+        #endif
+        #if UNITY_STANDALONE
+        stats = ReadSelf();
+        playerDb.InitStats(stats);
+        playerDb.InitPlayer();
+        StartCoroutine(InitUI());
+        #endif
     }
 
     public IEnumerator InitUI()

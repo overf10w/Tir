@@ -35,6 +35,9 @@ public class Weapon : MessageHandler
 
     public void Fire()
     {
-        weaponCharacteristics.Fire(wave);
+        if (weaponCharacteristics.level > 0)
+        {
+            weaponCharacteristics.Fire(wave);
+        }
     }
 }
