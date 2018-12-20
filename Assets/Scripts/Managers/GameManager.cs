@@ -1,79 +1,102 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MessageHandler
 {
-    private string gameDataProjectFilePath = "/StreamingAssets/data.json";
+    public ResourceLoader ResourceLoader;
+    private PlayerData playerData;
+    private Wave wave;
 
-    public Stats stats;
+    private int waveInd;
+    private int lvlInd;
 
-    //[SerializeField]
-    public PlayerDB playerDb;
+    private int cubes;
+    private int cubesDestroyed;
 
-    void Awake()
+    // Use this for initialization
+    IEnumerator Start()
     {
-        // TODO: dafuq?!
-        #if UNITY_EDITOR
-        stats = ReadSelf();
-        playerDb.InitStats(stats);
-        playerDb.InitPlayer();
-        StartCoroutine(InitUI());
-        #endif
-        #if UNITY_STANDALONE
-        stats = ReadSelf();
-        playerDb.InitStats(stats);
-        playerDb.InitPlayer();
-        StartCoroutine(InitUI());
-        #endif
+        playerData = ResourceLoader.playerData;
+        waveInd = playerData._currentWave;
+        yield return null;  // we need this so the InGameCanvas receives event on spawned wave (through MessageBus)
+        SpawnWave();
+        //ChangeSceneEnvironment();
     }
 
-    public IEnumerator InitUI()
+    void SpawnWave()
     {
-        yield return null;
-        playerDb.InvokeWeaponChanged();
-    }
-
-    void OnDisable()
-    { 
-        #if UNITY_STANDALONE
-            WriteSelf();
-        #endif
-    }
-
-    // TODO: try catch stats == null;
-    public Stats ReadSelf()
-    {
-        string dataAsJson = File.ReadAllText(Application.dataPath + gameDataProjectFilePath);
-        stats = JsonUtility.FromJson<Stats>(dataAsJson);
-        if (stats != null)
+        waveInd++;
+        if (waveInd % 5 == 0)
         {
-            return stats;
+            lvlInd++;
+            ChangeSceneEnvironment();
+        }
+        var wavePrefab = playerData.playerWaves.waves[waveInd % 5];
+        wave = Instantiate(wavePrefab, wavePrefab.transform.position, Quaternion.identity) as Wave;
+        cubes = wave.cubesNumber;
+        cubesDestroyed = 0;
+        playerData._currentWave = waveInd;
+        MessageBus.Instance.SendMessage(new Message() { Type = MessageType.WaveChanged, objectValue = wave });
+    }
+
+    private AssetBundle myLoadedAssetBundle;
+
+    void ChangeSceneEnvironment()
+    {
+        Texture2D texture2D;
+        GameObject go1;
+
+        if (myLoadedAssetBundle == null)
+        {
+            myLoadedAssetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, "levelbackgrounds"));
+            return;
+        }
+        if (lvlInd <= 2)
+        {
+            texture2D = myLoadedAssetBundle.LoadAsset<Texture2D>("McLaren");
+            go1 = new GameObject("BackGround ksta");
+            go1.transform.position = new Vector3(0, 0, 0);
         }
         else
         {
-            return null;
+            texture2D = myLoadedAssetBundle.LoadAsset<Texture2D>("Porsche");
+            go1 = new GameObject("BackGround ksta");
+            go1.transform.position = new Vector3(0, 0, -0.1f);
+        }
+        Sprite sprite = Sprite.Create(texture2D, new Rect(0, 0, texture2D.width, texture2D.height), Vector2.zero);
+        SpriteRenderer renderer = go1.AddComponent<SpriteRenderer>();
+        renderer.sprite = sprite;
+        //Instantiate(go);
+    }
+
+    public override void HandleMessage(Message message)
+    {
+        if (message.Type == MessageType.CubeDeath)
+        {
+            cubesDestroyed++;
+            if (cubes == cubesDestroyed)
+            {
+                //if (waveInd > gameManager.playerDb.playerWaves.waves.Length - 1)
+                //{
+                //    MessageBus.Instance.SendMessage(new Message() { Type = MessageType.GameOver });
+                //    return;
+                //}
+                if (lvlInd >= 3)
+                {
+                    MessageBus.Instance.SendMessage(new Message() { Type = MessageType.GameOver });
+                    return;
+                }
+                SpawnWave();
+            }
         }
     }
 
-    public void WriteSelf()
+    public void OnDisable()
     {
-        Stats save = playerDb.ReturnStats();
-        string dataAsJson = JsonUtility.ToJson(save);
-        string filePath = Application.dataPath + gameDataProjectFilePath;
-        Debug.Log("DataAsJson: " + dataAsJson);
-        File.WriteAllText(filePath, dataAsJson);
-    }
-
-    public void Reset()
-    {
-        // Write resetted stats
-        Stats resettedStats = new Stats();
-        string dataAsJson = JsonUtility.ToJson(resettedStats);
-        string filePath = Application.dataPath + gameDataProjectFilePath;
-        File.WriteAllText(filePath, dataAsJson);
-
-        playerDb.ResetPlayerStats();
+        // TODO: does this code matter?
+        ResourceLoader.playerData._currentWave = waveInd;
     }
 }

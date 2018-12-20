@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(GameManager))]
+[CustomEditor(typeof(ResourceLoader))]
 public class PlayerDataEditor : Editor
 {
-    private GameManager ps;
+    private ResourceLoader ps;
     public void OnEnable()
     {
-        ps = (GameManager) target;
+        ps = (ResourceLoader) target;
     }
 
     public override void OnInspectorGUI()

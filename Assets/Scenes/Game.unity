@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -729,69 +729,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4498710882700830, guid: 3b40b67c2c13f604eb6b1a4656ced532,
     type: 2}
   m_PrefabInternal: {fileID: 1425754865}
---- !u!1 &667130460
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 667130462}
-  - component: {fileID: 667130461}
-  m_Layer: 0
-  m_Name: _GM
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &667130461
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 667130460}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 389d241b800125942a9a3130ba39bfa8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stats:
-    _gold: 0
-    _currentWave: 0
-    _damageLvl: 0
-    _pistolLvl: 0
-    _doublePistolLvl: 0
-    _autoFireLvl: 0
-    _autoFireDuration: 0
-  playerDb:
-    skills: {fileID: 11400000, guid: b0401cd66a469594ba7c94d432c58e59, type: 2}
-    currentDamage:
-      level: 1
-      value: 2
-      goldWorth: 0
-    currentAutoFire:
-      level: 0
-      value: 0
-      goldWorth: 0
-    playerWaves: {fileID: 11400000, guid: 32a584db6d08c78418b23be599e7843f, type: 2}
-    _doublePistolLvl: 0
-    _gold: 0
-    _currentWave: 0
-    _autoFireDuration: 0
---- !u!4 &667130462
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 667130460}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 107.941246, y: 172.12051, z: 5.7172093}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &684694560
 GameObject:
   m_ObjectHideFlags: 0
@@ -996,7 +933,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 193d60ceb587e8a4dba7ce481233ced7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 667130461}
+  ResourceLoader: {fileID: 1079165209}
   weapons: []
 --- !u!114 &933382495
 MonoBehaviour:
@@ -1194,6 +1131,7 @@ GameObject:
   - component: {fileID: 1079165208}
   - component: {fileID: 1079165210}
   - component: {fileID: 1079165206}
+  - component: {fileID: 1079165209}
   m_Layer: 0
   m_Name: _app
   m_TagString: Untagged
@@ -1209,10 +1147,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1079165205}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05cd5d2760fece24ba94ee91feaf0561, type: 3}
+  m_Script: {fileID: 11500000, guid: 389d241b800125942a9a3130ba39bfa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 667130461}
+  ResourceLoader: {fileID: 1079165209}
 --- !u!4 &1079165207
 Transform:
   m_ObjectHideFlags: 0
@@ -1237,6 +1175,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76e64f1acf37521469e258c1c15dcc47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1079165209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1079165205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a914f8546ef2534188c6cc8875e2b48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats:
+    _gold: 0
+    _currentWave: 0
+    _damageLvl: 0
+    _pistolLvl: 0
+    _doublePistolLvl: 0
+    _autoFireLvl: 0
+    _autoFireDuration: 0
+  playerData:
+    skills: {fileID: 11400000, guid: b0401cd66a469594ba7c94d432c58e59, type: 2}
+    currentDamage:
+      level: 0
+      value: 0
+      goldWorth: 0
+    currentAutoFire:
+      level: 0
+      value: 0
+      goldWorth: 0
+    playerWaves: {fileID: 11400000, guid: 32a584db6d08c78418b23be599e7843f, type: 2}
+    _gold: 0
+    _currentWave: 0
+    _autoFireDuration: 0
 --- !u!114 &1079165210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1562,7 +1533,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6a94ce445a472044813e07a437d5f14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 667130461}
+  ResourceLoader: {fileID: 1079165209}
   playerGold: {fileID: 0}
   playerCurrentWave: {fileID: 0}
   playerAttack: {fileID: 0}

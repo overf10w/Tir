@@ -12,6 +12,7 @@ public class CreateAssetBundles
         {
             Directory.CreateDirectory(assetBundleDirectory);
         }
+        // TODO: Buildtarget.StandaloneWindows -> BuildTarget.Standalone
         BuildPipeline.BuildAssetBundles(assetBundleDirectory, BuildAssetBundleOptions.None, BuildTarget.StandaloneWindows);
     }
 }

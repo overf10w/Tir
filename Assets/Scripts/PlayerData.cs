@@ -13,7 +13,7 @@ public class Skill
 
 // TODO: 
 // 1. [+] Event delegates out of class
-// 2. Custom EventArgs for gold, currentDamage, currentAutoFireDuration, etc.
+// 2. [+] Custom EventArgs for gold, currentDamage, currentAutoFireDuration, etc.
 // 3. [+] In initPlayer, not to FIND weapons, but CREATE the weapons according to State data...
 // 4. Since PlayerDB is non-monobehaviour, TRY to use constructors!!!
 
@@ -35,7 +35,7 @@ public delegate void AutoFireUpdated(float seconds);
 public delegate void AttackUpdated(float value);
 
 [System.Serializable]
-public class PlayerDB
+public class PlayerData
 {
     public event WeaponChanged OnWeaponChanged;
     public event GoldChanged OnGoldChanged;
@@ -59,11 +59,10 @@ public class PlayerDB
     private int _pistolLvl;    
     
     private Weapon doublePistol;
-    public int _doublePistolLvl;
+    private int _doublePistolLvl;
 
     public void InitPlayer()
     {
-        Debug.Log("Pistol Lvl: " + _pistolLvl);
         currentDamage = skills.DamageLvls[_damageLvl];
         currentAutoFire = skills.AutoFireLvls[_autoFireLvl];
 
@@ -78,8 +77,6 @@ public class PlayerDB
         doublePistol.weaponType = WeaponType.DOUBLE_PISTOL;
         doublePistol.weaponCharacteristics = new WeaponCharacteristics(14, 4, 0);
         doublePistol.weaponCharacteristics.Init(_doublePistolLvl);
-
-        //_pistolLvl = _doublePistolLvl = 0;
     }
 
     [Header("Player Stats")]
@@ -173,8 +170,7 @@ public class PlayerDB
         {
             _gold -= skills.DamageLvls[nextInd].goldWorth;
 
-            if (OnAttackUpdated != null)
-                OnAttackUpdated(skills.DamageLvls[nextInd].value);
+            OnAttackUpdated?.Invoke(skills.DamageLvls[nextInd].value);
             _damageLvl = nextInd;
 
             currentDamage = skills.DamageLvls[_damageLvl];

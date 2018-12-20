@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class UserStatsCanvas : MessageHandler
 {
-    public GameManager gameManager;
+    public ResourceLoader ResourceLoader;
 
     public Text playerGold;
     public Text playerCurrentWave;
@@ -42,34 +42,34 @@ public class UserStatsCanvas : MessageHandler
 
         teamDPSTxt = GameObject.Find("TeamDPSTxt").GetComponent<Text>();
         // --------------- //
-        gameManager.playerDb.OnWeaponChanged += HandleWeaponChanged;
+        ResourceLoader.playerData.OnWeaponChanged += HandleWeaponChanged;
     }
 
     // TODO: this shouldn't be in update
     void Update()
     {
-        playerGold.text = gameManager.playerDb.Gold.ToString();
-        playerAttack.text = "Dmg: " + gameManager.playerDb.Damage.value + " (" + gameManager.playerDb.Damage.level + "lvl) " + ". Next attack: " + gameManager.playerDb.NextDamage.goldWorth + " gold";
+        playerGold.text = ResourceLoader.playerData.Gold.ToString();
+        playerAttack.text = "Dmg: " + ResourceLoader.playerData.Damage.value + " (" + ResourceLoader.playerData.Damage.level + "lvl) " + ". Next attack: " + ResourceLoader.playerData.NextDamage.goldWorth + " gold";
     }
 
     public void OnUpdateDamage(int kek = 2)
     {
-        gameManager.playerDb.UpdateDamage();
+        ResourceLoader.playerData.UpdateDamage();
     }
 
     public void OnIsAutoShoot(bool isAutoShoot)
     {
-        gameManager.playerDb.UpdateAutoFire();
+        ResourceLoader.playerData.UpdateAutoFire();
     }
 
     public void UpdatePistol()
     {
-        gameManager.playerDb.UpdatePistol();
+        ResourceLoader.playerData.UpdatePistol();
     }
 
     public void UpdateDoublePistol()
     {
-        gameManager.playerDb.UpdateDoublePistol();
+        ResourceLoader.playerData.UpdateDoublePistol();
     }
 
     public override void HandleMessage(Message message)
@@ -87,8 +87,6 @@ public class UserStatsCanvas : MessageHandler
         string str = w.Cost.ToString() + "$, " + w.Dps.ToString() + " dps";
         string strNxt = w.NextCost.ToString() + "$, " + w.NextDps.ToString() + " dps";
 
-        Debug.Log("HANDLE WEAPON CHANGED!: str: " + str);
-        Debug.Log("HANDLE WEAPON CHANGED!: strNxt: " + strNxt);
         switch (weapon.sender.weaponType)
         {
             case WeaponType.PISTOL:
