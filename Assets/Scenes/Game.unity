@@ -933,7 +933,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 193d60ceb587e8a4dba7ce481233ced7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ResourceLoader: {fileID: 1079165209}
+  ResourceManager: {fileID: 1079165209}
   weapons: []
 --- !u!114 &933382495
 MonoBehaviour:

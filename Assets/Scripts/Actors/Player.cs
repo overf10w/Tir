@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MessageHandler
 {
-    public ResourceLoader ResourceLoader;
+    public ResourceLoader ResourceManager;
 
     public Weapon[] weapons;
 
@@ -12,7 +12,7 @@ public class Player : MessageHandler
 
     void Start()
     {
-        ResourceLoader.playerData.OnAutoFireUpdated += OnAutoShoot;
+        ResourceManager.playerData.OnAutoFireUpdated += OnAutoShoot;
         gunContoller = GetComponentInChildren<Gun>();
         weapons = GetComponentsInChildren<Weapon>();
         StartCoroutine(FireWeapons());
@@ -24,7 +24,7 @@ public class Player : MessageHandler
         gunContoller.UpdateGunRotation();
         if (Input.GetMouseButton(0))
         {
-            gunContoller.Shoot(ResourceLoader.playerData.Damage.value);
+            gunContoller.Shoot(ResourceManager.playerData.Damage.value);
         }
     }
 
@@ -33,7 +33,7 @@ public class Player : MessageHandler
         if (message.Type == MessageType.CubeDeath)
         {
             Cube cube = (Cube)message.objectValue;
-            ResourceLoader.playerData.Gold += cube.Gold;
+            ResourceManager.playerData.Gold += cube.Gold;
         }
     }
 
@@ -53,7 +53,7 @@ public class Player : MessageHandler
             timeBetweenShots++;
             if (timeBetweenShots >= 0.2f)
             {
-                gunContoller.Shoot(ResourceLoader.playerData.Damage.value);
+                gunContoller.Shoot(ResourceManager.playerData.Damage.value);
                 timeBetweenShots = 0.0f;
             }
             yield return null;
@@ -62,7 +62,7 @@ public class Player : MessageHandler
 
     public void OnDisable()
     {
-        ResourceLoader.playerData.OnAutoFireUpdated -= OnAutoShoot;
+        ResourceManager.playerData.OnAutoFireUpdated -= OnAutoShoot;
     }
 
     public IEnumerator FireWeapons()
