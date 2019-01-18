@@ -79,11 +79,6 @@ public class GameManager : MessageHandler
             cubesDestroyed++;
             if (cubes == cubesDestroyed)
             {
-                //if (waveInd > gameManager.playerDb.playerWaves.waves.Length - 1)
-                //{
-                //    MessageBus.Instance.SendMessage(new Message() { Type = MessageType.GameOver });
-                //    return;
-                //}
                 if (lvlInd >= 3)
                 {
                     MessageBus.Instance.SendMessage(new Message() { Type = MessageType.GameOver });
@@ -92,6 +87,17 @@ public class GameManager : MessageHandler
                 SpawnWave();
             }
         }
+        else if (message.Type == MessageType.LevelChanged)
+        {
+            ChangeLevel(message.IntValue);
+        }
+    }
+
+    private void ChangeLevel(int level)
+    {
+        lvlInd = level;
+        Debug.Log("Level was changed to: " + lvlInd);
+        ChangeSceneEnvironment();
     }
 
     public void OnDisable()

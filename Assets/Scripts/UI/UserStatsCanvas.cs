@@ -74,11 +74,15 @@ public class UserStatsCanvas : MessageHandler
 
     public override void HandleMessage(Message message)
     {
-        if (message.Type == MessageType.WaveChanged)
+        if (message.Type == MessageType.LevelChanged)
         {
-            Wave tmpWave = (Wave) message.objectValue;
-            playerCurrentWave.text = "Round: " + tmpWave.index;
+            UpdateCurrentLevelLabel(message.IntValue);
         }
+    }
+
+    public void UpdateCurrentLevelLabel(int level)
+    {
+        playerCurrentWave.text = "Round: " + level;
     }
 
     public void HandleWeaponChanged(WeaponArgs weapon)

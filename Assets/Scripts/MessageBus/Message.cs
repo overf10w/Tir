@@ -8,6 +8,7 @@ public enum MessageType
     GameOver,
     CubeDeath,
     WaveChanged,
+    LevelChanged,
     PointAdded
 }
 
