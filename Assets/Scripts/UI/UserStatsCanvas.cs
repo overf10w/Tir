@@ -24,6 +24,8 @@ public class UserStatsCanvas : MessageHandler
     public float pistolDps;
     public float doublePistolDps;
 
+    public Text elapsedTimeSpan;
+
     // Use this for initialization
     void Awake()
     {
@@ -43,6 +45,9 @@ public class UserStatsCanvas : MessageHandler
         teamDPSTxt = GameObject.Find("TeamDPSTxt").GetComponent<Text>();
         // --------------- //
         ResourceLoader.playerData.OnWeaponChanged += HandleWeaponChanged;
+
+        // Time since last game run
+        elapsedTimeSpan = GameObject.Find("ElapsedTimeSpanTxt").GetComponent<Text>();
     }
 
     // TODO: this shouldn't be in update
@@ -72,11 +77,19 @@ public class UserStatsCanvas : MessageHandler
         ResourceLoader.playerData.UpdateDoublePistol();
     }
 
+    public void UpdateElapsedTimeSpan(double timeSpan)
+    {
+        elapsedTimeSpan.text = "Delta time: " + timeSpan;
+    }
+
     public override void HandleMessage(Message message)
     {
         if (message.Type == MessageType.LevelChanged)
         {
             UpdateCurrentLevelLabel(message.IntValue);
+        } else if (message.Type == MessageType.GameStarted)
+        {
+            UpdateElapsedTimeSpan(message.DoubleValue);
         }
     }
 

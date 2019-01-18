@@ -21,9 +21,14 @@ public class GameManager : MessageHandler
     {
         playerData = ResourceLoader.playerData;
         waveInd = playerData._currentWave;
+        
         yield return null;  // we need this so the InGameCanvas receives event on spawned wave (through MessageBus)
         SpawnWave();
         //ChangeSceneEnvironment();
+        long elapsedTicks = DateTime.Now.Ticks - playerData._timeLastPlayed;
+        TimeSpan elapsedSpan = new TimeSpan(elapsedTicks);
+        MessageBus.Instance.SendMessage(new Message() { Type = MessageType.GameStarted, DoubleValue = elapsedSpan.TotalSeconds });
+        Debug.Log("Elapsed span: total seconds: " + elapsedSpan.TotalSeconds);
     }
 
     void SpawnWave()

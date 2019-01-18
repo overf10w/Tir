@@ -59,7 +59,7 @@ public class ResourceLoader : MonoBehaviour
 
     public void WriteSelf()
     {
-        Stats save = playerData.ReturnStats();
+        Stats save = playerData.GetData();
         string dataAsJson = JsonUtility.ToJson(save);
         string filePath = Application.dataPath + gameDataProjectFilePath;
         File.WriteAllText(filePath, dataAsJson);

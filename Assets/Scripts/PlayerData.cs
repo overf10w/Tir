@@ -42,6 +42,8 @@ public class PlayerData
     public event AutoFireUpdated OnAutoFireUpdated;
     public event AttackUpdated OnAttackUpdated;
 
+    public long _timeLastPlayed;
+
     [Header("Skills")]
     [SerializeField]
     private PlayerSkills skills;
@@ -220,7 +222,7 @@ public class PlayerData
         _doublePistolLvl = 0;
         _autoFireLvl = 0;
         _autoFireDuration = 0.0f;
-
+        _timeLastPlayed = 0;
         //UpdatePlayerStats();
         //InitPlayer();
     }
@@ -234,9 +236,10 @@ public class PlayerData
         _doublePistolLvl = stats._doublePistolLvl;
         _autoFireLvl = stats._autoFireLvl;
         _autoFireDuration = stats._autoFireDuration;
+        _timeLastPlayed = stats._timeLastPlayed;
     }
 
-    public Stats ReturnStats()
+    public Stats GetData()
     {
         Stats playerStats = new Stats();
         playerStats._gold = _gold;
@@ -246,6 +249,7 @@ public class PlayerData
         playerStats._doublePistolLvl = _doublePistolLvl;
         playerStats._autoFireLvl = _autoFireLvl;
         playerStats._autoFireDuration = _autoFireDuration;
+        playerStats._timeLastPlayed = DateTime.Now.Ticks;
 
         return playerStats;
     }
@@ -268,6 +272,7 @@ public class Stats
     public int _doublePistolLvl;
     public int _autoFireLvl;
     public float _autoFireDuration;
+    public long _timeLastPlayed;
 }
 
 [CreateAssetMenu(fileName = "Stats.Asset", menuName = "Character/Stats")]
