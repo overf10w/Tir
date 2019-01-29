@@ -1963,10 +1963,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9228b852ebca9e24d962f55efefeaf49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelsHolder: {fileID: 1355238233}
+  levelList: {fileID: 1355238233}
   theOtherButton: {fileID: 2028446967}
-  step: 0.25
-  levelsCount: 0
 --- !u!222 &950183124
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2455,6 +2453,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats:
     _gold: 0
+    _level: 0
     _currentWave: 0
     _damageLvl: 0
     _pistolLvl: 0
@@ -2474,6 +2473,7 @@ MonoBehaviour:
       value: 0
       goldWorth: 0
     playerWaves: {fileID: 11400000, guid: 32a584db6d08c78418b23be599e7843f, type: 2}
+    _level: 0
     _gold: 0
     _currentWave: 0
     _autoFireDuration: 0
@@ -2999,8 +2999,9 @@ GameObject:
   - component: {fileID: 1355238235}
   - component: {fileID: 1355238234}
   - component: {fileID: 1355238233}
+  - component: {fileID: 1355238237}
   m_Layer: 5
-  m_Name: OurAwesomeList
+  m_Name: LevelList
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3101,6 +3102,19 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1355238231}
+--- !u!114 &1355238237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1355238231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90647dee2f8a6fc4ebf6a014ceb87444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  step: 0.25
+  levelsCount: 0
 --- !u!1 &1410468988
 GameObject:
   m_ObjectHideFlags: 0
@@ -3409,6 +3423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6a94ce445a472044813e07a437d5f14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LevelListUI: {fileID: 0}
   ResourceLoader: {fileID: 1079165209}
   playerGold: {fileID: 0}
   playerCurrentWave: {fileID: 0}
@@ -5455,10 +5470,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9228b852ebca9e24d962f55efefeaf49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelsHolder: {fileID: 1355238233}
+  levelList: {fileID: 1355238233}
   theOtherButton: {fileID: 950183121}
-  step: 0.25
-  levelsCount: 0
 --- !u!114 &2028446967
 MonoBehaviour:
   m_ObjectHideFlags: 0

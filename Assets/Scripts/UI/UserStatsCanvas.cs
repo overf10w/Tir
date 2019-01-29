@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class UserStatsCanvas : MessageHandler
 {
+    // UI 
+    public LevelListUI LevelListUI;
+
     public ResourceLoader ResourceLoader;
 
     public Text playerGold;
@@ -29,6 +32,8 @@ public class UserStatsCanvas : MessageHandler
     // Use this for initialization
     void Awake()
     {
+        // TODO: drag & drop
+        LevelListUI = FindObjectOfType<LevelListUI>();
         //yield return new W;
         playerGold = GameObject.Find("GoldTxt").GetComponent<Text>();
         playerCurrentWave = GameObject.Find("CurrentWaveLbl").GetComponent<Text>();
@@ -44,7 +49,9 @@ public class UserStatsCanvas : MessageHandler
 
         teamDPSTxt = GameObject.Find("TeamDPSTxt").GetComponent<Text>();
         // --------------- //
+        // TODO: use message bus
         ResourceLoader.playerData.OnWeaponChanged += HandleWeaponChanged;
+        ResourceLoader.playerData.OnLevelChanged += HandleLevelChanged;
 
         // Time since last game run
         elapsedTimeSpan = GameObject.Find("ElapsedTimeSpanTxt").GetComponent<Text>();
@@ -87,7 +94,8 @@ public class UserStatsCanvas : MessageHandler
         if (message.Type == MessageType.LevelChanged)
         {
             UpdateCurrentLevelLabel(message.IntValue);
-        } else if (message.Type == MessageType.GameStarted)
+        }
+        if (message.Type == MessageType.GameStarted)
         {
             UpdateElapsedTimeSpan(message.DoubleValue);
         }
@@ -120,6 +128,11 @@ public class UserStatsCanvas : MessageHandler
                 break;
         }
         teamDPSTxt.text = (pistolDps + doublePistolDps).ToString();
+    }
+
+    public void HandleLevelChanged(int level)
+    {
+        LevelListUI.SetLevel(level);
     }
 
     public void UpdateTeamDPSTxt(string text)

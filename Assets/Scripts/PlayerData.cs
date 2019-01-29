@@ -33,6 +33,7 @@ public delegate void WeaponChanged(WeaponArgs e);
 public delegate void GoldChanged(float value);
 public delegate void AutoFireUpdated(float seconds);
 public delegate void AttackUpdated(float value);
+public delegate void LevelChanged(int level);
 
 [System.Serializable]
 public class PlayerData
@@ -41,6 +42,7 @@ public class PlayerData
     public event GoldChanged OnGoldChanged;
     public event AutoFireUpdated OnAutoFireUpdated;
     public event AttackUpdated OnAttackUpdated;
+    public event LevelChanged OnLevelChanged;
 
     public long _timeLastPlayed;
 
@@ -62,6 +64,8 @@ public class PlayerData
     
     private Weapon doublePistol;
     private int _doublePistolLvl;
+
+    public int _level;
 
     public void InitPlayer()
     {
@@ -216,6 +220,7 @@ public class PlayerData
     {
         //TODO: uncomment for final build
         _gold = 0;
+        _level = 0;
         _currentWave = 0;
         _damageLvl = 0;
         _pistolLvl = 0;
@@ -230,6 +235,7 @@ public class PlayerData
     public void InitStats(Stats stats)
     {
         _gold = stats._gold;
+        _level = stats._level;
         _currentWave = stats._currentWave;
         _damageLvl = stats._damageLvl;
         _pistolLvl = stats._pistolLvl;
@@ -243,6 +249,7 @@ public class PlayerData
     {
         Stats playerStats = new Stats();
         playerStats._gold = _gold;
+        playerStats._level = _level;
         playerStats._currentWave = _currentWave;
         playerStats._damageLvl = _damageLvl;
         playerStats._pistolLvl = _pistolLvl;
@@ -260,12 +267,19 @@ public class PlayerData
         OnWeaponChanged?.Invoke(new WeaponArgs(doublePistol, doublePistol.weaponCharacteristics));
         OnWeaponChanged?.Invoke(new WeaponArgs(pistol, pistol.weaponCharacteristics));
     }
+
+    public void InvokeLevelChanged()
+    {
+        Debug.Log("INVOKED?");
+        OnLevelChanged?.Invoke(_level);
+    }
 }
 
 [System.Serializable]
 public class Stats
 {
     public float _gold;
+    public int _level;
     public int _currentWave;
     public int _damageLvl;
     public int _pistolLvl;

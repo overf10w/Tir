@@ -33,6 +33,7 @@ public class ResourceLoader : MonoBehaviour
     {
         yield return null;
         playerData.InvokeWeaponChanged();
+        playerData.InvokeLevelChanged();
     }
 
     void OnDisable()

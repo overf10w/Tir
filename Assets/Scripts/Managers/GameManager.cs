@@ -21,7 +21,7 @@ public class GameManager : MessageHandler
     {
         playerData = ResourceLoader.playerData;
         waveInd = playerData._currentWave;
-        
+        lvlInd = playerData._level;   
         yield return null;  // we need this so the InGameCanvas receives event on spawned wave (through MessageBus)
         SpawnWave();
         //ChangeSceneEnvironment();
@@ -37,6 +37,7 @@ public class GameManager : MessageHandler
         if (waveInd % 5 == 0)
         {
             lvlInd++;
+            playerData._level = lvlInd;
             ChangeSceneEnvironment();
         }
         var wavePrefab = playerData.playerWaves.waves[waveInd % 5];
@@ -95,6 +96,7 @@ public class GameManager : MessageHandler
         else if (message.Type == MessageType.LevelChanged)
         {
             ChangeLevel(message.IntValue);
+            ResourceLoader.playerData._level = message.IntValue;
         }
     }
 

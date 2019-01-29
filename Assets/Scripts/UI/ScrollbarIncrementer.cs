@@ -6,30 +6,28 @@ using UnityEngine.UI;
 
 public class ScrollbarIncrementer : MonoBehaviour
 {
-    public ScrollRect levelsHolder;
+    public ScrollRect levelList;
+    private LevelListUI levelListScript;
     public Button theOtherButton;
-    public float step = 0.25f;
-    public int levelsCount;
 
     public void Start()
     {
-        levelsCount = levelsHolder.transform.GetComponentsInChildren<Button>().Length;
-        step = (1.0f / (float) (levelsCount - 1));
+        levelListScript = levelList.GetComponent<LevelListUI>();
     }
 
     public void Increment()
     {
-        if (levelsHolder == null || theOtherButton == null) throw new Exception("Setup ScrollbarIncrementer first!");
-        levelsHolder.horizontalNormalizedPosition = Mathf.Clamp(levelsHolder.horizontalNormalizedPosition + step, 0, 1);
-        GetComponent<Button>().interactable = levelsHolder.horizontalNormalizedPosition != 1;
+        if (levelListScript == null || theOtherButton == null) throw new Exception("Setup ScrollbarIncrementer first!");
+        levelListScript.Increment();
+        GetComponent<Button>().interactable = levelListScript.HorizontalNormalizedPosition() <= 0.999f;
         theOtherButton.interactable = true;
     }
 
     public void Decrement()
     {
-        if (levelsHolder == null || theOtherButton == null) throw new Exception("Setup ScrollbarIncrementer first!");
-        levelsHolder.horizontalNormalizedPosition = Mathf.Clamp(levelsHolder.horizontalNormalizedPosition - step, 0, 1);
-        GetComponent<Button>().interactable = levelsHolder.horizontalNormalizedPosition != 0; ;
+        if (levelListScript == null || theOtherButton == null) throw new Exception("Setup ScrollbarIncrementer first!");
+        levelListScript.Decrement();    
+        GetComponent<Button>().interactable = levelListScript.HorizontalNormalizedPosition() >= 0.001f;
         theOtherButton.interactable = true;
     }
 }
