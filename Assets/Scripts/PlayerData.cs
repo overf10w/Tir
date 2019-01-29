@@ -135,11 +135,6 @@ public class PlayerData
     }
     #endregion
 
-    #region CURRENT_WAVE
-    [SerializeField]
-    public int _currentWave;
-    #endregion
-
     #region DAMAGE_SKILL
     [SerializeField]
     public Skill Damage
@@ -221,7 +216,6 @@ public class PlayerData
         //TODO: uncomment for final build
         _gold = 0;
         _level = 0;
-        _currentWave = 0;
         _damageLvl = 0;
         _pistolLvl = 0;
         _doublePistolLvl = 0;
@@ -236,7 +230,6 @@ public class PlayerData
     {
         _gold = stats._gold;
         _level = stats._level;
-        _currentWave = stats._currentWave;
         _damageLvl = stats._damageLvl;
         _pistolLvl = stats._pistolLvl;
         _doublePistolLvl = stats._doublePistolLvl;
@@ -250,7 +243,6 @@ public class PlayerData
         Stats playerStats = new Stats();
         playerStats._gold = _gold;
         playerStats._level = _level;
-        playerStats._currentWave = _currentWave;
         playerStats._damageLvl = _damageLvl;
         playerStats._pistolLvl = _pistolLvl;
         playerStats._doublePistolLvl = _doublePistolLvl;

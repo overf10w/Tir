@@ -10,41 +10,30 @@ public class GameManager : MessageHandler
     private PlayerData playerData;
     private Wave wave;
 
-    private int waveInd;
     private int lvlInd;
 
-    private int cubes;
+    private int cubesSpawned;
     private int cubesDestroyed;
 
     // Use this for initialization
     IEnumerator Start()
     {
         playerData = ResourceLoader.playerData;
-        waveInd = playerData._currentWave;
         lvlInd = playerData._level;   
         yield return null;  // we need this so the InGameCanvas receives event on spawned wave (through MessageBus)
         SpawnWave();
-        //ChangeSceneEnvironment();
         long elapsedTicks = DateTime.Now.Ticks - playerData._timeLastPlayed;
         TimeSpan elapsedSpan = new TimeSpan(elapsedTicks);
         MessageBus.Instance.SendMessage(new Message() { Type = MessageType.GameStarted, DoubleValue = elapsedSpan.TotalSeconds });
-        Debug.Log("Elapsed span: total seconds: " + elapsedSpan.TotalSeconds);
     }
 
     void SpawnWave()
     {
-        waveInd++;
-        if (waveInd % 5 == 0)
-        {
-            lvlInd++;
-            playerData._level = lvlInd;
-            ChangeSceneEnvironment();
-        }
-        var wavePrefab = playerData.playerWaves.waves[waveInd % 5];
+        var waves = playerData.playerWaves.waves;
+        var wavePrefab = playerData.playerWaves.waves[UnityEngine.Random.Range(0, waves.Length)];
         wave = Instantiate(wavePrefab, wavePrefab.transform.position, Quaternion.identity) as Wave;
-        cubes = wave.cubesNumber;
+        cubesSpawned = wave.cubesNumber;
         cubesDestroyed = 0;
-        playerData._currentWave = waveInd;
         MessageBus.Instance.SendMessage(new Message() { Type = MessageType.WaveChanged, objectValue = wave });
     }
 
@@ -75,7 +64,6 @@ public class GameManager : MessageHandler
         Sprite sprite = Sprite.Create(texture2D, new Rect(0, 0, texture2D.width, texture2D.height), Vector2.zero);
         SpriteRenderer renderer = go1.AddComponent<SpriteRenderer>();
         renderer.sprite = sprite;
-        //Instantiate(go);
     }
 
     public override void HandleMessage(Message message)
@@ -83,7 +71,7 @@ public class GameManager : MessageHandler
         if (message.Type == MessageType.CubeDeath)
         {
             cubesDestroyed++;
-            if (cubes == cubesDestroyed)
+            if (cubesDestroyed == cubesSpawned)
             {
                 if (lvlInd >= 3)
                 {
@@ -105,11 +93,5 @@ public class GameManager : MessageHandler
         lvlInd = level;
         Debug.Log("Level was changed to: " + lvlInd);
         ChangeSceneEnvironment();
-    }
-
-    public void OnDisable()
-    {
-        // TODO: does this code matter?
-        ResourceLoader.playerData._currentWave = waveInd;
     }
 }
