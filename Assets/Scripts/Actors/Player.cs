@@ -10,7 +10,7 @@ public class Player : MessageHandler
 
     private Gun gunContoller;
 
-    void Start()
+    private void Start()
     {
         ResourceManager.playerData.OnAutoFireUpdated += OnAutoShoot;
         gunContoller = GetComponentInChildren<Gun>();
@@ -18,8 +18,7 @@ public class Player : MessageHandler
         StartCoroutine(FireWeapons());
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         gunContoller.UpdateGunRotation();
         if (Input.GetMouseButton(0))

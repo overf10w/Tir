@@ -102,7 +102,7 @@ public class WeaponCharacteristics
         if (Time.time > nextShotTime)
         {
             nextShotTime = Time.time + msBetweenShots / 1000;
-            IDestroyable cube = wave.Cubes.ElementAtOrDefault(new System.Random().Next(wave.Cubes.Count));
+            IDestroyable cube = wave.Cubes.ElementAtOrDefault(new System.Random().Next(wave.cubesNumber));
             if ((MonoBehaviour)cube != null)
             {
                 cube.TakeDamage(dps);

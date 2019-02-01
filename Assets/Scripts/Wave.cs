@@ -22,9 +22,15 @@ public class Wave : MessageHandler
 
     private void Init()
     {
-        for (int i = 0; i < transform.childCount; i++)
+        for (int i = transform.childCount - 1; i >= 0; i--)
         {
-            cubesList.Add(transform.GetChild(i).GetComponent<IDestroyable>());
+            var oldCube = transform.GetChild(i);
+            var newCube = Resources.Load<Cube>("Prefabs/Cube") as Cube;
+            var kek = Instantiate(newCube, oldCube.transform) as Cube;
+            kek.transform.SetParent(this.gameObject.transform);
+            Destroy(oldCube.gameObject);
+            cubesList.Add(kek.GetComponent<IDestroyable>());
+
             cubesNumber++;
         }
     }
