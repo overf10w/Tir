@@ -10,18 +10,18 @@ public class Weapon : MessageHandler
     private Wave wave;
 
     [SerializeField]
-    public WeaponCharacteristics weaponCharacteristics;
+    public WeaponModel weaponModel;
 
     // Use this for initialization
     void Start()
     {
         //if (weaponType == WeaponType.PISTOL)
         //{
-        //    weaponCharacteristics = new WeaponCharacteristics(12, 2, 0);
+        //    weaponModel = new WeaponModel(12, 2, 0);
         //}
         //if (weaponType == WeaponType.DOUBLE_PISTOL)
         //{
-        //    weaponCharacteristics = new WeaponCharacteristics(20, 4, 0);
+        //    weaponModel = new WeaponModel(20, 4, 0);
         //}
     }
 
@@ -35,9 +35,9 @@ public class Weapon : MessageHandler
 
     public void Fire()
     {
-        if (weaponCharacteristics.level > 0)
+        if (weaponModel.level > 0)
         {
-            weaponCharacteristics.Fire(wave);
+            weaponModel.Fire(wave);
         }
     }
 }

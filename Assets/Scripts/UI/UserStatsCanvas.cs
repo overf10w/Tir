@@ -5,88 +5,86 @@ using UnityEngine.UI;
 
 public class UserStatsCanvas : MessageHandler
 {
-    // UI 
-    public LevelListUI LevelListUI;
+    public PlayerStats playerStats;
 
+    public LevelListUI LevelListUI;
     public ResourceLoader ResourceLoader;
 
-    public Text playerGold;
-    public Text playerCurrentWave;
-    public Text playerAttack;
+    public Text playerGoldLbl;
+    public Text playerCurrentWaveLbl;
+    public Text playerAttackLbl;
+    public Text teamDPSLbl;
+    public Text elapsedTimeSpanLbl;
 
     // pistol
-    public Text pistolTxt;
-    public Text pistolNextTxt;
+    public float pistolDps;
+    public Text pistolLbl;
+    public Text pistolNextLbl;
 
     // double pistol
-    public Text doublePistolTxt;
-    public Text doublePistolNextTxt;
-
-    public Text teamDPSTxt;
-
-    public float pistolDps;
     public float doublePistolDps;
-
-    public Text elapsedTimeSpan;
+    public Text doublePistolLbl;
+    public Text doublePistolNextLbl;
 
     // Use this for initialization
     void Awake()
     {
         // TODO: drag & drop
         LevelListUI = FindObjectOfType<LevelListUI>();
-        //yield return new W;
-        playerGold = GameObject.Find("GoldTxt").GetComponent<Text>();
-        playerCurrentWave = GameObject.Find("CurrentWaveLbl").GetComponent<Text>();
-        playerAttack = GameObject.Find("DamageTxt").GetComponent<Text>();
+
+        // playerStats
+        playerGoldLbl = GameObject.Find("GoldLbl").GetComponent<Text>();
+        playerCurrentWaveLbl = GameObject.Find("CurrentWaveLbl").GetComponent<Text>();
+        playerAttackLbl = GameObject.Find("DamageLbl").GetComponent<Text>();
 
         // pistol
-        pistolTxt = GameObject.Find("PistolTxt").GetComponent<Text>();
-        pistolNextTxt = GameObject.Find("PistolNextTxt").GetComponent<Text>();
-
+        pistolLbl = GameObject.Find("PistolLbl").GetComponent<Text>();
+        pistolNextLbl = GameObject.Find("PistolNextLbl").GetComponent<Text>();
+        
         //doublePistol
-        doublePistolTxt = GameObject.Find("DoublePistolTxt").GetComponent<Text>();
-        doublePistolNextTxt = GameObject.Find("DoublePistolNextTxt").GetComponent<Text>();
+        doublePistolLbl = GameObject.Find("DoublePistolLbl").GetComponent<Text>();
+        doublePistolNextLbl = GameObject.Find("DoublePistolNextLbl").GetComponent<Text>();
 
-        teamDPSTxt = GameObject.Find("TeamDPSTxt").GetComponent<Text>();
+        teamDPSLbl = GameObject.Find("TeamDPSLbl").GetComponent<Text>();
+
         // --------------- //
         // TODO: use message bus
-        ResourceLoader.playerData.OnWeaponChanged += HandleWeaponChanged;
-        ResourceLoader.playerData.OnLevelChanged += HandleLevelChanged;
+        //ResourceLoader.playerData.OnWeaponChanged += HandleWeaponChanged;
+        //ResourceLoader.gameData.OnLevelChanged += HandleLevelChanged;
 
-        // Time since last game run
-        elapsedTimeSpan = GameObject.Find("ElapsedTimeSpanTxt").GetComponent<Text>();
+        elapsedTimeSpanLbl = GameObject.Find("ElapsedTimeSpanLbl").GetComponent<Text>();
     }
 
     // TODO: this shouldn't be in update
     void Update()
     {
-        playerGold.text = ResourceLoader.playerData.Gold.ToString();
-        playerAttack.text = "Dmg: " + ResourceLoader.playerData.Damage.value + " (" + ResourceLoader.playerData.Damage.level + "lvl) " + ". Next attack: " + ResourceLoader.playerData.NextDamage.goldWorth + " gold";
+        //playerGoldLbl.text = ResourceLoader.playerData.Gold.ToString();
+        //playerAttackLbl.text = "Dmg: " + ResourceLoader.playerData.Damage.value + " (" + ResourceLoader.playerData.Damage.level + "lvl) " + ". Next attack: " + ResourceLoader.playerData.NextDamage.goldWorth + " gold";
     }
 
     public void OnUpdateDamage(int kek = 2)
     {
-        ResourceLoader.playerData.UpdateDamage();
+        //ResourceLoader.playerData.UpdateDamage();
     }
 
     public void OnIsAutoShoot(bool isAutoShoot)
     {
-        ResourceLoader.playerData.UpdateAutoFire();
+        //ResourceLoader.playerData.UpdateAutoFire();
     }
 
     public void UpdatePistol()
     {
-        ResourceLoader.playerData.UpdatePistol();
+        //ResourceLoader.playerData.UpdatePistol();
     }
 
     public void UpdateDoublePistol()
     {
-        ResourceLoader.playerData.UpdateDoublePistol();
+        //ResourceLoader.playerData.UpdateDoublePistol();
     }
 
     public void UpdateElapsedTimeSpan(double timeSpan)
     {
-        elapsedTimeSpan.text = "Delta time: " + timeSpan;
+        elapsedTimeSpanLbl.text = "Delta time: " + timeSpan;
     }
 
     public override void HandleMessage(Message message)
@@ -103,12 +101,12 @@ public class UserStatsCanvas : MessageHandler
 
     public void UpdateCurrentLevelLabel(int level)
     {
-        playerCurrentWave.text = "Round: " + level;
+        playerCurrentWaveLbl.text = "Round: " + level;
     }
 
     public void HandleWeaponChanged(WeaponArgs weapon)
     {
-        WeaponCharacteristics w = weapon.weaponCharacteristics;
+        WeaponModel w = weapon.weaponModel;
         string str = w.Cost.ToString() + "$, " + w.Dps.ToString() + " dps";
         string strNxt = w.NextCost.ToString() + "$, " + w.NextDps.ToString() + " dps";
 
@@ -116,18 +114,16 @@ public class UserStatsCanvas : MessageHandler
         {
             case WeaponType.PISTOL:
                 pistolDps = w.Dps;
-                pistolTxt.text = "Pistol: " + str;
-                pistolNextTxt.text = strNxt;
+                pistolLbl.text = "Pistol: " + str;
+                pistolNextLbl.text = strNxt;
                 break;
             case WeaponType.DOUBLE_PISTOL:
                 doublePistolDps = w.Dps;
-                doublePistolTxt.text = "DP: " + str;
-                doublePistolNextTxt.text = strNxt;
-                break;
-            default:
+                doublePistolLbl.text = "DP: " + str;
+                doublePistolNextLbl.text = strNxt;
                 break;
         }
-        teamDPSTxt.text = (pistolDps + doublePistolDps).ToString();
+        teamDPSLbl.text = (pistolDps + doublePistolDps).ToString();
     }
 
     public void HandleLevelChanged(int level)

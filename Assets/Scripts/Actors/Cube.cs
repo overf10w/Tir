@@ -31,7 +31,10 @@ public class Cube : MonoBehaviour, IDestroyable
         }
         else
         {
-            cachedVec = renderer.material.GetVector("_PlanePoint");
+            if (renderer.material.HasProperty("_PlanePoint"))
+            {
+                cachedVec = renderer.material.GetVector("_PlanePoint");
+            }
             newVec = new Vector4(cachedVec.x, transform.position.y + 1.0f * transform.localScale.y, cachedVec.z, cachedVec.w);
             cachedVec = newVec;
             renderer.material.SetVector("_PlanePoint", newVec);
@@ -60,7 +63,7 @@ public class Cube : MonoBehaviour, IDestroyable
         float wpDistance = cachedTransform.localScale.y * 1.0f;
         float x = wpDistance - (wpDistance * hp / 10.0f);
 
-        Debug.Log("x: " + x + "hp: " + hp);
+        //Debug.Log("x: " + x + "hp: " + hp);
 
         if (hp <= 0)
         {

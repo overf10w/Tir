@@ -39,7 +39,7 @@ public class GameOverCanvas : MessageHandler
     public void LoadScene(string sceneName)
     {
         MessageBus.Nullify();
-        //PlayerData.Nullify();
+        //PlayerModel.Nullify();
         SceneManager.LoadScene(sceneName);
     }
 

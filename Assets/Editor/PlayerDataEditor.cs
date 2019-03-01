@@ -6,38 +6,28 @@ using UnityEditor;
 [CustomEditor(typeof(ResourceLoader))]
 public class PlayerDataEditor : Editor
 {
-    private ResourceLoader ps;
-    public void OnEnable()
-    {
-        ps = (ResourceLoader) target;
-    }
+    //private ResourceLoader resourceLoader;
+    //public void OnEnable()
+    //{
+    //    resourceLoader = (ResourceLoader) target;
+    //    //resourceLoader.ReadPlayerStats();
+    //}
 
-    public override void OnInspectorGUI()
-    {
-        if (GUILayout.Button("Read Data"))
-        {
-            ps.ReadSelf();
-        }
-        DrawDefaultInspector();
-        //Editor tmpEditor = null;
-        //tmpEditor = Editor.CreateEditor(ps.stats);
-        if (GUILayout.Button("Reset Player Data"))
-        {
-            ps.Reset();
-        }
-        if (GUILayout.Button("Write Data"))
-        {
-            ps.WriteSelf();
-        }
-    }
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    //public override void OnInspectorGUI()
+    //{
+    //    if (GUILayout.Button("Read Data"))
+    //    {
+    //        resourceLoader.ReadPlayerStats();
+    //    }
+    //    DrawDefaultInspector();
+    //    if (GUILayout.Button("Reset Player Data"))
+    //    {
+    //        resourceLoader.Reset();
+    //        //resourceLoader.ReadPlayerStats();
+    //    }
+    //    if (GUILayout.Button("Write Data"))
+    //    {
+    //        resourceLoader.WritePlayerStats(resourceLoader.playerStats);
+    //    }
+    //}	
 }

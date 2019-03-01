@@ -5,9 +5,8 @@ using UnityEngine;
 public class Gun : MonoBehaviour
 {
     public Transform muzzle;
-    public float speed = 5f;
 
-    public float msBetweenShots = 200.0f;
+    private float msBetweenShots = 500.0f;
 
     private Vector3 target;
     private Vector3 mousePos;

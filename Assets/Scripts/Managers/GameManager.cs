@@ -7,30 +7,39 @@ using UnityEngine;
 public class GameManager : MessageHandler
 {
     public ResourceLoader ResourceLoader;
-    private PlayerData playerData;
+    private GameData gameData;
+
     private Wave wave;
+
+    public PlayerWaves playerWaves;
 
     private int lvlInd;
 
     private int cubesSpawned;
     private int cubesDestroyed;
 
-    // Use this for initialization
+    // TODO: construct player obj
     IEnumerator Start()
     {
-        playerData = ResourceLoader.playerData;
-        lvlInd = playerData._level;   
+        gameData = new GameData();
+        gameData.Init(ResourceLoader.instance.ReadGameStats());
+
+        PlayerView view = Instantiate(Resources.Load<PlayerView>("Prefabs/Player"));
+        PlayerModel model = new PlayerModel(ResourceLoader.instance.ReadPlayerStats());
+        PlayerController pc = new PlayerController(model, view);
+
+        lvlInd = gameData._level;
         yield return null;  // we need this so the InGameCanvas receives event on spawned wave (through MessageBus)
         SpawnWave();
-        long elapsedTicks = DateTime.Now.Ticks - playerData._timeLastPlayed;
+        long elapsedTicks = DateTime.Now.Ticks - gameData._timeLastPlayed;
         TimeSpan elapsedSpan = new TimeSpan(elapsedTicks);
         MessageBus.Instance.SendMessage(new Message() { Type = MessageType.GameStarted, DoubleValue = elapsedSpan.TotalSeconds });
     }
 
     void SpawnWave()
     {
-        var waves = playerData.playerWaves.waves;
-        var wavePrefab = playerData.playerWaves.waves[UnityEngine.Random.Range(0, waves.Length)];
+        var waves = playerWaves.waves;
+        var wavePrefab = waves[UnityEngine.Random.Range(0, waves.Length)];
         wave = Instantiate(wavePrefab, wavePrefab.transform.position, Quaternion.identity) as Wave;
         cubesSpawned = wave.cubesNumber;
         cubesDestroyed = 0;
@@ -84,7 +93,7 @@ public class GameManager : MessageHandler
         else if (message.Type == MessageType.LevelChanged)
         {
             ChangeLevel(message.IntValue);
-            ResourceLoader.playerData._level = message.IntValue;
+            gameData._level = message.IntValue;
         }
     }
 
@@ -94,4 +103,10 @@ public class GameManager : MessageHandler
         Debug.Log("Level was changed to: " + lvlInd);
         ChangeSceneEnvironment();
     }
+
+    public void OnDisable()
+    {
+        ResourceLoader.instance.WriteGameStats(gameData.GetData());
+    }
+
 }
