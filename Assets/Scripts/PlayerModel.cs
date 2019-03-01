@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using UnityEngine;
 
@@ -26,20 +27,16 @@ public delegate void AttackUpdated(float value);
 public delegate void LevelChanged(int level);
 
 [System.Serializable]
-public class PlayerModel
+public class PlayerModel : INotifyPropertyChanged
 {
     // boiler-plate
     public event PropertyChangedEventHandler PropertyChanged;
-    protected virtual void OnPropertyChanged(string propertyName)
+    protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
     {
-        PropertyChangedEventHandler handler = PropertyChanged;
-        if (handler != null)
-        {
-            handler(this, new PropertyChangedEventArgs(propertyName));
-        }
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
-    protected bool SetField<T>(ref T field, T value, string propertyName)
+    protected bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
     {
         if (EqualityComparer<T>.Default.Equals(field, value)) return false;
         field = value;
@@ -95,7 +92,7 @@ public class PlayerModel
         get { return gold; }
         set
         {
-            SetField(ref gold, value, "Gold");
+            SetField(ref gold, value);
         }
     }
 
