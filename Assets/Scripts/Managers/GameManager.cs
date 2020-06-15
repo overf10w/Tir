@@ -4,6 +4,18 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
+// 0. Do TODOs in WeaponModel.cs, Weapon.cs, PlayerController.cs
+// 1. Refactor MessageBus (as in Trumpage)
+// 2. Reorganize project (hierarchy, etc.)
+// 3. Figure out if we really need GameData and GameStats as separate classes
+
+// The concept of game is this
+// 0. 
+// 1. We can only have one real visible weapon
+// 2. All Fire() commands of that visible weapon should be queued
+// 3. All TakeDamage() commands of Cube.cs should be queued
+// NOTE the command patterns don't really need an undo functionality
+
 public class GameManager : MessageHandler
 {
     public ResourceLoader ResourceLoader;
@@ -18,14 +30,15 @@ public class GameManager : MessageHandler
     private int cubesSpawned;
     private int cubesDestroyed;
 
-    // TODO: construct player obj
+    private AssetBundle myLoadedAssetBundle;
+
     IEnumerator Start()
     {
         gameData = new GameData();
-        gameData.Init(ResourceLoader.instance.ReadGameStats());
+        gameData.Init(ResourceLoader.Instance.ReadGameStats());
 
         PlayerView view = Instantiate(Resources.Load<PlayerView>("Prefabs/Player"));
-        PlayerModel model = new PlayerModel(ResourceLoader.instance.ReadPlayerStats());
+        PlayerModel model = new PlayerModel(ResourceLoader.Instance.ReadPlayerStats());
         PlayerController pc = new PlayerController(model, view);
 
         lvlInd = gameData._level;
@@ -33,6 +46,7 @@ public class GameManager : MessageHandler
         SpawnWave();
         long elapsedTicks = DateTime.Now.Ticks - gameData._timeLastPlayed;
         TimeSpan elapsedSpan = new TimeSpan(elapsedTicks);
+        // TODO (?): this can be set solely by PlayerController.cs
         MessageBus.Instance.SendMessage(new Message() { Type = MessageType.GameStarted, DoubleValue = elapsedSpan.TotalSeconds });
     }
 
@@ -45,8 +59,6 @@ public class GameManager : MessageHandler
         cubesDestroyed = 0;
         MessageBus.Instance.SendMessage(new Message() { Type = MessageType.WaveChanged, objectValue = wave });
     }
-
-    private AssetBundle myLoadedAssetBundle;
 
     void ChangeSceneEnvironment()
     {
@@ -106,7 +118,6 @@ public class GameManager : MessageHandler
 
     public void OnDisable()
     {
-        ResourceLoader.instance.WriteGameStats(gameData.GetData());
+        ResourceLoader.Instance.WriteGameStats(gameData.GetData());
     }
-
 }

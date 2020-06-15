@@ -32,11 +32,7 @@ public class PlayerModel
     public event PropertyChangedEventHandler PropertyChanged;
     protected virtual void OnPropertyChanged(string propertyName)
     {
-        PropertyChangedEventHandler handler = PropertyChanged;
-        if (handler != null)
-        {
-            handler(this, new PropertyChangedEventArgs(propertyName));
-        }
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
     protected bool SetField<T>(ref T field, T value, string propertyName)
@@ -99,7 +95,6 @@ public class PlayerModel
         }
     }
 
-
     public void UpdatePistol()
     {
         if (gold >= pistol.weaponModel.Cost)
@@ -114,7 +109,6 @@ public class PlayerModel
             Debug.LogWarning("Sorry bro no money =((");
         }
     }
-
 
     public void UpdateDoublePistol()
     {

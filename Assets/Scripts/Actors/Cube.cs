@@ -24,6 +24,7 @@ public class Cube : MonoBehaviour, IDestroyable
         cubeStats = Resources.Load<CubeStats>("SO/CubeStats");
         gold = cubeStats.stats.gold;
         health = cubeStats.stats.HP;
+
         renderer = GetComponent<Renderer>();
         if (renderer == null)
         {
@@ -41,6 +42,7 @@ public class Cube : MonoBehaviour, IDestroyable
         }
     }
 
+    // TODO: this should be done via Coroutine Queue 
     public void TakeDamage(float damage)
     {
         health -= damage;
@@ -51,7 +53,6 @@ public class Cube : MonoBehaviour, IDestroyable
             Destroy(this.gameObject);
         }
     }
-
 
     public int Gold
     {

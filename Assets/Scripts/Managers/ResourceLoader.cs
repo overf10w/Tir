@@ -6,7 +6,7 @@ using UnityEngine;
 // TODO (only prior final build): make it singleton
 public class ResourceLoader : MonoBehaviour
 {
-    public static ResourceLoader instance;
+    public static ResourceLoader Instance;
 
     private string playerDataProjectFilePath = "/StreamingAssets/data.json";
     private string gameDataProjectFilePath   = "/StreamingAssets/gameData.json";
@@ -21,13 +21,13 @@ public class ResourceLoader : MonoBehaviour
 
     void Awake()
     {
-        if (instance != null)
+        if (Instance != null)
         {
             Debug.Log("More than one ResourceLoader is in the scene");
         }
         else
         {
-            instance = this;
+            Instance = this;
         }
 
         //// TODO: dafuq?!

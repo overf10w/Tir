@@ -35,6 +35,7 @@ public class PlayerController
         model.Gold += e.val;
     }
 
+    // TODO: remove this thing
     public IEnumerator FireWeapons()
     {
         while (true)
@@ -50,16 +51,16 @@ public class PlayerController
 
     public void HandleGoldChanged(float value)
     {
-        //view.ui.playerGoldLbl.text = value.ToString();
+        // view.ui.playerGoldLbl.text = value.ToString();
     }
 
     public void HandlePropertyChanged(object sender, PropertyChangedEventArgs e)
     {
-        MonoBehaviour.print("PlayerController: " + e.PropertyName);
-        view.ui.playerGoldLbl.text = e.PropertyName.ToString();
+        UnityEngine.Debug.Log("PlayerController: " + e.PropertyName);
+        view.ui.PlayerGoldTxt.text = e.PropertyName.ToString();
         if (e.PropertyName == "Gold")
         {
-            view.ui.playerGoldLbl.text = model.Gold.ToString();
+            view.ui.PlayerGoldTxt.text = model.Gold.ToString();
         }
         else
         {

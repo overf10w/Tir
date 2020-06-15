@@ -23,6 +23,9 @@ public class WeaponModel
 
     public WeaponType weaponType;
 
+    public float nextShotTime;
+    public float msBetweenShots = 200;
+
     public WeaponModel(float baseCost, float baseDps, int level)
     {
         this.baseCost = baseCost;
@@ -33,8 +36,6 @@ public class WeaponModel
         this.dps = 0;
     }
     
-    // TODO: remove these props
-
     public float Dps
     {
         get { return dps; }
@@ -93,10 +94,7 @@ public class WeaponModel
         nextDps = baseDps * (level + 1);
     }
 
-    public float nextShotTime;
-
-    public float msBetweenShots = 200;
-
+    // TODO: this be moved to Weapon.cs
     public void Fire(Wave wave)
     {
         if (Time.time > nextShotTime)

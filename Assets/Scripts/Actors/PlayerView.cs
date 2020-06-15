@@ -21,7 +21,6 @@ public class PlayerView : MessageHandler
 
     public Weapon[] weapons;
 
-    public Gun gun;
 
     private void Start()
     {
@@ -64,7 +63,7 @@ public class PlayerView : MessageHandler
             timeBetweenShots++;
             if (timeBetweenShots >= 0.2f)
             {
-                //gun.Shoot(model.currentDamage);
+                // gun.Shoot(model.currentDamage);
                 timeBetweenShots = 0.0f;
             }
             yield return null;
@@ -77,6 +76,12 @@ public class PlayerView : MessageHandler
     //    //ResourceLoader.instance.Write(model.GetStats());
     //}
 
+    //
+    public Gun gun;
+
+
+
+    // TODO: remove, this method should only be called from PlayerController.cs
     public IEnumerator FireWeapons()
     {
         while (true)

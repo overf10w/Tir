@@ -10,11 +10,11 @@ public class UserStatsCanvas : MessageHandler
     public LevelListUI LevelListUI;
     public ResourceLoader ResourceLoader;
 
-    public Text playerGoldLbl;
-    public Text playerCurrentWaveLbl;
-    public Text playerAttackLbl;
-    public Text teamDPSLbl;
-    public Text elapsedTimeSpanLbl;
+    public Text PlayerGoldTxt;
+    public Text PlayerCurrentWaveTxt;
+    public Text PlayerAttackTxt;
+    public Text TeamDPSTxt;
+    public Text ElapsedTimeSpanTxt;
 
     // pistol
     public float pistolDps;
@@ -33,9 +33,9 @@ public class UserStatsCanvas : MessageHandler
         LevelListUI = FindObjectOfType<LevelListUI>();
 
         // playerStats
-        playerGoldLbl = GameObject.Find("GoldLbl").GetComponent<Text>();
-        playerCurrentWaveLbl = GameObject.Find("CurrentWaveLbl").GetComponent<Text>();
-        playerAttackLbl = GameObject.Find("DamageLbl").GetComponent<Text>();
+        PlayerGoldTxt = GameObject.Find("GoldLbl").GetComponent<Text>();
+        PlayerCurrentWaveTxt = GameObject.Find("CurrentWaveLbl").GetComponent<Text>();
+        PlayerAttackTxt = GameObject.Find("DamageLbl").GetComponent<Text>();
 
         // pistol
         pistolLbl = GameObject.Find("PistolLbl").GetComponent<Text>();
@@ -45,14 +45,14 @@ public class UserStatsCanvas : MessageHandler
         doublePistolLbl = GameObject.Find("DoublePistolLbl").GetComponent<Text>();
         doublePistolNextLbl = GameObject.Find("DoublePistolNextLbl").GetComponent<Text>();
 
-        teamDPSLbl = GameObject.Find("TeamDPSLbl").GetComponent<Text>();
+        TeamDPSTxt = GameObject.Find("TeamDPSLbl").GetComponent<Text>();
 
         // --------------- //
         // TODO: use message bus
         //ResourceLoader.playerData.OnWeaponChanged += HandleWeaponChanged;
         //ResourceLoader.gameData.OnLevelChanged += HandleLevelChanged;
 
-        elapsedTimeSpanLbl = GameObject.Find("ElapsedTimeSpanLbl").GetComponent<Text>();
+        ElapsedTimeSpanTxt = GameObject.Find("ElapsedTimeSpanLbl").GetComponent<Text>();
     }
 
     // TODO: this shouldn't be in update
@@ -84,7 +84,7 @@ public class UserStatsCanvas : MessageHandler
 
     public void UpdateElapsedTimeSpan(double timeSpan)
     {
-        elapsedTimeSpanLbl.text = "Delta time: " + timeSpan;
+        ElapsedTimeSpanTxt.text = "Delta time: " + timeSpan;
     }
 
     public override void HandleMessage(Message message)
@@ -101,7 +101,7 @@ public class UserStatsCanvas : MessageHandler
 
     public void UpdateCurrentLevelLabel(int level)
     {
-        playerCurrentWaveLbl.text = "Round: " + level;
+        PlayerCurrentWaveTxt.text = "Round: " + level;
     }
 
     public void HandleWeaponChanged(WeaponArgs weapon)
@@ -123,7 +123,7 @@ public class UserStatsCanvas : MessageHandler
                 doublePistolNextLbl.text = strNxt;
                 break;
         }
-        teamDPSLbl.text = (pistolDps + doublePistolDps).ToString();
+        TeamDPSTxt.text = (pistolDps + doublePistolDps).ToString();
     }
 
     public void HandleLevelChanged(int level)
