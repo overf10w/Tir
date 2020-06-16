@@ -4,15 +4,18 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-[System.Serializable]
-public struct CubeStat
+namespace Game
 {
-    public int HP;
-    public int gold;
-}
+    [System.Serializable]
+    public struct CubeStat
+    {
+        public int HP;
+        public int gold;
+    }
 
-[CreateAssetMenu(fileName = "CubeStats.Asset", menuName = "Character/Cube")]
-public class CubeStats : ScriptableObject
-{
-    public CubeStat stats;
+    [CreateAssetMenu(fileName = "CubeStats.Asset", menuName = "Character/Cube")]
+    public class CubeStats : ScriptableObject
+    {
+        public CubeStat stats;
+    }
 }

@@ -2,50 +2,53 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gun : MonoBehaviour
+namespace Game
 {
-    public Transform muzzle;
-
-    private float msBetweenShots = 500.0f;
-
-    private Vector3 target;
-    private Vector3 mousePos;
-
-    private float nextShotTime;
-
-    // Rays
-    private Ray ray;
-    private RaycastHit hit;
-
-    public void UpdateGunRotation()
+    public class Gun : MonoBehaviour
     {
-        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        transform.rotation = Quaternion.LookRotation(ray.direction);
-    }
+        public Transform muzzle;
 
-    public void Shoot(float playerAttack)
-    {
-        if (Time.time > nextShotTime)
+        private float msBetweenShots = 500.0f;
+
+        private Vector3 target;
+        private Vector3 mousePos;
+
+        private float nextShotTime;
+
+        // Rays
+        private Ray ray;
+        private RaycastHit hit;
+
+        public void UpdateGunRotation()
         {
-            // Work only with 'Cube' layer
-            int layerMask = 1 << LayerMask.NameToLayer("Cube");
+            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            transform.rotation = Quaternion.LookRotation(ray.direction);
+        }
 
-            if (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, layerMask))
+        public void Shoot(float playerAttack)
+        {
+            if (Time.time > nextShotTime)
             {
-                nextShotTime = Time.time + msBetweenShots / 1000;
-                IDestroyable target = hit.transform.GetComponent<IDestroyable>();
-                if (target != null)
+                // Work only with 'Cube' layer
+                int layerMask = 1 << LayerMask.NameToLayer("Cube");
+
+                if (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, layerMask))
                 {
-                    target.TakeDamage(playerAttack);
+                    nextShotTime = Time.time + msBetweenShots / 1000;
+                    IDestroyable target = hit.transform.GetComponent<IDestroyable>();
+                    if (target != null)
+                    {
+                        target.TakeDamage(playerAttack);
+                    }
+                    Debug.DrawRay(ray.origin, ray.direction * 10000, Color.red, 0.5f);
+                    Debug.DrawRay(muzzle.position, hit.point - muzzle.position, Color.green, 0.7f);
                 }
-                Debug.DrawRay(ray.origin, ray.direction * 10000, Color.red, 0.5f);
-                Debug.DrawRay(muzzle.position, hit.point - muzzle.position, Color.green, 0.7f);
             }
         }
-    }
 
-    void OnDrawGizmos()
-    {
-        Gizmos.DrawSphere(hit.point, 0.3f);
+        void OnDrawGizmos()
+        {
+            Gizmos.DrawSphere(hit.point, 0.3f);
+        }
     }
 }

@@ -3,32 +3,77 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Weapon : MessageHandler
+namespace Game
 {
-    public WeaponType weaponType;
-    private Wave wave;
-
-    [SerializeField]
-    public WeaponModel weaponModel;
-
-    public override void HandleMessage(Message message)
+    public class Cost
     {
-        if (message.Type == MessageType.WaveChanged)
+        public Cost()
         {
-            this.wave = (Wave)message.objectValue;
+
         }
+
+        // JUST RENAME THE COST TO WEAPONSTAT AND USE THE MIX OF STRATEGY PATTERN AND Unity Forum tutorial:
+        // 1. https://en.wikipedia.org/wiki/Strategy_pattern#C#
+        // +
+        // 2. https://forum.unity.com/threads/tutorial-character-stats-aka-attributes-system.504095/
+
+
+        //////// How this thing should be done:
+        //////// 1. Store just the level (int or float)
+        //////// 2. Some scriptable object (or static class) stores 
+        ////////    an algorithm (with formulae and coefficients) of 
+        ////////    how to get the cost out of DPS/DMG level
+
+        public Cost(int curr, int next)
+        {
+            CurrCost = curr;
+            NextCost = next;
+        }
+
+        public int CurrCost { get; set; }
+        public int NextCost { get; set; }
     }
 
-    // TODO: 
-    // 0. Remove call to this method from PlayerController.cs (line 45)
-    // 1. Replace this method with WeaponModel.cs: Fire() method
-    // 2. This be called through Command pattern in PlayerView.cs
-    //      2.1. All the Fire() commands in PlayerView.cs should be queued
-    public void Fire()
+    public class Weapon : MessageHandler
     {
-        if (weaponModel.level > 0)
+        public Cost DPS { get; set; }
+
+        public WeaponType weaponType;
+        private Wave wave;
+
+        [SerializeField]
+        public WeaponModel WeaponModel;
+
+        public float nextShotTime;
+        public float msBetweenShots = 200;
+
+        public override void HandleMessage(Message message)
         {
-            weaponModel.Fire(wave);
+            if (message.Type == MessageType.WaveChanged)
+            {
+                this.wave = (Wave)message.objectValue;
+            }
+        }
+
+        // TODO: 
+        // 2. This be called through Command pattern in PlayerView.cs
+        //      2.1. All the Fire() commands in PlayerView.cs should be queued
+
+        public void Fire(Wave wave)
+        {
+            if (Time.time > nextShotTime)
+            {
+                nextShotTime = Time.time + msBetweenShots / 1000;
+                IDestroyable cube = wave.Cubes.ElementAtOrDefault(new System.Random().Next(wave.cubesNumber));
+                if ((MonoBehaviour)cube != null)
+                {
+                    cube.TakeDamage(WeaponModel.Dps);
+                }
+                else
+                {
+                    Debug.Log("Weapon: " + weaponType + ": There's no cube there!");
+                }
+            }
         }
     }
 }

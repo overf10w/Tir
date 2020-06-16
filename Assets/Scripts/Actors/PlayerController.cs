@@ -1,70 +1,94 @@
 ﻿using System;
 using System.Collections;
 using System.ComponentModel;
-using System.Diagnostics;
 using UnityEngine;
 
-public class PlayerController
+namespace Game
 {
-    public PlayerModel model;
-    public PlayerView view;
-
-    public PlayerController(PlayerModel model, PlayerView view)
+    public class PlayerController
     {
-        this.model = model;
-        this.view = view;
+        public PlayerModel model;
+        public PlayerView view;
 
-        // subscribe to view
-        view.OnClicked += HandleClicked;
-        view.OnCubeDeath += HandleCubeDeath;
-
-        // subscribe to model
-        model.PropertyChanged += HandlePropertyChanged;
-
-        // subscribe to ui events
-        // ui.PropChanged += HandleUIUpdated;
-    }
-
-    private void HandleClicked(object sender, EventArgs e)
-    {
-        view.gun.Shoot(model.currentDamage);
-    }
-
-    private void HandleCubeDeath(object sender, CustomArgs e)
-    {
-        model.Gold += e.val;
-    }
-
-    // TODO: remove this thing
-    public IEnumerator FireWeapons()
-    {
-        while (true)
+        public PlayerController(PlayerModel model, PlayerView view)
         {
-            foreach (var weapon in view.weapons)
+            this.model = model;
+            this.view = view;
+
+            view.OnClicked += HandleClicked;
+            view.OnCubeDeath += HandleCubeDeath;
+            view.OnUpdateWeaponBtnClick += HandleWeaponBtnClick;
+
+            model.PropertyChanged += HandlePropertyChanged;
+        }
+
+        // 
+
+        private void HandleClicked(object sender, EventArgs e)
+        {
+            view.Gun.Shoot(model.currentDamage);
+        }
+
+        private void HandleCubeDeath(object sender, CustomArgs e)
+        {
+            model.Gold += e.val;
+        }
+
+        public void HandleGoldChanged(float value)
+        {
+            // view.ui.playerGoldLbl.text = value.ToString();
+        }
+
+        public void HandlePropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            UnityEngine.Debug.Log("PlayerController: " + e.PropertyName);
+            view.Ui.PlayerGoldTxt.text = e.PropertyName.ToString();
+            if (e.PropertyName == "Gold")
             {
-                weapon.Fire();
-                yield return null;
+                view.Ui.PlayerGoldTxt.text = model.Gold.ToString();
             }
-            yield return null;
+            else
+            {
+                // 
+            }
         }
-    }
 
-    public void HandleGoldChanged(float value)
-    {
-        // view.ui.playerGoldLbl.text = value.ToString();
-    }
+        public void HandleWeaponBtnClick(object sender, GenericEventArgs<string> e)
+        {
+            string buttonName = e.val;
+            switch (buttonName)
+            {
+                case WeaponBtns.StandardPistolDmgBtn:
+                    // string weaponName = "StandardPistolDmgBtn";
+                    // if (model.weapons.lookUpForDictionaryKeyValuePair(weaponName).GetValue.DMG.Cost <= model.Gold) 
+                    // {
+                    //     BUY AN UPGRADE
+                    // }
+                    Debug.Log("PlayerController: WeaponBtns.StandardPistolDmgBtn pressed");
+                    break;
+                case WeaponBtns.StandardPistolDpsBtn:
+                    string weaponName = "StandardPistol";
+                    Weapon wpn;
+                    if (model.teamWeapons.TryGetValue(weaponName, out wpn))
+                    {
+                        //Debug.Log("PlayerController: wpn == null? : " + (wpn == null));
+                        Debug.Log("PlayerController: wpn.DPS.CurrCost: " + wpn.WeaponModel.DPS.CurrCost);
+                        if (wpn.WeaponModel.DPS.CurrCost <= model.Gold)
+                        {
+                            Debug.Log("PlayerController: Updating weapon...");
+                        }
+                    }
+                    //Debug.Log("PlayerController: WeaponBtns.StandardPistolDpsBtn pressed");
+                    break;
+                default:
+                    break;
+            }
+        }
 
-    public void HandlePropertyChanged(object sender, PropertyChangedEventArgs e)
-    {
-        UnityEngine.Debug.Log("PlayerController: " + e.PropertyName);
-        view.ui.PlayerGoldTxt.text = e.PropertyName.ToString();
-        if (e.PropertyName == "Gold")
+        public void BuyAnItem()
         {
-            view.ui.PlayerGoldTxt.text = model.Gold.ToString();
+            
         }
-        else
-        {
-            // 
-        }
+
     }
 }

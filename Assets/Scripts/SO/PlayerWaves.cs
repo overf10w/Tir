@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PlayerWaves.Asset", menuName = "Character/PlayerWaves")]
-public class PlayerWaves : ScriptableObject
+namespace Game
 {
-    public Wave[] waves;
-    private Wave currentWave;
+    [CreateAssetMenu(fileName = "PlayerWaves.Asset", menuName = "Character/PlayerWaves")]
+    public class PlayerWaves : ScriptableObject
+    {
+        public Wave[] waves;
+        private Wave currentWave;
+    }
 }

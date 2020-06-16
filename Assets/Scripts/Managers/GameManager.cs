@@ -4,120 +4,130 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-// 0. Do TODOs in WeaponModel.cs, Weapon.cs, PlayerController.cs
-// 1. Refactor MessageBus (as in Trumpage)
-// 2. Reorganize project (hierarchy, etc.)
+// 16-JUN-20:
+// 0. Do TODOs in WeaponModel.cs, Weapon.cs, PlayerController.cs - [done]
+// 1. Refactor MessageBus (as in Trumpage) 
+// 2. Reorganize project (hierarchy, etc.) - [done]
 // 3. Figure out if we really need GameData and GameStats as separate classes
+// 4. Refactor PlayerModel.cs class - make it like in Trumpage
+
+// 17-JUN-20:
+// 0. Reorganize files, folders, etc.
+// 1. Prettify all of the game buttons, panels, images, make all of the fonts TMPro
+// 2. Refactor PlayerModel.cs, Weapon.cs, PlayerController.cs, WeaponModel.cs, PlayerView.cs
 
 // The concept of game is this
-// 0. 
-// 1. We can only have one real visible weapon
+// 0. The Waves aren't really changed with levels. What changes is just Cube.cs configuration - its HP, bonusPoints and appearence (through SO config file)
+// 1. We can only have one real visible weapon - player orange gun - Gun.cs
 // 2. All Fire() commands of that visible weapon should be queued
 // 3. All TakeDamage() commands of Cube.cs should be queued
 // NOTE the command patterns don't really need an undo functionality
 
-public class GameManager : MessageHandler
+namespace Game
 {
-    public ResourceLoader ResourceLoader;
-    private GameData gameData;
-
-    private Wave wave;
-
-    public PlayerWaves playerWaves;
-
-    private int lvlInd;
-
-    private int cubesSpawned;
-    private int cubesDestroyed;
-
-    private AssetBundle myLoadedAssetBundle;
-
-    IEnumerator Start()
+    public class GameManager : MessageHandler
     {
-        gameData = new GameData();
-        gameData.Init(ResourceLoader.Instance.ReadGameStats());
+        public ResourceLoader ResourceLoader;
+        private GameData gameData;
 
-        PlayerView view = Instantiate(Resources.Load<PlayerView>("Prefabs/Player"));
-        PlayerModel model = new PlayerModel(ResourceLoader.Instance.ReadPlayerStats());
-        PlayerController pc = new PlayerController(model, view);
+        private Wave wave;
 
-        lvlInd = gameData._level;
-        yield return null;  // we need this so the InGameCanvas receives event on spawned wave (through MessageBus)
-        SpawnWave();
-        long elapsedTicks = DateTime.Now.Ticks - gameData._timeLastPlayed;
-        TimeSpan elapsedSpan = new TimeSpan(elapsedTicks);
-        // TODO (?): this can be set solely by PlayerController.cs
-        MessageBus.Instance.SendMessage(new Message() { Type = MessageType.GameStarted, DoubleValue = elapsedSpan.TotalSeconds });
-    }
+        public PlayerWaves playerWaves;
 
-    void SpawnWave()
-    {
-        var waves = playerWaves.waves;
-        var wavePrefab = waves[UnityEngine.Random.Range(0, waves.Length)];
-        wave = Instantiate(wavePrefab, wavePrefab.transform.position, Quaternion.identity) as Wave;
-        cubesSpawned = wave.cubesNumber;
-        cubesDestroyed = 0;
-        MessageBus.Instance.SendMessage(new Message() { Type = MessageType.WaveChanged, objectValue = wave });
-    }
+        private int lvlInd;
 
-    void ChangeSceneEnvironment()
-    {
-        Texture2D texture2D;
-        GameObject go1;
+        private int cubesSpawned;
+        private int cubesDestroyed;
 
-        if (myLoadedAssetBundle == null)
+        private AssetBundle myLoadedAssetBundle;
+
+        IEnumerator Start()
         {
-            myLoadedAssetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, "levelbackgrounds"));
-            return;
+            gameData = new GameData();
+            gameData.Init(ResourceLoader.Instance.ReadGameStats());
+
+            PlayerView view = Instantiate(Resources.Load<PlayerView>("Prefabs/Player"));
+            PlayerModel model = new PlayerModel(ResourceLoader.Instance.ReadPlayerStats());
+            PlayerController pc = new PlayerController(model, view);
+
+            lvlInd = gameData._level;
+            yield return null;  // we need this so the InGameCanvas receives event on spawned wave (through MessageBus)
+            SpawnWave();
+            long elapsedTicks = DateTime.Now.Ticks - gameData._timeLastPlayed;
+            TimeSpan elapsedSpan = new TimeSpan(elapsedTicks);
+            // TODO (?): this can be set solely by PlayerController.cs
+            MessageBus.Instance.SendMessage(new Message() { Type = MessageType.GameStarted, DoubleValue = elapsedSpan.TotalSeconds });
         }
-        if (lvlInd <= 2)
-        {
-            texture2D = myLoadedAssetBundle.LoadAsset<Texture2D>("McLaren");
-            go1 = new GameObject("BackGround ksta");
-            go1.transform.position = new Vector3(0, 0, 0);
-        }
-        else
-        {
-            texture2D = myLoadedAssetBundle.LoadAsset<Texture2D>("Porsche");
-            go1 = new GameObject("BackGround ksta");
-            go1.transform.position = new Vector3(0, 0, -0.1f);
-        }
-        Sprite sprite = Sprite.Create(texture2D, new Rect(0, 0, texture2D.width, texture2D.height), Vector2.zero);
-        SpriteRenderer renderer = go1.AddComponent<SpriteRenderer>();
-        renderer.sprite = sprite;
-    }
 
-    public override void HandleMessage(Message message)
-    {
-        if (message.Type == MessageType.CubeDeath)
+        void SpawnWave()
         {
-            cubesDestroyed++;
-            if (cubesDestroyed == cubesSpawned)
+            var waves = playerWaves.waves;
+            var wavePrefab = waves[UnityEngine.Random.Range(0, waves.Length)];
+            wave = Instantiate(wavePrefab, wavePrefab.transform.position, Quaternion.identity) as Wave;
+            cubesSpawned = wave.cubesNumber;
+            cubesDestroyed = 0;
+            MessageBus.Instance.SendMessage(new Message() { Type = MessageType.WaveChanged, objectValue = wave });
+        }
+
+        void ChangeSceneEnvironment()
+        {
+            Texture2D texture2D;
+            GameObject go1;
+
+            if (myLoadedAssetBundle == null)
             {
-                if (lvlInd >= 3)
+                myLoadedAssetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, "levelbackgrounds"));
+                return;
+            }
+            if (lvlInd <= 2)
+            {
+                texture2D = myLoadedAssetBundle.LoadAsset<Texture2D>("McLaren");
+                go1 = new GameObject("BackGround ksta");
+                go1.transform.position = new Vector3(0, 0, 0);
+            }
+            else
+            {
+                texture2D = myLoadedAssetBundle.LoadAsset<Texture2D>("Porsche");
+                go1 = new GameObject("BackGround ksta");
+                go1.transform.position = new Vector3(0, 0, -0.1f);
+            }
+            Sprite sprite = Sprite.Create(texture2D, new Rect(0, 0, texture2D.width, texture2D.height), Vector2.zero);
+            SpriteRenderer renderer = go1.AddComponent<SpriteRenderer>();
+            renderer.sprite = sprite;
+        }
+
+        public override void HandleMessage(Message message)
+        {
+            if (message.Type == MessageType.CubeDeath)
+            {
+                cubesDestroyed++;
+                if (cubesDestroyed == cubesSpawned)
                 {
-                    MessageBus.Instance.SendMessage(new Message() { Type = MessageType.GameOver });
-                    return;
+                    if (lvlInd >= 3)
+                    {
+                        MessageBus.Instance.SendMessage(new Message() { Type = MessageType.GameOver });
+                        return;
+                    }
+                    SpawnWave();
                 }
-                SpawnWave();
+            }
+            else if (message.Type == MessageType.LevelChanged)
+            {
+                ChangeLevel(message.IntValue);
+                gameData._level = message.IntValue;
             }
         }
-        else if (message.Type == MessageType.LevelChanged)
+
+        private void ChangeLevel(int level)
         {
-            ChangeLevel(message.IntValue);
-            gameData._level = message.IntValue;
+            lvlInd = level;
+            Debug.Log("Level was changed to: " + lvlInd);
+            ChangeSceneEnvironment();
         }
-    }
 
-    private void ChangeLevel(int level)
-    {
-        lvlInd = level;
-        Debug.Log("Level was changed to: " + lvlInd);
-        ChangeSceneEnvironment();
-    }
-
-    public void OnDisable()
-    {
-        ResourceLoader.Instance.WriteGameStats(gameData.GetData());
+        public void OnDisable()
+        {
+            ResourceLoader.Instance.WriteGameStats(gameData.GetData());
+        }
     }
 }

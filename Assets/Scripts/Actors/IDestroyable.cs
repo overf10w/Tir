@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IDestroyable
+namespace Game
 {
-    void TakeDamage(float damage);
+    public interface IDestroyable
+    {
+        void TakeDamage(float damage);
+    }
 }

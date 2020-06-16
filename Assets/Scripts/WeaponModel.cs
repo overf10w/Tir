@@ -3,112 +3,111 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public enum WeaponType
+namespace Game
 {
-    NONE,
-    PISTOL,
-    DOUBLE_PISTOL
-}
-
-[System.Serializable]
-public class WeaponModel
-{
-    public int level;
-
-    public float baseDps;
-    public float baseCost;
-
-    private float dps, nextDps;
-    private float cost, nextCost;
-
-    public WeaponType weaponType;
-
-    public float nextShotTime;
-    public float msBetweenShots = 200;
-
-    public WeaponModel(float baseCost, float baseDps, int level)
+    // TODO: remove
+    public enum WeaponType
     {
-        this.baseCost = baseCost;
-        this.baseDps = baseDps;
-        this.level = level;
-
-        this.cost = 0;
-        this.dps = 0;
-    }
-    
-    public float Dps
-    {
-        get { return dps; }
-        set { dps = value; }
+        NONE,
+        PISTOL,
+        DOUBLE_PISTOL
     }
 
-    public float Cost
+    [System.Serializable]
+    public class WeaponModel
     {
-        get { return cost; }
-        set { cost = value; }
-    }
+        public int level;
 
-    public float NextCost
-    {
-        get { return nextCost; }
-        set { nextCost = value; }
-    }
+        public float baseDps;
+        public float baseCost;
 
-    public float NextDps
-    {
-        get { return nextDps; }
-        set { nextDps = value; }
-    }
+        // TODO: DPS property 
+        // usage: WeaponModel.DPS.curr
+        //        WeaponModel.DPS.next
 
-    public void Init(int lvl)
-    {
-        level = lvl;
-        if (level == 0)
+        private float _dps, _nextDps;
+        private float cost, nextCost;
+
+        public WeaponType weaponType;
+
+        public WeaponModel(float baseCost, float baseDps, int level)
         {
-            nextCost = baseCost;
-            nextDps = baseDps;
+            this.baseCost = baseCost;
+            this.baseDps = baseDps;
+            this.level = level;
 
-            cost = baseCost;
-            dps = 0;
-
-            return;
+            this.cost = 0;
+            this._dps = 0;
         }
 
-        cost = (int)Math.Floor(baseCost * (float)Math.Pow(1.10f, level));
-        dps = baseDps * level;
-
-        var nxtLvl = lvl + 1;
-
-        nextCost = (int)Math.Floor(baseCost * (float)Math.Pow(1.10f, nxtLvl));
-        nextDps = baseDps * nxtLvl;
-    }
-
-    public void UpdateSelf()
-    {
-        level++;
-
-        cost = nextCost;
-        dps = nextDps;
-
-        nextCost = (int)Math.Floor(baseCost * (float)Math.Pow(1.10f, level + 1));
-        nextDps = baseDps * (level + 1);
-    }
-
-    // TODO: this be moved to Weapon.cs
-    public void Fire(Wave wave)
-    {
-        if (Time.time > nextShotTime)
+        public float Dps
         {
-            nextShotTime = Time.time + msBetweenShots / 1000;
-            IDestroyable cube = wave.Cubes.ElementAtOrDefault(new System.Random().Next(wave.cubesNumber));
-            if ((MonoBehaviour)cube != null)
-            {
-                cube.TakeDamage(dps);
-            }
-            else
-            {
-                Debug.Log("Weapon: " + weaponType + ": There's no cube there!");
-            }
+            get { return _dps; }
+            set { _dps = value; }
         }
+
+        public float Cost
+        {
+            get { return cost; }
+            set { cost = value; }
+        }
+
+        public float NextCost
+        {
+            get { return nextCost; }
+            set { nextCost = value; }
+        }
+
+        public float NextDps
+        {
+            get { return _nextDps; }
+            set { _nextDps = value; }
+        }
+
+        public void Init(int lvl)
+        {
+            level = lvl;
+            if (level == 0)
+            {
+                nextCost = baseCost;
+                _nextDps = baseDps;
+
+                cost = baseCost;
+                _dps = 0;
+
+                return;
+            }
+
+            cost = (int)Math.Floor(baseCost * (float)Math.Pow(1.10f, level));
+            _dps = baseDps * level;
+
+            var nxtLvl = lvl + 1;
+
+            nextCost = (int)Math.Floor(baseCost * (float)Math.Pow(1.10f, nxtLvl));
+            _nextDps = baseDps * nxtLvl;
+        }
+
+        public void UpdateSelf()
+        {
+            level++;
+
+            cost = nextCost;
+            _dps = _nextDps;
+
+            nextCost = (int)Math.Floor(baseCost * (float)Math.Pow(1.10f, level + 1));
+            _nextDps = baseDps * (level + 1);
+        }
+
+        private Cost _DPS;
+        public Cost DPS 
+        { 
+            get 
+            {
+                return _DPS;
+            }
+            set { _DPS = value; }
+        }
+
+        public Cost DMG { get; set; }
     }
 }

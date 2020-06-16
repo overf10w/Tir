@@ -3,48 +3,51 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameOverCanvas : MessageHandler
+namespace Game
 {
-    private CanvasGroup mainPanel;
-
-	// Use this for initialization
-	void Start ()
-	{
-	    mainPanel = transform.GetComponentInChildren<CanvasGroup>();
-	}
-	
-    public override void HandleMessage(Message message)
+    public class GameOverCanvas : MessageHandler
     {
-        if (message.Type == MessageType.GameOver)
+        private CanvasGroup mainPanel;
+
+        // Use this for initialization
+        void Start()
         {
-            StartCoroutine(FadeInStartPanel(mainPanel));
+            mainPanel = transform.GetComponentInChildren<CanvasGroup>();
         }
-    }
 
-    public IEnumerator FadeInStartPanel(CanvasGroup panel)
-    {
-        float delayBeforeMenuInteractable = 0.19f;
-        while (panel.alpha < 1.0f)
+        public override void HandleMessage(Message message)
         {
-            if (panel.alpha >= delayBeforeMenuInteractable)
+            if (message.Type == MessageType.GameOver)
             {
-                panel.interactable = true;
-                panel.blocksRaycasts = true;
+                StartCoroutine(FadeInStartPanel(mainPanel));
             }
-            panel.alpha += Time.deltaTime / 2.3f;
-            yield return null;
         }
-    }
 
-    public void LoadScene(string sceneName)
-    {
-        MessageBus.Nullify();
-        //PlayerModel.Nullify();
-        SceneManager.LoadScene(sceneName);
-    }
+        public IEnumerator FadeInStartPanel(CanvasGroup panel)
+        {
+            float delayBeforeMenuInteractable = 0.19f;
+            while (panel.alpha < 1.0f)
+            {
+                if (panel.alpha >= delayBeforeMenuInteractable)
+                {
+                    panel.interactable = true;
+                    panel.blocksRaycasts = true;
+                }
+                panel.alpha += Time.deltaTime / 2.3f;
+                yield return null;
+            }
+        }
 
-    public void OnExitButtonClick()
-    {
-        Application.Quit();
+        public void LoadScene(string sceneName)
+        {
+            MessageBus.Nullify();
+            //PlayerModel.Nullify();
+            SceneManager.LoadScene(sceneName);
+        }
+
+        public void OnExitButtonClick()
+        {
+            Application.Quit();
+        }
     }
 }

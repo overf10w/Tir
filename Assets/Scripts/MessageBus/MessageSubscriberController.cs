@@ -1,17 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MessageSubscriberController : MonoBehaviour
+namespace Game
 {
-    public MessageType[] MessageTypes;
-    public MessageHandler Handler;
-
-    void Start()
+    public class MessageSubscriberController : MonoBehaviour
     {
-        MessageSubscriber subscriber = new MessageSubscriber();
-        subscriber.MessageTypes = MessageTypes;
-        subscriber.Handler = Handler;
+        public MessageType[] MessageTypes;
+        public MessageHandler Handler;
 
-        MessageBus.Instance.AddSubscriber(subscriber);
+        void Start()
+        {
+            MessageSubscriber subscriber = new MessageSubscriber();
+            subscriber.MessageTypes = MessageTypes;
+            subscriber.Handler = Handler;
+
+            MessageBus.Instance.AddSubscriber(subscriber);
+        }
     }
 }

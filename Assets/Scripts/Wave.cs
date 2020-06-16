@@ -6,46 +6,49 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-public class Wave : MessageHandler
+namespace Game
 {
-    [HideInInspector]
-    public int cubesNumber;
-    public int index;
-
-    private List<IDestroyable> cubesList;
-
-    void Awake()
+    public class Wave : MessageHandler
     {
-        cubesList = new List<IDestroyable>();
-        Init();
-    }
+        [HideInInspector]
+        public int cubesNumber;
+        public int index;
 
-    private void Init()
-    {
-        for (int i = transform.childCount - 1; i >= 0; i--)
+        private List<IDestroyable> cubesList;
+
+        void Awake()
         {
-            var oldCube = transform.GetChild(i);
-            var newCube = Resources.Load<Cube>("Prefabs/Cube") as Cube;
-            var kek = Instantiate(newCube, oldCube.transform) as Cube;
-            kek.transform.SetParent(this.gameObject.transform);
-            Destroy(oldCube.gameObject);
-            cubesList.Add(kek.GetComponent<IDestroyable>());
-
-            cubesNumber++;
+            cubesList = new List<IDestroyable>();
+            Init();
         }
-    }
 
-    public override void HandleMessage(Message message)
-    {
-        if (message.Type == MessageType.CubeDeath)
+        private void Init()
         {
-            Cube cube = (Cube)message.objectValue;
-            cubesList.Remove(cube);
-        }
-    }
+            for (int i = transform.childCount - 1; i >= 0; i--)
+            {
+                var oldCube = transform.GetChild(i);
+                var newCube = Resources.Load<Cube>("Prefabs/Cube") as Cube;
+                var kek = Instantiate(newCube, oldCube.transform) as Cube;
+                kek.transform.SetParent(this.gameObject.transform);
+                Destroy(oldCube.gameObject);
+                cubesList.Add(kek.GetComponent<IDestroyable>());
 
-    public List<IDestroyable> Cubes
-    {
-        get { return cubesList; }
+                cubesNumber++;
+            }
+        }
+
+        public override void HandleMessage(Message message)
+        {
+            if (message.Type == MessageType.CubeDeath)
+            {
+                Cube cube = (Cube)message.objectValue;
+                cubesList.Remove(cube);
+            }
+        }
+
+        public List<IDestroyable> Cubes
+        {
+            get { return cubesList; }
+        }
     }
 }
