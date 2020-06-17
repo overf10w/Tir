@@ -1,0 +1,2803 @@
+fileFormatVersion: 2
+guid: 9f51c2c2ff030524da06308215b550f4
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5694177224156086517
+    second: Sci_Fi_Icon_Pack_0
+  - first:
+      213: -3114880823929539101
+    second: Sci_Fi_Icon_Pack_1
+  - first:
+      213: 9082347760435086497
+    second: Sci_Fi_Icon_Pack_2
+  - first:
+      213: 8142155825287320830
+    second: Sci_Fi_Icon_Pack_3
+  - first:
+      213: -3488458129563865256
+    second: Sci_Fi_Icon_Pack_4
+  - first:
+      213: 2500306853789705384
+    second: Sci_Fi_Icon_Pack_5
+  - first:
+      213: 920475542273877426
+    second: Sci_Fi_Icon_Pack_6
+  - first:
+      213: 8368201514300652791
+    second: Sci_Fi_Icon_Pack_7
+  - first:
+      213: -1432848517421063613
+    second: Sci_Fi_Icon_Pack_8
+  - first:
+      213: -5855230092646088410
+    second: Sci_Fi_Icon_Pack_9
+  - first:
+      213: -7255697404482166407
+    second: Sci_Fi_Icon_Pack_10
+  - first:
+      213: -3825469419743659382
+    second: Sci_Fi_Icon_Pack_11
+  - first:
+      213: -1521483944630801650
+    second: Sci_Fi_Icon_Pack_12
+  - first:
+      213: -15638793038631502
+    second: Sci_Fi_Icon_Pack_13
+  - first:
+      213: -6937255435871748574
+    second: Sci_Fi_Icon_Pack_14
+  - first:
+      213: -962581894667595111
+    second: Sci_Fi_Icon_Pack_15
+  - first:
+      213: -6459829432823035817
+    second: Sci_Fi_Icon_Pack_16
+  - first:
+      213: -7226562211432568282
+    second: Sci_Fi_Icon_Pack_17
+  - first:
+      213: 1804858044595845031
+    second: Sci_Fi_Icon_Pack_18
+  - first:
+      213: 517502746036574859
+    second: Sci_Fi_Icon_Pack_19
+  - first:
+      213: 5497625238220773647
+    second: Sci_Fi_Icon_Pack_20
+  - first:
+      213: -8793101224183836516
+    second: Sci_Fi_Icon_Pack_21
+  - first:
+      213: -8909494617009858987
+    second: Sci_Fi_Icon_Pack_22
+  - first:
+      213: -8083205660748380448
+    second: Sci_Fi_Icon_Pack_23
+  - first:
+      213: 3679331719908856012
+    second: Sci_Fi_Icon_Pack_24
+  - first:
+      213: -1256816381411296525
+    second: Sci_Fi_Icon_Pack_25
+  - first:
+      213: 8065042797513296008
+    second: Sci_Fi_Icon_Pack_26
+  - first:
+      213: -7613633140560112331
+    second: Sci_Fi_Icon_Pack_27
+  - first:
+      213: -8113440048733289262
+    second: Sci_Fi_Icon_Pack_28
+  - first:
+      213: 3530799952686209174
+    second: Sci_Fi_Icon_Pack_29
+  - first:
+      213: 7370681194175978150
+    second: Sci_Fi_Icon_Pack_30
+  - first:
+      213: 3867914840638519209
+    second: Sci_Fi_Icon_Pack_31
+  - first:
+      213: 5759752389180795236
+    second: Sci_Fi_Icon_Pack_32
+  - first:
+      213: 5536281760337076641
+    second: Sci_Fi_Icon_Pack_33
+  - first:
+      213: -8410684770096288716
+    second: Sci_Fi_Icon_Pack_34
+  - first:
+      213: -7585855697315588768
+    second: Sci_Fi_Icon_Pack_35
+  - first:
+      213: 4512892695699661725
+    second: Sci_Fi_Icon_Pack_36
+  - first:
+      213: 5327953333270261400
+    second: Sci_Fi_Icon_Pack_37
+  - first:
+      213: 2788757758964116161
+    second: Sci_Fi_Icon_Pack_38
+  - first:
+      213: 4886314254528683833
+    second: Sci_Fi_Icon_Pack_39
+  - first:
+      213: -6416387507145356639
+    second: Sci_Fi_Icon_Pack_40
+  - first:
+      213: -7237580241216047907
+    second: Sci_Fi_Icon_Pack_41
+  - first:
+      213: 7238951951950629826
+    second: Sci_Fi_Icon_Pack_42
+  - first:
+      213: 5061369614859488398
+    second: Sci_Fi_Icon_Pack_43
+  - first:
+      213: 1098915687770605295
+    second: Sci_Fi_Icon_Pack_44
+  - first:
+      213: 4603123538919438989
+    second: Sci_Fi_Icon_Pack_45
+  - first:
+      213: 5852687933128521467
+    second: Sci_Fi_Icon_Pack_46
+  - first:
+      213: -8597716465165188470
+    second: Sci_Fi_Icon_Pack_47
+  - first:
+      213: 1602381202422530990
+    second: Sci_Fi_Icon_Pack_48
+  - first:
+      213: -3524951018940138169
+    second: Sci_Fi_Icon_Pack_49
+  - first:
+      213: -1913331091121786856
+    second: Sci_Fi_Icon_Pack_50
+  - first:
+      213: -1064736851709924467
+    second: Sci_Fi_Icon_Pack_51
+  - first:
+      213: 4227395340548208372
+    second: Sci_Fi_Icon_Pack_52
+  - first:
+      213: 1646541816585656882
+    second: Sci_Fi_Icon_Pack_53
+  - first:
+      213: -2225477361769182924
+    second: Sci_Fi_Icon_Pack_54
+  - first:
+      213: -5998446474035141852
+    second: Sci_Fi_Icon_Pack_55
+  - first:
+      213: -3931895700432764516
+    second: Sci_Fi_Icon_Pack_56
+  - first:
+      213: -4513957941867529334
+    second: Sci_Fi_Icon_Pack_57
+  - first:
+      213: -3471174867724715893
+    second: Sci_Fi_Icon_Pack_58
+  - first:
+      213: 6237211099455984907
+    second: Sci_Fi_Icon_Pack_59
+  - first:
+      213: 1729113312936163186
+    second: Sci_Fi_Icon_Pack_60
+  - first:
+      213: 3645871598720256985
+    second: Sci_Fi_Icon_Pack_61
+  - first:
+      213: -2219077277723681096
+    second: Sci_Fi_Icon_Pack_62
+  - first:
+      213: 3632826572146827425
+    second: Sci_Fi_Icon_Pack_63
+  - first:
+      213: 9222537834139499853
+    second: Sci_Fi_Icon_Pack_64
+  - first:
+      213: -3432746364999656887
+    second: Sci_Fi_Icon_Pack_65
+  - first:
+      213: -8045133613492942482
+    second: Sci_Fi_Icon_Pack_66
+  - first:
+      213: -4948491708154983848
+    second: Sci_Fi_Icon_Pack_67
+  - first:
+      213: -1229411704554027954
+    second: Sci_Fi_Icon_Pack_68
+  - first:
+      213: 6121860083497599665
+    second: Sci_Fi_Icon_Pack_69
+  - first:
+      213: 2282694242999782088
+    second: Sci_Fi_Icon_Pack_70
+  - first:
+      213: -4470388439362506077
+    second: Sci_Fi_Icon_Pack_71
+  - first:
+      213: -778030497013242842
+    second: Sci_Fi_Icon_Pack_72
+  - first:
+      213: -8840102401671682904
+    second: Sci_Fi_Icon_Pack_73
+  - first:
+      213: 3885536423653871835
+    second: Sci_Fi_Icon_Pack_74
+  - first:
+      213: -3172266426644310816
+    second: Sci_Fi_Icon_Pack_75
+  - first:
+      213: 5550409669424074999
+    second: Sci_Fi_Icon_Pack_76
+  - first:
+      213: 1774630141117305378
+    second: Sci_Fi_Icon_Pack_77
+  - first:
+      213: 4919178454062087359
+    second: Sci_Fi_Icon_Pack_78
+  - first:
+      213: 2018010966644148158
+    second: Sci_Fi_Icon_Pack_79
+  - first:
+      213: -1195032991283896034
+    second: Sci_Fi_Icon_Pack_80
+  - first:
+      213: 2636913537924908528
+    second: Sci_Fi_Icon_Pack_81
+  - first:
+      213: -6854860969657155031
+    second: Sci_Fi_Icon_Pack_82
+  - first:
+      213: 1067558933663113934
+    second: Sci_Fi_Icon_Pack_83
+  - first:
+      213: -1898598061787311454
+    second: Sci_Fi_Icon_Pack_84
+  - first:
+      213: 4917398481364913241
+    second: Sci_Fi_Icon_Pack_85
+  - first:
+      213: 6621923151150772766
+    second: Sci_Fi_Icon_Pack_86
+  - first:
+      213: -6443130303812427708
+    second: Sci_Fi_Icon_Pack_87
+  - first:
+      213: -5323857018021915650
+    second: Sci_Fi_Icon_Pack_88
+  - first:
+      213: -4340695594362851949
+    second: Sci_Fi_Icon_Pack_89
+  - first:
+      213: 203251810112307102
+    second: Sci_Fi_Icon_Pack_90
+  - first:
+      213: -8881529899333569087
+    second: Sci_Fi_Icon_Pack_91
+  - first:
+      213: 6662756851256031941
+    second: Sci_Fi_Icon_Pack_92
+  - first:
+      213: 5629932692972743317
+    second: Sci_Fi_Icon_Pack_93
+  - first:
+      213: 5231974416532909043
+    second: Sci_Fi_Icon_Pack_94
+  - first:
+      213: 200770101637081992
+    second: Sci_Fi_Icon_Pack_95
+  - first:
+      213: 4378758335311897749
+    second: Sci_Fi_Icon_Pack_96
+  - first:
+      213: -5330702857872835720
+    second: Sci_Fi_Icon_Pack_97
+  - first:
+      213: 3247941550446899546
+    second: Sci_Fi_Icon_Pack_98
+  - first:
+      213: -569752181949132130
+    second: Sci_Fi_Icon_Pack_99
+  - first:
+      213: -8625791023455875918
+    second: Sci_Fi_Icon_Pack_100
+  - first:
+      213: -8128370912437559585
+    second: Sci_Fi_Icon_Pack_101
+  - first:
+      213: -6132702003958583361
+    second: Sci_Fi_Icon_Pack_102
+  - first:
+      213: 5056229961613807097
+    second: Sci_Fi_Icon_Pack_103
+  - first:
+      213: -4313559504135045505
+    second: Sci_Fi_Icon_Pack_104
+  - first:
+      213: 7720140584174374263
+    second: Sci_Fi_Icon_Pack_105
+  - first:
+      213: 4653496398022847037
+    second: Sci_Fi_Icon_Pack_106
+  - first:
+      213: -7853977050106952934
+    second: Sci_Fi_Icon_Pack_107
+  - first:
+      213: 4119443397920091650
+    second: Sci_Fi_Icon_Pack_108
+  - first:
+      213: -5838583811634133339
+    second: Sci_Fi_Icon_Pack_109
+  - first:
+      213: -7958598338130441521
+    second: Sci_Fi_Icon_Pack_110
+  - first:
+      213: 8156069915370161634
+    second: Sci_Fi_Icon_Pack_111
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_0
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 955
+        width: 123
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 096230f442d7c31439aaad49181f68b8
+      internalID: -5694177224156086517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_1
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 955
+        width: 123
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04e75d5aa6318864c981901e16d82c58
+      internalID: -3114880823929539101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_2
+      rect:
+        serializedVersion: 2
+        x: 284
+        y: 955
+        width: 122
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e56be7d502e60142bfa27f459c63d08
+      internalID: 9082347760435086497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_3
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 955
+        width: 123
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac23f225e84e50d41b6d10d3348f8ce9
+      internalID: 8142155825287320830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_4
+      rect:
+        serializedVersion: 2
+        x: 555
+        y: 955
+        width: 123
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4893c20022d130340a3be956e3ac27ec
+      internalID: -3488458129563865256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_5
+      rect:
+        serializedVersion: 2
+        x: 692
+        y: 955
+        width: 122
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9ab5e757771ea44c8ac0a2e36771afd
+      internalID: 2500306853789705384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_6
+      rect:
+        serializedVersion: 2
+        x: 828
+        y: 955
+        width: 123
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f7572a199c8a4040afbdc5742a6cd18
+      internalID: 920475542273877426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_7
+      rect:
+        serializedVersion: 2
+        x: 963
+        y: 955
+        width: 123
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 819a3cb387932dd49b9298dbec0d5cd3
+      internalID: 8368201514300652791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_8
+      rect:
+        serializedVersion: 2
+        x: 1099
+        y: 955
+        width: 122
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a338c6019b9887c46a6fe5f14c320acc
+      internalID: -1432848517421063613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_9
+      rect:
+        serializedVersion: 2
+        x: 1234
+        y: 955
+        width: 122
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b2995262151d254b95827ce167e0a59
+      internalID: -5855230092646088410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_10
+      rect:
+        serializedVersion: 2
+        x: 1370
+        y: 955
+        width: 123
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da6ee0317d2a2684da4be19c45f5ce47
+      internalID: -7255697404482166407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_11
+      rect:
+        serializedVersion: 2
+        x: 1505
+        y: 955
+        width: 123
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95561fb77eb39234a80f54271971ae40
+      internalID: -3825469419743659382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_12
+      rect:
+        serializedVersion: 2
+        x: 1642
+        y: 955
+        width: 122
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0cf6a9f8113ade14eb261919a9b4e116
+      internalID: -1521483944630801650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_13
+      rect:
+        serializedVersion: 2
+        x: 1777
+        y: 955
+        width: 122
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74c50f56676920a40b6ba73df6dd882e
+      internalID: -15638793038631502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_14
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 821
+        width: 123
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15700dfd057a9634fb91ef732726b6ec
+      internalID: -6937255435871748574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_15
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 821
+        width: 123
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5401eba77664b7b47bf942425fc91284
+      internalID: -962581894667595111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_16
+      rect:
+        serializedVersion: 2
+        x: 284
+        y: 821
+        width: 122
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a945e2dc840da44fae38b4ea5950d24
+      internalID: -6459829432823035817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_17
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 821
+        width: 123
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ac9684ecb0563147b37966dac4745db
+      internalID: -7226562211432568282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_18
+      rect:
+        serializedVersion: 2
+        x: 555
+        y: 821
+        width: 123
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 412018503ffcaaf47a48b20e18f88e57
+      internalID: 1804858044595845031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_19
+      rect:
+        serializedVersion: 2
+        x: 692
+        y: 821
+        width: 122
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82fc7ecd04c9ad8468cf4ba511325948
+      internalID: 517502746036574859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_20
+      rect:
+        serializedVersion: 2
+        x: 828
+        y: 821
+        width: 123
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9e670a1f9d26e343a603244bc88d986
+      internalID: 5497625238220773647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_21
+      rect:
+        serializedVersion: 2
+        x: 965
+        y: 821
+        width: 122
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38599e750f328714fbd8678d24083b6c
+      internalID: -8793101224183836516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_22
+      rect:
+        serializedVersion: 2
+        x: 1099
+        y: 821
+        width: 122
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d83c3e195f7afec4d8ed95023aa0308d
+      internalID: -8909494617009858987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_23
+      rect:
+        serializedVersion: 2
+        x: 1234
+        y: 821
+        width: 122
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a4906f710e40ed4d9b9dd3137da44fd
+      internalID: -8083205660748380448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_24
+      rect:
+        serializedVersion: 2
+        x: 1370
+        y: 821
+        width: 123
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6dcb96e47ffc1ee4b8d8683cde9c40bd
+      internalID: 3679331719908856012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_25
+      rect:
+        serializedVersion: 2
+        x: 1505
+        y: 821
+        width: 123
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d9ca1d38c484c8488dc90feabf02733
+      internalID: -1256816381411296525
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_26
+      rect:
+        serializedVersion: 2
+        x: 1642
+        y: 821
+        width: 122
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88a648e4185466a45ad54c5c66f8bde3
+      internalID: 8065042797513296008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_27
+      rect:
+        serializedVersion: 2
+        x: 1777
+        y: 821
+        width: 122
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1960dbfb9bcd5a4f91a45142fdaed47
+      internalID: -7613633140560112331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_28
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 685
+        width: 123
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 822869cb348a1b347bba5e50d2fac807
+      internalID: -8113440048733289262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_29
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 685
+        width: 123
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce59aa6a9c8c6c745add837393a7d42d
+      internalID: 3530799952686209174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_30
+      rect:
+        serializedVersion: 2
+        x: 284
+        y: 685
+        width: 122
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 628a62aef2e62414ead21acad2adae4c
+      internalID: 7370681194175978150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_31
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 685
+        width: 123
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a943cd25c9906042a240b846647f4d0
+      internalID: 3867914840638519209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_32
+      rect:
+        serializedVersion: 2
+        x: 555
+        y: 685
+        width: 123
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a57578821b22984a9a88f8e96f10d06
+      internalID: 5759752389180795236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_33
+      rect:
+        serializedVersion: 2
+        x: 692
+        y: 685
+        width: 122
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8fa416ccd9736f544877369842e673db
+      internalID: 5536281760337076641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_34
+      rect:
+        serializedVersion: 2
+        x: 828
+        y: 685
+        width: 123
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11389034bc7dd33459ea15389c7fc5d8
+      internalID: -8410684770096288716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_35
+      rect:
+        serializedVersion: 2
+        x: 965
+        y: 685
+        width: 122
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e6df13af4238fd4da462fcc76d78196
+      internalID: -7585855697315588768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_36
+      rect:
+        serializedVersion: 2
+        x: 1099
+        y: 685
+        width: 122
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40c92ee5e6d5ecc40aef6ab53cf90b9e
+      internalID: 4512892695699661725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_37
+      rect:
+        serializedVersion: 2
+        x: 1234
+        y: 685
+        width: 122
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88aa8b248c53bb241a840805bbdce549
+      internalID: 5327953333270261400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_38
+      rect:
+        serializedVersion: 2
+        x: 1370
+        y: 685
+        width: 123
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 269063fcf6ef95b40bee43aa1a5f8cbe
+      internalID: 2788757758964116161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_39
+      rect:
+        serializedVersion: 2
+        x: 1505
+        y: 685
+        width: 123
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08b066e81d867b440ac6220977be6aa6
+      internalID: 4886314254528683833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_40
+      rect:
+        serializedVersion: 2
+        x: 1642
+        y: 685
+        width: 122
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 548e2cddbc09aff4180469f5e97f4f8e
+      internalID: -6416387507145356639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_41
+      rect:
+        serializedVersion: 2
+        x: 1777
+        y: 685
+        width: 122
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 749af06a0ed566941acbac58ef3aaf7b
+      internalID: -7237580241216047907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_42
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 549
+        width: 123
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20af5c4e1a337284cbf8ca889032f662
+      internalID: 7238951951950629826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_43
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 548
+        width: 123
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4abb35338f15ce45a534b046a72aaaa
+      internalID: 5061369614859488398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_44
+      rect:
+        serializedVersion: 2
+        x: 284
+        y: 549
+        width: 122
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b041f9f36ebaeb9478d5219479e04e7c
+      internalID: 1098915687770605295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_45
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 549
+        width: 123
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c9760fc385a750468f81234c1eef129
+      internalID: 4603123538919438989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_46
+      rect:
+        serializedVersion: 2
+        x: 555
+        y: 549
+        width: 123
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8bb710dd187f8664b8226fffa110babe
+      internalID: 5852687933128521467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_47
+      rect:
+        serializedVersion: 2
+        x: 692
+        y: 549
+        width: 122
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a0dedabff4bc1a4f903d1429a624917
+      internalID: -8597716465165188470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_48
+      rect:
+        serializedVersion: 2
+        x: 828
+        y: 539
+        width: 125
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 163ae325b5ac3874dbf2984d7b99f98b
+      internalID: 1602381202422530990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_49
+      rect:
+        serializedVersion: 2
+        x: 962
+        y: 549
+        width: 125
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 803c34038a05d0f4a8f005090f03c87a
+      internalID: -3524951018940138169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_50
+      rect:
+        serializedVersion: 2
+        x: 1099
+        y: 549
+        width: 122
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff0bca3a2e1ca5245b268d96a59962f0
+      internalID: -1913331091121786856
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_51
+      rect:
+        serializedVersion: 2
+        x: 1234
+        y: 549
+        width: 122
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d38f7182caa6b9c4eba3e5ce267e7ebc
+      internalID: -1064736851709924467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_52
+      rect:
+        serializedVersion: 2
+        x: 1370
+        y: 549
+        width: 123
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e1ea718376ecc349ae97e1206dbf823
+      internalID: 4227395340548208372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_53
+      rect:
+        serializedVersion: 2
+        x: 1505
+        y: 548
+        width: 123
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5d9c84989deb9547a84e34100a0517d
+      internalID: 1646541816585656882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_54
+      rect:
+        serializedVersion: 2
+        x: 1642
+        y: 549
+        width: 122
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b9d5f714bf17cd4b9a799b01848e64b
+      internalID: -2225477361769182924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_55
+      rect:
+        serializedVersion: 2
+        x: 1777
+        y: 549
+        width: 122
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e249f171710e12b44a20264b4d050a8a
+      internalID: -5998446474035141852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_56
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 413
+        width: 123
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e28bbb41a0d047b48abc044edc543783
+      internalID: -3931895700432764516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_57
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 413
+        width: 123
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da105992f017d9346990e52b5b2dba54
+      internalID: -4513957941867529334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_58
+      rect:
+        serializedVersion: 2
+        x: 284
+        y: 413
+        width: 122
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d641cb6a5939b1449899672daa58fda
+      internalID: -3471174867724715893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_59
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 413
+        width: 123
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9819e1e284322744977c2e71c2ea8be
+      internalID: 6237211099455984907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_60
+      rect:
+        serializedVersion: 2
+        x: 555
+        y: 413
+        width: 123
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c1e757dfda61e24ca0304e22cfc3ca5
+      internalID: 1729113312936163186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_61
+      rect:
+        serializedVersion: 2
+        x: 692
+        y: 413
+        width: 122
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7f689ae86b156248a6f60c6635bb15c
+      internalID: 3645871598720256985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_62
+      rect:
+        serializedVersion: 2
+        x: 828
+        y: 413
+        width: 125
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab94bbae87497854480fc71f0236b48c
+      internalID: -2219077277723681096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_63
+      rect:
+        serializedVersion: 2
+        x: 965
+        y: 413
+        width: 122
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1b34f4c544c24e408ec440d02d5a3fd
+      internalID: 3632826572146827425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_64
+      rect:
+        serializedVersion: 2
+        x: 1099
+        y: 413
+        width: 122
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d149500eb0187c149b5899a06d51ed65
+      internalID: 9222537834139499853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_65
+      rect:
+        serializedVersion: 2
+        x: 1234
+        y: 413
+        width: 122
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ccebfdc0b6ad76f469c75b1703d33d3d
+      internalID: -3432746364999656887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_66
+      rect:
+        serializedVersion: 2
+        x: 1370
+        y: 413
+        width: 123
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 523fb05042f06f44dab013f3b27e4dc4
+      internalID: -8045133613492942482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_67
+      rect:
+        serializedVersion: 2
+        x: 1505
+        y: 413
+        width: 123
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50640517e558f214996d4ab14999c9cc
+      internalID: -4948491708154983848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_68
+      rect:
+        serializedVersion: 2
+        x: 1642
+        y: 413
+        width: 122
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41c8eb48c92316443addd9f0c1b1d4ba
+      internalID: -1229411704554027954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_69
+      rect:
+        serializedVersion: 2
+        x: 1777
+        y: 413
+        width: 122
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ef8720ba2782ea4db612e896db2671c
+      internalID: 6121860083497599665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_70
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 278
+        width: 123
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10e78472b6682d946b3fa3f462e06cb3
+      internalID: 2282694242999782088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_71
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 278
+        width: 123
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 977d72865c9025043acabf6fae900020
+      internalID: -4470388439362506077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_72
+      rect:
+        serializedVersion: 2
+        x: 284
+        y: 278
+        width: 122
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c230ec5e0d66846439bf2c93aa709d5f
+      internalID: -778030497013242842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_73
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 278
+        width: 123
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8db2587e09e67e4b81e688e7158c4b1
+      internalID: -8840102401671682904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_74
+      rect:
+        serializedVersion: 2
+        x: 555
+        y: 278
+        width: 123
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 003ff91f62379b04ea19b40c43e4b9ed
+      internalID: 3885536423653871835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_75
+      rect:
+        serializedVersion: 2
+        x: 692
+        y: 278
+        width: 122
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d0134a39c964e14c907e3a1ca923f99
+      internalID: -3172266426644310816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_76
+      rect:
+        serializedVersion: 2
+        x: 828
+        y: 278
+        width: 123
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45c614ab177c700468898798113d0f99
+      internalID: 5550409669424074999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_77
+      rect:
+        serializedVersion: 2
+        x: 965
+        y: 278
+        width: 122
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93ae335ab2a636240b0ef4f8a5064790
+      internalID: 1774630141117305378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_78
+      rect:
+        serializedVersion: 2
+        x: 1099
+        y: 278
+        width: 122
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1fbc650a3a71a2f4d8f68a5edf9c22da
+      internalID: 4919178454062087359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_79
+      rect:
+        serializedVersion: 2
+        x: 1234
+        y: 278
+        width: 122
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d42fafc53ce26f047b696377a2687109
+      internalID: 2018010966644148158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_80
+      rect:
+        serializedVersion: 2
+        x: 1370
+        y: 278
+        width: 123
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98007ff891ed02544904ac598b68c52c
+      internalID: -1195032991283896034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_81
+      rect:
+        serializedVersion: 2
+        x: 1505
+        y: 278
+        width: 123
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2616f4508129de44849a3f1c06991c8
+      internalID: 2636913537924908528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_82
+      rect:
+        serializedVersion: 2
+        x: 1642
+        y: 278
+        width: 122
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 341d3af63ad3db540a355b5b4fa4b0c6
+      internalID: -6854860969657155031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_83
+      rect:
+        serializedVersion: 2
+        x: 1777
+        y: 278
+        width: 122
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b45a52b410a0b7488be12943c2d0fd9
+      internalID: 1067558933663113934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_84
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 142
+        width: 123
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3842d32d1cf71b64d822f5d4b94da177
+      internalID: -1898598061787311454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_85
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 142
+        width: 123
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92aeab2dc1ff8fe4e8673f254335741e
+      internalID: 4917398481364913241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_86
+      rect:
+        serializedVersion: 2
+        x: 284
+        y: 142
+        width: 122
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9712867eeb694834bac89648c559efd7
+      internalID: 6621923151150772766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_87
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 142
+        width: 123
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d526970784f7a2346b0caac62078ac6c
+      internalID: -6443130303812427708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_88
+      rect:
+        serializedVersion: 2
+        x: 555
+        y: 142
+        width: 123
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aab498ba94f9f3e41820a44873936806
+      internalID: -5323857018021915650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_89
+      rect:
+        serializedVersion: 2
+        x: 692
+        y: 142
+        width: 122
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95db8c06f0733af4fba160d40724eef9
+      internalID: -4340695594362851949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_90
+      rect:
+        serializedVersion: 2
+        x: 828
+        y: 142
+        width: 123
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 965582592b70cf149b21294591a179a7
+      internalID: 203251810112307102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_91
+      rect:
+        serializedVersion: 2
+        x: 965
+        y: 142
+        width: 122
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5467525382743594788265b31cf19535
+      internalID: -8881529899333569087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_92
+      rect:
+        serializedVersion: 2
+        x: 1099
+        y: 142
+        width: 122
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e51a204351845c4ebdc6670d0c23853
+      internalID: 6662756851256031941
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_93
+      rect:
+        serializedVersion: 2
+        x: 1234
+        y: 142
+        width: 122
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e550dd92eb7e9a49b557a05148587a5
+      internalID: 5629932692972743317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_94
+      rect:
+        serializedVersion: 2
+        x: 1370
+        y: 142
+        width: 123
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2df79e5ab7e90e542a4c053d0eb91588
+      internalID: 5231974416532909043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_95
+      rect:
+        serializedVersion: 2
+        x: 1505
+        y: 142
+        width: 123
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68d4072569114484ca6236415246e301
+      internalID: 200770101637081992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_96
+      rect:
+        serializedVersion: 2
+        x: 1642
+        y: 142
+        width: 122
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a1535f5575b9bd4891f2c4921e0fd45
+      internalID: 4378758335311897749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_97
+      rect:
+        serializedVersion: 2
+        x: 1777
+        y: 142
+        width: 122
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 746a0ea57b5618d4185ac2ab680cc365
+      internalID: -5330702857872835720
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_98
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 6
+        width: 123
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53e172c5b3472b1429d8f456034b846a
+      internalID: 3247941550446899546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_99
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 6
+        width: 123
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 965be0ed6313a1347891f6b922334679
+      internalID: -569752181949132130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_100
+      rect:
+        serializedVersion: 2
+        x: 284
+        y: 6
+        width: 122
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9fe78248778814746a9c26a8beb3d8fe
+      internalID: -8625791023455875918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_101
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 6
+        width: 123
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84ad95e8a5a437947b31d3dd0294feec
+      internalID: -8128370912437559585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_102
+      rect:
+        serializedVersion: 2
+        x: 555
+        y: 6
+        width: 123
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5895ff80a1eda64459d5fdbb6cde0820
+      internalID: -6132702003958583361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_103
+      rect:
+        serializedVersion: 2
+        x: 692
+        y: 6
+        width: 122
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cdef93417eb3aef4baea8fdf503b8bc5
+      internalID: 5056229961613807097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_104
+      rect:
+        serializedVersion: 2
+        x: 828
+        y: 6
+        width: 123
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c83eed524fa740408c130afc16234d3
+      internalID: -4313559504135045505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_105
+      rect:
+        serializedVersion: 2
+        x: 965
+        y: 6
+        width: 122
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 360896dc5b3a1ee47969949ec414cb70
+      internalID: 7720140584174374263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_106
+      rect:
+        serializedVersion: 2
+        x: 1099
+        y: 6
+        width: 122
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec91a909b0ab54e4fb042f799138600a
+      internalID: 4653496398022847037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_107
+      rect:
+        serializedVersion: 2
+        x: 1234
+        y: 6
+        width: 122
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87477a0fdf26d124183fe86ece984c88
+      internalID: -7853977050106952934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_108
+      rect:
+        serializedVersion: 2
+        x: 1370
+        y: 6
+        width: 123
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63bb7a5eada86aa4a9308c4ec778acc2
+      internalID: 4119443397920091650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_109
+      rect:
+        serializedVersion: 2
+        x: 1505
+        y: 6
+        width: 123
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7bed83e2d1e794a4283396d366407114
+      internalID: -5838583811634133339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_110
+      rect:
+        serializedVersion: 2
+        x: 1642
+        y: 6
+        width: 122
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7046e59e0e770240a9e5807211e19cf
+      internalID: -7958598338130441521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci_Fi_Icon_Pack_111
+      rect:
+        serializedVersion: 2
+        x: 1777
+        y: 6
+        width: 122
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd3795d4c36a9d242b0d180666a5cd49
+      internalID: 8156069915370161634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

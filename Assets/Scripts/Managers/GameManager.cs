@@ -12,9 +12,14 @@ using UnityEngine;
 // 4. Refactor PlayerModel.cs class - make it like in Trumpage
 
 // 17-JUN-20:
-// 0. Reorganize files, folders, etc.
-// 1. Prettify all of the game buttons, panels, images, make all of the fonts TMPro
-// 2. Refactor PlayerModel.cs, Weapon.cs, PlayerController.cs, WeaponModel.cs, PlayerView.cs
+// 0. Reorganize project structure: files, folders, etc. - [done]
+// 1. Prettify all of the game buttons, panels, images, make all of the fonts TMPro - [done]
+// 2. Refactor PlayerModel.cs, Weapon.cs, PlayerController.cs, WeaponModel.cs, PlayerView.cs - [done]
+
+// 18-JUN-20:
+// 0. Do TODOs in Weapon.cs, PlayerModel.cs
+// 0. Initialize Player Weapons on Startup
+// 1. Read and save Player Weapons' WeaponData
 
 // The concept of game is this
 // 0. The Waves aren't really changed with levels. What changes is just Cube.cs configuration - its HP, bonusPoints and appearence (through SO config file)

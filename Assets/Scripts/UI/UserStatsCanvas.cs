@@ -106,27 +106,14 @@ namespace Game
             PlayerCurrentWaveTxt.text = "Round: " + level;
         }
 
-        public void HandleWeaponChanged(WeaponArgs weapon)
-        {
-            WeaponModel w = weapon.weaponModel;
-            string str = w.Cost.ToString() + "$, " + w.Dps.ToString() + " dps";
-            string strNxt = w.NextCost.ToString() + "$, " + w.NextDps.ToString() + " dps";
+        //public void HandleWeaponChanged(WeaponArgs weapon)
+        //{
+        //    WeaponModel w = weapon.weaponModel;
+        //    string str = w.Cost.ToString() + "$, " + w.Dps.ToString() + " dps";
+        //    string strNxt = w.NextCost.ToString() + "$, " + w.NextDps.ToString() + " dps";
 
-            switch (weapon.sender.weaponType)
-            {
-                case WeaponType.PISTOL:
-                    pistolDps = w.Dps;
-                    pistolLbl.text = "Pistol: " + str;
-                    pistolNextLbl.text = strNxt;
-                    break;
-                case WeaponType.DOUBLE_PISTOL:
-                    doublePistolDps = w.Dps;
-                    doublePistolLbl.text = "DP: " + str;
-                    doublePistolNextLbl.text = strNxt;
-                    break;
-            }
-            TeamDPSTxt.text = (pistolDps + doublePistolDps).ToString();
-        }
+        //    TeamDPSTxt.text = (pistolDps + doublePistolDps).ToString();
+        //}
 
         public void HandleLevelChanged(int level)
         {
