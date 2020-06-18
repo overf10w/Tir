@@ -7,28 +7,33 @@ namespace Game
     [System.Serializable]
     public class WeaponStatsAlgorithm
     {
-        public string name;
-        
         public float basePrice;
-
         [Tooltip("Optimal value between (1.07 - 1.15)")]
-        public float multiplier;
-        public float level;
+        public float priceMultiplier;
 
-        public float GetPrice()
-        {
-            return basePrice * Mathf.Pow(multiplier, level);
-        }
+        // TODO: add these fields
+        // public float baseValue;
+        // public float valueMultiplier;
 
         public float GetPrice(int level)
         {
-            return basePrice * Mathf.Pow(multiplier, level);
+            return basePrice * Mathf.Pow(priceMultiplier, level);
         }
+    }
+
+    [System.Serializable]
+    public class WeaponStatsAlgorithmsHolder
+    {
+        public string name;
+
+        public WeaponStatsAlgorithm DPS;
+
+        public WeaponStatsAlgorithm DMG;
     }
 
     [CreateAssetMenu(fileName = "WeaponStatsStrategies", menuName = "ScriptableObjects/WeaponStatsStrategies", order = 1)]
     public class WeaponStatsStrategies : ScriptableObject
     {
-        public WeaponStatsAlgorithm[] algorithms;
+        public WeaponStatsAlgorithmsHolder[] algorithms;
     }
 }

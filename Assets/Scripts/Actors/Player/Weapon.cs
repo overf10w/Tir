@@ -3,11 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-// TODO: 
-// add WeaponData class for serialization purpose
-
 namespace Game
 {
+    [System.Serializable]
+    public class WeaponStatData
+    {
+        public string weaponName;
+
+        public int dpsLevel;
+
+        public int dmgLevel;
+    }
+
     // TODO: WeaponStat => WeaponStats - [done]
     // WeaponStats to have these props:
     // Value
@@ -51,16 +58,19 @@ namespace Game
         public float nextShotTime;
         public float msBetweenShots = 200;
 
-        private WeaponStatsAlgorithm algorithm;
+        private WeaponStatsAlgorithmsHolder algorithm;
 
-        public void Init(WeaponStatsAlgorithm algorithm, int level)
+        public void Init(WeaponStatsAlgorithmsHolder algorithm, WeaponStatData data)
         {
             this.algorithm = algorithm;
-            DPS = new WeaponStat(level);
 
-            DPS.Price = algorithm.GetPrice(level);
+            DPS = new WeaponStat(data.dpsLevel);
+            // TODO: algorithm.GetDPSPrice(level)
+            DPS.Price = algorithm.DPS.GetPrice(data.dpsLevel);
 
-            DMG = new WeaponStat(level);
+            DMG = new WeaponStat(data.dmgLevel);
+            // TODO: algorithm.GetDMGPrice(data.dmgLevel)
+            DMG.Price = algorithm.DMG.GetPrice(data.dmgLevel);
         }
 
         public override void HandleMessage(Message message)

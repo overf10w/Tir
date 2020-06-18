@@ -17,9 +17,12 @@ using UnityEngine;
 // 2. Refactor PlayerModel.cs, Weapon.cs, PlayerController.cs, WeaponModel.cs, PlayerView.cs - [done]
 
 // 18-JUN-20:
-// 0. Do TODOs in Weapon.cs, PlayerModel.cs
-// 0. Initialize Player Weapons on Startup
-// 1. Read and save Player Weapons' WeaponData
+// 0. Do TODOs in Weapon.cs, PlayerModel.cs - [done]
+// 0. Initialize Player Weapons on Startup - [done]
+// 1. Read and save Player Weapons' WeaponData - [done]
+
+// 19-JUN-20:
+// 0. PlayerController (or PlayerView) - read WeaponStatData and initialize TeamPanel on startup 
 
 // The concept of game is this
 // 0. The Waves aren't really changed with levels. What changes is just Cube.cs configuration - its HP, bonusPoints and appearence (through SO config file)

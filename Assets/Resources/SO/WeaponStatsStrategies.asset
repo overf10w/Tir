@@ -14,6 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   algorithms:
   - name: StandardPistol
-    basePrice: 20
-    multiplier: 1.12
-    level: 0
+    DPS:
+      basePrice: 20
+      priceMultiplier: 1.6
+    DMG:
+      basePrice: 15
+      priceMultiplier: 1.12
+  - name: MachineGun
+    DPS:
+      basePrice: 40
+      priceMultiplier: 1.22
+    DMG:
+      basePrice: 25
+      priceMultiplier: 1.095

@@ -57,26 +57,25 @@ namespace Game
         {
             teamWeapons = new Dictionary<string, Weapon>();
 
-            // TODO: foreach (weapon in Serialized WeaponData Array) 
-            // {
-            //     foreach (algo in weaponStatsStrategies.algorithms) 
-            //     {
-            //          if (algo.name == weapon.weaponName) 
-            //          { 
-            //              // CREATE AND INIT AN OBJECT,
-            //              weaponScript.Init(alg, elem.level); 
-            //              // ADD AN OBJECT TO DICTIONARY
-            //              break;
-            //          }
-            //     }
-            // }
+            string path = Path.Combine(Application.persistentDataPath, "weapons.dat");
 
-            GameObject standardPistol = new GameObject("StandardPistol");
-            Weapon weaponScript = standardPistol.AddComponent<Weapon>();
-            
-            weaponScript.Init(weaponStatsStrategies.algorithms[0], 100);
+            WeaponStatData[] loadedWeapons = ResourceLoader.Load<WeaponStatData[]>(path);
 
-            teamWeapons.Add("StandardPistol", weaponScript);
+            foreach (var weapon in loadedWeapons)
+            {
+                foreach(var algo in weaponStatsStrategies.algorithms)
+                {
+                    if (weapon.weaponName == algo.name)
+                    {
+                        GameObject obj = new GameObject(weapon.weaponName);
+                        Weapon weaponScript = obj.AddComponent<Weapon>();
+                        weaponScript.Init(algo, weapon);
+                        teamWeapons.Add(weapon.weaponName, weaponScript);
+                        Debug.Log("weapon.weaponName: [" + weapon.weaponName + "] == algo.name: [" + algo.name + "]");
+                        break;
+                    }
+                }
+            }
         }
 
         public PlayerModel(PlayerStats playerStats)
