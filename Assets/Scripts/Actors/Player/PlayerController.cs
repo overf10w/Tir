@@ -15,6 +15,8 @@ namespace Game
             this.model = model;
             this.view = view;
 
+            view.Init(model);
+
             view.OnClicked += HandleClicked;
             view.OnCubeDeath += HandleCubeDeath;
             view.OnUpdateWeaponBtnClick += HandleWeaponBtnClick;
@@ -24,7 +26,7 @@ namespace Game
 
         private void HandleClicked(object sender, EventArgs e)
         {
-            // TODO: view.Gun.Shoot(model.teamWeapons['PlayerPistol'].model.DPS);
+            // TODO (LP): view.Gun.Shoot(model.teamWeapons['PlayerPistol'].model.DPS);
             // For that matter, model.teamWeapons['PlayerPistol'] should be cached in PlayreController on a startup
             // And also, for that matter, playerGun.DPS shouldn't be upgradeable at all, its dps.Multiplier should be 0.
             view.Gun.Shoot(model.currentDamage);
@@ -54,41 +56,38 @@ namespace Game
             }
         }
 
-        public void HandleWeaponBtnClick(object sender, GenericEventArgs<string> e)
+        public void HandleWeaponBtnClick(object sender, GenericEventArgs<WeaponClickInfo> e)
         {
-            string buttonName = e.val;
-            switch (buttonName)
-            {
-                case WeaponBtns.StandardPistolDmgBtn:
-                    // string weaponName = "StandardPistolDmgBtn";
-                    // if (model.weapons.lookUpForDictionaryKeyValuePair(weaponName).GetValue.DMG.Cost <= model.Gold) 
-                    // {
-                    //     BUY AN UPGRADE
-                    // }
-                    Debug.Log("PlayerController: WeaponBtns.StandardPistolDmgBtn pressed");
-                    break;
-                case WeaponBtns.StandardPistolDpsBtn:
-                    string weaponName = "StandardPistol";
-                    Weapon wpn;
-                    if (model.teamWeapons.TryGetValue(weaponName, out wpn))
-                    {
-                        //Debug.Log("PlayerController: wpn == null? : " + (wpn == null));
-                        Debug.Log("PlayerController: wpn.DPS.CurrCost: " + wpn.DPS.Price);
-                        if (wpn.DPS.Price <= model.Gold)
-                        {
-                            Debug.Log("PlayerController: Updating weapon...");
-                        }
-                    }
-                    //Debug.Log("PlayerController: WeaponBtns.StandardPistolDpsBtn pressed");
-                    break;
-                default:
-                    break;
-            }
-        }
+            string weaponName = e.val.weaponName;
+            string buttonName = e.val.buttonName;
 
-        public void BuyAnItem()
-        {
-            
+            if (model.teamWeapons.ContainsKey(weaponName))
+            {
+                Weapon wpn;
+
+                if (model.teamWeapons.TryGetValue(weaponName, out wpn))
+                {
+                    // TODO: (LP): 
+                    // ideally, 
+                    // (1) player controller updates the model, 
+                    // (2) player controller reacts to the model update by updating the view
+                    switch (buttonName)
+                    {
+                        case "DPS":
+                            wpn.DPS.Level++;
+                            model.SaveTeamWeapons(model.teamWeapons);
+                            view.TeamPanel.UpdateTeamPanel(model.teamWeapons);
+                            break;
+                        case "DMG":
+                            wpn.DMG.Level++;
+                            model.SaveTeamWeapons(model.teamWeapons);
+                            view.TeamPanel.UpdateTeamPanel(model.teamWeapons);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
         }
     }
 }

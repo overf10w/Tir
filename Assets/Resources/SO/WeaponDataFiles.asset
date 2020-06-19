@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapons:
   - weaponName: StandardPistol
-    dpsLevel: 1
-    dmgLevel: 2
+    dpsLevel: 0
+    dmgLevel: 0
   - weaponName: MachineGun
-    dpsLevel: 3
-    dmgLevel: 4
+    dpsLevel: 2
+    dmgLevel: 0

@@ -29,7 +29,7 @@ namespace Game
     {
         public event EventHandler<EventArgs> OnClicked = (sender, e) => { };
         public event EventHandler<CustomArgs> OnCubeDeath = (sender, e) => { };
-        public event EventHandler<GenericEventArgs<string>> OnUpdateWeaponBtnClick = (sender, e) => { };
+        public event EventHandler<GenericEventArgs<WeaponClickInfo>> OnUpdateWeaponBtnClick = (sender, e) => { };
 
         public Gun Gun;
 
@@ -37,15 +37,20 @@ namespace Game
 
         public TeamPanel TeamPanel;
 
-        private void Start()
+        public void Init(PlayerModel model)
         {
             Ui = FindObjectOfType<UserStatsCanvas>();
+
             TeamPanel = Ui.GetComponentInChildren<TeamPanel>();
+            TeamPanel.Init(model.teamWeapons);
             if (TeamPanel)
             {
                 TeamPanel.WeaponBtnClick.PlayerView = this;
             }
+            
+
             Gun = GetComponentInChildren<Gun>();
+            Debug.Log("PlayerView: Gun == null: " + (Gun == null).ToString());
         }
 
         private void Update()
@@ -88,9 +93,9 @@ namespace Game
             }
         }
 
-        public void HandleWeaponBtnClick(string btnName)
+        public void HandleWeaponBtnClick(WeaponClickInfo weaponClickInfo)
         {
-            OnUpdateWeaponBtnClick?.Invoke(this, new GenericEventArgs<string>(btnName));
+            OnUpdateWeaponBtnClick?.Invoke(this, new GenericEventArgs<WeaponClickInfo>(weaponClickInfo));
         }
 
         //public void OnDisable()

@@ -23,6 +23,8 @@ namespace Game
     // (each of the props can be of type CharacterStat (https://forum.unity.com/threads/tutorial-character-stats-aka-attributes-system.504095/)) - but that's not obligatory: 
     public class WeaponStat
     {
+        private WeaponStatsAlgorithm algorithm;
+
         public WeaponStat()
         {
 
@@ -40,17 +42,26 @@ namespace Game
             Level = level;
         }
 
+        public WeaponStat(int level, WeaponStatsAlgorithm algorithm)
+        {
+            Level = level;
+            this.algorithm = algorithm;
+        }
+
         public int Level { get; set; }
-        public float Price { get; set; }
+
+        // TODO: make all getters like this (where possible)
+        public float Price { get => algorithm.GetPrice(Level); set { } }
+        
         public int Value { get; set; }
     }
 
     public class Weapon : MessageHandler
     {
-        // TODO: (?) private set
+        // TODO (LP): (?) private set
         public WeaponStat DPS { get; set; }
 
-        // TODO: (?) private set
+        // TODO (LP): (?) private set
         public WeaponStat DMG { get; set; }
 
         private Wave wave;
@@ -58,19 +69,14 @@ namespace Game
         public float nextShotTime;
         public float msBetweenShots = 200;
 
-        private WeaponStatsAlgorithmsHolder algorithm;
+        private WeaponStatsAlgorithmsHolder algorithmHolder;
 
         public void Init(WeaponStatsAlgorithmsHolder algorithm, WeaponStatData data)
         {
-            this.algorithm = algorithm;
-
-            DPS = new WeaponStat(data.dpsLevel);
-            // TODO: algorithm.GetDPSPrice(level)
-            DPS.Price = algorithm.DPS.GetPrice(data.dpsLevel);
-
-            DMG = new WeaponStat(data.dmgLevel);
-            // TODO: algorithm.GetDMGPrice(data.dmgLevel)
-            DMG.Price = algorithm.DMG.GetPrice(data.dmgLevel);
+            this.algorithmHolder = algorithm;
+            
+            DPS = new WeaponStat(data.dpsLevel, algorithm.DPS);
+            DMG = new WeaponStat(data.dmgLevel, algorithm.DMG);
         }
 
         public override void HandleMessage(Message message)

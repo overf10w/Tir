@@ -78,6 +78,24 @@ namespace Game
             }
         }
 
+        public void SaveTeamWeapons(Dictionary<string, Weapon> teamWeapons)
+        {
+            WeaponStatData[] teamWeaponsToSave = new WeaponStatData[teamWeapons.Count];
+            int i = 0;
+            foreach(var weapon in teamWeapons)
+            {
+                WeaponStatData data = new WeaponStatData();
+                data.weaponName = weapon.Key;
+                data.dpsLevel = weapon.Value.DPS.Level;
+                data.dmgLevel = weapon.Value.DMG.Level;
+
+                teamWeaponsToSave[i++] = data;
+            }
+
+            string path = Path.Combine(Application.persistentDataPath, "weapons.dat");
+            ResourceLoader.Save<WeaponStatData[]>(path, teamWeaponsToSave);
+        }
+
         public PlayerModel(PlayerStats playerStats)
         {
             weaponStatsStrategies = Resources.Load<WeaponStatsStrategies>("SO/WeaponStatsStrategies");

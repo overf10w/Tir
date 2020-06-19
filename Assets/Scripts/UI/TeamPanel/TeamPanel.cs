@@ -6,15 +6,27 @@ using UnityEngine.UI;
 
 namespace Game
 {
+    public class WeaponClickInfo
+    {
+        public string weaponName;
+        public string buttonName;
+
+        public WeaponClickInfo(string weaponName, string buttonName)
+        {
+            this.weaponName = weaponName;
+            this.buttonName = buttonName;
+        }
+    }
+
     public class WeaponBtnClick
     {
         public PlayerView PlayerView;
 
-        public void Dispatch(string btnName)
+        public void Dispatch(WeaponClickInfo weaponClickInfo)
         {
             if (PlayerView != null)
             {
-                PlayerView.HandleWeaponBtnClick(btnName);
+                PlayerView.HandleWeaponBtnClick(weaponClickInfo);
             }
         }
     }
@@ -41,20 +53,73 @@ namespace Game
     {
         public WeaponBtnClick WeaponBtnClick { get; set; }
 
-        private void Awake()
+        private Transform content;
+        private GameObject weaponUiEntryPrefab;
+        private List<GameObject> weaponUiEntries;
+
+        public void UpdateTeamPanel(Dictionary<string, Weapon> weapons)
+        {
+            foreach (var weapon in weapons) 
+                Debug.Log("UpdateTeamPanel: weapon.Key: " + weapon.Key + ", weapon.Value.DPS.Price " + weapon.Value.DPS.Price);
+            if (weapons != null)
+            {
+                foreach(var weapon in weapons)
+                {
+                    foreach (var entry in weaponUiEntries)
+                    {
+                        if (entry.name == weapon.Key)
+                        {
+                            var script = entry.GetComponent<WeaponPanelEntry>();
+                            script.UpdateSelf(weapon.Value.DPS.Price, weapon.Value.DMG.Price);
+                            Debug.Log("TeamPanel.cs: hey there!");
+                            break;
+                        }
+                    }
+                }
+            }
+
+        }
+
+
+        public void Init(Dictionary<string, Weapon> weapons)
         {
             WeaponBtnClick = new WeaponBtnClick();
 
-            WeaponButton StandardPistol = new WeaponButton();
+            content = transform.Find("Scroll View/Viewport/Content").GetComponent<Transform>();
+
+            weaponUiEntryPrefab = Resources.Load<GameObject>("Prefabs/WeaponPanelEntry");
+
+            weaponUiEntries = new List<GameObject>();
+            Debug.Log("TeamPanel.cs: weaponUiEntry == null: " + (weaponUiEntryPrefab == null).ToString());
+
+
+            if (weapons != null)
+            {
+                foreach (var weapon in weapons)
+                {
+                    GameObject entryGameObject = Instantiate(weaponUiEntryPrefab, content);
+                    weaponUiEntries.Add(entryGameObject);
+
+                    entryGameObject.name = weapon.Key;
+                    WeaponPanelEntry script = entryGameObject.GetComponent<WeaponPanelEntry>();
+
+                    script.Init(weapon.Value.DPS.Price, weapon.Value.DMG.Price);
+                    script.DPSButton.onClick.AddListener(() => { WeaponBtnClick.Dispatch(new WeaponClickInfo(weapon.Key, "DPS")); });
+                    script.DMGButton.onClick.AddListener(() => { WeaponBtnClick.Dispatch(new WeaponClickInfo(weapon.Key, "DMG")); });
+                }
+            }
+
+
+            //WeaponButton StandardPistol = new WeaponButton();
             
-            StandardPistol.DpsBtn = transform.Find("StandardPistol/DPSBtn").GetComponent<Button>();
-            StandardPistol.DpsTxt = transform.Find("StandardPistol/DPSBtn/DPSTxt").GetComponent<TextMeshProUGUI>();
+            //StandardPistol.DpsBtn = transform.Find("StandardPistol/DPSBtn").GetComponent<Button>();
+            //StandardPistol.DpsTxt = transform.Find("StandardPistol/DPSBtn/DPSTxt").GetComponent<TextMeshProUGUI>();
 
-            StandardPistol.DmgBtn = transform.Find("StandardPistol/DMGBtn").GetComponent<Button>();
-            StandardPistol.DmgTxt = transform.Find("StandardPistol/DMGBtn/DMGTxt").GetComponent<TextMeshProUGUI>();
+            //StandardPistol.DmgBtn = transform.Find("StandardPistol/DMGBtn").GetComponent<Button>();
+            //StandardPistol.DmgTxt = transform.Find("StandardPistol/DMGBtn/DMGTxt").GetComponent<TextMeshProUGUI>();
 
-            StandardPistol.DmgBtn.onClick.AddListener(() => { WeaponBtnClick.Dispatch(WeaponBtns.StandardPistolDmgBtn); });
-            StandardPistol.DpsBtn.onClick.AddListener(() => { WeaponBtnClick.Dispatch(WeaponBtns.StandardPistolDpsBtn); });
+            //StandardPistol.DmgBtn.onClick.AddListener(() => { WeaponBtnClick.Dispatch(WeaponBtns.StandardPistolDmgBtn); });
+            //StandardPistol.DpsBtn.onClick.AddListener(() => { WeaponBtnClick.Dispatch(WeaponBtns.StandardPistolDpsBtn); });
         }
     }
 }
