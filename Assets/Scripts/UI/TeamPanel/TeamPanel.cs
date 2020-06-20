@@ -6,12 +6,12 @@ using UnityEngine.UI;
 
 namespace Game
 {
-    public class WeaponClickInfo
+    public class WeaponStatBtnClickArgs
     {
         public string weaponName;
         public string buttonName;
 
-        public WeaponClickInfo(string weaponName, string buttonName)
+        public WeaponStatBtnClickArgs(string weaponName, string buttonName)
         {
             this.weaponName = weaponName;
             this.buttonName = buttonName;
@@ -22,7 +22,7 @@ namespace Game
     {
         public PlayerView PlayerView;
 
-        public void Dispatch(WeaponClickInfo weaponClickInfo)
+        public void Dispatch(WeaponStatBtnClickArgs weaponClickInfo)
         {
             if (PlayerView != null)
             {
@@ -70,7 +70,10 @@ namespace Game
                         if (entry.name == weapon.Key)
                         {
                             var script = entry.GetComponent<WeaponPanelEntry>();
-                            script.UpdateSelf(weapon.Value.DPS.Price, weapon.Value.DMG.Price);
+                            //script.UpdateSelf(weapon.Value.DPS.Price, weapon.Value.DMG.Price);
+
+                            script.UpdateSelf(weapon.Value.DPS, weapon.Value.DMG);
+
                             Debug.Log("TeamPanel.cs: hey there!");
                             break;
                         }
@@ -103,9 +106,10 @@ namespace Game
                     entryGameObject.name = weapon.Key;
                     WeaponPanelEntry script = entryGameObject.GetComponent<WeaponPanelEntry>();
 
-                    script.Init(weapon.Value.DPS.Price, weapon.Value.DMG.Price);
-                    script.DPSButton.onClick.AddListener(() => { WeaponBtnClick.Dispatch(new WeaponClickInfo(weapon.Key, "DPS")); });
-                    script.DMGButton.onClick.AddListener(() => { WeaponBtnClick.Dispatch(new WeaponClickInfo(weapon.Key, "DMG")); });
+                    script.Init(weapon.Value.DPS, weapon.Value.DMG);
+
+                    script.DPSButton.onClick.AddListener(() => { WeaponBtnClick.Dispatch(new WeaponStatBtnClickArgs(weapon.Key, "DPS")); });
+                    script.DMGButton.onClick.AddListener(() => { WeaponBtnClick.Dispatch(new WeaponStatBtnClickArgs(weapon.Key, "DMG")); });
                 }
             }
 

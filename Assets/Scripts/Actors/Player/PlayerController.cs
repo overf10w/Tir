@@ -56,7 +56,7 @@ namespace Game
             }
         }
 
-        public void HandleWeaponBtnClick(object sender, GenericEventArgs<WeaponClickInfo> e)
+        public void HandleWeaponBtnClick(object sender, GenericEventArgs<WeaponStatBtnClickArgs> e)
         {
             string weaponName = e.val.weaponName;
             string buttonName = e.val.buttonName;

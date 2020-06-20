@@ -26,8 +26,8 @@ using UnityEngine;
 // 1. Update weapons when their (DPS, DMG) buttons are clicked! - [done]
 
 // 20-JUN-20:
-// 0. Refactor PlayerController, Weapon, PlayerModel a bit
-// 1. Prettify the TeamPanel entries: for each weapon entry show: icon, name of weapon, curr/next DPS/DMG, price for DPS/DMG
+// 0. Refactor PlayerController, Weapon, PlayerModel a bit, rename some of the model/view classes
+// 1. Prettify the TeamPanel entries: for each weapon entry show: icon, name of weapon, curr/next DPS/DMG, price for DPS/DMG - [3/4, except icon]
 // 2. Rewrite Cube.cs: TakeDamage() - so that it takes damage in a queue
 // 3. Rewrite how Cube.cs is configured (should be configured through the scriptable object)
 // 4. Make the weapons actually shoot at the cubes

@@ -17,5 +17,5 @@ MonoBehaviour:
     dpsLevel: 0
     dmgLevel: 0
   - weaponName: MachineGun
-    dpsLevel: 2
+    dpsLevel: 0
     dmgLevel: 0

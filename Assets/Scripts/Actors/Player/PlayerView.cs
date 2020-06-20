@@ -29,7 +29,7 @@ namespace Game
     {
         public event EventHandler<EventArgs> OnClicked = (sender, e) => { };
         public event EventHandler<CustomArgs> OnCubeDeath = (sender, e) => { };
-        public event EventHandler<GenericEventArgs<WeaponClickInfo>> OnUpdateWeaponBtnClick = (sender, e) => { };
+        public event EventHandler<GenericEventArgs<WeaponStatBtnClickArgs>> OnUpdateWeaponBtnClick = (sender, e) => { };
 
         public Gun Gun;
 
@@ -93,9 +93,9 @@ namespace Game
             }
         }
 
-        public void HandleWeaponBtnClick(WeaponClickInfo weaponClickInfo)
+        public void HandleWeaponBtnClick(WeaponStatBtnClickArgs weaponClickInfo)
         {
-            OnUpdateWeaponBtnClick?.Invoke(this, new GenericEventArgs<WeaponClickInfo>(weaponClickInfo));
+            OnUpdateWeaponBtnClick?.Invoke(this, new GenericEventArgs<WeaponStatBtnClickArgs>(weaponClickInfo));
         }
 
         //public void OnDisable()

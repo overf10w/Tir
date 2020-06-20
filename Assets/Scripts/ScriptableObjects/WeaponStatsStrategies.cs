@@ -19,6 +19,21 @@ namespace Game
         {
             return basePrice * Mathf.Pow(priceMultiplier, level);
         }
+
+        public float GetNextPrice(int level)
+        {
+            return GetPrice(++level);
+        }
+
+        public float GetValue(int level)
+        {
+            return level;
+        }
+
+        public float GetNextValue(int level)
+        {
+            return ++level;
+        }
     }
 
     [System.Serializable]

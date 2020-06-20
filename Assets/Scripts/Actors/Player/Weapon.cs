@@ -53,7 +53,11 @@ namespace Game
         // TODO: make all getters like this (where possible)
         public float Price { get => algorithm.GetPrice(Level); set { } }
         
-        public int Value { get; set; }
+        public float NextPrice { get => algorithm.GetNextPrice(Level); set { } }
+
+        public float Value { get => algorithm.GetValue(Level); set { } }
+
+        public float NextValue { get => algorithm.GetNextValue(Level); set { } }
     }
 
     public class Weapon : MessageHandler
