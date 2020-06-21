@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,8 +9,17 @@ namespace Game
 {
     public class WeaponPanelEntry : MonoBehaviour
     {
+        private AssetBundle assetBundle;
+
         // View
 
+        // icon
+        [SerializeField]
+        private Image IconImg;
+
+        // name
+        [SerializeField]
+        private TextMeshProUGUI NameTxt;
         // next price
         [SerializeField]
         private TextMeshProUGUI DPSNextPrice;
@@ -25,8 +35,6 @@ namespace Game
         private TextMeshProUGUI DPSNextValueTxt;
         [SerializeField]
         private TextMeshProUGUI DMGNextValueTxt;
-
-
 
         [HideInInspector]
         public Button DPSButton;
@@ -49,12 +57,39 @@ namespace Game
             //DMGPrice.text = dmgPrice.ToString();
         }
 
-        public void Init(WeaponStat dps, WeaponStat dmg)
+        private void InitIcon(string name)
         {
+            //if (!assetBundle)
+            //{
+                assetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, "uisprites"));
+            //}
+
+            if (assetBundle == null)
+            {
+                Debug.Log("Failed to load AssetBundle!");
+                return;
+            }
+
+            if (assetBundle)
+            {
+                Texture2D tex = assetBundle.LoadAsset<Texture2D>(name);
+                Sprite mySprite = Sprite.Create(tex, new Rect(0.0f, 0.0f, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100.0f);
+                IconImg.sprite = mySprite;
+                assetBundle.Unload(false);
+            }
+        }
+
+        public void Init(string name, WeaponStat dps, WeaponStat dmg)
+        {
+
             InitButtons();
 
             DPS = dps;
             DMG = dmg;
+
+            InitIcon(name);
+
+            NameTxt.text = name;
 
             DPSNextPrice.text = dps.Price.ToString();
             DMGNextPrice.text = dmg.Price.ToString();

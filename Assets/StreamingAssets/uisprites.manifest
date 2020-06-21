@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3668195483
+CRC: 2496450282
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: a9cf55db215c26873010ef05122e5c0c
+    Hash: b95bcb797fdaa9093c191e74b297bc9b
   TypeTreeHash:
     serializedVersion: 2
     Hash: cb3f6df5cbc4a2990c44c2787bc9553a
@@ -14,6 +14,6 @@ ClassTypes:
 - Class: 213
   Script: {instanceID: 0}
 Assets:
-- Assets/Sprites/McLaren.jpg
-- Assets/Sprites/Porsche.jpg
+- Assets/Sprites/UI/TeamPanel/Icons/MachineGun.png
+- Assets/Sprites/UI/TeamPanel/Icons/StandardPistol.png
 Dependencies: []

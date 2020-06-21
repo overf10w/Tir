@@ -106,7 +106,7 @@ namespace Game
                     entryGameObject.name = weapon.Key;
                     WeaponPanelEntry script = entryGameObject.GetComponent<WeaponPanelEntry>();
 
-                    script.Init(weapon.Value.DPS, weapon.Value.DMG);
+                    script.Init(weapon.Key, weapon.Value.DPS, weapon.Value.DMG);
 
                     script.DPSButton.onClick.AddListener(() => { WeaponBtnClick.Dispatch(new WeaponStatBtnClickArgs(weapon.Key, "DPS")); });
                     script.DMGButton.onClick.AddListener(() => { WeaponBtnClick.Dispatch(new WeaponStatBtnClickArgs(weapon.Key, "DMG")); });

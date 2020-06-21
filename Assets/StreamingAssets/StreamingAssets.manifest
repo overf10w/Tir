@@ -1,7 +1,10 @@
 ManifestFileVersion: 0
-CRC: 2099463863
+CRC: 3625401044
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
       Name: levelbackgrounds
+      Dependencies: {}
+    Info_1:
+      Name: uisprites
       Dependencies: {}
