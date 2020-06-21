@@ -8,8 +8,11 @@ namespace Game
     {
         public CubeStats cubeStats;
 
-        [SerializeField] private int gold = 2;
-        [SerializeField] private float health = 100.0f;
+        [SerializeField] 
+        private int gold = 2;
+        
+        [SerializeField] 
+        private float health = 100.0f;
 
         private Renderer renderer;
 
@@ -19,8 +22,12 @@ namespace Game
 
         private Vector4 cachedVec;
 
+        private CoroutineQueue takeDamageQueue;
+
         public void Awake()
         {
+            takeDamageQueue = new CoroutineQueue(1, StartCoroutine);
+
             cachedTransform = transform;
 
             cubeStats = Resources.Load<CubeStats>("SO/CubeStats");
@@ -48,6 +55,13 @@ namespace Game
         // TODO: when the cube is being acted upon, its outline should be colored in a different color (ie white)
         public void TakeDamage(float damage)
         {
+            takeDamageQueue.Run(TakeDamageRoutine(damage));
+        }
+
+        private IEnumerator TakeDamageRoutine(float damage)
+        {
+            yield return new WaitForSeconds(0.5f);
+            
             health -= damage;
             Show(health);
             if (health <= 0.0f)
