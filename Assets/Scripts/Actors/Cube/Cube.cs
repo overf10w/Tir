@@ -1,18 +1,33 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using System.Collections;
 using UnityEngine;
+
 
 namespace Game
 {
+    // Cube ModelView
     public class Cube : MonoBehaviour, IDestroyable
     {
-        public CubeStats cubeStats;
+        private CubeStat cubeStats;
 
-        [SerializeField] 
-        private int gold = 2;
-        
-        [SerializeField] 
-        private float health = 100.0f;
+        private int _gold = 2;
+
+        private float _health = 100.0f;
+
+        public float Health 
+        { 
+            get => _health; 
+            set 
+            { 
+                _health = value;
+                OnHpChange?.Invoke(this, new GenericEventArgs<float>(_health));
+            } 
+        }
+
+        public int Gold
+        {
+            get => _gold;
+        }
 
         private Renderer renderer;
 
@@ -23,16 +38,22 @@ namespace Game
         private Vector4 cachedVec;
 
         private CoroutineQueue takeDamageQueue;
+        private CoroutineQueue changeHPQueue;
 
-        public void Awake()
+        public event EventHandler<GenericEventArgs<float>> OnTakeDamage;
+        public event EventHandler<GenericEventArgs<float>> OnHpChange;
+
+
+        public void Init()
         {
             takeDamageQueue = new CoroutineQueue(1, StartCoroutine);
+            changeHPQueue = new CoroutineQueue(1, StartCoroutine);
 
             cachedTransform = transform;
 
-            cubeStats = Resources.Load<CubeStats>("SO/CubeStats");
-            gold = cubeStats.stats.gold;
-            health = cubeStats.stats.HP;
+            cubeStats = Resources.Load<CubeStats>("SO/CubeStats").stats;
+            _gold = cubeStats.gold;
+            _health = cubeStats.HP;
 
             renderer = GetComponent<Renderer>();
             if (renderer == null)
@@ -51,43 +72,59 @@ namespace Game
             }
         }
 
-        // TODO: this should be done via Coroutine Queue 
-        // TODO: when the cube is being acted upon, its outline should be colored in a different color (ie white)
         public void TakeDamage(float damage)
         {
-            takeDamageQueue.Run(TakeDamageRoutine(damage));
+            OnTakeDamage?.Invoke(this, new GenericEventArgs<float>(damage));
+        }
+
+        public void ShowHealth(float health)
+        {
+            changeHPQueue.Run(ChangeHpRoutine(health));
+        }
+
+        private IEnumerator ChangeHpRoutine(float health)
+        {
+            Show(health);
+            yield return new WaitForSeconds(cubeStats.takeDamageEffectDuration);
+        }
+
+        public void Destroy()
+        {
+            changeHPQueue.Run(DestroyRoutine());
+        }
+
+        private IEnumerator DestroyRoutine()
+        {
+            yield return new WaitForEndOfFrame();
+            MessageBus.Instance.SendMessage(new Message { Type = MessageType.CubeDeath, objectValue = (Cube)this });
+            Destroy(this.gameObject);
         }
 
         private IEnumerator TakeDamageRoutine(float damage)
         {
+            OnTakeDamage?.Invoke(this, new GenericEventArgs<float>(cubeStats.takeDamageEffectDuration));
             yield return new WaitForSeconds(0.5f);
             
-            health -= damage;
-            Show(health);
-            if (health <= 0.0f)
+            _health -= damage;
+            Show(_health);
+            if (_health <= 0.0f)
             {
                 MessageBus.Instance.SendMessage(new Message { Type = MessageType.CubeDeath, objectValue = (Cube)this });
                 Destroy(this.gameObject);
             }
         }
 
-        public int Gold
-        {
-            get { return gold; }
-        }
+
 
         public void Show(float hp)
         {
-            float wpDistance = cachedTransform.localScale.y * 1.0f;
-            float x = wpDistance - (wpDistance * hp / 10.0f);
-
-            //Debug.Log("x: " + x + "hp: " + hp);
-
             if (hp <= 0)
             {
                 return;
             }
 
+            float wpDistance = cachedTransform.localScale.y * 1.0f;
+            float x = wpDistance - (wpDistance * hp / 10.0f);
             renderer.material.SetVector("_PlanePoint", new Vector4(cachedVec.x, cachedVec.y - x, cachedVec.z, cachedVec.w));
         }
     }

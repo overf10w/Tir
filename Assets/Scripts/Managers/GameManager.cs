@@ -25,19 +25,28 @@ using UnityEngine;
 // 0. PlayerController (or PlayerView) - read WeaponStatData and initialize TeamPanel on startup - [done]
 // 1. Update weapons when their (DPS, DMG) buttons are clicked! - [done]
 
-// 20-JUN-20:
+// 20-21-JUN-20:
 // 0. Refactor PlayerController, Weapon, PlayerModel a bit, rename some of the model/view classes
 // 1. Prettify the TeamPanel entries: for each weapon entry show: icon, name of weapon, curr/next DPS/DMG, price for DPS/DMG - [done]
 // 2. Rewrite Cube.cs: TakeDamage() - so that it takes damage in a queue - [done]
-// 3. Rewrite how Cube.cs is configured (should be configured through the scriptable object)
-// 4. Make the weapons actually shoot at the cubes
+
+// 22-JUN-20:
+// 0. Cube.cs should be configured through its CubeStats script obj; this SO should have a float: TakeDamageEffectDuration - [done]
+// 1. Cube.cs to have OnDamageTakenEvent(float duration); <-- duration is configured with CubeStats SO - [done]
+// 2. The Cube should have View monobehaviour: On Cube.OnDamageTaken(duration) changes cube's color outline from green to red, 
+// plays sound effect (Like in Trumpage sound machine ya know - такой терпкий плотный звук скрежета кирпичей смешанный с лопанием воздушного шарика)
+// 3. Make the weapons actually shoot at the cubes
+
+// 23-JUN-20:
+// 0. Reconfigure how the environment is changed according to current level: introduce environment manager which gets notified through message bus when level changed
+// 1. When level changes to more advanced one, the cube stats and config (textures, sounds, particles, colors, hp) should also change
 
 // The concept of game is this
 // 0. The Waves aren't really changed with levels. What changes is just Cube.cs configuration - its HP, bonusPoints and appearence (through SO config file)
 // 1. We can only have one real visible weapon - player orange gun - Gun.cs
-// 2. All Fire() commands of that visible weapon should be queued
-// 3. All TakeDamage() commands of Cube.cs should be queued
-// NOTE the command patterns don't really need an undo functionality
+// 2. All Fire() commands of that visible weapon should be queued : but why ? - actually we don't need to queue this, remember KISS principle
+// 3. All TakeDamage() methods of Cube.cs should be queued
+// NOTE the command patterns don't really need an undo functionality : so why we need the command pattern in first place?
 
 namespace Game
 {

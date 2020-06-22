@@ -19,19 +19,22 @@ namespace Game
         void Awake()
         {
             cubesList = new List<IDestroyable>();
-            Init();
+            SpawnCubes();
         }
 
-        private void Init()
+        private void SpawnCubes()
         {
             for (int i = transform.childCount - 1; i >= 0; i--)
             {
-                var oldCube = transform.GetChild(i);
-                var newCube = Resources.Load<Cube>("Prefabs/Cube") as Cube;
-                var kek = Instantiate(newCube, oldCube.transform) as Cube;
-                kek.transform.SetParent(this.gameObject.transform);
-                Destroy(oldCube.gameObject);
-                cubesList.Add(kek.GetComponent<IDestroyable>());
+                var spawnTransform = transform.GetChild(i);
+                var prefab = Resources.Load<Cube>("Prefabs/Cube") as Cube;
+                var cube = Instantiate(prefab, spawnTransform.transform) as Cube;
+                cube.Init();
+                new CubeController(cube);
+                cube.transform.SetParent(this.gameObject.transform);
+                cubesList.Add(cube.GetComponent<IDestroyable>());
+
+                Destroy(spawnTransform.gameObject);
 
                 cubesNumber++;
             }

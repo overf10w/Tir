@@ -124,9 +124,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 678915ecbbbb15941a6eb1e37f8a4384, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cubeStats: {fileID: 11400000, guid: cf23f3c81b3bcc04087b4691ca2f2266, type: 2}
-  gold: 2
-  health: 100
+  cubeStats:
+    HP: 0
+    gold: 0
+    takeDamageEffectDuration: 0
 --- !u!114 &114597653798570518
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -8,7 +8,7 @@ namespace Game
     {
         public Transform muzzle;
 
-        private float msBetweenShots = 500.0f;
+        private float msBetweenShots = 400.0f;
 
         private Vector3 target;
         private Vector3 mousePos;

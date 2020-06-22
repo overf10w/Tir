@@ -11,6 +11,8 @@ namespace Game
     {
         public int HP;
         public int gold;
+        [Tooltip("In seconds")]
+        public float takeDamageEffectDuration;
     }
 
     [CreateAssetMenu(fileName = "CubeStats.Asset", menuName = "Character/Cube")]
