@@ -31,6 +31,7 @@ namespace Game
         // Use this for initialization
         void Awake()
         {
+            InitMessageHandler();
             // TODO: drag & drop
             LevelListUI = FindObjectOfType<LevelListUI>();
 
@@ -87,6 +88,14 @@ namespace Game
         public void UpdateElapsedTimeSpan(double timeSpan)
         {
             ElapsedTimeSpanTxt.text = "Delta time: " + timeSpan;
+        }
+
+        public override void InitMessageHandler()
+        {
+            MessageSubscriber msc = new MessageSubscriber();
+            msc.Handler = this;
+            msc.MessageTypes = new MessageType[] { MessageType.LevelChanged, MessageType.GameStarted };
+            MessageBus.Instance.AddSubscriber(msc);
         }
 
         public override void HandleMessage(Message message)

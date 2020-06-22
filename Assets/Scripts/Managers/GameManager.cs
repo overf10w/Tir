@@ -68,6 +68,8 @@ namespace Game
 
         IEnumerator Start()
         {
+            InitMessageHandler();
+
             gameData = new GameData();
             gameData.Init(ResourceLoader.Instance.ReadGameStats());
 
@@ -119,6 +121,14 @@ namespace Game
             Sprite sprite = Sprite.Create(texture2D, new Rect(0, 0, texture2D.width, texture2D.height), Vector2.zero);
             SpriteRenderer renderer = go1.AddComponent<SpriteRenderer>();
             renderer.sprite = sprite;
+        }
+
+        public override void InitMessageHandler()
+        {
+            MessageSubscriber msc = new MessageSubscriber();
+            msc.Handler = this;
+            msc.MessageTypes = new MessageType[] { MessageType.CubeDeath, MessageType.LevelChanged };
+            MessageBus.Instance.AddSubscriber(msc);
         }
 
         public override void HandleMessage(Message message)

@@ -6,6 +6,7 @@ namespace Game
 {
     public abstract class MessageHandler : MonoBehaviour
     {
+        public abstract void InitMessageHandler();
         public abstract void HandleMessage(Message message);
     }
 }

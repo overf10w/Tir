@@ -9,10 +9,18 @@ namespace Game
     {
         private CanvasGroup mainPanel;
 
-        // Use this for initialization
-        void Start()
+        private void Start()
         {
+            InitMessageHandler();
             mainPanel = transform.GetComponentInChildren<CanvasGroup>();
+        }
+
+        public override void InitMessageHandler()
+        {
+            MessageSubscriber msc = new MessageSubscriber();
+            msc.Handler = this;
+            msc.MessageTypes = new MessageType[] { MessageType.GameOver };
+            MessageBus.Instance.AddSubscriber(msc);
         }
 
         public override void HandleMessage(Message message)

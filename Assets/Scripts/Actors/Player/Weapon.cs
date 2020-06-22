@@ -77,10 +77,20 @@ namespace Game
 
         public void Init(WeaponStatsAlgorithmsHolder algorithm, WeaponStatData data)
         {
+            InitMessageHandler();
+
             this.algorithmHolder = algorithm;
             
             DPS = new WeaponStat(data.dpsLevel, algorithm.DPS);
             DMG = new WeaponStat(data.dmgLevel, algorithm.DMG);
+        }
+
+        public override void InitMessageHandler()
+        {
+            MessageSubscriber msc = new MessageSubscriber();
+            msc.Handler = this;
+            msc.MessageTypes = new MessageType[] { MessageType.WaveChanged };
+            MessageBus.Instance.AddSubscriber(msc);
         }
 
         public override void HandleMessage(Message message)
@@ -109,6 +119,11 @@ namespace Game
                     Debug.Log("Weapon: " + ": There's no cube there!");
                 }
             }
+        }
+
+        private void Update()
+        {
+            //Fire(wave);
         }
     }
 }

@@ -1,26 +1,15 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &100100000
-Prefab:
-  m_ObjectHideFlags: 1
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications: []
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1678288083163246}
-  m_IsPrefabParent: 1
 --- !u!1 &1678288083163246
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
   m_Component:
   - component: {fileID: 4076567064875184}
   - component: {fileID: 114645423227489422}
-  - component: {fileID: 114260238524664828}
   m_Layer: 0
   m_Name: WeaponPistolPrefab
   m_TagString: Untagged
@@ -30,9 +19,10 @@ GameObject:
   m_IsActive: 1
 --- !u!4 &4076567064875184
 Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1678288083163246}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -3.64, y: 0, z: 0}
@@ -41,39 +31,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114260238524664828
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1678288083163246}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca612a69d4ac63c418eaf8abaee811fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MessageTypes: 03000000
-  Handler: {fileID: 114645423227489422}
 --- !u!114 &114645423227489422
 MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1678288083163246}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1893d447fd355b442af63e6859e96398, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponType: 1
-  weaponCharacteristics:
-    level: 0
-    baseDps: 0
-    baseCost: 0
-    dps: 0
-    nextDps: 0
-    cost: 0
-    nextCost: 0
-    weaponType: 0
-    nextShotTime: 0
-    msBetweenShots: 0
+  nextShotTime: 0
+  msBetweenShots: 200

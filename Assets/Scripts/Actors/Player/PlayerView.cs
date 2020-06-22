@@ -39,6 +39,8 @@ namespace Game
 
         public void Init(PlayerModel model)
         {
+            InitMessageHandler();
+
             Ui = FindObjectOfType<UserStatsCanvas>();
 
             TeamPanel = Ui.GetComponentInChildren<TeamPanel>();
@@ -60,6 +62,14 @@ namespace Game
             {
                 OnClicked?.Invoke(this, EventArgs.Empty);
             }
+        }
+
+        public override void InitMessageHandler()
+        {
+            MessageSubscriber msc = new MessageSubscriber();
+            msc.Handler = this;
+            msc.MessageTypes = new MessageType[] { MessageType.CubeDeath };
+            MessageBus.Instance.AddSubscriber(msc);
         }
 
         public override void HandleMessage(Message message)

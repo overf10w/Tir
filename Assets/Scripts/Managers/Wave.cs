@@ -18,6 +18,8 @@ namespace Game
 
         void Awake()
         {
+            InitMessageHandler();
+
             cubesList = new List<IDestroyable>();
             SpawnCubes();
         }
@@ -38,6 +40,14 @@ namespace Game
 
                 cubesNumber++;
             }
+        }
+
+        public override void InitMessageHandler()
+        {
+            MessageSubscriber msc = new MessageSubscriber();
+            msc.Handler = this;
+            msc.MessageTypes = new MessageType[] { MessageType.CubeDeath };
+            MessageBus.Instance.AddSubscriber(msc);
         }
 
         public override void HandleMessage(Message message)
