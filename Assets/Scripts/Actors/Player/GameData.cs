@@ -3,11 +3,10 @@ using UnityEngine;
 
 namespace Game
 {
+    // TODO: rename to PlayerData
     [System.Serializable]
     public class GameData
     {
-        public event LevelChanged OnLevelChanged;
-
         public GameStats stats;
 
         public long _timeLastPlayed;
@@ -22,24 +21,14 @@ namespace Game
             };
         }
 
-        public void Reset()
-        {
-            _timeLastPlayed = 0;
-            _level = 0;
-        }
-
         public void Init(GameStats gameStats)
         {
             _timeLastPlayed = gameStats._timeLastPlayed;
         }
-
-        public void InvokeLevelChanged()
-        {
-            OnLevelChanged?.Invoke(_level);
-        }
     }
 
     // TODO: Do we even need this?
+    // TODO: Move these stats to PlayerStats
     [System.Serializable]
     public class GameStats
     {

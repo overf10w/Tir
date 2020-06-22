@@ -59,8 +59,10 @@ namespace Game
 
         public void UpdateTeamPanel(Dictionary<string, Weapon> weapons)
         {
-            foreach (var weapon in weapons) 
+            foreach (var weapon in weapons)
+            {
                 Debug.Log("UpdateTeamPanel: weapon.Key: " + weapon.Key + ", weapon.Value.DPS.Price " + weapon.Value.DPS.Price);
+            }
             if (weapons != null)
             {
                 foreach(var weapon in weapons)

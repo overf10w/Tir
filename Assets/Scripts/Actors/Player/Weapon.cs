@@ -50,7 +50,7 @@ namespace Game
 
         public int Level { get; set; }
 
-        // TODO: make all getters like this (where possible)
+        // TODO: make all getters arrow getters '=>' like this (where possible)
         public float Price { get => algorithm.GetPrice(Level); set { } }
         
         public float NextPrice { get => algorithm.GetNextPrice(Level); set { } }
@@ -97,22 +97,20 @@ namespace Game
         {
             if (message.Type == MessageType.WaveChanged)
             {
+                Debug.Log("Weapon.cs: On Wave Changed!");
                 this.wave = (Wave)message.objectValue;
             }
         }
 
-        // TODO: 
-        // 2. This be called through Command pattern in PlayerView.cs
-        //      2.1. All the Fire() commands in PlayerView.cs should be queued
         public void Fire(Wave wave)
         {
             if (Time.time > nextShotTime)
             {
                 nextShotTime = Time.time + msBetweenShots / 1000;
-                IDestroyable cube = wave.Cubes.ElementAtOrDefault(new System.Random().Next(wave.cubesNumber));
+                IDestroyable cube = wave.Cubes.ElementAtOrDefault(new System.Random().Next(wave.Cubes.Count));
                 if ((MonoBehaviour)cube != null)
                 {
-                    cube.TakeDamage(DPS.Price);
+                    cube.TakeDamage(DPS.Value);
                 }
                 else
                 {
@@ -123,7 +121,10 @@ namespace Game
 
         private void Update()
         {
-            //Fire(wave);
+            if (wave != null)
+            {
+                Fire(wave);
+            }
         }
     }
 }

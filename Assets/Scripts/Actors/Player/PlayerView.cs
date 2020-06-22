@@ -49,9 +49,11 @@ namespace Game
             {
                 TeamPanel.WeaponBtnClick.PlayerView = this;
             }
-            
 
             Gun = GetComponentInChildren<Gun>();
+            // TODO: 
+            // Gun.Init(model);
+
             Debug.Log("PlayerView: Gun == null: " + (Gun == null).ToString());
         }
 

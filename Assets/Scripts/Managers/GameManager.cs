@@ -6,7 +6,7 @@ using UnityEngine;
 
 // 16-JUN-20:
 // 0. Do TODOs in WeaponModel.cs, Weapon.cs, PlayerController.cs - [done]
-// 1. Refactor MessageBus (as in Trumpage) 
+// 1. Refactor MessageBus (as in Trumpage) - [done]
 // 2. Reorganize project (hierarchy, etc.) - [done]
 // 3. Figure out if we really need GameData and GameStats as separate classes
 // 4. Refactor PlayerModel.cs class - make it like in Trumpage
@@ -35,11 +35,13 @@ using UnityEngine;
 // 1. Cube.cs to have OnDamageTakenEvent(float duration); <-- duration is configured with CubeStats SO - [done]
 // 2. The Cube should have View monobehaviour: On Cube.OnDamageTaken(duration) changes cube's color outline from green to red, 
 // plays sound effect (Like in Trumpage sound machine ya know - такой терпкий плотный звук скрежета кирпичей смешанный с лопанием воздушного шарика)
-// 3. Make the weapons actually shoot at the cubes
+// 3. Make the team weapons actually shoot at the cubes - [done]
 
 // 23-JUN-20:
-// 0. Reconfigure how the environment is changed according to current level: introduce environment manager which gets notified through message bus when level changed
-// 1. When level changes to more advanced one, the cube stats and config (textures, sounds, particles, colors, hp) should also change
+// 0. Refactor 
+// 1. Create PlayerDataFiles (just as WeaponDataFiles), with gold, lastTimePlayed, currLevel; so that on startup we see curr player gold
+// 2. Reconfigure how the environment is changed according to current level: introduce environment manager which gets notified through message bus when level changed
+// 3. When level changes to more advanced one, the cube stats and config (textures, sounds, particles, colors, hp) should also change
 
 // The concept of game is this
 // 0. The Waves aren't really changed with levels. What changes is just Cube.cs configuration - its HP, bonusPoints and appearence (through SO config file)

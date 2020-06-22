@@ -127,16 +127,8 @@ namespace Game
         //    playerData.ResetPlayerStats();
         //}
 
-
-
-
         /// NEW BEAUTIFUL CODE GOES HERE
         /// HEHE
-
-        public void LoadWeapons(int level)
-        {
-            
-        }
 
         public static T Load<T>(string path) where T : class
         {

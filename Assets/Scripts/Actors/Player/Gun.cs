@@ -4,14 +4,17 @@ using UnityEngine;
 
 namespace Game
 {
+    // TODO: Gun to be init
     public class Gun : MonoBehaviour
     {
+        // TODO: 
+        // This Gun be initialized with WeaponStats (add PlayerDefaultPistol to WeaponDataFiles, rename StandardPistol to smth else)
+        // private WeaponStat DPS; <-- where DPS means 1/interval, so the interval between shots = 1/DPS
+        // private WeaponStat DMG;
+
         public Transform muzzle;
 
         private float msBetweenShots = 400.0f;
-
-        private Vector3 target;
-        private Vector3 mousePos;
 
         private float nextShotTime;
 
@@ -25,7 +28,7 @@ namespace Game
             transform.rotation = Quaternion.LookRotation(ray.direction);
         }
 
-        public void Shoot(float playerAttack)
+        public void Shoot(float damage)
         {
             if (Time.time > nextShotTime)
             {
@@ -38,7 +41,7 @@ namespace Game
                     IDestroyable target = hit.transform.GetComponent<IDestroyable>();
                     if (target != null)
                     {
-                        target.TakeDamage(playerAttack);
+                        target.TakeDamage(damage);
                     }
                     Debug.DrawRay(ray.origin, ray.direction * 10000, Color.red, 0.5f);
                     Debug.DrawRay(muzzle.position, hit.point - muzzle.position, Color.green, 0.7f);

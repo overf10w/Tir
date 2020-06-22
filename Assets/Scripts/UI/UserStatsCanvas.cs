@@ -18,18 +18,8 @@ namespace Game
         public Text TeamDPSTxt;
         public Text ElapsedTimeSpanTxt;
 
-        // pistol
-        public float pistolDps;
-        public Text pistolLbl;
-        public Text pistolNextLbl;
 
-        // double pistol
-        public float doublePistolDps;
-        public Text doublePistolLbl;
-        public Text doublePistolNextLbl;
-
-        // Use this for initialization
-        void Awake()
+        private void Awake()
         {
             InitMessageHandler();
             // TODO: drag & drop
@@ -39,14 +29,6 @@ namespace Game
             PlayerGoldTxt = GameObject.Find("GoldLbl").GetComponent<Text>();
             PlayerCurrentWaveTxt = GameObject.Find("CurrentWaveLbl").GetComponent<Text>();
             PlayerAttackTxt = GameObject.Find("DamageLbl").GetComponent<Text>();
-
-            // pistol
-            pistolLbl = GameObject.Find("PistolLbl").GetComponent<Text>();
-            pistolNextLbl = GameObject.Find("PistolNextLbl").GetComponent<Text>();
-
-            //doublePistol
-            doublePistolLbl = GameObject.Find("DoublePistolLbl").GetComponent<Text>();
-            doublePistolNextLbl = GameObject.Find("DoublePistolNextLbl").GetComponent<Text>();
 
             TeamDPSTxt = GameObject.Find("TeamDPSLbl").GetComponent<Text>();
 
@@ -59,7 +41,7 @@ namespace Game
         }
 
         // TODO: this shouldn't be in update
-        void Update()
+        private void Update()
         {
             //playerGoldLbl.text = ResourceLoader.playerData.Gold.ToString();
             //playerAttackLbl.text = "Dmg: " + ResourceLoader.playerData.Damage.value + " (" + ResourceLoader.playerData.Damage.level + "lvl) " + ". Next attack: " + ResourceLoader.playerData.NextDamage.goldWorth + " gold";
