@@ -15,7 +15,7 @@ MonoBehaviour:
   weapons:
   - weaponName: StandardPistol
     dpsLevel: 0
-    dmgLevel: 0
+    dmgLevel: 1
   - weaponName: MachineGun
-    dpsLevel: 0
-    dmgLevel: 0
+    dpsLevel: 2
+    dmgLevel: 3

@@ -14,7 +14,6 @@ namespace Game
 
         public Text PlayerGoldTxt;
         public Text PlayerCurrentWaveTxt;
-        public Text PlayerAttackTxt;
         public Text TeamDPSTxt;
         public Text ElapsedTimeSpanTxt;
 
@@ -28,7 +27,6 @@ namespace Game
             // playerStats
             PlayerGoldTxt = GameObject.Find("GoldLbl").GetComponent<Text>();
             PlayerCurrentWaveTxt = GameObject.Find("CurrentWaveLbl").GetComponent<Text>();
-            PlayerAttackTxt = GameObject.Find("DamageLbl").GetComponent<Text>();
 
             TeamDPSTxt = GameObject.Find("TeamDPSLbl").GetComponent<Text>();
 
@@ -50,11 +48,6 @@ namespace Game
         public void OnUpdateDamage(int kek = 2)
         {
             //ResourceLoader.playerData.UpdateDamage();
-        }
-
-        public void OnIsAutoShoot(bool isAutoShoot)
-        {
-            //ResourceLoader.playerData.UpdateAutoFire();
         }
 
         public void UpdatePistol()

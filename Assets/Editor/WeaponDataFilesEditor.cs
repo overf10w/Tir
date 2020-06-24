@@ -13,14 +13,12 @@ namespace Game
         
         private string path;
 
-        // Start is called before the first frame update
         public void OnEnable()
         {
             path = Path.Combine(Application.persistentDataPath, "weapons.dat");
             weaponDataFiles = (WeaponDataFiles)target;
         }
 
-        // Update is called once per frame
         public override void OnInspectorGUI()
         {
             DrawDefaultInspector();

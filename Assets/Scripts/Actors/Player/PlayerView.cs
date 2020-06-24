@@ -29,13 +29,16 @@ namespace Game
     {
         public event EventHandler<EventArgs> OnClicked = (sender, e) => { };
         public event EventHandler<CustomArgs> OnCubeDeath = (sender, e) => { };
-        public event EventHandler<GenericEventArgs<WeaponStatBtnClickArgs>> OnUpdateWeaponBtnClick = (sender, e) => { };
+        public event EventHandler<GenericEventArgs<WeaponStatBtnClickArgs>> OnTeamWeaponBtnClick = (sender, e) => { };
+        public event EventHandler<GenericEventArgs<WeaponStatBtnClickArgs>> OnClickGunBtnClick = (sender, e) => { };
 
         public Gun Gun;
 
         public UserStatsCanvas Ui;
 
         public TeamPanel TeamPanel;
+
+        public ClickGunPanel ClickGunPanel;
 
         public void Init(PlayerModel model)
         {
@@ -50,9 +53,16 @@ namespace Game
                 TeamPanel.WeaponBtnClick.PlayerView = this;
             }
 
+            ClickGunPanel = Ui.GetComponentInChildren<ClickGunPanel>();
+            ClickGunPanel.Init(model.gunData.weaponName, model.DPS, model.DMG);
+            if (ClickGunPanel)
+            {
+                ClickGunPanel.WeaponBtnClick.PlayerView = this;
+            }
+
             Gun = GetComponentInChildren<Gun>();
-            // TODO: 
-            // Gun.Init(model);
+
+            Gun.Init(model.gunData, model.gunAlgorithmHolder.DPS, model.gunAlgorithmHolder.DMG);
 
             Debug.Log("PlayerView: Gun == null: " + (Gun == null).ToString());
         }
@@ -107,8 +117,14 @@ namespace Game
 
         public void HandleWeaponBtnClick(WeaponStatBtnClickArgs weaponClickInfo)
         {
-            OnUpdateWeaponBtnClick?.Invoke(this, new GenericEventArgs<WeaponStatBtnClickArgs>(weaponClickInfo));
+            OnTeamWeaponBtnClick?.Invoke(this, new GenericEventArgs<WeaponStatBtnClickArgs>(weaponClickInfo));
         }
+
+        public void HandleClickGunBtnClick(WeaponStatBtnClickArgs clickGunClickInfo)
+        {
+            OnClickGunBtnClick?.Invoke(this, new GenericEventArgs<WeaponStatBtnClickArgs>(clickGunClickInfo));
+        }
+
 
         //public void OnDisable()
         //{

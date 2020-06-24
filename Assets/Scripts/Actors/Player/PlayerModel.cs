@@ -24,22 +24,17 @@ namespace Game
             return true;
         }
 
-        // TODO: 
-        // public WeaponStat DMG;
         public float currentDamage;
-        public float currentAutoFire;
-
-        private int damageLvl;
-        // AutoFire level is basically DPS level !
-        private int autoFireLvl;
-
-        [SerializeField] 
-        private float autoFireDuration;
 
         public Dictionary<string, Weapon> teamWeapons;
-
         private WeaponStatsStrategies weaponStatsStrategies;
 
+        public WeaponStatData gunData;
+        public WeaponStatsAlgorithmsHolder gunAlgorithmHolder;
+        public WeaponStat DPS { get; set; }
+        public WeaponStat DMG { get; set; }
+
+        // TODO (LP): instantiating of TeamWeapons should be moved to PlayerView
         private void InitTeamWeapons()
         {
             teamWeapons = new Dictionary<string, Weapon>();
@@ -65,6 +60,40 @@ namespace Game
             }
         }
 
+        private void InitClickGun()
+        {
+            string path = Path.Combine(Application.persistentDataPath, "clickGun.dat");
+
+            gunData = ResourceLoader.Load<WeaponStatData>(path);
+            gunAlgorithmHolder = Resources.Load<GunStatsStrategy>("SO/Weapons/ClickGun/GunStatsStrategy").algorithm;
+
+            DPS = new WeaponStat(gunData.dpsLevel, gunAlgorithmHolder.DPS);
+            DMG = new WeaponStat(gunData.dmgLevel, gunAlgorithmHolder.DMG);
+
+            DPS.PropertyChanged += HandleClickGunChanged;
+            DMG.PropertyChanged += HandleClickGunChanged;
+
+            Debug.Log("PlayerModel: Read gunData: dpsLevel: " + gunData.dpsLevel + ", dmgLevel: " + gunData.dmgLevel);
+        }
+
+        public void HandleClickGunChanged(object sender, PropertyChangedEventArgs e)
+        {
+            PropertyChanged?.Invoke(sender, e);
+            SaveClickGun(DPS, DMG);
+        }
+
+        public void SaveClickGun(WeaponStat DPS, WeaponStat DMG) 
+        {
+            WeaponStatData data = new WeaponStatData();
+
+            data.weaponName = "Gun";
+            data.dpsLevel = DPS.Level;
+            data.dmgLevel = DMG.Level;
+
+            string path = Path.Combine(Application.persistentDataPath, "clickGun.dat");
+            ResourceLoader.Save<WeaponStatData>(path, data);
+        }
+
         public void SaveTeamWeapons(Dictionary<string, Weapon> teamWeapons)
         {
             WeaponStatData[] teamWeaponsToSave = new WeaponStatData[teamWeapons.Count];
@@ -85,14 +114,15 @@ namespace Game
 
         public PlayerModel(PlayerStats playerStats)
         {
-            weaponStatsStrategies = Resources.Load<WeaponStatsStrategies>("SO/WeaponStatsStrategies");
+            weaponStatsStrategies = Resources.Load<WeaponStatsStrategies>("SO/Weapons/TeamWeapons/WeaponStatsStrategies");
 
             InitTeamWeapons();
+
+            InitClickGun();
 
             InitStats(playerStats);
 
             currentDamage = 2.0f;
-            currentAutoFire = 0.0f;
         }
 
         [Header("Player Stats")]
@@ -110,17 +140,11 @@ namespace Game
         public void ResetPlayerStats()
         {
             gold = 0;
-            damageLvl = 0;
-            autoFireLvl = 0;
-            autoFireDuration = 0.0f;
         }
 
         public void InitStats(PlayerStats playerStats)
         {
             gold = playerStats._gold;
-            damageLvl = playerStats._damageLvl;
-            autoFireLvl = playerStats._autoFireLvl;
-            autoFireDuration = playerStats._autoFireDuration;
         }
 
         public PlayerStats GetStats()
@@ -128,9 +152,6 @@ namespace Game
             return new PlayerStats
             {
                 _gold = gold,
-                _damageLvl = damageLvl,
-                _autoFireLvl = autoFireLvl,
-                _autoFireDuration = autoFireDuration,
                 _timeLastPlayed = DateTime.Now.Ticks
             };
         }

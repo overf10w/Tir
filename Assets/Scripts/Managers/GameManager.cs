@@ -8,7 +8,7 @@ using UnityEngine;
 // 0. Do TODOs in WeaponModel.cs, Weapon.cs, PlayerController.cs - [done]
 // 1. Refactor MessageBus (as in Trumpage) - [done]
 // 2. Reorganize project (hierarchy, etc.) - [done]
-// 3. Figure out if we really need GameData and GameStats as separate classes
+// 3. Figure out if we really need GameData and GameStats as separate classes - [done]
 // 4. Refactor PlayerModel.cs class - make it like in Trumpage
 
 // 17-JUN-20:
@@ -26,7 +26,7 @@ using UnityEngine;
 // 1. Update weapons when their (DPS, DMG) buttons are clicked! - [done]
 
 // 20-21-JUN-20:
-// 0. Refactor PlayerController, Weapon, PlayerModel a bit, rename some of the model/view classes
+// 0. Refactor PlayerController, Weapon, PlayerModel a bit, rename some of the model/view classes - [done]
 // 1. Prettify the TeamPanel entries: for each weapon entry show: icon, name of weapon, curr/next DPS/DMG, price for DPS/DMG - [done]
 // 2. Rewrite Cube.cs: TakeDamage() - so that it takes damage in a queue - [done]
 
@@ -38,10 +38,20 @@ using UnityEngine;
 // 3. Make the team weapons actually shoot at the cubes - [done]
 
 // 23-JUN-20:
-// 0. Refactor 
-// 1. Create PlayerDataFiles (just as WeaponDataFiles), with gold, lastTimePlayed, currLevel; so that on startup we see curr player gold
-// 2. Reconfigure how the environment is changed according to current level: introduce environment manager which gets notified through message bus when level changed
-// 3. When level changes to more advanced one, the cube stats and config (textures, sounds, particles, colors, hp) should also change
+// 0. Refactor - [done]
+// 1. Create GunDataFile (just as WeaponDataFiles), which stores serialized info on disk about this gun - so that on startup we see curr. player's gun dmg - [done]
+// 2. Create PlayerDataFiles (just as WeaponDataFiles), with gold, lastTimePlayed, currLevel; so that on startup we see curr. player's gold
+// 3. Reconfigure how the environment is changed according to current level: introduce environment manager which gets notified through message bus when level changed
+// 4. When level changes to more advanced one, the cube stats and config (textures, sounds, particles, colors, hp) should also change
+
+// 24-JUN-20:
+// 0. Import all of the Sci-Fi fonts that are opened in Chrome
+// 1. Do the TODO in PlayerController.cs - [done]
+// 2. Do all previous TODOs
+
+// 25-JUN-20:
+// 0. Refactor
+// 0. Do all previous TODOs
 
 // The concept of game is this
 // 0. The Waves aren't really changed with levels. What changes is just Cube.cs configuration - its HP, bonusPoints and appearence (through SO config file)
@@ -88,7 +98,7 @@ namespace Game
             MessageBus.Instance.SendMessage(new Message() { Type = MessageType.GameStarted, DoubleValue = elapsedSpan.TotalSeconds });
         }
 
-        void SpawnWave()
+        private void SpawnWave()
         {
             var waves = playerWaves.waves;
             var wavePrefab = waves[UnityEngine.Random.Range(0, waves.Length)];
@@ -98,7 +108,7 @@ namespace Game
             MessageBus.Instance.SendMessage(new Message() { Type = MessageType.WaveChanged, objectValue = wave });
         }
 
-        void ChangeSceneEnvironment()
+        private void ChangeSceneEnvironment()
         {
             Texture2D texture2D;
             GameObject go1;

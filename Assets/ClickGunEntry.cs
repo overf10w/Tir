@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Game
 {
-    public class WeaponPanelEntry : MonoBehaviour
+    public class ClickGunEntry : MonoBehaviour
     {
         private AssetBundle assetBundle;
 
@@ -20,16 +20,19 @@ namespace Game
         // name
         [SerializeField]
         private TextMeshProUGUI NameTxt;
+
         // next price
         [SerializeField]
         private TextMeshProUGUI DPSNextPrice;
         [SerializeField]
         private TextMeshProUGUI DMGNextPrice;
+
         // curr value
         [SerializeField]
         private TextMeshProUGUI DPSValueTxt;
         [SerializeField]
         private TextMeshProUGUI DMGValueTxt;
+        
         // next value
         [SerializeField]
         private TextMeshProUGUI DPSNextValueTxt;
@@ -45,7 +48,7 @@ namespace Game
         // ViewModel
         [HideInInspector]
         public WeaponStat DPS;
-        
+
         [HideInInspector]
         public WeaponStat DMG;
 
@@ -61,26 +64,34 @@ namespace Game
         {
             //if (!assetBundle)
             //{
-                assetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, "uisprites"));
+            assetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, "uisprites"));
             //}
 
             if (assetBundle == null)
             {
-                Debug.Log("Failed to load AssetBundle!");
+                Debug.LogError("Failed to load AssetBundle!");
                 return;
             }
 
             if (assetBundle)
             {
                 Texture2D tex = assetBundle.LoadAsset<Texture2D>(name);
-                Sprite mySprite = Sprite.Create(tex, new Rect(0.0f, 0.0f, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100.0f);
-                IconImg.sprite = mySprite;
-                assetBundle.Unload(false);
+                if (tex != null)
+                {
+                    Sprite mySprite = Sprite.Create(tex, new Rect(0.0f, 0.0f, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100.0f);
+                    IconImg.sprite = mySprite;
+                    assetBundle.Unload(false);
+                }
+                else
+                {
+                    Debug.LogError("ClickGunEntry.cs: Failed to load texture: " + name);
+                }
             }
         }
 
         public void Init(string name, WeaponStat dps, WeaponStat dmg)
         {
+
             InitButtons();
 
             DPS = dps;

@@ -4,13 +4,12 @@ using UnityEngine;
 
 namespace Game
 {
-    // TODO: Gun to be init
     public class Gun : MonoBehaviour
     {
         // TODO: 
-        // This Gun be initialized with WeaponStats (add PlayerDefaultPistol to WeaponDataFiles, rename StandardPistol to smth else)
-        // private WeaponStat DPS; <-- where DPS means 1/interval, so the interval between shots = 1/DPS
-        // private WeaponStat DMG;
+        // Probably don't need these:
+        public WeaponStat DPS;
+        public WeaponStat DMG;
 
         public Transform muzzle;
 
@@ -21,6 +20,14 @@ namespace Game
         // Rays
         private Ray ray;
         private RaycastHit hit;
+
+        public void Init(WeaponStatData gunData, WeaponStatsAlgorithm dpsAlgorithm, WeaponStatsAlgorithm dmgAlgorithm)
+        {
+            DPS = new WeaponStat(gunData.dpsLevel, dpsAlgorithm);
+            DMG = new WeaponStat(gunData.dmgLevel, dmgAlgorithm);
+
+            Debug.Log("Gun.cs: Init: DPS.Value: " + DPS.Value + ", DMG.Value: " + DMG.Value);
+        }
 
         public void UpdateGunRotation()
         {

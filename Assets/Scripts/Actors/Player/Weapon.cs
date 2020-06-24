@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace Game
@@ -21,8 +23,26 @@ namespace Game
     // Level
     // Price
     // (each of the props can be of type CharacterStat (https://forum.unity.com/threads/tutorial-character-stats-aka-attributes-system.504095/)) - but that's not obligatory: 
-    public class WeaponStat
+    public class WeaponStat : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        protected bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value))
+            {
+                return false;
+            }
+            field = value;
+            OnPropertyChanged(propertyName);
+            return true;
+        }
+
         private WeaponStatsAlgorithm algorithm;
 
         public WeaponStat()
@@ -48,9 +68,12 @@ namespace Game
             this.algorithm = algorithm;
         }
 
-        public int Level { get; set; }
+        private int _level;
+        public int Level { get => _level; set { SetField(ref _level, value); } }
 
         // TODO: make all getters arrow getters '=>' like this (where possible)
+        // TODO: check for cases when this.algorithm == null !!!!
+        // TODO: these all should be private set
         public float Price { get => algorithm.GetPrice(Level); set { } }
         
         public float NextPrice { get => algorithm.GetNextPrice(Level); set { } }
@@ -63,6 +86,8 @@ namespace Game
     public class Weapon : MessageHandler
     {
         // TODO (LP): (?) private set
+
+        // TODO: this stat to become SPS - Shots Per Second
         public WeaponStat DPS { get; set; }
 
         // TODO (LP): (?) private set

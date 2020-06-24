@@ -82,7 +82,6 @@ namespace Game
                     }
                 }
             }
-
         }
 
 
@@ -114,18 +113,6 @@ namespace Game
                     script.DMGButton.onClick.AddListener(() => { WeaponBtnClick.Dispatch(new WeaponStatBtnClickArgs(weapon.Key, "DMG")); });
                 }
             }
-
-
-            //WeaponButton StandardPistol = new WeaponButton();
-            
-            //StandardPistol.DpsBtn = transform.Find("StandardPistol/DPSBtn").GetComponent<Button>();
-            //StandardPistol.DpsTxt = transform.Find("StandardPistol/DPSBtn/DPSTxt").GetComponent<TextMeshProUGUI>();
-
-            //StandardPistol.DmgBtn = transform.Find("StandardPistol/DMGBtn").GetComponent<Button>();
-            //StandardPistol.DmgTxt = transform.Find("StandardPistol/DMGBtn/DMGTxt").GetComponent<TextMeshProUGUI>();
-
-            //StandardPistol.DmgBtn.onClick.AddListener(() => { WeaponBtnClick.Dispatch(WeaponBtns.StandardPistolDmgBtn); });
-            //StandardPistol.DpsBtn.onClick.AddListener(() => { WeaponBtnClick.Dispatch(WeaponBtns.StandardPistolDpsBtn); });
         }
     }
 }
