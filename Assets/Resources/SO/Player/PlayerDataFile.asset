@@ -9,13 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e41928f1458c48488933841db137b8a, type: 3}
-  m_Name: WeaponDataFiles
+  m_Script: {fileID: 11500000, guid: a7f303825e9116746aa633fe1e53ebb7, type: 3}
+  m_Name: PlayerDataFile
   m_EditorClassIdentifier: 
-  weapons:
-  - weaponName: StandardPistol
-    dpsLevel: 0
-    dmgLevel: 0
-  - weaponName: MachineGun
-    dpsLevel: 0
-    dmgLevel: 0
+  playerStats:
+    gold: 110
+    level: 2
+    timeLastPlayed: 3

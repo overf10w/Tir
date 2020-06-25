@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,8 +18,7 @@ namespace Game
         public Text TeamDPSTxt;
         public Text ElapsedTimeSpanTxt;
 
-
-        private void Awake()
+        public void Init(PlayerModel playerModel)
         {
             InitMessageHandler();
             // TODO: drag & drop
@@ -26,6 +26,8 @@ namespace Game
 
             // playerStats
             PlayerGoldTxt = GameObject.Find("GoldLbl").GetComponent<Text>();
+            PlayerGoldTxt.text = playerModel.Gold.ToString();
+
             PlayerCurrentWaveTxt = GameObject.Find("CurrentWaveLbl").GetComponent<Text>();
 
             TeamDPSTxt = GameObject.Find("TeamDPSLbl").GetComponent<Text>();
@@ -36,6 +38,8 @@ namespace Game
             //ResourceLoader.gameData.OnLevelChanged += HandleLevelChanged;
 
             ElapsedTimeSpanTxt = GameObject.Find("ElapsedTimeSpanLbl").GetComponent<Text>();
+            TimeSpan idleTimeSpan = new TimeSpan(playerModel.IdleTimeSpan);
+            ElapsedTimeSpanTxt.text = idleTimeSpan.ToString("hh\\:mm\\:ss");
         }
 
         // TODO: this shouldn't be in update

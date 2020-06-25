@@ -24,8 +24,6 @@ namespace Game
             return true;
         }
 
-        public float currentDamage;
-
         public Dictionary<string, Weapon> teamWeapons;
         private WeaponStatsStrategies weaponStatsStrategies;
 
@@ -76,6 +74,32 @@ namespace Game
             Debug.Log("PlayerModel: Read gunData: dpsLevel: " + gunData.dpsLevel + ", dmgLevel: " + gunData.dmgLevel);
         }
 
+        private void InitPlayerStats()
+        {
+            string path = Path.Combine(Application.persistentDataPath, "playerStats.dat");
+
+            playerStats = ResourceLoader.Load<PlayerStats>(path);
+
+            Gold = playerStats.gold;
+            Level = playerStats.level;
+            _timeLastPlayed = playerStats.timeLastPlayed;
+
+            Debug.Log("PlayerModel: Loaded Gold: " + Gold + ", Level: " + Level);
+        }
+
+        public void SavePlayerStats()
+        {
+            string path = Path.Combine(Application.persistentDataPath, "playerStats.dat");
+
+            PlayerStats playerStats = new PlayerStats();
+
+            playerStats.gold = Gold;
+            playerStats.level = Level;
+            playerStats.timeLastPlayed = DateTime.Now.Ticks;
+
+            ResourceLoader.Save<PlayerStats>(path, playerStats);
+        }
+
         public void HandleClickGunChanged(object sender, PropertyChangedEventArgs e)
         {
             PropertyChanged?.Invoke(sender, e);
@@ -112,7 +136,7 @@ namespace Game
             ResourceLoader.Save<WeaponStatData[]>(path, teamWeaponsToSave);
         }
 
-        public PlayerModel(PlayerStats playerStats)
+        public PlayerModel()
         {
             weaponStatsStrategies = Resources.Load<WeaponStatsStrategies>("SO/Weapons/TeamWeapons/WeaponStatsStrategies");
 
@@ -120,54 +144,64 @@ namespace Game
 
             InitClickGun();
 
-            InitStats(playerStats);
+            InitPlayerStats();
 
-            currentDamage = 2.0f;
+            //InitStats(playerStats);
         }
 
-        [Header("Player Stats")]
-        [SerializeField]
-        private float gold;
+        private float _gold;
         public float Gold
         {
-            get => gold;
+            get => _gold;
             set
             {
-                SetField(ref gold, value, "Gold");
+                SetField(ref _gold, value, "Gold");
+                SavePlayerStats();
             }
         }
 
-        public void ResetPlayerStats()
+        private int _level;
+        public int Level
         {
-            gold = 0;
+            get => _level;
+            set
+            {
+                SetField(ref _level, value, "Level");
+            }
+        }
+
+        //long elapsedTicks = DateTime.Now.Ticks - gameData._timeLastPlayed;
+
+        private long _timeLastPlayed;
+        private long gameStartDateTime = -1;
+        public long IdleTimeSpan
+        {
+            get
+            {
+                if (gameStartDateTime == -1)
+                {
+                    gameStartDateTime = DateTime.Now.Ticks;
+                }
+                return gameStartDateTime - _timeLastPlayed;
+            }
+            private set { }
         }
 
         public void InitStats(PlayerStats playerStats)
         {
-            gold = playerStats._gold;
+            _gold = playerStats.gold;
+            _level = playerStats.level;
+            _timeLastPlayed = playerStats.timeLastPlayed;
         }
 
-        public PlayerStats GetStats()
-        {
-            return new PlayerStats
-            {
-                _gold = gold,
-                _timeLastPlayed = DateTime.Now.Ticks
-            };
-        }
+        private PlayerStats playerStats;
     }
 
     [System.Serializable]
     public class PlayerStats
     {
-        public float _gold;
-        public int _level;
-        public int _currentWave;
-        public int _damageLvl;
-        public int _pistolLvl;
-        public int _doublePistolLvl;
-        public int _autoFireLvl;
-        public float _autoFireDuration;
-        public long _timeLastPlayed;
+        public float gold;
+        public int level;
+        public long timeLastPlayed;
     }
 }

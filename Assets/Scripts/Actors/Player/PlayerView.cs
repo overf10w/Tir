@@ -45,6 +45,7 @@ namespace Game
             InitMessageHandler();
 
             Ui = FindObjectOfType<UserStatsCanvas>();
+            Ui.Init(model);
 
             TeamPanel = Ui.GetComponentInChildren<TeamPanel>();
             TeamPanel.Init(model.teamWeapons);

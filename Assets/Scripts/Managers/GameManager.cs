@@ -40,62 +40,62 @@ using UnityEngine;
 // 23-JUN-20:
 // 0. Refactor - [done]
 // 1. Create GunDataFile (just as WeaponDataFiles), which stores serialized info on disk about this gun - so that on startup we see curr. player's gun dmg - [done]
-// 2. Create PlayerDataFiles (just as WeaponDataFiles), with gold, lastTimePlayed, currLevel; so that on startup we see curr. player's gold
+// 2. Create PlayerDataFiles (just as WeaponDataFiles), with gold, lastTimePlayed, currLevel; so that on startup we see curr. player's gold - [done]
 // 3. Reconfigure how the environment is changed according to current level: introduce environment manager which gets notified through message bus when level changed
 // 4. When level changes to more advanced one, the cube stats and config (textures, sounds, particles, colors, hp) should also change
 
 // 24-JUN-20:
 // 0. Import all of the Sci-Fi fonts that are opened in Chrome
 // 1. Do the TODO in PlayerController.cs - [done]
-// 2. Do all previous TODOs
+// 2. Do all previous TODOs 
 
 // 25-JUN-20:
+// 0. Refactor - [done]
+// 1. Do all previous TODOs
+
+// 26-JUN-20:
 // 0. Refactor
-// 0. Do all previous TODOs
+// 1. Do all the previous TODOs
 
 // The concept of game is this
 // 0. The Waves aren't really changed with levels. What changes is just Cube.cs configuration - its HP, bonusPoints and appearence (through SO config file)
 // 1. We can only have one real visible weapon - player orange gun - Gun.cs
 // 2. All Fire() commands of that visible weapon should be queued : but why ? - actually we don't need to queue this, remember KISS principle
-// 3. All TakeDamage() methods of Cube.cs should be queued
-// NOTE the command patterns don't really need an undo functionality : so why we need the command pattern in first place?
+// 3. All TakeDamage() methods of Cube.cs should be queued - [done]
+// NOTE the command patterns don't really need an undo functionality : so why we need the command pattern at all?
 
 namespace Game
 {
     public class GameManager : MessageHandler
     {
         public ResourceLoader ResourceLoader;
-        private GameData gameData;
+        
+        // TODO: remove, change to PlayerData
 
         private Wave wave;
 
         public PlayerWaves playerWaves;
-
-        private int lvlInd;
 
         private int cubesSpawned;
         private int cubesDestroyed;
 
         private AssetBundle myLoadedAssetBundle;
 
-        IEnumerator Start()
+        private IEnumerator Start()
         {
             InitMessageHandler();
 
-            gameData = new GameData();
-            gameData.Init(ResourceLoader.Instance.ReadGameStats());
-
             PlayerView view = Instantiate(Resources.Load<PlayerView>("Prefabs/Player"));
-            PlayerModel model = new PlayerModel(ResourceLoader.Instance.ReadPlayerStats());
+            PlayerModel model = new PlayerModel();
             PlayerController pc = new PlayerController(model, view);
 
-            lvlInd = gameData._level;
             yield return null;  // we need this so the InGameCanvas receives event on spawned wave (through MessageBus)
             SpawnWave();
-            long elapsedTicks = DateTime.Now.Ticks - gameData._timeLastPlayed;
-            TimeSpan elapsedSpan = new TimeSpan(elapsedTicks);
-            // TODO (?): this can be set solely by PlayerController.cs
-            MessageBus.Instance.SendMessage(new Message() { Type = MessageType.GameStarted, DoubleValue = elapsedSpan.TotalSeconds });
+
+            //long elapsedTicks = DateTime.Now.Ticks - gameData._timeLastPlayed;
+            //TimeSpan elapsedSpan = new TimeSpan(elapsedTicks);
+            //// TODO (?): this can be set solely by PlayerController.cs
+            //MessageBus.Instance.SendMessage(new Message() { Type = MessageType.GameStarted, DoubleValue = elapsedSpan.TotalSeconds });
         }
 
         private void SpawnWave()
@@ -108,32 +108,38 @@ namespace Game
             MessageBus.Instance.SendMessage(new Message() { Type = MessageType.WaveChanged, objectValue = wave });
         }
 
-        private void ChangeSceneEnvironment()
-        {
-            Texture2D texture2D;
-            GameObject go1;
+        // TODO: this be moved to SceneEnvironmentManager
+        //       (1) SceneEnvironmentManager listens to MessageBus.ChangeLevel event 
+        //       (2) MessageBus.ChangeLevel event to be spawned by the PlayerController through PlayerView
+        //           (2.1) PlayerController through PlayerView knows and counts how many cubes were killed, waves passed, and points earned
+        //           (2.2) PlayerController updates PlayerModel.Level/PlayerModel.MaxLevel after certain threshold of aforementioned stats was reached
+        //           (2.3) PlayerController listens to PlayerModel.Level update and spawns (through PlayerView) MessageBus.ChangeLevel event
+        //private void ChangeSceneEnvironment()
+        //{
+        //    Texture2D texture2D;
+        //    GameObject go1;
 
-            if (myLoadedAssetBundle == null)
-            {
-                myLoadedAssetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, "levelbackgrounds"));
-                return;
-            }
-            if (lvlInd <= 2)
-            {
-                texture2D = myLoadedAssetBundle.LoadAsset<Texture2D>("McLaren");
-                go1 = new GameObject("BackGround ksta");
-                go1.transform.position = new Vector3(0, 0, 0);
-            }
-            else
-            {
-                texture2D = myLoadedAssetBundle.LoadAsset<Texture2D>("Porsche");
-                go1 = new GameObject("BackGround ksta");
-                go1.transform.position = new Vector3(0, 0, -0.1f);
-            }
-            Sprite sprite = Sprite.Create(texture2D, new Rect(0, 0, texture2D.width, texture2D.height), Vector2.zero);
-            SpriteRenderer renderer = go1.AddComponent<SpriteRenderer>();
-            renderer.sprite = sprite;
-        }
+        //    if (myLoadedAssetBundle == null)
+        //    {
+        //        myLoadedAssetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, "levelbackgrounds"));
+        //        return;
+        //    }
+        //    if (lvlInd <= 2)
+        //    {
+        //        texture2D = myLoadedAssetBundle.LoadAsset<Texture2D>("McLaren");
+        //        go1 = new GameObject("BackGround ksta");
+        //        go1.transform.position = new Vector3(0, 0, 0);
+        //    }
+        //    else
+        //    {
+        //        texture2D = myLoadedAssetBundle.LoadAsset<Texture2D>("Porsche");
+        //        go1 = new GameObject("BackGround ksta");
+        //        go1.transform.position = new Vector3(0, 0, -0.1f);
+        //    }
+        //    Sprite sprite = Sprite.Create(texture2D, new Rect(0, 0, texture2D.width, texture2D.height), Vector2.zero);
+        //    SpriteRenderer renderer = go1.AddComponent<SpriteRenderer>();
+        //    renderer.sprite = sprite;
+        //}
 
         public override void InitMessageHandler()
         {
@@ -150,31 +156,32 @@ namespace Game
                 cubesDestroyed++;
                 if (cubesDestroyed == cubesSpawned)
                 {
-                    if (lvlInd >= 3)
-                    {
-                        MessageBus.Instance.SendMessage(new Message() { Type = MessageType.GameOver });
-                        return;
-                    }
+                    //if (lvlInd >= 3)
+                    //{
+                    //    MessageBus.Instance.SendMessage(new Message() { Type = MessageType.GameOver });
+                    //    return;
+                    //}
                     SpawnWave();
                 }
             }
-            else if (message.Type == MessageType.LevelChanged)
-            {
-                ChangeLevel(message.IntValue);
-                gameData._level = message.IntValue;
-            }
+            // TODO: this be checked by PlayerView/Controller
+            //else if (message.Type == MessageType.LevelChanged)
+            //{
+            //    ChangeLevel(message.IntValue);
+            //    gameData._level = message.IntValue;
+            //}
         }
 
-        private void ChangeLevel(int level)
-        {
-            lvlInd = level;
-            Debug.Log("Level was changed to: " + lvlInd);
-            ChangeSceneEnvironment();
-        }
+        //private void ChangeLevel(int level)
+        //{
+        //    lvlInd = level;
+        //    Debug.Log("Level was changed to: " + lvlInd);
+        //    ChangeSceneEnvironment();
+        //}
 
-        public void OnDisable()
-        {
-            ResourceLoader.Instance.WriteGameStats(gameData.GetData());
-        }
+        //public void OnDisable()
+        //{
+        //    ResourceLoader.Instance.WriteGameStats(gameData.GetData());
+        //}
     }
 }

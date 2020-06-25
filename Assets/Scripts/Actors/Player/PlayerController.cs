@@ -35,7 +35,7 @@ namespace Game
             // TODO (LP): view.Gun.Shoot(model.teamWeapons['PlayerPistol'].model.DPS);
             // For that matter, model.teamWeapons['PlayerPistol'] should be cached in PlayreController on a startup
             // And also, for that matter, playerGun.DPS shouldn't be upgradeable at all, its dps.Multiplier should be 0.
-            view.Gun.Shoot(model.currentDamage);
+            view.Gun.Shoot(model.DMG.Value);
         }
 
         private void HandleCubeDeath(object sender, CustomArgs e)
@@ -57,7 +57,7 @@ namespace Game
             }
 
             //UnityEngine.Debug.Log("PlayerController: " + e.PropertyName);
-            view.Ui.PlayerGoldTxt.text = e.PropertyName.ToString();
+            //view.Ui.PlayerGoldTxt.text = e.PropertyName.ToString();
             if (e.PropertyName == "Gold")
             {
                 view.Ui.PlayerGoldTxt.text = model.Gold.ToString();
