@@ -55,11 +55,19 @@ using UnityEngine;
 
 // 26-JUN-20:
 // 0. Refactor
-// 1. Do all the previous TODOs
+// 1. Duplicate THIS project and import and play and experiment with downloaded assets, also import Ultimate VFX assets (just for air floating particles) - [done]
+// 2. Do all the previous TODOs
+
+// 27-JUN-20:
+// 0. Import Ultimate VFX, Hit & Slashes, Unique Projectiles, sky skyboxes (just 3 skyboxes), some 3d models of spaceships etc.
+// 1. Duplicate the main scene and play around with these assets (and models) just to see the possibilities the assets offer
+// 2. Integrate them into project, make a backup
+// 3. Import MK_Glow and play around with it, too: try setting simple 3d-meshes to glow (i.e. cube, sphere, cylinder), try setting halo, flare lens effects, consider performance
+// 4. Try playing with that beautify post processing asset
 
 // The concept of game is this
 // 0. The Waves aren't really changed with levels. What changes is just Cube.cs configuration - its HP, bonusPoints and appearence (through SO config file)
-// 1. We can only have one real visible weapon - player orange gun - Gun.cs
+// 1. We can only have one real visible weapon - player Orange Gun - Gun.cs - [done]
 // 2. All Fire() commands of that visible weapon should be queued : but why ? - actually we don't need to queue this, remember KISS principle
 // 3. All TakeDamage() methods of Cube.cs should be queued - [done]
 // NOTE the command patterns don't really need an undo functionality : so why we need the command pattern at all?
