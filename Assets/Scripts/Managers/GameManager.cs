@@ -99,7 +99,7 @@ using UnityEngine;
 
 // 05-JUL-20:
 // 0. Make the cubes glowing and sexy - GameDoc/Cube - 6 hrs - [done]
-// 1. Git commit
+// 1. Git commit - [done]
 
 // 06-JUL-20:
 // 0. Introduce Ability / Skill concept (Ability is a skill applied for a limited amount of time):
