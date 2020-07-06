@@ -32,7 +32,7 @@ namespace Game
             for (int i = spawnGrid.childCount - 1; i >= 0; i--)
             {
                 var spawnTransform = spawnGrid.GetChild(i);
-                var prefab = Resources.Load<Cube>("Prefabs/Cube_New") as Cube;
+                var prefab = Resources.Load<Cube>("Prefabs/Cube") as Cube;
                 //float scaleMultiplier = prefab.transform
                 var cube = Instantiate(prefab, spawnTransform.transform) as Cube;
                 cube.Init();
