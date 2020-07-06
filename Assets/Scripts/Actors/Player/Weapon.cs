@@ -71,14 +71,14 @@ namespace Game
         private int _level;
         public int Level { get => _level; set { SetField(ref _level, value); } }
 
-        // TODO: make all getters arrow getters '=>' like this (where possible)
+        // TODO: make all getters arrow getters '=>' like this (where possible throughout the project)
         // TODO: check for cases when this.algorithm == null !!!!
-        // TODO: these all should be private set
         public float Price { get => algorithm.GetPrice(Level); set { } }
         
         public float NextPrice { get => algorithm.GetNextPrice(Level); set { } }
 
-        public float Value { get => algorithm.GetValue(Level); set { } }
+        private float _value;
+        public float Value { get => algorithm.GetValue(_value, Level); set { _value = value; } }
 
         public float NextValue { get => algorithm.GetNextValue(Level); set { } }
     }
@@ -86,7 +86,6 @@ namespace Game
     public class Weapon : MessageHandler
     {
         // TODO (LP): (?) private set
-
         // TODO: this stat to become SPS - Shots Per Second
         public WeaponStat DPS { get; set; }
 
@@ -135,6 +134,7 @@ namespace Game
                 IDestroyable cube = wave.Cubes.ElementAtOrDefault(new System.Random().Next(wave.Cubes.Count));
                 if ((MonoBehaviour)cube != null)
                 {
+                    // TODO uncomment this!!
                     cube.TakeDamage(DPS.Value);
                 }
                 else

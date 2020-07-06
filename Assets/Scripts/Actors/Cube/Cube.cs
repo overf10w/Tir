@@ -29,7 +29,7 @@ namespace Game
             get => _gold;
         }
 
-        private Renderer renderer;
+        //private Renderer renderer;
 
         private Transform cachedTransform;
 
@@ -55,25 +55,27 @@ namespace Game
             _gold = cubeStats.gold;
             _health = cubeStats.HP;
 
-            renderer = GetComponent<Renderer>();
-            if (renderer == null)
-            {
-                Debug.Log("SHFDSSDKL:F");
-            }
-            else
-            {
-                if (renderer.material.HasProperty("_PlanePoint"))
-                {
-                    cachedVec = renderer.material.GetVector("_PlanePoint");
-                }
-                newVec = new Vector4(cachedVec.x, transform.position.y + 1.0f * transform.localScale.y, cachedVec.z, cachedVec.w);
-                cachedVec = newVec;
-                renderer.material.SetVector("_PlanePoint", newVec);
-            }
+            //renderer = GetComponent<Renderer>();
+            //if (renderer == null)
+            //{
+            //    Debug.Log("SHFDSSDKL:F");
+            //}
+            //else
+            //{
+            //    if (renderer.material.HasProperty("_PlanePoint"))
+            //    {
+            //        cachedVec = renderer.material.GetVector("_PlanePoint");
+            //    }
+            //    newVec = new Vector4(cachedVec.x, transform.position.y + 1.0f * transform.localScale.y, cachedVec.z, cachedVec.w);
+            //    cachedVec = newVec;
+            //    renderer.material.SetVector("_PlanePoint", newVec);
+            //}
         }
 
         public void TakeDamage(float damage)
         {
+            Debug.Log("Cube.cs: TakeDamage()");
+            Health -= damage;
             OnTakeDamage?.Invoke(this, new GenericEventArgs<float>(damage));
         }
 
@@ -125,7 +127,7 @@ namespace Game
 
             float wpDistance = cachedTransform.localScale.y * 1.0f;
             float x = wpDistance - (wpDistance * hp / 10.0f);
-            renderer.material.SetVector("_PlanePoint", new Vector4(cachedVec.x, cachedVec.y - x, cachedVec.z, cachedVec.w));
+            //renderer.material.SetVector("_PlanePoint", new Vector4(cachedVec.x, cachedVec.y - x, cachedVec.z, cachedVec.w));
         }
     }
 }

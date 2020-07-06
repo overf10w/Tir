@@ -50,7 +50,7 @@ namespace Game
         {
             MessageBus.Nullify();
             //PlayerModel.Nullify();
-            SceneManager.LoadScene(sceneName);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
         }
 
         public void OnExitButtonClick()

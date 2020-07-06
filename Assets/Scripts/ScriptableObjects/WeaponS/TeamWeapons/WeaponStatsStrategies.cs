@@ -15,6 +15,10 @@ namespace Game
         // public float baseValue;
         // public float valueMultiplier;
 
+        // TODO: add these fields: 
+        // public float[] skillMultipliers;        <-- to be set by outer script, init through PlayerController/GameManager Init() chain
+        // public float[] abilityMultipliers;      <-- to be set by outer script, updated through some methods, etc.
+
         public float GetPrice(int level)
         {
             return basePrice * Mathf.Pow(priceMultiplier, level);
@@ -25,8 +29,11 @@ namespace Game
             return GetPrice(++level);
         }
 
-        public float GetValue(int level)
+        public float GetValue(float currValue, int level)
         {
+            // How value should be calculated:
+            // public float GetValue(int currValue, int level, int skillLevel)
+            // return currValue + level * baseValue * valueMultiplier * skillLevel * baseSkillValue * skillMultiplier;
             return level;
         }
 

@@ -16,6 +16,9 @@ namespace Game
 
         private List<IDestroyable> cubesList;
 
+        [SerializeField]
+        private Transform spawnGrid;
+
         void Awake()
         {
             InitMessageHandler();
@@ -26,10 +29,11 @@ namespace Game
 
         private void SpawnCubes()
         {
-            for (int i = transform.childCount - 1; i >= 0; i--)
+            for (int i = spawnGrid.childCount - 1; i >= 0; i--)
             {
-                var spawnTransform = transform.GetChild(i);
-                var prefab = Resources.Load<Cube>("Prefabs/Cube") as Cube;
+                var spawnTransform = spawnGrid.GetChild(i);
+                var prefab = Resources.Load<Cube>("Prefabs/Cube_New") as Cube;
+                //float scaleMultiplier = prefab.transform
                 var cube = Instantiate(prefab, spawnTransform.transform) as Cube;
                 cube.Init();
                 new CubeController(cube);

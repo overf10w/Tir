@@ -23,12 +23,40 @@ namespace Game
             view.OnTeamWeaponBtnClick += HandleTeamWeaponBtnClick;
             view.OnClickGunBtnClick += HandleClickGunBtnClick;
 
-            // TODO (24-JUN): 
-            // (1) view.OnClickGunBtnClick += HandleClickGunBtnClick { // update model.DPS, model.DMG, ... } - [done]
-            // (2) model.OnPropertyChanged() += HandleModelPropertyChanged { // case "DMG"/"DPS" { // update view.ClickGunPanel.DMG/DPS }}
-
             model.PropertyChanged += HandlePropertyChanged;
         }
+
+        // One important notice: 
+        // 1. Abilities have nothing to do with WeaponStat.Price
+        // 2. Abilities only work with WeaponStat.Value
+        // 3. 
+
+
+        // HandleAbilityClicked(object sender, string weapon /*Ability ability*/) 
+        // {
+        //     string weapon; // string weapon = ability.TargetObjName; 
+        //     Weapon weaponToPerformAbilityOn = model.FindWeapon(weapon);
+        //     Command command = new Command(new AbilityIncreaseDPSBy1%(weaponToPerformAbilityOn, ability));
+        //     ability.Execute();
+        // }
+
+        // Command AbilityIncreaseDPSBy1%
+        // {
+        //     private Weapon weapon;
+        //     private abilityProps;
+        //      
+        //     void Execute() 
+        //     {
+        //         WeaponStat prevWeaponStat = weapon.DPS; <-- here should be deep copy of an object
+        //         weapon.DPS = new WeaponStat(data.dpsLevel, SomeSpecialEmptyAlgorithm.DPS);
+        //
+        //         //!! MAYBE WE DON'T NEED ABOVE LINES AT ALL !!//
+        //         float increaseAmount = 1%amount of weapon.DPS.Value;
+        //         weapon.DPS.Value += increaseAmount;
+        //         // ... HERE GOES WAITING FOR %ABILITY_DURATION% ... //
+        //         weapon.DPS.Value -= increaseAmount;
+        //     }
+        // }
 
         private void HandleClicked(object sender, EventArgs e)
         {
