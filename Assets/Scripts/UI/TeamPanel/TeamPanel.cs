@@ -72,7 +72,6 @@ namespace Game
                         if (entry.name == weapon.Key)
                         {
                             var script = entry.GetComponent<WeaponPanelEntry>();
-                            //script.UpdateSelf(weapon.Value.DPS.Price, weapon.Value.DMG.Price);
 
                             script.UpdateSelf(weapon.Value.DPS, weapon.Value.DMG);
 

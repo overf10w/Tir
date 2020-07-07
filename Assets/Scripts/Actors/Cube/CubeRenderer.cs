@@ -26,6 +26,12 @@ namespace Game
 
         private void HandleHpChange(object sender, GenericEventArgs<float> hp)
         {
+            if (currHP <= 0)
+            {
+
+                return;
+
+            }
             Debug.Log("CubeRenderer: HandleHPChange");
             float deltaHp = currHP - hp.val;
             float deltaScale = deltaHp * hpScaleMultiplier;

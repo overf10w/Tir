@@ -49,6 +49,11 @@ namespace Game
                     {
                         GameObject obj = new GameObject(weapon.weaponName);
                         Weapon weaponScript = obj.AddComponent<Weapon>();
+                        // TODO: 
+                        // 1. Subscribe to weaponScript.OnPropertyChanged
+                        // 2. Raise the event when notified OnPropertyChanged
+                        // 3. PlayerController subscribes to this event and changes view accordingly (it just updates the views with the ref to teamWeapons dictionary;
+
                         weaponScript.Init(algo, weapon);
                         teamWeapons.Add(weapon.weaponName, weaponScript);
                         Debug.Log("weapon.weaponName: [" + weapon.weaponName + "] == algo.name: [" + algo.name + "]");
@@ -65,8 +70,8 @@ namespace Game
             gunData = ResourceLoader.Load<WeaponStatData>(path);
             gunAlgorithmHolder = Resources.Load<GunStatsStrategy>("SO/Weapons/ClickGun/GunStatsStrategy").algorithm;
 
-            DPS = new WeaponStat(gunData.dpsLevel, gunAlgorithmHolder.DPS);
-            DMG = new WeaponStat(gunData.dmgLevel, gunAlgorithmHolder.DMG);
+            DPS = new WeaponStat(gunData.dpsLevel, gunData.upgradeLevel, gunAlgorithmHolder.DPS);
+            DMG = new WeaponStat(gunData.dmgLevel, gunData.upgradeLevel, gunAlgorithmHolder.DMG);
 
             DPS.PropertyChanged += HandleClickGunChanged;
             DMG.PropertyChanged += HandleClickGunChanged;
@@ -113,6 +118,7 @@ namespace Game
             data.weaponName = "Gun";
             data.dpsLevel = DPS.Level;
             data.dmgLevel = DMG.Level;
+            data.upgradeLevel = DPS.UpgradeLevel;
 
             string path = Path.Combine(Application.persistentDataPath, "clickGun.dat");
             ResourceLoader.Save<WeaponStatData>(path, data);
@@ -128,6 +134,7 @@ namespace Game
                 data.weaponName = weapon.Key;
                 data.dpsLevel = weapon.Value.DPS.Level;
                 data.dmgLevel = weapon.Value.DMG.Level;
+                data.upgradeLevel = weapon.Value.DPS.UpgradeLevel;
 
                 teamWeaponsToSave[i++] = data;
             }

@@ -17,13 +17,37 @@ MonoBehaviour:
     DPS:
       basePrice: 20
       priceMultiplier: 1.6
+      baseValue: 5
+      valueMultiplier: 1.3
+      baseUpgradePrice: 40
+      upgradePriceMultiplier: 1
+      maxUpgradeLevel: 0
+      upgradeValueMultiplier: 2
     DMG:
       basePrice: 15
       priceMultiplier: 1.12
+      baseValue: 0
+      valueMultiplier: 0
+      baseUpgradePrice: 40
+      upgradePriceMultiplier: 1
+      maxUpgradeLevel: 0
+      upgradeValueMultiplier: 2
   - name: MachineGun
     DPS:
       basePrice: 40
       priceMultiplier: 1.22
+      baseValue: 0
+      valueMultiplier: 0
+      baseUpgradePrice: 40
+      upgradePriceMultiplier: 1
+      maxUpgradeLevel: 0
+      upgradeValueMultiplier: 2
     DMG:
       basePrice: 25
       priceMultiplier: 1.095
+      baseValue: 0
+      valueMultiplier: 0
+      baseUpgradePrice: 40
+      upgradePriceMultiplier: 1
+      maxUpgradeLevel: 0
+      upgradeValueMultiplier: 2

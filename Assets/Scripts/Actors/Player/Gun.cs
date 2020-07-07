@@ -23,8 +23,8 @@ namespace Game
 
         public void Init(WeaponStatData gunData, WeaponStatsAlgorithm dpsAlgorithm, WeaponStatsAlgorithm dmgAlgorithm)
         {
-            DPS = new WeaponStat(gunData.dpsLevel, dpsAlgorithm);
-            DMG = new WeaponStat(gunData.dmgLevel, dmgAlgorithm);
+            DPS = new WeaponStat(gunData.dpsLevel, gunData.upgradeLevel, dpsAlgorithm);
+            DMG = new WeaponStat(gunData.dmgLevel, gunData.upgradeLevel, dmgAlgorithm);
 
             Debug.Log("Gun.cs: Init: DPS.Value: " + DPS.Value + ", DMG.Value: " + DMG.Value);
         }

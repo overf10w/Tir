@@ -17,6 +17,18 @@ MonoBehaviour:
     DPS:
       basePrice: 20
       priceMultiplier: 1.045
+      baseValue: 5
+      valueMultiplier: 0
+      baseUpgradePrice: 0
+      upgradePriceMultiplier: 0
+      maxUpgradeLevel: 0
+      upgradeValueMultiplier: 2
     DMG:
       basePrice: 25
       priceMultiplier: 1.19
+      baseValue: 0
+      valueMultiplier: 0
+      baseUpgradePrice: 0
+      upgradePriceMultiplier: 0
+      maxUpgradeLevel: 0
+      upgradeValueMultiplier: 2

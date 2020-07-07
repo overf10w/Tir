@@ -15,7 +15,15 @@ namespace Game
         public int dpsLevel;
 
         public int dmgLevel;
+
+        public int upgradeLevel;
     }
+
+    // TODO: 
+    // PROP UpgradePrice
+    // PROP NextUpgradePrice
+    // PROP BaseUpgradePrice
+    // Method UpgradeSkill();
 
     // TODO: WeaponStat => WeaponStats - [done]
     // WeaponStats to have these props:
@@ -62,9 +70,10 @@ namespace Game
             Level = level;
         }
 
-        public WeaponStat(int level, WeaponStatsAlgorithm algorithm)
+        public WeaponStat(int level, int upgradeLevel, WeaponStatsAlgorithm algorithm)
         {
             Level = level;
+            _upgradeLevel = upgradeLevel;
             this.algorithm = algorithm;
         }
 
@@ -78,9 +87,22 @@ namespace Game
         public float NextPrice { get => algorithm.GetNextPrice(Level); set { } }
 
         private float _value;
-        public float Value { get => algorithm.GetValue(_value, Level); set { _value = value; } }
+        public float Value { get => algorithm.GetValue(Level, _upgradeLevel); set { _value = value; } }
 
         public float NextValue { get => algorithm.GetNextValue(Level); set { } }
+
+        private int _upgradeLevel;
+
+        public int UpgradeLevel { get => _upgradeLevel; set { SetField(ref _upgradeLevel, value); } }
+
+        public float UpgradePrice { get => algorithm.GetUpgradePrice(_upgradeLevel); set { } }
+        public float NextUpgradePrice { get => algorithm.GetNextUpgradePrice(_upgradeLevel); set { }}
+
+        // TODO: setter
+        public void Upgrade()
+        {
+            _upgradeLevel++;
+        }
     }
 
     public class Weapon : MessageHandler
@@ -105,8 +127,8 @@ namespace Game
 
             this.algorithmHolder = algorithm;
             
-            DPS = new WeaponStat(data.dpsLevel, algorithm.DPS);
-            DMG = new WeaponStat(data.dmgLevel, algorithm.DMG);
+            DPS = new WeaponStat(data.dpsLevel, data.upgradeLevel, algorithm.DPS);
+            DMG = new WeaponStat(data.dmgLevel, data.upgradeLevel, algorithm.DMG);
         }
 
         public override void InitMessageHandler()

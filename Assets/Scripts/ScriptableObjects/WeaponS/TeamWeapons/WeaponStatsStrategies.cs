@@ -1,23 +1,32 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game
 {
     [System.Serializable]
     public class WeaponStatsAlgorithm
     {
+        [Header("Price/Value algorithm")]
         public float basePrice;
-        [Tooltip("Optimal value between (1.07 - 1.15)")]
+        [Tooltip("Optimal between (1.07 - 1.15)")]
         public float priceMultiplier;
+        
+        public float baseValue;
+        public float valueMultiplier;
+
+        [Header("Upgrade algorithm")]
+        public float baseUpgradePrice;
+        public float upgradePriceMultiplier;
+        public int maxUpgradeLevel;
+        public float upgradeValueMultiplier = 2.0f;
 
         // TODO: add these fields
         // public float baseValue;
         // public float valueMultiplier;
 
-        // TODO: add these fields: 
-        // public float[] skillMultipliers;        <-- to be set by outer script, init through PlayerController/GameManager Init() chain
-        // public float[] abilityMultipliers;      <-- to be set by outer script, updated through some methods, etc.
+        // TODO: add these fields:
+        // public float baseUpgradePrice;
+        // public float maxSkillLevel;
+        // public float skillMultiplier; <-- thus, we should add skillLevel field in the Weapon
 
         public float GetPrice(int level)
         {
@@ -29,12 +38,23 @@ namespace Game
             return GetPrice(++level);
         }
 
-        public float GetValue(float currValue, int level)
+        public float GetUpgradePrice(int skillLevel)
         {
-            // How value should be calculated:
-            // public float GetValue(int currValue, int level, int skillLevel)
-            // return currValue + level * baseValue * valueMultiplier * skillLevel * baseSkillValue * skillMultiplier;
-            return level;
+            return baseUpgradePrice * Mathf.Pow(upgradePriceMultiplier, skillLevel);
+        }
+
+        public float GetNextUpgradePrice(int level)
+        {
+            return GetUpgradePrice(level);
+        }
+
+        public float GetValue(int level, int upgradeLevel)
+        {
+            // How value should be calculated: 
+            // public float GetValue(int level, int skillLevel, int globalDPSMultiplier)
+            // return level * baseValue * valueMultiplier * skillLevel * skillMultiplier * globalDPSMultiplier;
+            float upgradeValue = upgradeLevel <= 0 ? 1 : 1 * Mathf.Pow(upgradeValueMultiplier, upgradeLevel);
+            return baseValue * Mathf.Pow(valueMultiplier, level) * level * upgradeValue;
         }
 
         public float GetNextValue(int level)

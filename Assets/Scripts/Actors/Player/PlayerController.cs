@@ -7,13 +7,17 @@ namespace Game
 {
     public class PlayerController
     {
-        public PlayerModel model;
-        public PlayerView view;
+        private PlayerModel model;
+        private PlayerView view;
 
-        public PlayerController(PlayerModel model, PlayerView view)
+        // TODO: InputManager will be renamed to ResearchView and will be Canvas (and an input manager at once)
+        private InputManager researchView;
+
+        public PlayerController(PlayerModel model, PlayerView view, InputManager researchView)
         {
             this.model = model;
             this.view = view;
+            this.researchView = researchView;
 
             view.Init(model);
 
@@ -22,6 +26,9 @@ namespace Game
 
             view.OnTeamWeaponBtnClick += HandleTeamWeaponBtnClick;
             view.OnClickGunBtnClick += HandleClickGunBtnClick;
+
+            researchView.OnKeyPress += HandleResearchKeyPress;
+
 
             model.PropertyChanged += HandlePropertyChanged;
         }
@@ -57,6 +64,45 @@ namespace Game
         //         weapon.DPS.Value -= increaseAmount;
         //     }
         // }
+
+        // TODO: Instead of updating view manually here, react to teamWeapons updates
+        private void HandleResearchKeyPress(object sender, InputEventArgs e)
+        {
+            switch(e.KeyCode)
+            {
+                case InputEventArgs.INPUT_KEY_CODE.NUM_KEY_1:
+                    if (model.teamWeapons.ContainsKey("StandardPistol"))
+                    {
+                        Weapon wpn;
+
+                        if (model.teamWeapons.TryGetValue("StandardPistol", out wpn))
+                        {
+                            wpn.DPS.Upgrade();
+                            model.SaveTeamWeapons(model.teamWeapons);
+                            view.TeamPanel.UpdateTeamPanel(model.teamWeapons);
+                            Debug.Log("StandardPistol was upgraded");
+                            // TODO: (LP):
+                            // ideally, 
+                            // (1) player controller updates the model, 
+                            // (2) player controller reacts to the model update by updating the view
+                            //wpn.DPS.Level++;
+                            //model.SaveTeamWeapons(model.teamWeapons);
+                            //view.TeamPanel.UpdateTeamPanel(model.teamWeapons);
+                        }
+                    }
+                    break;
+
+                case InputEventArgs.INPUT_KEY_CODE.NUM_KEY_2:
+                    Debug.Log("PlayerController: KeyCode_2");
+                    break;
+                case InputEventArgs.INPUT_KEY_CODE.NUM_KEY_3:
+                    Debug.Log("PlayerController: KeyCode_3");
+                    break;
+
+                default:
+                    break;
+            }
+        }
 
         private void HandleClicked(object sender, EventArgs e)
         {
