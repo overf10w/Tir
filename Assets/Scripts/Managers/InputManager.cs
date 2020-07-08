@@ -14,6 +14,7 @@ namespace Game
             NUM_KEY_3,
             NUM_KEY_4,
             NUM_KEY_5,
+            DPS_MULTIPLIER
         }
         public const string NUM_KEY_1 = "1";
         public const string NUM_KEY_2 = "2";
@@ -43,7 +44,7 @@ namespace Game
             }
             else if (Input.GetKeyUp(KeyCode.Alpha2))
             {
-                OnKeyPress?.Invoke(this, new InputEventArgs(InputEventArgs.INPUT_KEY_CODE.NUM_KEY_2));
+                OnKeyPress?.Invoke(this, new InputEventArgs(InputEventArgs.INPUT_KEY_CODE.DPS_MULTIPLIER));
             }
         }
     }

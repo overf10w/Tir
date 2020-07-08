@@ -61,7 +61,7 @@ namespace Game
         {
             foreach (var weapon in weapons)
             {
-                Debug.Log("UpdateTeamPanel: weapon.Key: " + weapon.Key + ", weapon.Value.DPS.Price " + weapon.Value.DPS.Price);
+                //Debug.Log("UpdateTeamPanel: weapon.Key: " + weapon.Key + ", weapon.Value.DPS.Price " + weapon.Value.DPS.Price);
             }
             if (weapons != null)
             {
@@ -75,13 +75,16 @@ namespace Game
 
                             script.UpdateSelf(weapon.Value.DPS, weapon.Value.DMG);
 
-                            Debug.Log("TeamPanel.cs: hey there!");
+                            Debug.Log("TeamPanel.UpdateTeamPanel(): " + weapon.Value.DPS.Value);
+
+                            
                             break;
                         }
                     }
                 }
             }
         }
+
 
 
         public void Init(Dictionary<string, Weapon> weapons)
@@ -93,7 +96,7 @@ namespace Game
             weaponUiEntryPrefab = Resources.Load<GameObject>("Prefabs/WeaponPanelEntry");
 
             weaponUiEntries = new List<GameObject>();
-            Debug.Log("TeamPanel.cs: weaponUiEntry == null: " + (weaponUiEntryPrefab == null).ToString());
+            //Debug.Log("TeamPanel.cs: weaponUiEntry == null: " + (weaponUiEntryPrefab == null).ToString());
 
 
             if (weapons != null)

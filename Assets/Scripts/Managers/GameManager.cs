@@ -102,7 +102,7 @@ using UnityEngine;
 // 1. Git commit - [done]
 
 // 06-JUL-20:
-// 0. Introduce Ability / Skill / Upgrade concept (Ability is a skill applied for a limited amount of time):
+// 0. Introduce Ability / Skill / Upgrade concept (Ability is a skill applied for a limited amount of time): - [done]
 //    https://forum.unity.com/threads/ability-slots-system.618382/
 //    https://www.reddit.com/r/Unity3D/comments/b5dcz1/best_way_to_create_an_ability_system/
 //    https://forum.unity.com/threads/how-did-you-design-your-ability-system.355467/

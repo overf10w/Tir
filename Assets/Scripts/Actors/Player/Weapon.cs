@@ -70,6 +70,30 @@ namespace Game
             Level = level;
         }
 
+        private float dpsMultiplier;
+
+        private PlayerStats playerStats;
+
+        public void UpdateSelf()
+        {
+            dpsMultiplier = playerStats.dpsMultiplier;
+        }
+
+        public WeaponStat(int level, WeaponStatData weaponStats, PlayerStats playerStats, WeaponStatsAlgorithm algorithm)
+        {
+            // Init this WeaponStat's stats
+            Level = level;
+            _upgradeLevel = weaponStats.upgradeLevel;
+
+            // Init global teamWeaponsStats
+            dpsMultiplier = playerStats.dpsMultiplier;
+
+            Debug.LogWarning("Weapon.dpsMultiplier: " + dpsMultiplier);
+
+            this.algorithm = algorithm;
+            this.playerStats = playerStats;
+        }
+
         public WeaponStat(int level, int upgradeLevel, WeaponStatsAlgorithm algorithm)
         {
             Level = level;
@@ -87,7 +111,7 @@ namespace Game
         public float NextPrice { get => algorithm.GetNextPrice(Level); set { } }
 
         private float _value;
-        public float Value { get => algorithm.GetValue(Level, _upgradeLevel); set { _value = value; } }
+        public float Value { get => algorithm.GetValue(Level, _upgradeLevel, dpsMultiplier); set { _value = value; } }
 
         public float NextValue { get => algorithm.GetNextValue(Level); set { } }
 
@@ -107,6 +131,8 @@ namespace Game
 
     public class Weapon : MessageHandler
     {
+        // TODO: readonly or smth
+        public PlayerStats playerStats;
         // TODO (LP): (?) private set
         // TODO: this stat to become SPS - Shots Per Second
         public WeaponStat DPS { get; set; }
@@ -127,8 +153,8 @@ namespace Game
 
             this.algorithmHolder = algorithm;
             
-            DPS = new WeaponStat(data.dpsLevel, data.upgradeLevel, algorithm.DPS);
-            DMG = new WeaponStat(data.dmgLevel, data.upgradeLevel, algorithm.DMG);
+            DPS = new WeaponStat(data.dpsLevel, data, playerStats, algorithm.DPS);
+            DMG = new WeaponStat(data.dmgLevel, data, playerStats, algorithm.DMG);
         }
 
         public override void InitMessageHandler()
@@ -143,7 +169,7 @@ namespace Game
         {
             if (message.Type == MessageType.WaveChanged)
             {
-                Debug.Log("Weapon.cs: On Wave Changed!");
+                //Debug.Log("Weapon.cs: On Wave Changed!");
                 this.wave = (Wave)message.objectValue;
             }
         }
@@ -164,6 +190,12 @@ namespace Game
                     Debug.Log("Weapon: " + ": There's no cube there!");
                 }
             }
+        }
+
+        public void UpdateSelf()
+        {
+            DPS.UpdateSelf();
+            DMG.UpdateSelf();
         }
 
         private void Update()

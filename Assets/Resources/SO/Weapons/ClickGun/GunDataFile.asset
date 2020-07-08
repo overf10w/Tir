@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunStats:
     weaponName: Gun
-    dpsLevel: 4
-    dmgLevel: 2
+    dpsLevel: 0
+    dmgLevel: 0
     upgradeLevel: 0

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e41928f1458c48488933841db137b8a, type: 3}
   m_Name: WeaponDataFiles
   m_EditorClassIdentifier: 
+  dpsMultiplier: 0
   weapons:
   - weaponName: StandardPistol
     dpsLevel: 0

@@ -48,13 +48,13 @@ namespace Game
             return GetUpgradePrice(level);
         }
 
-        public float GetValue(int level, int upgradeLevel)
+        public float GetValue(int level, int upgradeLevel, float dpsMultiplier)
         {
             // How value should be calculated: 
             // public float GetValue(int level, int skillLevel, int globalDPSMultiplier)
             // return level * baseValue * valueMultiplier * skillLevel * skillMultiplier * globalDPSMultiplier;
             float upgradeValue = upgradeLevel <= 0 ? 1 : 1 * Mathf.Pow(upgradeValueMultiplier, upgradeLevel);
-            return baseValue * Mathf.Pow(valueMultiplier, level) * level * upgradeValue;
+            return baseValue * Mathf.Pow(valueMultiplier, level) * level * upgradeValue * dpsMultiplier;
         }
 
         public float GetNextValue(int level)

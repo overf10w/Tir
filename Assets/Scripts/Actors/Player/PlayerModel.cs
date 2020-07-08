@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using UnityEngine;
 
@@ -10,6 +12,7 @@ namespace Game
     [System.Serializable]
     public class PlayerModel
     {
+        #region NotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {
@@ -23,17 +26,23 @@ namespace Game
             OnPropertyChanged(propertyName);
             return true;
         }
+        #endregion
 
         public Dictionary<string, Weapon> teamWeapons;
         private WeaponStatsStrategies weaponStatsStrategies;
 
         public WeaponStatData gunData;
         public WeaponStatsAlgorithmsHolder gunAlgorithmHolder;
+
+        [HideInInspector]
+        public PlayerStats playerStats;
+        
+        // Click Gun Stats
         public WeaponStat DPS { get; set; }
         public WeaponStat DMG { get; set; }
 
         // TODO (LP): instantiating of TeamWeapons should be moved to PlayerView
-        private void InitTeamWeapons()
+        private void InitTeamWeapons(PlayerStats playerStats)
         {
             teamWeapons = new Dictionary<string, Weapon>();
 
@@ -49,6 +58,7 @@ namespace Game
                     {
                         GameObject obj = new GameObject(weapon.weaponName);
                         Weapon weaponScript = obj.AddComponent<Weapon>();
+                        weaponScript.playerStats = playerStats;
                         // TODO: 
                         // 1. Subscribe to weaponScript.OnPropertyChanged
                         // 2. Raise the event when notified OnPropertyChanged
@@ -56,10 +66,18 @@ namespace Game
 
                         weaponScript.Init(algo, weapon);
                         teamWeapons.Add(weapon.weaponName, weaponScript);
-                        Debug.Log("weapon.weaponName: [" + weapon.weaponName + "] == algo.name: [" + algo.name + "]");
+                        //Debug.Log("weapon.weaponName: [" + weapon.weaponName + "] == algo.name: [" + algo.name + "]");
                         break;
                     }
                 }
+            }
+        }
+
+        public void UpdateTeamWeapons()
+        {
+            foreach(var wpn in teamWeapons)
+            {
+                wpn.Value.UpdateSelf();
             }
         }
 
@@ -89,7 +107,16 @@ namespace Game
             Level = playerStats.level;
             _timeLastPlayed = playerStats.timeLastPlayed;
 
+            playerStats.PropertyChanged += HandlePlayerStatChanged;
+
             Debug.Log("PlayerModel: Loaded Gold: " + Gold + ", Level: " + Level);
+        }
+
+        public event EventHandler<GenericEventArgs<string>> OnGlobalStatChanged;
+
+        public void HandlePlayerStatChanged(object sender, PropertyChangedEventArgs args)
+        {
+            OnGlobalStatChanged?.Invoke(sender, new GenericEventArgs<string>(args.PropertyName));
         }
 
         public void SavePlayerStats()
@@ -101,6 +128,7 @@ namespace Game
             playerStats.gold = Gold;
             playerStats.level = Level;
             playerStats.timeLastPlayed = DateTime.Now.Ticks;
+            playerStats.dpsMultiplier = this.playerStats.dpsMultiplier;
 
             ResourceLoader.Save<PlayerStats>(path, playerStats);
         }
@@ -147,11 +175,12 @@ namespace Game
         {
             weaponStatsStrategies = Resources.Load<WeaponStatsStrategies>("SO/Weapons/TeamWeapons/WeaponStatsStrategies");
 
-            InitTeamWeapons();
+            InitPlayerStats();
+
+            InitTeamWeapons(playerStats);
 
             InitClickGun();
 
-            InitPlayerStats();
 
             //InitStats(playerStats);
         }
@@ -201,14 +230,38 @@ namespace Game
             _timeLastPlayed = playerStats.timeLastPlayed;
         }
 
-        private PlayerStats playerStats;
     }
 
     [System.Serializable]
-    public class PlayerStats
+    public class PlayerStats : INotifyPropertyChanged
     {
+        [Header("Player")]
         public float gold;
         public int level;
         public long timeLastPlayed;
+
+        [Header("Team Stats")]
+        [Tooltip("1.0 - 7.0")]
+        public float dpsMultiplier;
+
+        public float DPSMultiplier { get => dpsMultiplier; set { SetField(ref dpsMultiplier, value); } }
+
+        #region INotifyPropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        protected bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value))
+            {
+                return false;
+            }
+            field = value;
+            OnPropertyChanged(propertyName);
+            return true;
+        }
+        #endregion
     }
 }

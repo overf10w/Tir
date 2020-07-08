@@ -31,6 +31,14 @@ namespace Game
 
 
             model.PropertyChanged += HandlePropertyChanged;
+            model.OnGlobalStatChanged += HandleGlobalStatChanged;
+        }
+
+        private void HandleGlobalStatChanged(object sender, GenericEventArgs<string> args)
+        {
+            Debug.Log("PlayerController: Notified of GlobalDPSMultiplier change");
+            model.UpdateTeamWeapons();
+            view.TeamPanel.UpdateTeamPanel(model.teamWeapons);
         }
 
         // One important notice: 
@@ -92,8 +100,9 @@ namespace Game
                     }
                     break;
 
-                case InputEventArgs.INPUT_KEY_CODE.NUM_KEY_2:
-                    Debug.Log("PlayerController: KeyCode_2");
+                case InputEventArgs.INPUT_KEY_CODE.DPS_MULTIPLIER:
+                    model.playerStats.DPSMultiplier++;
+                    // model.DPS
                     break;
                 case InputEventArgs.INPUT_KEY_CODE.NUM_KEY_3:
                     Debug.Log("PlayerController: KeyCode_3");

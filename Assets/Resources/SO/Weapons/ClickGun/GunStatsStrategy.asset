@@ -18,10 +18,10 @@ MonoBehaviour:
       basePrice: 20
       priceMultiplier: 1.045
       baseValue: 5
-      valueMultiplier: 0
-      baseUpgradePrice: 0
-      upgradePriceMultiplier: 0
-      maxUpgradeLevel: 0
+      valueMultiplier: 1
+      baseUpgradePrice: 2
+      upgradePriceMultiplier: 1
+      maxUpgradeLevel: 100
       upgradeValueMultiplier: 2
     DMG:
       basePrice: 25

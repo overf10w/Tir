@@ -8,6 +8,8 @@ namespace Game
     [System.Serializable]
     public class WeaponDataFiles : ScriptableObject
     {
+        public float dpsMultiplier;
+
         public WeaponStatData[] weapons;
     }
 }
