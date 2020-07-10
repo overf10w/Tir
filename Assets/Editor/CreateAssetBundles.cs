@@ -2,17 +2,20 @@
 using System.IO;
 using UnityEngine;
 
-public class CreateAssetBundles
+namespace Game
 {
-    [MenuItem("Assets/Build AssetBundles")]
-    static void BuildAllAssetBundles()
+    public class CreateAssetBundles
     {
-        string assetBundleDirectory = Application.streamingAssetsPath;
-        if (!Directory.Exists(assetBundleDirectory))
+        [MenuItem("Assets/Build AssetBundles")]
+        static void BuildAllAssetBundles()
         {
-            Directory.CreateDirectory(assetBundleDirectory);
+            string assetBundleDirectory = Application.streamingAssetsPath;
+            if (!Directory.Exists(assetBundleDirectory))
+            {
+                Directory.CreateDirectory(assetBundleDirectory);
+            }
+            // TODO: Buildtarget.StandaloneWindows -> BuildTarget.Standalone
+            BuildPipeline.BuildAssetBundles(assetBundleDirectory, BuildAssetBundleOptions.None, BuildTarget.StandaloneWindows);
         }
-        // TODO: Buildtarget.StandaloneWindows -> BuildTarget.Standalone
-        BuildPipeline.BuildAssetBundles(assetBundleDirectory, BuildAssetBundleOptions.None, BuildTarget.StandaloneWindows);
     }
 }

@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class MessageHandler : MonoBehaviour
+namespace Game
 {
-    public abstract void HandleMessage(Message message);
+    public abstract class MessageHandler : MonoBehaviour
+    {
+        public abstract void InitMessageHandler();
+        public abstract void HandleMessage(Message message);
+    }
 }

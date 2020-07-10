@@ -1,5 +1,8 @@
-﻿public struct MessageSubscriber
+﻿namespace Game
 {
-    public MessageType[] MessageTypes;
-    public MessageHandler Handler;
+    public struct MessageSubscriber
+    {
+        public MessageType[] MessageTypes;
+        public MessageHandler Handler;
+    }
 }

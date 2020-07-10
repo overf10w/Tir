@@ -1,0 +1,19 @@
+ManifestFileVersion: 0
+CRC: 2496450282
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: b95bcb797fdaa9093c191e74b297bc9b
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: cb3f6df5cbc4a2990c44c2787bc9553a
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/Sprites/UI/TeamPanel/Icons/MachineGun.png
+- Assets/Sprites/UI/TeamPanel/Icons/StandardPistol.png
+Dependencies: []
