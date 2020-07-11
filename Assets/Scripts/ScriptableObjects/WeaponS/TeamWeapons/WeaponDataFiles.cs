@@ -8,6 +8,9 @@ namespace Game
     [System.Serializable]
     public class WeaponDataFiles : ScriptableObject
     {
+        private static WeaponDataFiles _instance;
+        public static WeaponDataFiles Instance { get => _instance; }
+
         public float dpsMultiplier;
 
         public WeaponStatData[] weapons;

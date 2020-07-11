@@ -101,7 +101,9 @@ namespace Game
                     break;
 
                 case InputEventArgs.INPUT_KEY_CODE.DPS_MULTIPLIER:
-                    model.playerStats.DPSMultiplier++;
+                    float cached = model.playerStats.DPSMultiplier;
+
+                    model.playerStats["DPSMultiplier"] = cached + 1;
                     // model.DPS
                     break;
                 case InputEventArgs.INPUT_KEY_CODE.NUM_KEY_3:

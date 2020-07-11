@@ -111,8 +111,20 @@ using UnityEngine;
 // 0. Introduce fortnite-style combos for gaining extra money (encourages active gameplay)
 
 // 08-JUL-20:
-// 0. After Level 100, introduce concept of a time warp: the user loses their progress to play the game anew, with some of their skills and abilities preserved
-//    so the user can get lvl(0-200) quicker, so the user level increase speed is higher than that if their chose not to do a time warp
+// 0. After Level 100, introduce concept of a time warp: the user loses their progress to play the game anew:
+//      1. The TeamWeapons levels are all set to 0
+//      2. The Gun level is set to 0
+//      3. The Player Level is set to 0
+//      4. Some of their skills and abilities preserved: (done via the skill tree):
+//                                                            - global DPS multiplier
+//                                                            - ability cooldown decrease multiplier
+//                                                            - bank coefficient (money earned multiplier (gives +3% to earned money))
+//                                                            - increased chance of weapons not missing the targets
+//                                                            - decrease cookie anti-matter (the cookie anti-matter is a coeff, like dpsMultiplier ())
+//                                                            - increase cookie-UFO encounter (cookie UFO is just like container with trillion cubes)
+//                                                            - increase cookie wisdom cube encounter (contains very big amount of gold)
+//                                                            - convert cookie anti-matter into cookie pro-matter (for each 1% of anti-matter reduced, pro-matter increases by 1%)
+//    so the user can get lvl(0-200) quicker, so the user level increase speed is higher than that if they chose not to do a time warp
 
 // 09-JUL-20:
 // 0. Add upgrades panel to each team weapon - i.e. increase chance of rage mode by 10%, increase chance of anti-cookie-matter hit by 10%
@@ -134,7 +146,7 @@ using UnityEngine;
 //        - when player kills 3 cubes in such a manner, he is rewarded with gold and the whole wave HP is decreased slightly
 // 0. The Waves aren't really changed with levels. What changes is just Cube.cs configuration - its HP, bonusPoints and appearence (through SO config file)
 // 1. With each level completed the giant planet cookie on horizon comes a little bit closer to player, and in the end of game, it's like, very close
-// 2. There's achievement: "cookie hero", "cookieverse explosion", "cookieverse spacecookie warp", "5 clicks 5 kills 
+// 2. There's achievement: "cookie hero", "cookieverse explosion", "cookieverse spacecookie warp", "5 clicks 5 kills"
 //    (when player kills 5 in a row 1 click per cube, ofc they need to have strong stats to achieve this)"
 // 3. We can only have one real visible weapon - player Orange Gun - Gun.cs - [done]
 // 4. All Fire() commands of that visible weapon should be queued : but why ? - actually we don't need to queue this, remember KISS principle

@@ -10,12 +10,20 @@ namespace Game
     {
         public PlayerStats playerStats;
 
+        [HideInInspector]
         public LevelListUI LevelListUI;
         public ResourceLoader ResourceLoader;
 
+        [HideInInspector]
         public Text PlayerGoldTxt;
+
+        [HideInInspector]
         public Text PlayerCurrentWaveTxt;
+
+        [HideInInspector]
         public Text TeamDPSTxt;
+
+        [HideInInspector]
         public Text ElapsedTimeSpanTxt;
 
         public void Init(PlayerModel playerModel)

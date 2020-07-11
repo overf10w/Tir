@@ -48,9 +48,27 @@ namespace Game
 
             string path = Path.Combine(Application.persistentDataPath, "weapons.dat");
 
-            WeaponStatData[] loadedWeapons = ResourceLoader.Load<WeaponStatData[]>(path);
+            WeaponStatData[] weaponStats = ResourceLoader.Load<WeaponStatData[]>(path);
 
-            foreach (var weapon in loadedWeapons)
+            // TODO: init with special scriptable object injected here (through constructor chain) all the way down through GameManager
+            if (weaponStats == null)
+            {
+                weaponStats = new WeaponStatData[2];
+
+                weaponStats[0] = new WeaponStatData();
+                weaponStats[0].dmgLevel = 0;
+                weaponStats[0].dpsLevel = 0;
+                weaponStats[0].upgradeLevel = 0;
+                weaponStats[0].weaponName = "StandardPistol";
+
+                weaponStats[1] = new WeaponStatData();
+                weaponStats[1].dmgLevel = 0;
+                weaponStats[1].dpsLevel = 0;
+                weaponStats[1].upgradeLevel = 0;
+                weaponStats[1].weaponName = "MachineGun";
+            }
+
+            foreach (var weapon in weaponStats)
             {
                 foreach(var algo in weaponStatsStrategies.algorithms)
                 {
@@ -86,6 +104,14 @@ namespace Game
             string path = Path.Combine(Application.persistentDataPath, "clickGun.dat");
 
             gunData = ResourceLoader.Load<WeaponStatData>(path);
+            if (gunData == null)
+            {
+                gunData = new WeaponStatData();
+                gunData.dmgLevel = 0;
+                gunData.dpsLevel = 0;
+                gunData.upgradeLevel = 0;
+                gunData.weaponName = "Gun";
+            }
             gunAlgorithmHolder = Resources.Load<GunStatsStrategy>("SO/Weapons/ClickGun/GunStatsStrategy").algorithm;
 
             DPS = new WeaponStat(gunData.dpsLevel, gunData.upgradeLevel, gunAlgorithmHolder.DPS);
@@ -101,15 +127,23 @@ namespace Game
         {
             string path = Path.Combine(Application.persistentDataPath, "playerStats.dat");
 
-            playerStats = ResourceLoader.Load<PlayerStats>(path);
+            this.playerStats = ResourceLoader.Load<PlayerStats>(path);
 
-            Gold = playerStats.gold;
-            Level = playerStats.level;
-            _timeLastPlayed = playerStats.timeLastPlayed;
+            if (this.playerStats == null)
+            {
+                this.playerStats = new PlayerStats();
+                this.playerStats.gold = 0;
+                this.playerStats.level = 0;
+                this.playerStats.timeLastPlayed = DateTime.Now.Ticks;
+                this.playerStats.dpsMultiplier = 1.1f;
+            }
 
-            playerStats.PropertyChanged += HandlePlayerStatChanged;
+            Gold = this.playerStats.gold;
+            Level = this.playerStats.level;
+            _timeLastPlayed = this.playerStats.timeLastPlayed;
 
-            Debug.Log("PlayerModel: Loaded Gold: " + Gold + ", Level: " + Level);
+            this.playerStats.PropertyChanged += HandlePlayerStatChanged;
+            Debug.Log("PlayerModel: InitPlayerStats: playerStats == null : " + (this.playerStats == null).ToString());
         }
 
         public event EventHandler<GenericEventArgs<string>> OnGlobalStatChanged;
@@ -246,6 +280,13 @@ namespace Game
 
         public float DPSMultiplier { get => dpsMultiplier; set { SetField(ref dpsMultiplier, value); } }
 
+        // Indexer (will be used by Upgrade system a lot)
+        public object this[string propertyName]
+        {
+            get { return this.GetType().GetProperty(propertyName).GetValue(this, null); }
+            set { this.GetType().GetProperty(propertyName).SetValue(this, value, null); }
+        }
+
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
@@ -254,6 +295,7 @@ namespace Game
         }
         protected bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
         {
+            Debug.Log("PlayerStats: SetField<T>(): Invoked");
             if (EqualityComparer<T>.Default.Equals(field, value))
             {
                 return false;

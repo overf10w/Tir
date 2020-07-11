@@ -169,9 +169,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 193d60ceb587e8a4dba7ce481233ced7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Gun: {fileID: 0}
+  Gun: {fileID: 114516165194106670}
   Ui: {fileID: 0}
   TeamPanel: {fileID: 0}
+  ClickGunPanel: {fileID: 0}
 --- !u!1 &1897732656888728
 GameObject:
   m_ObjectHideFlags: 0

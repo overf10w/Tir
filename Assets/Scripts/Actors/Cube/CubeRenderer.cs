@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.WSA;
 
 namespace Game
 {
@@ -28,10 +27,9 @@ namespace Game
         {
             if (currHP <= 0)
             {
-
                 return;
-
             }
+
             Debug.Log("CubeRenderer: HandleHPChange");
             float deltaHp = currHP - hp.val;
             float deltaScale = deltaHp * hpScaleMultiplier;

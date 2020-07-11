@@ -32,6 +32,7 @@ namespace Game
         public event EventHandler<GenericEventArgs<WeaponStatBtnClickArgs>> OnTeamWeaponBtnClick = (sender, e) => { };
         public event EventHandler<GenericEventArgs<WeaponStatBtnClickArgs>> OnClickGunBtnClick = (sender, e) => { };
 
+        [HideInInspector]
         public Gun Gun;
 
         public UserStatsCanvas Ui;
