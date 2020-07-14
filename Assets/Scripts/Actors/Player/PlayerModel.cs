@@ -120,7 +120,7 @@ namespace Game
             DPS.PropertyChanged += HandleClickGunChanged;
             DMG.PropertyChanged += HandleClickGunChanged;
 
-            Debug.Log("PlayerModel: Read gunData: dpsLevel: " + gunData.dpsLevel + ", dmgLevel: " + gunData.dmgLevel);
+            //Debug.Log("PlayerModel: Read gunData: dpsLevel: " + gunData.dpsLevel + ", dmgLevel: " + gunData.dmgLevel);
         }
 
         private void InitPlayerStats()
@@ -143,7 +143,7 @@ namespace Game
             _timeLastPlayed = this.playerStats.timeLastPlayed;
 
             this.playerStats.PropertyChanged += HandlePlayerStatChanged;
-            Debug.Log("PlayerModel: InitPlayerStats: playerStats == null : " + (this.playerStats == null).ToString());
+            //Debug.Log("PlayerModel: InitPlayerStats: playerStats == null : " + (this.playerStats == null).ToString());
         }
 
         public event EventHandler<GenericEventArgs<string>> OnGlobalStatChanged;
@@ -288,6 +288,7 @@ namespace Game
         }
 
         #region INotifyPropertyChanged
+        [field: NonSerialized]
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {
@@ -295,7 +296,7 @@ namespace Game
         }
         protected bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
         {
-            Debug.Log("PlayerStats: SetField<T>(): Invoked");
+            //Debug.Log("PlayerStats: SetField<T>(): Invoked");
             if (EqualityComparer<T>.Default.Equals(field, value))
             {
                 return false;

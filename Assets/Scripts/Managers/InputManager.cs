@@ -29,6 +29,7 @@ namespace Game
             KeyCode = keyCode;
         }
     }
+
     /// <summary>
     /// Used primarily for cases when player presses special keys like 1, 2, etc.
     /// </summary>

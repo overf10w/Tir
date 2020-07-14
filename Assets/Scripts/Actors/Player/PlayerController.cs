@@ -8,37 +8,49 @@ namespace Game
     public class PlayerController
     {
         private PlayerModel model;
-        private PlayerView view;
+        private PlayerView playerView;
 
-        // TODO: InputManager will be renamed to ResearchView and will be Canvas (and an input manager at once)
-        private InputManager researchView;
+        private InputManager inputManager;
 
-        public PlayerController(PlayerModel model, PlayerView view, InputManager researchView)
+        public PlayerController(PlayerModel model, Upgrades.Upgrade[] upgrades, PlayerView view, InputManager inputManager)
         {
             this.model = model;
-            this.view = view;
-            this.researchView = researchView;
+            this.playerView = view;
+            this.inputManager = inputManager;
 
-            view.Init(model);
+            view.Init(model, upgrades);
 
             view.OnClicked += HandleClicked;
             view.OnCubeDeath += HandleCubeDeath;
 
             view.OnTeamWeaponBtnClick += HandleTeamWeaponBtnClick;
             view.OnClickGunBtnClick += HandleClickGunBtnClick;
+            view.OnUpgradeBtnClick += HandleUpgradeBtnClick;
 
-            researchView.OnKeyPress += HandleResearchKeyPress;
-
+            inputManager.OnKeyPress += HandleResearchKeyPress;
 
             model.PropertyChanged += HandlePropertyChanged;
             model.OnGlobalStatChanged += HandleGlobalStatChanged;
+        }
+
+        private void HandleUpgradeBtnClick(object sender, UpgradeBtnClickEventArgs e)
+        {
+            //Debug.Log("PlayerController.cs: HandleUpgradeBtnClick");
+
+            string indexer = e.upgrade.indexer;
+
+            float cached = (float)model.playerStats[indexer];
+
+            model.playerStats[indexer] = cached + 1;
+
+            e.upgrade.IsActive = false;
         }
 
         private void HandleGlobalStatChanged(object sender, GenericEventArgs<string> args)
         {
             Debug.Log("PlayerController: Notified of GlobalDPSMultiplier change");
             model.UpdateTeamWeapons();
-            view.TeamPanel.UpdateTeamPanel(model.teamWeapons);
+            playerView.TeamPanel.UpdateTeamPanel(model.teamWeapons);
         }
 
         // One important notice: 
@@ -87,7 +99,7 @@ namespace Game
                         {
                             wpn.DPS.Upgrade();
                             model.SaveTeamWeapons(model.teamWeapons);
-                            view.TeamPanel.UpdateTeamPanel(model.teamWeapons);
+                            playerView.TeamPanel.UpdateTeamPanel(model.teamWeapons);
                             Debug.Log("StandardPistol was upgraded");
                             // TODO: (LP):
                             // ideally, 
@@ -120,7 +132,7 @@ namespace Game
             // TODO (LP): view.Gun.Shoot(model.teamWeapons['PlayerPistol'].model.DPS);
             // For that matter, model.teamWeapons['PlayerPistol'] should be cached in PlayreController on a startup
             // And also, for that matter, playerGun.DPS shouldn't be upgradeable at all, its dps.Multiplier should be 0.
-            view.Gun.Shoot(model.DMG.Value);
+            playerView.Gun.Shoot(model.DMG.Value);
         }
 
         private void HandleCubeDeath(object sender, CustomArgs e)
@@ -138,14 +150,14 @@ namespace Game
             if (sender is WeaponStat weaponStat)
             {
                 Debug.Log("PlayerController: HandlePropertyChanged: model.Changed: weaponStatObject: " + weaponStat.Level);
-                view.ClickGunPanel.UpdateClickGunPanel(model.DPS, model.DMG);
+                playerView.ClickGunPanel.UpdateClickGunPanel(model.DPS, model.DMG);
             }
 
             //UnityEngine.Debug.Log("PlayerController: " + e.PropertyName);
             //view.Ui.PlayerGoldTxt.text = e.PropertyName.ToString();
             if (e.PropertyName == "Gold")
             {
-                view.Ui.PlayerGoldTxt.text = model.Gold.ToString();
+                playerView.Ui.PlayerGoldTxt.text = model.Gold.ToString();
             }
             else
             {
@@ -196,12 +208,12 @@ namespace Game
                         case "DPS":
                             wpn.DPS.Level++;
                             model.SaveTeamWeapons(model.teamWeapons);
-                            view.TeamPanel.UpdateTeamPanel(model.teamWeapons);
+                            playerView.TeamPanel.UpdateTeamPanel(model.teamWeapons);
                             break;
                         case "DMG":
                             wpn.DMG.Level++;
                             model.SaveTeamWeapons(model.teamWeapons);
-                            view.TeamPanel.UpdateTeamPanel(model.teamWeapons);
+                            playerView.TeamPanel.UpdateTeamPanel(model.teamWeapons);
                             break;
                         default:
                             break;

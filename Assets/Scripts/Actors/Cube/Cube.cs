@@ -74,7 +74,7 @@ namespace Game
 
         public void TakeDamage(float damage)
         {
-            Debug.Log("Cube.cs: TakeDamage()");
+            //Debug.Log("Cube.cs: TakeDamage()");
             Health -= damage;
             OnTakeDamage?.Invoke(this, new GenericEventArgs<float>(damage));
         }

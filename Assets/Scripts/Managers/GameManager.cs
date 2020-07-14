@@ -173,13 +173,20 @@ namespace Game
         [SerializeField]
         private InputManager researchView;
 
+        private Upgrades.Upgrade[] upgrades;
+
+        private string upgradesPath;
+
         private IEnumerator Start()
         {
             InitMessageHandler();
 
+            upgradesPath = Path.Combine(Application.persistentDataPath, "upgrades.dat");
+            upgrades = ResourceLoader.LoadUpgrades(upgradesPath);
+
             PlayerView view = Instantiate(Resources.Load<PlayerView>("Prefabs/Player"));
             PlayerModel model = new PlayerModel();
-            PlayerController pc = new PlayerController(model, view, researchView);
+            PlayerController pc = new PlayerController(model, upgrades, view, researchView);
 
             yield return null;  // we need this so the InGameCanvas receives event on spawned wave (through MessageBus)
             SpawnWave();

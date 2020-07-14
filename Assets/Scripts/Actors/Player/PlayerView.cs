@@ -31,6 +31,7 @@ namespace Game
         public event EventHandler<CustomArgs> OnCubeDeath = (sender, e) => { };
         public event EventHandler<GenericEventArgs<WeaponStatBtnClickArgs>> OnTeamWeaponBtnClick = (sender, e) => { };
         public event EventHandler<GenericEventArgs<WeaponStatBtnClickArgs>> OnClickGunBtnClick = (sender, e) => { };
+        public event EventHandler<UpgradeBtnClickEventArgs> OnUpgradeBtnClick = (sender, e) => { };
 
         [HideInInspector]
         public Gun Gun;
@@ -38,10 +39,10 @@ namespace Game
         public UserStatsCanvas Ui;
 
         public TeamPanel TeamPanel;
-
         public ClickGunPanel ClickGunPanel;
+        public ResearchPanel ResearchPanel;
 
-        public void Init(PlayerModel model)
+        public void Init(PlayerModel model, Upgrades.Upgrade[] upgrades)
         {
             InitMessageHandler();
 
@@ -62,11 +63,18 @@ namespace Game
                 ClickGunPanel.WeaponBtnClick.PlayerView = this;
             }
 
+            ResearchPanel = Ui.GetComponentInChildren<ResearchPanel>();
+            ResearchPanel.Init(upgrades);
+            if (ResearchPanel)
+            {
+                ResearchPanel.UpgradeBtnClick.PlayerView = this;
+            }
+
             Gun = GetComponentInChildren<Gun>();
 
             Gun.Init(model.gunData, model.gunAlgorithmHolder.DPS, model.gunAlgorithmHolder.DMG);
 
-            Debug.Log("PlayerView: Gun == null: " + (Gun == null).ToString());
+            //Debug.Log("PlayerView: Gun == null: " + (Gun == null).ToString());
         }
 
         private void Update()
@@ -127,6 +135,10 @@ namespace Game
             OnClickGunBtnClick?.Invoke(this, new GenericEventArgs<WeaponStatBtnClickArgs>(clickGunClickInfo));
         }
 
+        public void HandleUpgradeBtnClick(UpgradeBtnClickEventArgs clickInfo)
+        {
+            OnUpgradeBtnClick?.Invoke(this, clickInfo);
+        }
 
         //public void OnDisable()
         //{

@@ -1,9 +1,22 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace Game
 {
+    public class UpgradeBtnClickEventArgs : EventArgs
+    {
+        public Upgrades.Upgrade upgrade;
+        public UpgradeBtnClickEventArgs(Upgrades.Upgrade upgrade)
+        {
+            this.upgrade = upgrade;
+        }
+
+    }
+
     // TODO: 
     // 1. Create an Upgrades Research Center View ((with canvas and all), which listens to when playerModel.playerStats/playerModel.teamWeapons has changed)
     // 2. Create an Upgrades Research Center Controller (which listens to the View and upgrades Upgrades.playerStats accordingly)
@@ -22,8 +35,9 @@ namespace Game
         }
 
         [System.Serializable]
-        public class Upgrade
+        public class Upgrade : INotifyPropertyChanged
         {
+            public string indexer;
             public string name;
             public string description;
             public float price;
@@ -31,18 +45,42 @@ namespace Game
 
             public Criteria[] criterias;
 
-            public bool isActive;
-            public bool IsActive()
+            [SerializeField]
+            private bool _isActive;
+            public bool IsActive { get => _isActive; set { SetField(ref _isActive, value); } }
+            //public bool IsActive()
+            //{
+            //    foreach (var criteria in criterias)
+            //    {
+            //        if (criteria.IsSatisfied)
+            //        {
+            //            return true;
+            //        }
+            //    }
+            //    return false;
+            //}
+
+            #region INotifyPropertyChanged
+            // In our case the events shouldn't be serialized, coz:
+            // 1. Had we try to serialize this event, all the MonoBehaviours subscribers would get serialized also (and MB cannot be serialized)
+            [field: NonSerialized]
+            public event PropertyChangedEventHandler PropertyChanged;
+            protected virtual void OnPropertyChanged(string propertyName)
             {
-                foreach (var criteria in criterias)
-                {
-                    if (criteria.IsSatisfied)
-                    {
-                        return true;
-                    }
-                }
-                return false;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             }
+            protected bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+            {
+                Debug.Log("PlayerStats: SetField<T>(): Invoked");
+                if (EqualityComparer<T>.Default.Equals(field, value))
+                {
+                    return false;
+                }
+                field = value;
+                OnPropertyChanged(propertyName);
+                return true;
+            }
+            #endregion
         }
 
         private PlayerStats playerStats;

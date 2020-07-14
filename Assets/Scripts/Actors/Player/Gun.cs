@@ -26,7 +26,7 @@ namespace Game
             DPS = new WeaponStat(gunData.dpsLevel, gunData.upgradeLevel, dpsAlgorithm);
             DMG = new WeaponStat(gunData.dmgLevel, gunData.upgradeLevel, dmgAlgorithm);
 
-            Debug.Log("Gun.cs: Init: DPS.Value: " + DPS.Value + ", DMG.Value: " + DMG.Value);
+            //Debug.Log("Gun.cs: Init: DPS.Value: " + DPS.Value + ", DMG.Value: " + DMG.Value);
         }
 
         public void UpdateGunRotation()

@@ -6,7 +6,6 @@ using UnityEngine;
 
 namespace Game
 {
-    // TODO (only prior final build): make it singleton
     public class ResourceLoader : MonoBehaviour
     {
         public static ResourceLoader Instance;
@@ -43,7 +42,6 @@ namespace Game
 
         /// NEW BEAUTIFUL CODE GOES HERE
         /// HEHE
-
         public static T Load<T>(string path) where T : class
         {
             if (File.Exists(path))
@@ -66,5 +64,28 @@ namespace Game
                 formatter.Serialize(stream, data);
             }
         }
+
+        // TODO: if (upgrades == null) INIT upgrades with the backup SO
+        public Upgrades.Upgrade[] LoadUpgrades(string path)
+        {
+            Upgrades.Upgrade[] upgrades = Load<Upgrades.Upgrade[]>(path);
+            if (upgrades == null)
+            {
+                upgrades = new Upgrades.Upgrade[1];
+                upgrades[0] = new Upgrades.Upgrade();
+                upgrades[0].name = "DPS++";
+                upgrades[0].description = "Increase DPS by Kek%";
+                upgrades[0].price = 10000;
+                upgrades[0].amount = 100;
+
+                upgrades[0].criterias = new Upgrades.Criteria[1];
+                upgrades[0].criterias[0] = new Upgrades.Criteria();
+                upgrades[0].criterias[0].indexer = "DPSMultiplier";
+                upgrades[0].criterias[0].threshold = 0;
+            }
+            return upgrades;
+        }
+
+
     }
 }

@@ -30,7 +30,7 @@ namespace Game
                 return;
             }
 
-            Debug.Log("CubeRenderer: HandleHPChange");
+            //Debug.Log("CubeRenderer: HandleHPChange");
             float deltaHp = currHP - hp.val;
             float deltaScale = deltaHp * hpScaleMultiplier;
 

@@ -75,9 +75,7 @@ namespace Game
 
                             script.UpdateSelf(weapon.Value.DPS, weapon.Value.DMG);
 
-                            Debug.Log("TeamPanel.UpdateTeamPanel(): " + weapon.Value.DPS.Value);
-
-                            
+                            //Debug.Log("TeamPanel.UpdateTeamPanel(): " + weapon.Value.DPS.Value);
                             break;
                         }
                     }
@@ -93,11 +91,9 @@ namespace Game
 
             content = transform.Find("Scroll View/Viewport/Content").GetComponent<Transform>();
 
-            weaponUiEntryPrefab = Resources.Load<GameObject>("Prefabs/WeaponPanelEntry");
+            weaponUiEntryPrefab = Resources.Load<GameObject>("Prefabs/UI/TeamPanel/WeaponPanelEntry");
 
             weaponUiEntries = new List<GameObject>();
-            //Debug.Log("TeamPanel.cs: weaponUiEntry == null: " + (weaponUiEntryPrefab == null).ToString());
-
 
             if (weapons != null)
             {

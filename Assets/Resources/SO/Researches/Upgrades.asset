@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: Upgrades
   m_EditorClassIdentifier: 
   upgrades:
-  - name: DPS++
-    description: Increase DPS by 100%
-    price: 10000
+  - indexer: DPSMultiplier
+    name: DPS++
+    description: Increase Team DPS/DMG by 100%
+    price: 1000
     amount: 100
     criterias:
     - indexer: DPSMultiplier
       threshold: 0
-    isActive: 0
+    _isActive: 1
