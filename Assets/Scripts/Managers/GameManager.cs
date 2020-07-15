@@ -4,6 +4,29 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
+// Refactor such things:
+// Cosmetic:
+// 1. Public/private getters/setters: private fields to start with "_"
+//     1.1 Expression Body Properties where possible
+//     1.2 In Properties: not to have setter by default at all
+//     1.3 In Properties: if setters are needed, have private setters
+//     1.4 In Properties: if setters are needed outside of class, it should be very rare
+//     1.5 In Properties: setters should ONLY perform validation logic, nothing more
+// 2. Regarding [SerializeField]:
+//     2.1 [SerializeField] on same line with field, other attributes above
+// 3. Rearrange class members/fields/properties in this order:
+//     - Inner classes/INotifyPropertyChanged, encapsulated in regions
+//     - Constants
+//     - Static
+//     - Serialized fields
+//     - Public properties
+//     - Private properties
+//     - Private fields
+//     - Awake/Start/Constructor
+// 4. Mark fields const where appropriate
+// 5. Do todos
+
+
 // 16-JUN-20:
 // 0. Do TODOs in WeaponModel.cs, Weapon.cs, PlayerController.cs - [done]
 // 1. Refactor MessageBus (as in Trumpage) - [done]
@@ -157,54 +180,75 @@ namespace Game
 {
     public class GameManager : MessageHandler
     {
-        public ResourceLoader ResourceLoader;
-        
-        // TODO: remove, change to PlayerData
+        #region MessageHandler
+        public override void InitMessageHandler()
+        {
+            MessageSubscriber msc = new MessageSubscriber();
+            msc.Handler = this;
+            msc.MessageTypes = new MessageType[] { MessageType.CUBE_DEATH, MessageType.LEVEL_CHANGED };
+            MessageBus.Instance.AddSubscriber(msc);
+        }
 
-        private Wave wave;
+        public override void HandleMessage(Message message)
+        {
+            if (message.Type == MessageType.CUBE_DEATH)
+            {
+                _cubesDestroyed++;
+                if (_cubesDestroyed == _cubesSpawned)
+                {
+                    //if (lvlInd >= 3)
+                    //{
+                    //    MessageBus.Instance.SendMessage(new Message() { Type = MessageType.GameOver });
+                    //    return;
+                    //}
+                    SpawnWave();
+                }
+            }
+            // TODO: this be checked by PlayerView/Controller
+            //else if (message.Type == MessageType.LevelChanged)
+            //{
+            //    ChangeLevel(message.IntValue);
+            //    gameData._level = message.IntValue;
+            //}
+        }
+        #endregion
 
-        public PlayerWaves playerWaves;
+        [SerializeField] private ResourceLoader _resourceLoader;
+        [SerializeField] private PlayerWaves _playerWaves;
+        [SerializeField] private InputManager _inputManager;
 
-        private int cubesSpawned;
-        private int cubesDestroyed;
+        private AssetBundle _assetBundle;
+        private Upgrades.Upgrade[] _upgrades;
+        private string _upgradesPath;
 
-        private AssetBundle myLoadedAssetBundle;
-
-        [SerializeField]
-        private InputManager researchView;
-
-        private Upgrades.Upgrade[] upgrades;
-
-        private string upgradesPath;
+        private Wave _wave;
+        private int _cubesSpawned;
+        private int _cubesDestroyed;
 
         private IEnumerator Start()
         {
             InitMessageHandler();
 
-            upgradesPath = Path.Combine(Application.persistentDataPath, "upgrades.dat");
-            upgrades = ResourceLoader.LoadUpgrades(upgradesPath);
+            _upgradesPath = Path.Combine(Application.persistentDataPath, "upgrades.dat");
+            _upgrades = _resourceLoader.LoadUpgrades(_upgradesPath);
 
             PlayerView view = Instantiate(Resources.Load<PlayerView>("Prefabs/Player"));
             PlayerModel model = new PlayerModel();
-            PlayerController pc = new PlayerController(model, upgrades, view, researchView);
+            PlayerController pc = new PlayerController(model, _upgrades, view, _inputManager);
 
             yield return null;  // we need this so the InGameCanvas receives event on spawned wave (through MessageBus)
             SpawnWave();
-
-            //long elapsedTicks = DateTime.Now.Ticks - gameData._timeLastPlayed;
-            //TimeSpan elapsedSpan = new TimeSpan(elapsedTicks);
-            //// TODO (?): this can be set solely by PlayerController.cs
-            //MessageBus.Instance.SendMessage(new Message() { Type = MessageType.GameStarted, DoubleValue = elapsedSpan.TotalSeconds });
         }
 
         private void SpawnWave()
         {
-            var waves = playerWaves.waves;
+            var waves = _playerWaves.waves;
+            // TODO: Singleton Random
             var wavePrefab = waves[UnityEngine.Random.Range(0, waves.Length)];
-            wave = Instantiate(wavePrefab, wavePrefab.transform.position, Quaternion.identity) as Wave;
-            cubesSpawned = wave.cubesNumber;
-            cubesDestroyed = 0;
-            MessageBus.Instance.SendMessage(new Message() { Type = MessageType.WaveChanged, objectValue = wave });
+            _wave = Instantiate(wavePrefab, wavePrefab.transform.position, Quaternion.identity) as Wave;
+            _cubesSpawned = _wave.CubesNumber;
+            _cubesDestroyed = 0;
+            MessageBus.Instance.SendMessage(new Message() { Type = MessageType.WAVE_CHANGED, objectValue = _wave });
         }
 
         // TODO: this be moved to SceneEnvironmentManager
@@ -239,37 +283,6 @@ namespace Game
         //    SpriteRenderer renderer = go1.AddComponent<SpriteRenderer>();
         //    renderer.sprite = sprite;
         //}
-
-        public override void InitMessageHandler()
-        {
-            MessageSubscriber msc = new MessageSubscriber();
-            msc.Handler = this;
-            msc.MessageTypes = new MessageType[] { MessageType.CubeDeath, MessageType.LevelChanged };
-            MessageBus.Instance.AddSubscriber(msc);
-        }
-
-        public override void HandleMessage(Message message)
-        {
-            if (message.Type == MessageType.CubeDeath)
-            {
-                cubesDestroyed++;
-                if (cubesDestroyed == cubesSpawned)
-                {
-                    //if (lvlInd >= 3)
-                    //{
-                    //    MessageBus.Instance.SendMessage(new Message() { Type = MessageType.GameOver });
-                    //    return;
-                    //}
-                    SpawnWave();
-                }
-            }
-            // TODO: this be checked by PlayerView/Controller
-            //else if (message.Type == MessageType.LevelChanged)
-            //{
-            //    ChangeLevel(message.IntValue);
-            //    gameData._level = message.IntValue;
-            //}
-        }
 
         //private void ChangeLevel(int level)
         //{

@@ -9,78 +9,55 @@ namespace Game
 {
     public class ClickGunEntry : MonoBehaviour
     {
-        private AssetBundle assetBundle;
-
-        // View
+        private AssetBundle _assetBundle;
 
         // icon
-        [SerializeField]
-        private Image IconImg;
+        [SerializeField] private Image _iconImg;
 
         // name
-        [SerializeField]
-        private TextMeshProUGUI NameTxt;
+        [SerializeField] private TextMeshProUGUI _nameTxt;
 
         // next price
-        [SerializeField]
-        private TextMeshProUGUI DPSNextPrice;
-        [SerializeField]
-        private TextMeshProUGUI DMGNextPrice;
+        [SerializeField] private TextMeshProUGUI _dpsNextPrice;
+        [SerializeField] private TextMeshProUGUI _dmgNextPrice;
 
         // curr value
-        [SerializeField]
-        private TextMeshProUGUI DPSValueTxt;
-        [SerializeField]
-        private TextMeshProUGUI DMGValueTxt;
+        [SerializeField] private TextMeshProUGUI _dpsValueTxt;
+        [SerializeField] private TextMeshProUGUI _dmgValueTxt;
         
         // next value
-        [SerializeField]
-        private TextMeshProUGUI DPSNextValueTxt;
-        [SerializeField]
-        private TextMeshProUGUI DMGNextValueTxt;
+        [SerializeField] private TextMeshProUGUI _dpsNextValueTxt;
+        [SerializeField] private TextMeshProUGUI _dmgNextValueTxt;
 
-        [HideInInspector]
-        public Button DPSButton;
+        public Button DPSButton { get; private set; }
+        public Button DMGButton { get; private set; }
 
-        [HideInInspector]
-        public Button DMGButton;
-
-        // ViewModel
-        [HideInInspector]
-        public WeaponStat DPS;
-
-        [HideInInspector]
-        public WeaponStat DMG;
+        public WeaponStat DPS { get; private set; }
+        public WeaponStat DMG { get; private set; }
 
         public void Init(float dpsPrice, float dmgPrice)
         {
             InitButtons();
-
-            //DPSPrice.text = dpsPrice.ToString();
-            //DMGPrice.text = dmgPrice.ToString();
         }
 
         private void InitIcon(string name)
         {
-            //if (!assetBundle)
-            //{
-            assetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, "uisprites"));
-            //}
+            _assetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, "uisprites"));
 
-            if (assetBundle == null)
+            if (_assetBundle == null)
             {
                 Debug.LogError("Failed to load AssetBundle!");
                 return;
             }
 
-            if (assetBundle)
+            if (_assetBundle)
             {
-                Texture2D tex = assetBundle.LoadAsset<Texture2D>(name);
+                Texture2D tex = _assetBundle.LoadAsset<Texture2D>(name);
                 if (tex != null)
                 {
                     Sprite mySprite = Sprite.Create(tex, new Rect(0.0f, 0.0f, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100.0f);
-                    IconImg.sprite = mySprite;
-                    assetBundle.Unload(false);
+                    _iconImg.sprite = mySprite;
+                    _assetBundle.Unload(false);
                 }
                 else
                 {
@@ -99,28 +76,28 @@ namespace Game
 
             InitIcon(name);
 
-            NameTxt.text = name;
+            _nameTxt.text = name;
 
-            DPSNextPrice.text = dps.Price.ToString();
-            DMGNextPrice.text = dmg.Price.ToString();
+            _dpsNextPrice.text = dps.Price.ToString();
+            _dmgNextPrice.text = dmg.Price.ToString();
 
-            DPSValueTxt.text = dps.Value.ToString();
-            DMGValueTxt.text = dmg.Value.ToString();
+            _dpsValueTxt.text = dps.Value.ToString();
+            _dmgValueTxt.text = dmg.Value.ToString();
 
-            DPSNextValueTxt.text = dps.NextValue.ToString();
-            DMGNextValueTxt.text = dmg.NextValue.ToString();
+            _dpsNextValueTxt.text = dps.NextValue.ToString();
+            _dmgNextValueTxt.text = dmg.NextValue.ToString();
         }
 
         public void UpdateSelf(WeaponStat dps, WeaponStat dmg)
         {
-            DPSNextPrice.text = dps.Price.ToString();
-            DMGNextPrice.text = dmg.Price.ToString();
+            _dpsNextPrice.text = dps.Price.ToString();
+            _dmgNextPrice.text = dmg.Price.ToString();
 
-            DPSValueTxt.text = dps.Value.ToString();
-            DMGValueTxt.text = dmg.Value.ToString();
+            _dpsValueTxt.text = dps.Value.ToString();
+            _dmgValueTxt.text = dmg.Value.ToString();
 
-            DPSNextValueTxt.text = dps.NextValue.ToString();
-            DMGNextValueTxt.text = dmg.NextValue.ToString();
+            _dpsNextValueTxt.text = dps.NextValue.ToString();
+            _dmgNextValueTxt.text = dmg.NextValue.ToString();
         }
 
         private void InitButtons()

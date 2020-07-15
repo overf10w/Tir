@@ -18,10 +18,9 @@ namespace Game
     }
     public class ClickGunPanel : MonoBehaviour
     {
-        [SerializeField]
-        private ClickGunEntry _clickGunEntry;
+        [SerializeField] private ClickGunEntry _clickGunEntry;
 
-        public ClickGunBtnClick WeaponBtnClick { get; set; }
+        public ClickGunBtnClick WeaponBtnClick { get; private set; }
 
         public void Init(string name, WeaponStat dps, WeaponStat dmg)
         {

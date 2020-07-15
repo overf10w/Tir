@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerDataFile
   m_EditorClassIdentifier: 
   playerStats:
-    gold: 2718
+    gold: 7566
     level: 0
-    timeLastPlayed: 637303603395324272
+    timeLastPlayed: 637304437054171852
     dpsMultiplier: 1

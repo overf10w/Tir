@@ -44,9 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a8071651798d734bbe86db7a166ab05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cubesNumber: 0
-  index: 0
-  spawnGrid: {fileID: 4527973315028046686}
+  _cubesNumber: 0
+  _spawnGrid: {fileID: 4527973315028046686}
 --- !u!1 &2612551833707608343
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,12 +7,12 @@ namespace Game
     public enum MessageType
     {
         NONE,
-        GameOver,
-        CubeDeath,
-        WaveChanged,
-        LevelChanged,
-        GameStarted,
-        PointAdded
+        GAMEOVER,
+        CUBE_DEATH,
+        WAVE_CHANGED,
+        LEVEL_CHANGED,
+        GAME_STARTED,
+        POINT_ADDED
     }
 
     public struct Message

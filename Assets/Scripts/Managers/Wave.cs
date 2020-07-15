@@ -10,62 +10,57 @@ namespace Game
 {
     public class Wave : MessageHandler
     {
-        [HideInInspector]
-        public int cubesNumber;
-        public int index;
+        #region MessageHandler
+        public override void InitMessageHandler()
+        {
+            MessageSubscriber msc = new MessageSubscriber();
+            msc.Handler = this;
+            msc.MessageTypes = new MessageType[] { MessageType.CUBE_DEATH };
+            MessageBus.Instance.AddSubscriber(msc);
+        }
 
-        private List<IDestroyable> cubesList;
+        public override void HandleMessage(Message message)
+        {
+            if (message.Type == MessageType.CUBE_DEATH)
+            {
+                Cube cube = (Cube)message.objectValue;
+                Cubes.Remove(cube);
+            }
+        }
+        #endregion
 
-        [SerializeField]
-        private Transform spawnGrid;
+        [SerializeField] private int _cubesNumber;
+        public int CubesNumber => _cubesNumber;
 
-        void Awake()
+        [SerializeField] private Transform _spawnGrid;
+
+        public List<IDestroyable> Cubes { get; private set; }
+
+        private void Awake()
         {
             InitMessageHandler();
 
-            cubesList = new List<IDestroyable>();
+            Cubes = new List<IDestroyable>();
             SpawnCubes();
         }
 
         private void SpawnCubes()
         {
-            for (int i = spawnGrid.childCount - 1; i >= 0; i--)
+            for (int i = _spawnGrid.childCount - 1; i >= 0; i--)
             {
-                var spawnTransform = spawnGrid.GetChild(i);
+                var spawnTransform = _spawnGrid.GetChild(i);
                 var prefab = Resources.Load<Cube>("Prefabs/Cube") as Cube;
                 //float scaleMultiplier = prefab.transform
                 var cube = Instantiate(prefab, spawnTransform.transform) as Cube;
                 cube.Init();
                 new CubeController(cube);
                 cube.transform.SetParent(this.gameObject.transform);
-                cubesList.Add(cube.GetComponent<IDestroyable>());
+                Cubes.Add(cube.GetComponent<IDestroyable>());
 
                 Destroy(spawnTransform.gameObject);
 
-                cubesNumber++;
+                _cubesNumber++;
             }
-        }
-
-        public override void InitMessageHandler()
-        {
-            MessageSubscriber msc = new MessageSubscriber();
-            msc.Handler = this;
-            msc.MessageTypes = new MessageType[] { MessageType.CubeDeath };
-            MessageBus.Instance.AddSubscriber(msc);
-        }
-
-        public override void HandleMessage(Message message)
-        {
-            if (message.Type == MessageType.CubeDeath)
-            {
-                Cube cube = (Cube)message.objectValue;
-                cubesList.Remove(cube);
-            }
-        }
-
-        public List<IDestroyable> Cubes
-        {
-            get { return cubesList; }
         }
     }
 }

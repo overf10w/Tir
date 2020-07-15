@@ -18,6 +18,7 @@ namespace Game
     [CreateAssetMenu(fileName = "CubeStats.Asset", menuName = "Character/Cube")]
     public class CubeStats : ScriptableObject
     {
-        public CubeStat stats;
+        [SerializeField] private CubeStat stats;
+        public CubeStat Stats => stats;
     }
 }

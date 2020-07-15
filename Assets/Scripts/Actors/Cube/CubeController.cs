@@ -6,14 +6,14 @@ namespace Game
 {
     public class CubeController
     {
-        private Cube cubeMV;
+        private Cube _cubeMV;
 
         public CubeController (Cube cubeMV)
         {
-            this.cubeMV = cubeMV;
+            _cubeMV = cubeMV;
 
-            cubeMV.OnTakeDamage += HandleCubeTakeDamage;
-            cubeMV.OnHpChange += HandleCubeHpChange;
+            _cubeMV.OnTakeDamage += HandleCubeTakeDamage;
+            _cubeMV.OnHpChange += HandleCubeHpChange;
         }
 
         public CubeController()
@@ -23,15 +23,15 @@ namespace Game
 
         public void HandleCubeTakeDamage(object sender, GenericEventArgs<float> damage)
         {
-            cubeMV.Health -= damage.val;
-            cubeMV.ShowHealth(cubeMV.Health);
+            _cubeMV.Health -= damage.Val;
+            _cubeMV.ShowHealth(_cubeMV.Health);
         }
 
         public void HandleCubeHpChange(object sender, GenericEventArgs<float> hp)
         {
-            if (hp.val <= 0)
+            if (hp.Val <= 0)
             {
-                cubeMV.Destroy();
+                _cubeMV.Destroy();
             }
         }
     }

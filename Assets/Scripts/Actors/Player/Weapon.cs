@@ -11,11 +11,8 @@ namespace Game
     public class WeaponStatData
     {
         public string weaponName;
-
         public int dpsLevel;
-
         public int dmgLevel;
-
         public int upgradeLevel;
     }
 
@@ -33,6 +30,7 @@ namespace Game
     // (each of the props can be of type CharacterStat (https://forum.unity.com/threads/tutorial-character-stats-aka-attributes-system.504095/)) - but that's not obligatory: 
     public class WeaponStat : INotifyPropertyChanged
     {
+        #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string propertyName)
@@ -50,13 +48,9 @@ namespace Game
             OnPropertyChanged(propertyName);
             return true;
         }
+        #endregion
 
-        private WeaponStatsAlgorithm algorithm;
-
-        public WeaponStat()
-        {
-
-        }
+        private WeaponStatsAlgorithm _algorithm;
 
         public WeaponStat(int level, int price, int value)
         {
@@ -70,13 +64,13 @@ namespace Game
             Level = level;
         }
 
-        private float dpsMultiplier;
+        private float dpsMultiplier; // TODO: remove, and use playerStats.dpsMultiplier instead
 
-        private PlayerStats playerStats;
+        private PlayerStats _playerStats;
 
         public void UpdateSelf()
         {
-            dpsMultiplier = playerStats.dpsMultiplier;
+            dpsMultiplier = _playerStats.dpsMultiplier;
         }
 
         public WeaponStat(int level, WeaponStatData weaponStats, PlayerStats playerStats, WeaponStatsAlgorithm algorithm)
@@ -90,15 +84,15 @@ namespace Game
 
             Debug.LogWarning("Weapon.dpsMultiplier: " + dpsMultiplier);
 
-            this.algorithm = algorithm;
-            this.playerStats = playerStats;
+            this._algorithm = algorithm;
+            this._playerStats = playerStats;
         }
 
         public WeaponStat(int level, int upgradeLevel, WeaponStatsAlgorithm algorithm)
         {
             Level = level;
             _upgradeLevel = upgradeLevel;
-            this.algorithm = algorithm;
+            this._algorithm = algorithm;
         }
 
         private int _level;
@@ -106,21 +100,21 @@ namespace Game
 
         // TODO: make all getters arrow getters '=>' like this (where possible throughout the project)
         // TODO: check for cases when this.algorithm == null !!!!
-        public float Price { get => algorithm.GetPrice(Level); set { } }
+        public float Price { get => _algorithm.GetPrice(Level); set { } }
         
-        public float NextPrice { get => algorithm.GetNextPrice(Level); set { } }
+        public float NextPrice { get => _algorithm.GetNextPrice(Level); set { } }
 
         private float _value;
-        public float Value { get => algorithm.GetValue(Level, _upgradeLevel, dpsMultiplier); set { _value = value; } }
+        public float Value { get => _algorithm.GetValue(Level, _upgradeLevel, dpsMultiplier); set { _value = value; } }
 
-        public float NextValue { get => algorithm.GetNextValue(Level); set { } }
+        public float NextValue { get => _algorithm.GetNextValue(Level); set { } }
 
         private int _upgradeLevel;
 
         public int UpgradeLevel { get => _upgradeLevel; set { SetField(ref _upgradeLevel, value); } }
 
-        public float UpgradePrice { get => algorithm.GetUpgradePrice(_upgradeLevel); set { } }
-        public float NextUpgradePrice { get => algorithm.GetNextUpgradePrice(_upgradeLevel); set { }}
+        public float UpgradePrice { get => _algorithm.GetUpgradePrice(_upgradeLevel); set { } }
+        public float NextUpgradePrice { get => _algorithm.GetNextUpgradePrice(_upgradeLevel); set { }}
 
         // TODO: setter
         public void Upgrade()
@@ -131,58 +125,64 @@ namespace Game
 
     public class Weapon : MessageHandler
     {
-        // TODO: readonly or smth
-        public PlayerStats playerStats;
-        // TODO (LP): (?) private set
-        // TODO: this stat to become SPS - Shots Per Second
-        public WeaponStat DPS { get; set; }
-
-        // TODO (LP): (?) private set
-        public WeaponStat DMG { get; set; }
-
-        private Wave wave;
-
-        public float nextShotTime;
-        public float msBetweenShots = 200;
-
-        private WeaponStatsAlgorithmsHolder algorithmHolder;
-
-        public void Init(WeaponStatsAlgorithmsHolder algorithm, WeaponStatData data)
-        {
-            InitMessageHandler();
-
-            this.algorithmHolder = algorithm;
-            
-            DPS = new WeaponStat(data.dpsLevel, data, playerStats, algorithm.DPS);
-            DMG = new WeaponStat(data.dmgLevel, data, playerStats, algorithm.DMG);
-        }
-
+        #region MessageHandler
         public override void InitMessageHandler()
         {
             MessageSubscriber msc = new MessageSubscriber();
             msc.Handler = this;
-            msc.MessageTypes = new MessageType[] { MessageType.WaveChanged };
+            msc.MessageTypes = new MessageType[] { MessageType.WAVE_CHANGED };
             MessageBus.Instance.AddSubscriber(msc);
         }
 
         public override void HandleMessage(Message message)
         {
-            if (message.Type == MessageType.WaveChanged)
+            if (message.Type == MessageType.WAVE_CHANGED)
             {
                 //Debug.Log("Weapon.cs: On Wave Changed!");
-                this.wave = (Wave)message.objectValue;
+                this._wave = (Wave)message.objectValue;
+            }
+        }
+        #endregion
+
+        public WeaponStat DPS { get; private set; }
+
+        public WeaponStat DMG { get; private set; }
+
+        private PlayerStats _playerStats;
+        private WeaponStatsAlgorithmsHolder _algorithmHolder;
+
+        private Wave _wave;
+
+        private float _nextShotTime;
+        private float _msBetweenShots = 200;
+
+        public void Init(WeaponStatsAlgorithmsHolder algorithmHolder, WeaponStatData data, PlayerStats playerStats)
+        {
+            InitMessageHandler();
+
+            _algorithmHolder = algorithmHolder;
+            _playerStats = playerStats;
+
+            DPS = new WeaponStat(data.dpsLevel, data, playerStats, algorithmHolder.DPS);
+            DMG = new WeaponStat(data.dmgLevel, data, playerStats, algorithmHolder.DMG);
+        }
+
+        private void Update()
+        {
+            if (_wave != null)
+            {
+                Fire(_wave);
             }
         }
 
         public void Fire(Wave wave)
         {
-            if (Time.time > nextShotTime)
+            if (Time.time > _nextShotTime)
             {
-                nextShotTime = Time.time + msBetweenShots / 1000;
+                _nextShotTime = Time.time + _msBetweenShots / 1000;
                 IDestroyable cube = wave.Cubes.ElementAtOrDefault(new System.Random().Next(wave.Cubes.Count));
                 if ((MonoBehaviour)cube != null)
                 {
-                    // TODO uncomment this!!
                     cube.TakeDamage(DPS.Value);
                 }
                 else
@@ -196,14 +196,6 @@ namespace Game
         {
             DPS.UpdateSelf();
             DMG.UpdateSelf();
-        }
-
-        private void Update()
-        {
-            if (wave != null)
-            {
-                Fire(wave);
-            }
         }
     }
 }

@@ -8,23 +8,13 @@ namespace Game
 {
     public class UserStatsCanvas : MessageHandler
     {
-        public PlayerStats playerStats;
-
-        [HideInInspector]
-        public LevelListUI LevelListUI;
+        [HideInInspector] public LevelListUI LevelListUI;
         public ResourceLoader ResourceLoader;
 
-        [HideInInspector]
-        public Text PlayerGoldTxt;
-
-        [HideInInspector]
-        public Text PlayerCurrentWaveTxt;
-
-        [HideInInspector]
-        public Text TeamDPSTxt;
-
-        [HideInInspector]
-        public Text ElapsedTimeSpanTxt;
+        [HideInInspector] public Text PlayerGoldTxt;
+        [HideInInspector] public Text PlayerCurrentWaveTxt;
+        [HideInInspector] public Text TeamDPSTxt;
+        [HideInInspector] public Text ElapsedTimeSpanTxt;
 
         public void Init(PlayerModel playerModel)
         {
@@ -81,17 +71,17 @@ namespace Game
         {
             MessageSubscriber msc = new MessageSubscriber();
             msc.Handler = this;
-            msc.MessageTypes = new MessageType[] { MessageType.LevelChanged, MessageType.GameStarted };
+            msc.MessageTypes = new MessageType[] { MessageType.LEVEL_CHANGED, MessageType.GAME_STARTED };
             MessageBus.Instance.AddSubscriber(msc);
         }
 
         public override void HandleMessage(Message message)
         {
-            if (message.Type == MessageType.LevelChanged)
+            if (message.Type == MessageType.LEVEL_CHANGED)
             {
                 UpdateCurrentLevelLabel(message.IntValue);
             }
-            if (message.Type == MessageType.GameStarted)
+            if (message.Type == MessageType.GAME_STARTED)
             {
                 UpdateElapsedTimeSpan(message.DoubleValue);
             }
@@ -114,11 +104,6 @@ namespace Game
         public void HandleLevelChanged(int level)
         {
             LevelListUI.SetLevel(level);
-        }
-
-        public void UpdateTeamDPSTxt(string text)
-        {
-
         }
     }
 }

@@ -7,27 +7,27 @@ namespace Game
 {
     public class GameOverCanvas : MessageHandler
     {
-        private CanvasGroup mainPanel;
+        private CanvasGroup _mainPanel;
 
         private void Start()
         {
             InitMessageHandler();
-            mainPanel = transform.GetComponentInChildren<CanvasGroup>();
+            _mainPanel = transform.GetComponentInChildren<CanvasGroup>();
         }
 
         public override void InitMessageHandler()
         {
             MessageSubscriber msc = new MessageSubscriber();
             msc.Handler = this;
-            msc.MessageTypes = new MessageType[] { MessageType.GameOver };
+            msc.MessageTypes = new MessageType[] { MessageType.GAMEOVER };
             MessageBus.Instance.AddSubscriber(msc);
         }
 
         public override void HandleMessage(Message message)
         {
-            if (message.Type == MessageType.GameOver)
+            if (message.Type == MessageType.GAMEOVER)
             {
-                StartCoroutine(FadeInStartPanel(mainPanel));
+                StartCoroutine(FadeInStartPanel(_mainPanel));
             }
         }
 

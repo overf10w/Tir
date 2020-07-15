@@ -76,13 +76,12 @@ namespace Game
                     {
                         GameObject obj = new GameObject(weapon.weaponName);
                         Weapon weaponScript = obj.AddComponent<Weapon>();
-                        weaponScript.playerStats = playerStats;
                         // TODO: 
                         // 1. Subscribe to weaponScript.OnPropertyChanged
                         // 2. Raise the event when notified OnPropertyChanged
                         // 3. PlayerController subscribes to this event and changes view accordingly (it just updates the views with the ref to teamWeapons dictionary;
 
-                        weaponScript.Init(algo, weapon);
+                        weaponScript.Init(algo, weapon, playerStats);
                         teamWeapons.Add(weapon.weaponName, weaponScript);
                         //Debug.Log("weapon.weaponName: [" + weapon.weaponName + "] == algo.name: [" + algo.name + "]");
                         break;
@@ -269,24 +268,6 @@ namespace Game
     [System.Serializable]
     public class PlayerStats : INotifyPropertyChanged
     {
-        [Header("Player")]
-        public float gold;
-        public int level;
-        public long timeLastPlayed;
-
-        [Header("Team Stats")]
-        [Tooltip("1.0 - 7.0")]
-        public float dpsMultiplier;
-
-        public float DPSMultiplier { get => dpsMultiplier; set { SetField(ref dpsMultiplier, value); } }
-
-        // Indexer (will be used by Upgrade system a lot)
-        public object this[string propertyName]
-        {
-            get { return this.GetType().GetProperty(propertyName).GetValue(this, null); }
-            set { this.GetType().GetProperty(propertyName).SetValue(this, value, null); }
-        }
-
         #region INotifyPropertyChanged
         [field: NonSerialized]
         public event PropertyChangedEventHandler PropertyChanged;
@@ -306,5 +287,23 @@ namespace Game
             return true;
         }
         #endregion
+
+        [Header("Player")]
+        public float gold;
+        public int level;
+        public long timeLastPlayed;
+
+        [Header("Team Stats")]
+        [Tooltip("1.0 - 7.0")]
+        public float dpsMultiplier;
+
+        public float DPSMultiplier { get => dpsMultiplier; set { SetField(ref dpsMultiplier, value); } }
+
+        // Indexer (will be used by Upgrade system a lot)
+        public object this[string propertyName]
+        {
+            get { return this.GetType().GetProperty(propertyName).GetValue(this, null); }
+            set { this.GetType().GetProperty(propertyName).SetValue(this, value, null); }
+        }
     }
 }

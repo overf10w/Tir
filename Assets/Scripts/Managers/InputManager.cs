@@ -16,13 +16,14 @@ namespace Game
             NUM_KEY_5,
             DPS_MULTIPLIER
         }
+
         public const string NUM_KEY_1 = "1";
         public const string NUM_KEY_2 = "2";
         public const string NUM_KEY_3 = "3";
         public const string NUM_KEY_4 = "4";
         public const string NUM_KEY_5 = "5";
 
-        public INPUT_KEY_CODE KeyCode;
+        public INPUT_KEY_CODE KeyCode { get; }
 
         public InputEventArgs(INPUT_KEY_CODE keyCode)
         {

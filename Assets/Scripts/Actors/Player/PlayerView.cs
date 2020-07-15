@@ -7,26 +7,45 @@ namespace Game
 {
     public class CustomArgs : EventArgs
     {
-        public float val;
+        public float Val { get; }
 
         public CustomArgs(float val)
         {
-            this.val = val;
+            Val = val;
         }
     }
 
     public class GenericEventArgs<T> : EventArgs
     {
-        public T val;
+        public T Val { get;}
 
         public GenericEventArgs(T val) 
         {
-            this.val = val;
+            Val = val;
         }
     }
 
     public class PlayerView : MessageHandler
     {
+        #region MessageHandler
+        public override void InitMessageHandler()
+        {
+            MessageSubscriber msc = new MessageSubscriber();
+            msc.Handler = this;
+            msc.MessageTypes = new MessageType[] { MessageType.CUBE_DEATH };
+            MessageBus.Instance.AddSubscriber(msc);
+        }
+
+        public override void HandleMessage(Message message)
+        {
+            if (message.Type == MessageType.CUBE_DEATH)
+            {
+                Cube cube = (Cube)message.objectValue;
+                OnCubeDeath?.Invoke(this, new CustomArgs(cube.Gold));
+            }
+        }
+        #endregion
+
         public event EventHandler<EventArgs> OnClicked = (sender, e) => { };
         public event EventHandler<CustomArgs> OnCubeDeath = (sender, e) => { };
         public event EventHandler<GenericEventArgs<WeaponStatBtnClickArgs>> OnTeamWeaponBtnClick = (sender, e) => { };
@@ -34,13 +53,15 @@ namespace Game
         public event EventHandler<UpgradeBtnClickEventArgs> OnUpgradeBtnClick = (sender, e) => { };
 
         [HideInInspector]
-        public Gun Gun;
+        public Gun Gun { get; private set; }
 
-        public UserStatsCanvas Ui;
+        public UserStatsCanvas Ui { get; private set; }
 
-        public TeamPanel TeamPanel;
-        public ClickGunPanel ClickGunPanel;
-        public ResearchPanel ResearchPanel;
+        public TeamPanel TeamPanel { get; private set; }
+
+        public ClickGunPanel ClickGunPanel { get; private set; }
+
+        private ResearchPanel _researchPanel;
 
         public void Init(PlayerModel model, Upgrades.Upgrade[] upgrades)
         {
@@ -63,18 +84,16 @@ namespace Game
                 ClickGunPanel.WeaponBtnClick.PlayerView = this;
             }
 
-            ResearchPanel = Ui.GetComponentInChildren<ResearchPanel>();
-            ResearchPanel.Init(upgrades);
-            if (ResearchPanel)
+            _researchPanel = Ui.GetComponentInChildren<ResearchPanel>();
+            _researchPanel.Init(upgrades);
+            if (_researchPanel)
             {
-                ResearchPanel.UpgradeBtnClick.PlayerView = this;
+                _researchPanel.UpgradeBtnClick.PlayerView = this;
             }
 
             Gun = GetComponentInChildren<Gun>();
 
             Gun.Init(model.gunData, model.gunAlgorithmHolder.DPS, model.gunAlgorithmHolder.DMG);
-
-            //Debug.Log("PlayerView: Gun == null: " + (Gun == null).ToString());
         }
 
         private void Update()
@@ -83,23 +102,6 @@ namespace Game
             if (Input.GetMouseButton(0))
             {
                 OnClicked?.Invoke(this, EventArgs.Empty);
-            }
-        }
-
-        public override void InitMessageHandler()
-        {
-            MessageSubscriber msc = new MessageSubscriber();
-            msc.Handler = this;
-            msc.MessageTypes = new MessageType[] { MessageType.CubeDeath };
-            MessageBus.Instance.AddSubscriber(msc);
-        }
-
-        public override void HandleMessage(Message message)
-        {
-            if (message.Type == MessageType.CubeDeath)
-            {
-                Cube cube = (Cube)message.objectValue;
-                OnCubeDeath?.Invoke(this, new CustomArgs(cube.Gold));
             }
         }
 

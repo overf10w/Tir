@@ -10,8 +10,8 @@ namespace Game
     {
         public static ResourceLoader Instance;
 
-        private string playerDataProjectFilePath = "/StreamingAssets/data.json";
-        private string gameDataProjectFilePath = "/StreamingAssets/gameData.json";
+        private const string _playerDataProjectFilePath = "/StreamingAssets/data.json";
+        private const string _gameDataProjectFilePath = "/StreamingAssets/gameData.json";
 
         void Awake()
         {
@@ -28,7 +28,7 @@ namespace Game
         // TODO: try catch playerStats == null;
         public PlayerStats ReadPlayerStats()
         {
-            string dataAsJson = File.ReadAllText(Application.dataPath + playerDataProjectFilePath);
+            string dataAsJson = File.ReadAllText(Application.dataPath + _playerDataProjectFilePath);
             PlayerStats playerStats = JsonUtility.FromJson<PlayerStats>(dataAsJson);
             if (playerStats != null)
             {
@@ -73,10 +73,10 @@ namespace Game
             {
                 upgrades = new Upgrades.Upgrade[1];
                 upgrades[0] = new Upgrades.Upgrade();
-                upgrades[0].name = "DPS++";
-                upgrades[0].description = "Increase DPS by Kek%";
-                upgrades[0].price = 10000;
-                upgrades[0].amount = 100;
+                upgrades[0].Name = "DPS++";
+                upgrades[0].Description = "Increase DPS by Kek%";
+                upgrades[0].Price = 10000;
+                upgrades[0].Amount = 100;
 
                 upgrades[0].criterias = new Upgrades.Criteria[1];
                 upgrades[0].criterias[0] = new Upgrades.Criteria();

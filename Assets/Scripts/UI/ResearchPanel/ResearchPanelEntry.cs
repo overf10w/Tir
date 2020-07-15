@@ -9,14 +9,11 @@ namespace Game
 {
     public class ResearchPanelEntry : MonoBehaviour
     {
-        public Button UpgradeBtn;
+        public Button UpgradeBtn { get; private set; }
 
-        [SerializeField]
-        private TextMeshProUGUI name;
-        [SerializeField]
-        private TextMeshProUGUI description;
-        [SerializeField]
-        private TextMeshProUGUI price;
+        [SerializeField] private TextMeshProUGUI _name;
+        [SerializeField] private TextMeshProUGUI _description;
+        [SerializeField] private TextMeshProUGUI _price;
 
         public void Init(Upgrades.Upgrade upgrade)
         {
@@ -24,46 +21,25 @@ namespace Game
 
             UpgradeBtn = transform.Find("UpgradeBtn").GetComponent<Button>();
 
-            name.text = upgrade.name.ToString();
-            description.text = upgrade.description.ToString();
-            price.text = upgrade.price.ToString();
+            _name.text = upgrade.Name.ToString();
+            _description.text = upgrade.Description.ToString();
+            _price.text = upgrade.Price.ToString();
 
             if (!upgrade.IsActive)
             {
-                price.color = Color.red;
+                _price.color = Color.red;
                 UpgradeBtn.interactable = false;
             }
-
-            //name = transform.Find("NameTxt").GetComponent<TextMeshProUGUI>();
-            //description = transform.Find("DescriptionTxt").GetComponent<TextMeshProUGUI>();
-            //price = transform.Find("PriceTxt").GetComponent<TextMeshProUGUI>();
         }
 
         private void HandleUpgradeModelChanged(object sender, PropertyChangedEventArgs args)
         {
             Upgrades.Upgrade upgrade = (Upgrades.Upgrade)sender;
-            Debug.Log(
-                "ResearchPanelEntry: " +
-                "upgrade.isActive: " + upgrade.IsActive
-                );
             if (!upgrade.IsActive)
             {
-                price.color = Color.red;
+                _price.color = Color.red;
                 UpgradeBtn.interactable = false;
-                Debug.Log("ResearchPanelEntry: fading and disabling inactive upgrade");
             }
-        }
-
-        // Start is called before the first frame update
-        void Start()
-        {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
         }
     }
 }

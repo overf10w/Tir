@@ -8,13 +8,13 @@ namespace Game
 {
     public class WeaponStatBtnClickArgs
     {
-        public string weaponName;
-        public string buttonName;
+        public string WeaponName { get; }
+        public string ButtonName { get; }
 
         public WeaponStatBtnClickArgs(string weaponName, string buttonName)
         {
-            this.weaponName = weaponName;
-            this.buttonName = buttonName;
+            WeaponName = weaponName;
+            ButtonName = buttonName;
         }
     }
 
@@ -51,31 +51,24 @@ namespace Game
 
     public class TeamPanel : MonoBehaviour
     {
-        public WeaponBtnClick WeaponBtnClick { get; set; }
+        public WeaponBtnClick WeaponBtnClick { get; private set; }
 
-        private Transform content;
-        private GameObject weaponUiEntryPrefab;
-        private List<GameObject> weaponUiEntries;
+        private Transform _content;
+        private GameObject _weaponUiEntryPrefab;
+        private List<GameObject> _weaponUiEntries;
 
         public void UpdateTeamPanel(Dictionary<string, Weapon> weapons)
         {
-            foreach (var weapon in weapons)
-            {
-                //Debug.Log("UpdateTeamPanel: weapon.Key: " + weapon.Key + ", weapon.Value.DPS.Price " + weapon.Value.DPS.Price);
-            }
             if (weapons != null)
             {
                 foreach(var weapon in weapons)
                 {
-                    foreach (var entry in weaponUiEntries)
+                    foreach (var entry in _weaponUiEntries)
                     {
                         if (entry.name == weapon.Key)
                         {
                             var script = entry.GetComponent<WeaponPanelEntry>();
-
                             script.UpdateSelf(weapon.Value.DPS, weapon.Value.DMG);
-
-                            //Debug.Log("TeamPanel.UpdateTeamPanel(): " + weapon.Value.DPS.Value);
                             break;
                         }
                     }
@@ -83,24 +76,19 @@ namespace Game
             }
         }
 
-
-
         public void Init(Dictionary<string, Weapon> weapons)
         {
             WeaponBtnClick = new WeaponBtnClick();
-
-            content = transform.Find("Scroll View/Viewport/Content").GetComponent<Transform>();
-
-            weaponUiEntryPrefab = Resources.Load<GameObject>("Prefabs/UI/TeamPanel/WeaponPanelEntry");
-
-            weaponUiEntries = new List<GameObject>();
+            _content = transform.Find("Scroll View/Viewport/Content").GetComponent<Transform>();
+            _weaponUiEntryPrefab = Resources.Load<GameObject>("Prefabs/UI/TeamPanel/WeaponPanelEntry");
+            _weaponUiEntries = new List<GameObject>();
 
             if (weapons != null)
             {
                 foreach (var weapon in weapons)
                 {
-                    GameObject entryGameObject = Instantiate(weaponUiEntryPrefab, content);
-                    weaponUiEntries.Add(entryGameObject);
+                    GameObject entryGameObject = Instantiate(_weaponUiEntryPrefab, _content);
+                    _weaponUiEntries.Add(entryGameObject);
 
                     entryGameObject.name = weapon.Key;
                     WeaponPanelEntry script = entryGameObject.GetComponent<WeaponPanelEntry>();

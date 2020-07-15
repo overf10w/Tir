@@ -761,14 +761,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c89a759fe0d1e34c904652c66e2595d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IconImg: {fileID: 2455419585820820816}
-  NameTxt: {fileID: 3285291685623087350}
-  DPSNextPrice: {fileID: 2455419587034692196}
-  DMGNextPrice: {fileID: 2455419587492147024}
-  DPSValueTxt: {fileID: 5214040367874698864}
-  DMGValueTxt: {fileID: 5589268856586897152}
-  DPSNextValueTxt: {fileID: 3606721936091511403}
-  DMGNextValueTxt: {fileID: 3031235587991838384}
+  _iconImg: {fileID: 2455419585820820816}
+  _nameTxt: {fileID: 3285291685623087350}
+  _dpsNextPrice: {fileID: 2455419587034692196}
+  _dmgNextPrice: {fileID: 2455419587492147024}
+  _dpsValueTxt: {fileID: 5214040367874698864}
+  _dmgValueTxt: {fileID: 5589268856586897152}
+  _dpsNextValueTxt: {fileID: 3606721936091511403}
+  _dmgNextValueTxt: {fileID: 3031235587991838384}
   DPSButton: {fileID: 0}
   DMGButton: {fileID: 0}
 --- !u!1 &2455419587004598928

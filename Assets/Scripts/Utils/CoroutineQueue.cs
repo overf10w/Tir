@@ -17,22 +17,22 @@ namespace Game
         /// <summary>
         /// Maximum number of coroutines to run at once
         /// </summary>
-        private readonly uint maxActive;
+        private readonly uint _maxActive;
 
         /// <summary>
         /// Delegate to start coroutines with
         /// </summary>
-        private readonly Func<IEnumerator, Coroutine> coroutineStarter;
+        private readonly Func<IEnumerator, Coroutine> _coroutineStarter;
 
         /// <summary>
         /// Queue of coroutines waiting to start
         /// </summary>
-        private readonly Queue<IEnumerator> queue;
+        private readonly Queue<IEnumerator> _queue;
 
         /// <summary>
         /// Number of currently active coroutines
         /// </summary>
-        private uint numActive;
+        private uint _numActive;
 
         /// <summary>
         /// Create the queue, initially with no coroutines
@@ -53,9 +53,9 @@ namespace Game
             {
                 throw new ArgumentException("Must be at least one", "maxActive");
             }
-            this.maxActive = maxActive;
-            this.coroutineStarter = coroutineStarter;
-            queue = new Queue<IEnumerator>();
+            this._maxActive = maxActive;
+            this._coroutineStarter = coroutineStarter;
+            _queue = new Queue<IEnumerator>();
         }
 
         /// <summary>
@@ -65,34 +65,34 @@ namespace Game
         /// <param name="coroutine">Coroutine to run or queue</param>
         public void Run(IEnumerator coroutine)
         {
-            if (numActive < maxActive)
+            if (_numActive < _maxActive)
             {
                 var runner = CoroutineRunner(coroutine);
-                coroutineStarter(runner);
+                _coroutineStarter(runner);
             }
             else
             {
-                queue.Enqueue(coroutine);
+                _queue.Enqueue(coroutine);
             }
         }
 
         /// <summary>
         /// Runs a coroutine then runs the next queued coroutine (via <see cref="Run"/>) if available.
-        /// Increments <see cref="numActive"/> before running the coroutine and decrements it after.
+        /// Increments <see cref="_numActive"/> before running the coroutine and decrements it after.
         /// </summary>
         /// <returns>Values yielded by the given coroutine</returns>
         /// <param name="coroutine">Coroutine to run</param>
         private IEnumerator CoroutineRunner(IEnumerator coroutine)
         {
-            numActive++;
+            _numActive++;
             while (coroutine.MoveNext())
             {
                 yield return coroutine.Current;
             }
-            numActive--;
-            if (queue.Count > 0)
+            _numActive--;
+            if (_queue.Count > 0)
             {
-                var next = queue.Dequeue();
+                var next = _queue.Dequeue();
                 Run(next);
             }
         }

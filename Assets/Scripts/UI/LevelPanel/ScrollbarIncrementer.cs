@@ -9,27 +9,27 @@ namespace Game
     public class ScrollbarIncrementer : MonoBehaviour
     {
         public ScrollRect levelList;
-        private LevelListUI levelListScript;
+        private LevelListUI _levelListScript;
         public Button theOtherButton;
 
         public void Start()
         {
-            levelListScript = levelList.GetComponent<LevelListUI>();
+            _levelListScript = levelList.GetComponent<LevelListUI>();
         }
 
         public void Increment()
         {
-            if (levelListScript == null || theOtherButton == null) throw new Exception("Setup ScrollbarIncrementer first!");
-            levelListScript.Increment();
-            GetComponent<Button>().interactable = levelListScript.HorizontalNormalizedPosition() <= 0.999f;
+            if (_levelListScript == null || theOtherButton == null) throw new Exception("Setup ScrollbarIncrementer first!");
+            _levelListScript.Increment();
+            GetComponent<Button>().interactable = _levelListScript.HorizontalNormalizedPosition() <= 0.999f;
             theOtherButton.interactable = true;
         }
 
         public void Decrement()
         {
-            if (levelListScript == null || theOtherButton == null) throw new Exception("Setup ScrollbarIncrementer first!");
-            levelListScript.Decrement();
-            GetComponent<Button>().interactable = levelListScript.HorizontalNormalizedPosition() >= 0.001f;
+            if (_levelListScript == null || theOtherButton == null) throw new Exception("Setup ScrollbarIncrementer first!");
+            _levelListScript.Decrement();
+            GetComponent<Button>().interactable = _levelListScript.HorizontalNormalizedPosition() >= 0.001f;
             theOtherButton.interactable = true;
         }
     }

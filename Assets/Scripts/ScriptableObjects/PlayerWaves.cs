@@ -8,6 +8,6 @@ namespace Game
     public class PlayerWaves : ScriptableObject
     {
         public Wave[] waves;
-        private Wave currentWave;
+        private Wave _currentWave;
     }
 }

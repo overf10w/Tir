@@ -51,7 +51,7 @@ namespace Game
 
             cachedTransform = transform;
 
-            cubeStats = Resources.Load<CubeStats>("SO/CubeStats").stats;
+            cubeStats = Resources.Load<CubeStats>("SO/CubeStats").Stats;
             _gold = cubeStats.gold;
             _health = cubeStats.HP;
 
@@ -98,7 +98,7 @@ namespace Game
         private IEnumerator DestroyRoutine()
         {
             yield return new WaitForEndOfFrame();
-            MessageBus.Instance.SendMessage(new Message { Type = MessageType.CubeDeath, objectValue = (Cube)this });
+            MessageBus.Instance.SendMessage(new Message { Type = MessageType.CUBE_DEATH, objectValue = (Cube)this });
             Destroy(this.gameObject);
         }
 
@@ -111,7 +111,7 @@ namespace Game
             Show(_health);
             if (_health <= 0.0f)
             {
-                MessageBus.Instance.SendMessage(new Message { Type = MessageType.CubeDeath, objectValue = (Cube)this });
+                MessageBus.Instance.SendMessage(new Message { Type = MessageType.CUBE_DEATH, objectValue = (Cube)this });
                 Destroy(this.gameObject);
             }
         }
