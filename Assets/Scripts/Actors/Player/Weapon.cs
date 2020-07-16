@@ -52,6 +52,27 @@ namespace Game
 
         private WeaponStatsAlgorithm _algorithm;
 
+        private PlayerStats _playerStats;
+
+        private int _level;
+        public int Level { get => _level; set { SetField(ref _level, value); } }
+
+        // TODO: check for cases when _algorithm == null !!!!
+        public float Price { get => _algorithm.GetPrice(Level); private set { } }
+        
+        public float NextPrice { get => _algorithm.GetNextPrice(Level);}
+
+        private float _value;
+        public float Value { get => _algorithm.GetValue(Level, _upgradeLevel, _playerStats.dpsMultiplier); set { _value = value; } }
+
+        public float NextValue { get => _algorithm.GetNextValue(Level); }
+
+        private int _upgradeLevel;
+        public int UpgradeLevel { get => _upgradeLevel; set { SetField(ref _upgradeLevel, value); } }
+
+        public float UpgradePrice { get => _algorithm.GetUpgradePrice(_upgradeLevel); }
+        public float NextUpgradePrice { get => _algorithm.GetNextUpgradePrice(_upgradeLevel);}
+
         public WeaponStat(int level, int price, int value)
         {
             Level = level;
@@ -64,28 +85,14 @@ namespace Game
             Level = level;
         }
 
-        private float dpsMultiplier; // TODO: remove, and use playerStats.dpsMultiplier instead
-
-        private PlayerStats _playerStats;
-
-        public void UpdateSelf()
-        {
-            dpsMultiplier = _playerStats.dpsMultiplier;
-        }
-
         public WeaponStat(int level, WeaponStatData weaponStats, PlayerStats playerStats, WeaponStatsAlgorithm algorithm)
         {
             // Init this WeaponStat's stats
             Level = level;
             _upgradeLevel = weaponStats.upgradeLevel;
 
-            // Init global teamWeaponsStats
-            dpsMultiplier = playerStats.dpsMultiplier;
-
-            Debug.LogWarning("Weapon.dpsMultiplier: " + dpsMultiplier);
-
-            this._algorithm = algorithm;
-            this._playerStats = playerStats;
+            _algorithm = algorithm;
+            _playerStats = playerStats;
         }
 
         public WeaponStat(int level, int upgradeLevel, WeaponStatsAlgorithm algorithm)
@@ -95,31 +102,15 @@ namespace Game
             this._algorithm = algorithm;
         }
 
-        private int _level;
-        public int Level { get => _level; set { SetField(ref _level, value); } }
-
-        // TODO: make all getters arrow getters '=>' like this (where possible throughout the project)
-        // TODO: check for cases when this.algorithm == null !!!!
-        public float Price { get => _algorithm.GetPrice(Level); set { } }
-        
-        public float NextPrice { get => _algorithm.GetNextPrice(Level); set { } }
-
-        private float _value;
-        public float Value { get => _algorithm.GetValue(Level, _upgradeLevel, dpsMultiplier); set { _value = value; } }
-
-        public float NextValue { get => _algorithm.GetNextValue(Level); set { } }
-
-        private int _upgradeLevel;
-
-        public int UpgradeLevel { get => _upgradeLevel; set { SetField(ref _upgradeLevel, value); } }
-
-        public float UpgradePrice { get => _algorithm.GetUpgradePrice(_upgradeLevel); set { } }
-        public float NextUpgradePrice { get => _algorithm.GetNextUpgradePrice(_upgradeLevel); set { }}
-
         // TODO: setter
         public void Upgrade()
         {
             _upgradeLevel++;
+        }
+
+        public void UpdateSelf()
+        {
+            
         }
     }
 
@@ -190,12 +181,6 @@ namespace Game
                     Debug.Log("Weapon: " + ": There's no cube there!");
                 }
             }
-        }
-
-        public void UpdateSelf()
-        {
-            DPS.UpdateSelf();
-            DMG.UpdateSelf();
         }
     }
 }

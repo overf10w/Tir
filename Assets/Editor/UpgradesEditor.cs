@@ -12,17 +12,15 @@ namespace Game
     [CustomEditor(typeof(Upgrades))]
     public class UpgradesEditor : Editor
     {
-        private Upgrades upgrades;
-
-        private string path;
-
-        private string backupPath;
+        private Upgrades _upgrades;
+        private string _path;
+        private string _backupPath;
 
         public void OnEnable()
         {
-            path = Path.Combine(Application.persistentDataPath, "upgrades.dat");
-            backupPath = Path.Combine(Application.persistentDataPath, "backupUpgrades.dat");
-            upgrades = (Upgrades)target;
+            _path = Path.Combine(Application.persistentDataPath, "upgrades.dat");
+            _backupPath = Path.Combine(Application.persistentDataPath, "backupUpgrades.dat");
+            _upgrades = (Upgrades)target;
         }
 
         public override void OnInspectorGUI()
@@ -37,22 +35,22 @@ namespace Game
 
             if (GUILayout.Button("Read"))
             {
-                upgrades.upgrades = ResourceLoader.Load<Upgrades.Upgrade[]>(path);
+                _upgrades.upgrades = ResourceLoader.Load<Upgrades.Upgrade[]>(_path);
             }
 
             if (GUILayout.Button("Write"))
             {
-                ResourceLoader.Save<Upgrades.Upgrade[]>(path, upgrades.upgrades);
+                ResourceLoader.Save<Upgrades.Upgrade[]>(_path, _upgrades.upgrades);
             }
 
             if (GUILayout.Button("Write Default", redStyle))
             {
-                ResourceLoader.Save<Upgrades.Upgrade[]>(backupPath, upgrades.upgrades);
+                ResourceLoader.Save<Upgrades.Upgrade[]>(_backupPath, _upgrades.upgrades);
             }
 
             if (GUILayout.Button("Reset Default", blueStyle))
             {
-                upgrades.upgrades = ResourceLoader.Load<Upgrades.Upgrade[]>(backupPath);
+                _upgrades.upgrades = ResourceLoader.Load<Upgrades.Upgrade[]>(_backupPath);
             }
         }
     }

@@ -71,14 +71,15 @@ namespace Game
             Ui.Init(model);
 
             TeamPanel = Ui.GetComponentInChildren<TeamPanel>();
-            TeamPanel.Init(model.teamWeapons);
+            TeamPanel.Init(model.TeamWeapons);
             if (TeamPanel)
             {
                 TeamPanel.WeaponBtnClick.PlayerView = this;
             }
 
             ClickGunPanel = Ui.GetComponentInChildren<ClickGunPanel>();
-            ClickGunPanel.Init(model.gunData.weaponName, model.DPS, model.DMG);
+            
+            ClickGunPanel.Init(model.GunData.weaponName, model.DPS, model.DMG);
             if (ClickGunPanel)
             {
                 ClickGunPanel.WeaponBtnClick.PlayerView = this;
@@ -93,7 +94,7 @@ namespace Game
 
             Gun = GetComponentInChildren<Gun>();
 
-            Gun.Init(model.gunData, model.gunAlgorithmHolder.DPS, model.gunAlgorithmHolder.DMG);
+            Gun.Init(model.GunData, model.GunAlgorithmHolder.DPS, model.GunAlgorithmHolder.DMG);
         }
 
         private void Update()

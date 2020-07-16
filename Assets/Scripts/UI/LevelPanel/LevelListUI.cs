@@ -8,24 +8,24 @@ namespace Game
     public class LevelListUI : MonoBehaviour
     {
         private ScrollRect _scrollRect;
-        public float step = 0.25f;
-        public int levelsCount;
+        private float _step = 0.25f;
+        private int _levelsCount;
 
-        public void Start()
+        private void Start()
         {
             _scrollRect = GetComponent<ScrollRect>();
-            levelsCount = transform.GetComponentsInChildren<Button>().Length;
-            step = (1.0f / (float)(levelsCount - 1));
+            _levelsCount = transform.GetComponentsInChildren<Button>().Length;
+            _step = (1.0f / (float)(_levelsCount - 1));
         }
 
         public void Increment()
         {
-            _scrollRect.horizontalNormalizedPosition = Mathf.Clamp(_scrollRect.horizontalNormalizedPosition + step, 0, 1);
+            _scrollRect.horizontalNormalizedPosition = Mathf.Clamp(_scrollRect.horizontalNormalizedPosition + _step, 0, 1);
         }
 
         public void Decrement()
         {
-            _scrollRect.horizontalNormalizedPosition = Mathf.Clamp(_scrollRect.horizontalNormalizedPosition - step, 0, 1);
+            _scrollRect.horizontalNormalizedPosition = Mathf.Clamp(_scrollRect.horizontalNormalizedPosition - _step, 0, 1);
         }
 
         public float HorizontalNormalizedPosition()
@@ -35,7 +35,7 @@ namespace Game
 
         public void SetLevel(int level)
         {
-            _scrollRect.horizontalNormalizedPosition = Mathf.Clamp(step * level, 0, 1);
+            _scrollRect.horizontalNormalizedPosition = Mathf.Clamp(_step * level, 0, 1);
             Debug.Log("LevelListUI: SetLevel(): Level: " + level);
         }
     }

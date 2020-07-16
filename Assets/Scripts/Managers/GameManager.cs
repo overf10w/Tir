@@ -18,12 +18,13 @@ using UnityEngine;
 //     - Inner classes/INotifyPropertyChanged, encapsulated in regions
 //     - Constants
 //     - Static
+//     - Events/public fields (though there shouldn't be such thing as public field)
 //     - Serialized fields
 //     - Public properties
 //     - Private properties
 //     - Private fields
 //     - Awake/Start/Constructor
-// 4. Mark fields const where appropriate
+// 4. Mark fields const/readonly where appropriate
 // 5. Do todos
 
 

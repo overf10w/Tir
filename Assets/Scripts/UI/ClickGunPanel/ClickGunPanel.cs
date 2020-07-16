@@ -16,6 +16,7 @@ namespace Game
             }
         }
     }
+
     public class ClickGunPanel : MonoBehaviour
     {
         [SerializeField] private ClickGunEntry _clickGunEntry;

@@ -25,7 +25,7 @@ namespace Game
         private MessageBus() { }
         #endregion
 
-        private Dictionary<MessageType, List<MessageSubscriber>> _subscriberLists =
+        private readonly Dictionary<MessageType, List<MessageSubscriber>> _subscriberLists =
             new Dictionary<MessageType, List<MessageSubscriber>>();
 
         public void AddSubscriber(MessageSubscriber subscriber)
@@ -35,15 +35,6 @@ namespace Game
             {
                 AddSubscriberToMessage(messageTypes[i], subscriber);
             }
-        }
-
-        void AddSubscriberToMessage(MessageType messageType, MessageSubscriber subscriber)
-        {
-            if (!_subscriberLists.ContainsKey(messageType))
-            {
-                _subscriberLists[messageType] = new List<MessageSubscriber>();
-            }
-            _subscriberLists[messageType].Add(subscriber);
         }
 
         public void SendMessage(Message message)
@@ -61,14 +52,23 @@ namespace Game
             }
         }
 
-        void SendMessageToSubscriber(Message message, MessageSubscriber subscriber)
-        {
-            subscriber.Handler.HandleMessage(message);
-        }
-
         public static void Nullify()
         {
             instance = null;
+        }
+
+        private void AddSubscriberToMessage(MessageType messageType, MessageSubscriber subscriber)
+        {
+            if (!_subscriberLists.ContainsKey(messageType))
+            {
+                _subscriberLists[messageType] = new List<MessageSubscriber>();
+            }
+            _subscriberLists[messageType].Add(subscriber);
+        }
+
+        private void SendMessageToSubscriber(Message message, MessageSubscriber subscriber)
+        {
+            subscriber.Handler.HandleMessage(message);
         }
     }
 }

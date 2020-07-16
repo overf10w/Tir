@@ -9,28 +9,45 @@ namespace Game
     [CustomEditor(typeof (WeaponDataFiles))]
     public class WeaponDataFilesEditor : Editor
     {
-        private WeaponDataFiles weaponDataFiles;
-        
-        private string path;
+        private WeaponDataFiles _weaponsDataFile;
+        private string _path;
+        private string _backupPath;
 
         public void OnEnable()
         {
-            path = Path.Combine(Application.persistentDataPath, "weapons.dat");
-            weaponDataFiles = (WeaponDataFiles)target;
+            _path = Path.Combine(Application.persistentDataPath, "weapons.dat");
+            _backupPath = Path.Combine(Application.persistentDataPath, "backupWeapons.dat");
+            _weaponsDataFile = (WeaponDataFiles)target;
         }
 
         public override void OnInspectorGUI()
         {
+            var redStyle = new GUIStyle(GUI.skin.button);
+            redStyle.normal.textColor = Color.red;
+
+            var blueStyle = new GUIStyle(GUI.skin.button);
+            blueStyle.normal.textColor = Color.blue;
+
             DrawDefaultInspector();
 
-            if (GUILayout.Button("Read WeaponDataArray From Disk"))
+            if (GUILayout.Button("Read"))
             {
-                weaponDataFiles.weapons = ResourceLoader.Load<WeaponStatData[]>(path);
+                _weaponsDataFile.weapons = ResourceLoader.Load<WeaponStatData[]>(_path);
             }
 
-            if (GUILayout.Button("Write WeaponDataArray To Disk"))
+            if (GUILayout.Button("Write"))
             {
-                ResourceLoader.Save<WeaponStatData[]>(path, weaponDataFiles.weapons);
+                ResourceLoader.Save<WeaponStatData[]>(_path, _weaponsDataFile.weapons);
+            }
+
+            if (GUILayout.Button("Write Default", redStyle))
+            {
+                ResourceLoader.Save<WeaponStatData[]>(_backupPath, _weaponsDataFile.weapons);
+            }
+
+            if (GUILayout.Button("Reset Default", blueStyle))
+            {
+                _weaponsDataFile.weapons = ResourceLoader.Load<WeaponStatData[]>(_backupPath);
             }
         }
     }

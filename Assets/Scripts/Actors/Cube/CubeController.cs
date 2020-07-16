@@ -6,9 +6,9 @@ namespace Game
 {
     public class CubeController
     {
-        private Cube _cubeMV;
+        private readonly Cube _cubeMV;
 
-        public CubeController (Cube cubeMV)
+        public CubeController(Cube cubeMV)
         {
             _cubeMV = cubeMV;
 
@@ -16,18 +16,13 @@ namespace Game
             _cubeMV.OnHpChange += HandleCubeHpChange;
         }
 
-        public CubeController()
-        {
-
-        }
-
-        public void HandleCubeTakeDamage(object sender, GenericEventArgs<float> damage)
+        private void HandleCubeTakeDamage(object sender, GenericEventArgs<float> damage)
         {
             _cubeMV.Health -= damage.Val;
             _cubeMV.ShowHealth(_cubeMV.Health);
         }
 
-        public void HandleCubeHpChange(object sender, GenericEventArgs<float> hp)
+        private void HandleCubeHpChange(object sender, GenericEventArgs<float> hp)
         {
             if (hp.Val <= 0)
             {

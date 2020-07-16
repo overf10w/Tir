@@ -40,32 +40,6 @@ namespace Game
             InitButtons();
         }
 
-        private void InitIcon(string name)
-        {
-            _assetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, "uisprites"));
-
-            if (_assetBundle == null)
-            {
-                Debug.LogError("Failed to load AssetBundle!");
-                return;
-            }
-
-            if (_assetBundle)
-            {
-                Texture2D tex = _assetBundle.LoadAsset<Texture2D>(name);
-                if (tex != null)
-                {
-                    Sprite mySprite = Sprite.Create(tex, new Rect(0.0f, 0.0f, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100.0f);
-                    _iconImg.sprite = mySprite;
-                    _assetBundle.Unload(false);
-                }
-                else
-                {
-                    Debug.LogError("ClickGunEntry.cs: Failed to load texture: " + name);
-                }
-            }
-        }
-
         public void Init(string name, WeaponStat dps, WeaponStat dmg)
         {
 
@@ -100,17 +74,43 @@ namespace Game
             _dmgNextValueTxt.text = dmg.NextValue.ToString();
         }
 
+        public void UpdateSelf(float dpsPrice, float dmgPrice)
+        {
+            //DPSPrice.text = dpsPrice.ToString();
+            //DMGPrice.text = dmgPrice.ToString();
+        }
+
+        private void InitIcon(string name)
+        {
+            _assetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, "uisprites"));
+
+            if (_assetBundle == null)
+            {
+                Debug.LogError("Failed to load AssetBundle!");
+                return;
+            }
+
+            if (_assetBundle)
+            {
+                Texture2D tex = _assetBundle.LoadAsset<Texture2D>(name);
+                if (tex != null)
+                {
+                    Sprite mySprite = Sprite.Create(tex, new Rect(0.0f, 0.0f, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100.0f);
+                    _iconImg.sprite = mySprite;
+                    _assetBundle.Unload(false);
+                }
+                else
+                {
+                    Debug.LogError("ClickGunEntry.cs: Failed to load texture: " + name);
+                }
+            }
+        }
+
         private void InitButtons()
         {
             DPSButton = transform.Find("DPSBtn").GetComponent<Button>();
 
             DMGButton = transform.Find("DMGBtn").GetComponent<Button>();
-        }
-
-        public void UpdateSelf(float dpsPrice, float dmgPrice)
-        {
-            //DPSPrice.text = dpsPrice.ToString();
-            //DMGPrice.text = dmgPrice.ToString();
         }
     }
 }

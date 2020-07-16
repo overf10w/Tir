@@ -13,7 +13,7 @@ namespace Game
         private const string _playerDataProjectFilePath = "/StreamingAssets/data.json";
         private const string _gameDataProjectFilePath = "/StreamingAssets/gameData.json";
 
-        void Awake()
+        private void Awake()
         {
             if (Instance != null)
             {
@@ -85,7 +85,5 @@ namespace Game
             }
             return upgrades;
         }
-
-
     }
 }

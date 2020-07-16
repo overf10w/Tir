@@ -7,14 +7,7 @@ namespace Game
 {
     public class GameOverCanvas : MessageHandler
     {
-        private CanvasGroup _mainPanel;
-
-        private void Start()
-        {
-            InitMessageHandler();
-            _mainPanel = transform.GetComponentInChildren<CanvasGroup>();
-        }
-
+        #region MessageHandler
         public override void InitMessageHandler()
         {
             MessageSubscriber msc = new MessageSubscriber();
@@ -27,23 +20,18 @@ namespace Game
         {
             if (message.Type == MessageType.GAMEOVER)
             {
-                StartCoroutine(FadeInStartPanel(_mainPanel));
+                StartCoroutine(FadeInPanel(_mainPanel));
             }
         }
 
-        public IEnumerator FadeInStartPanel(CanvasGroup panel)
+        #endregion
+
+        private CanvasGroup _mainPanel;
+
+        private void Start()
         {
-            float delayBeforeMenuInteractable = 0.19f;
-            while (panel.alpha < 1.0f)
-            {
-                if (panel.alpha >= delayBeforeMenuInteractable)
-                {
-                    panel.interactable = true;
-                    panel.blocksRaycasts = true;
-                }
-                panel.alpha += Time.deltaTime / 2.3f;
-                yield return null;
-            }
+            InitMessageHandler();
+            _mainPanel = transform.GetComponentInChildren<CanvasGroup>();
         }
 
         public void LoadScene(string sceneName)
@@ -56,6 +44,21 @@ namespace Game
         public void OnExitButtonClick()
         {
             Application.Quit();
+        }
+
+        private IEnumerator FadeInPanel(CanvasGroup panel)
+        {
+            float delayBeforeMenuInteractable = 0.19f;
+            while (panel.alpha < 1.0f)
+            {
+                if (panel.alpha >= delayBeforeMenuInteractable)
+                {
+                    panel.interactable = true;
+                    panel.blocksRaycasts = true;
+                }
+                panel.alpha += Time.deltaTime / 2.3f;
+                yield return null;
+            }
         }
     }
 }

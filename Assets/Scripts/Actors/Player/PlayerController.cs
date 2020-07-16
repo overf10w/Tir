@@ -36,16 +36,15 @@ namespace Game
         private void HandleUpgradeBtnClick(object sender, UpgradeBtnClickEventArgs e)
         {
             string indexer = e.Upgrade.Indexer;
-            float cached = (float)_model.playerStats[indexer];
-            _model.playerStats[indexer] = cached + 1;
+            float cached = (float)_model.PlayerStats[indexer];
+            _model.PlayerStats[indexer] = cached + 1;
             e.Upgrade.IsActive = false;
         }
 
         private void HandleGlobalStatChanged(object sender, GenericEventArgs<string> args)
         {
             Debug.Log("PlayerController: Notified of GlobalDPSMultiplier change");
-            _model.UpdateTeamWeapons();
-            _view.TeamPanel.UpdateTeamPanel(_model.teamWeapons);
+            _view.TeamPanel.UpdateTeamPanel(_model.TeamWeapons);
         }
 
         // One important notice: 
@@ -86,15 +85,15 @@ namespace Game
             switch(e.KeyCode)
             {
                 case InputEventArgs.INPUT_KEY_CODE.NUM_KEY_1:
-                    if (_model.teamWeapons.ContainsKey("StandardPistol"))
+                    if (_model.TeamWeapons.ContainsKey("StandardPistol"))
                     {
                         Weapon wpn;
 
-                        if (_model.teamWeapons.TryGetValue("StandardPistol", out wpn))
+                        if (_model.TeamWeapons.TryGetValue("StandardPistol", out wpn))
                         {
                             wpn.DPS.Upgrade();
-                            _model.SaveTeamWeapons(_model.teamWeapons);
-                            _view.TeamPanel.UpdateTeamPanel(_model.teamWeapons);
+                            _model.SaveTeamWeapons(_model.TeamWeapons);
+                            _view.TeamPanel.UpdateTeamPanel(_model.TeamWeapons);
                             Debug.Log("StandardPistol was upgraded");
                             // TODO: (LP):
                             // ideally, 
@@ -108,8 +107,8 @@ namespace Game
                     break;
 
                 case InputEventArgs.INPUT_KEY_CODE.DPS_MULTIPLIER:
-                    float cached = _model.playerStats.DPSMultiplier;
-                    _model.playerStats["DPSMultiplier"] = cached + 1;
+                    float cached = _model.PlayerStats.DPSMultiplier;
+                    _model.PlayerStats["DPSMultiplier"] = cached + 1;
                     break;
                 case InputEventArgs.INPUT_KEY_CODE.NUM_KEY_3:
                     Debug.Log("PlayerController: KeyCode_3");
@@ -133,12 +132,12 @@ namespace Game
             _model.Gold += e.Val;
         }
 
-        public void HandleGoldChanged(float value)
+        private void HandleGoldChanged(float value)
         {
             // view.ui.playerGoldLbl.text = value.ToString();
         }
 
-        public void HandlePropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void HandlePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (sender is WeaponStat weaponStat)
             {
@@ -158,7 +157,7 @@ namespace Game
             }
         }
 
-        public void HandleClickGunBtnClick(object sender, GenericEventArgs<WeaponStatBtnClickArgs> e)
+        private void HandleClickGunBtnClick(object sender, GenericEventArgs<WeaponStatBtnClickArgs> e)
         {
             string weaponName = e.Val.WeaponName;
             string buttonName = e.Val.ButtonName;
@@ -181,16 +180,16 @@ namespace Game
             }
         }
 
-        public void HandleTeamWeaponBtnClick(object sender, GenericEventArgs<WeaponStatBtnClickArgs> e)
+        private void HandleTeamWeaponBtnClick(object sender, GenericEventArgs<WeaponStatBtnClickArgs> e)
         {
             string weaponName = e.Val.WeaponName;
             string buttonName = e.Val.ButtonName;
 
-            if (_model.teamWeapons.ContainsKey(weaponName))
+            if (_model.TeamWeapons.ContainsKey(weaponName))
             {
                 Weapon wpn;
 
-                if (_model.teamWeapons.TryGetValue(weaponName, out wpn))
+                if (_model.TeamWeapons.TryGetValue(weaponName, out wpn))
                 {
                     // TODO: (LP): 
                     // ideally, 
@@ -200,13 +199,13 @@ namespace Game
                     {
                         case "DPS":
                             wpn.DPS.Level++;
-                            _model.SaveTeamWeapons(_model.teamWeapons);
-                            _view.TeamPanel.UpdateTeamPanel(_model.teamWeapons);
+                            _model.SaveTeamWeapons(_model.TeamWeapons);
+                            _view.TeamPanel.UpdateTeamPanel(_model.TeamWeapons);
                             break;
                         case "DMG":
                             wpn.DMG.Level++;
-                            _model.SaveTeamWeapons(_model.teamWeapons);
-                            _view.TeamPanel.UpdateTeamPanel(_model.teamWeapons);
+                            _model.SaveTeamWeapons(_model.TeamWeapons);
+                            _view.TeamPanel.UpdateTeamPanel(_model.TeamWeapons);
                             break;
                         default:
                             break;

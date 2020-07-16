@@ -8,12 +8,19 @@ namespace Game
     // Cube ModelView
     public class Cube : MonoBehaviour, IDestroyable
     {
-        private CubeStat cubeStats;
+        #region IDestroyable
+        public void TakeDamage(float damage)
+        {
+            //Debug.Log("Cube.cs: TakeDamage()");
+            Health -= damage;
+            OnTakeDamage?.Invoke(this, new GenericEventArgs<float>(damage));
+        }
+        #endregion
 
-        private int _gold = 2;
+        public event EventHandler<GenericEventArgs<float>> OnTakeDamage;
+        public event EventHandler<GenericEventArgs<float>> OnHpChange;
 
         private float _health = 100.0f;
-
         public float Health 
         { 
             get => _health; 
@@ -24,64 +31,38 @@ namespace Game
             } 
         }
 
-        public int Gold
-        {
-            get => _gold;
-        }
+        private int _gold = 2;
+        public int Gold => _gold;
 
-        //private Renderer renderer;
+        private CubeStat cubeStats;
 
-        private Transform cachedTransform;
+        private Transform _cachedTransform;
+        private Vector4 _newVec;
+        private Vector4 _cachedVec;
 
-        private Vector4 newVec;
-
-        private Vector4 cachedVec;
-
-        private CoroutineQueue takeDamageQueue;
-        private CoroutineQueue changeHPQueue;
-
-        public event EventHandler<GenericEventArgs<float>> OnTakeDamage;
-        public event EventHandler<GenericEventArgs<float>> OnHpChange;
-
+        private CoroutineQueue _takeDamageQueue;
+        private CoroutineQueue _changeHPQueue;
 
         public void Init()
         {
-            takeDamageQueue = new CoroutineQueue(1, StartCoroutine);
-            changeHPQueue = new CoroutineQueue(1, StartCoroutine);
+            _takeDamageQueue = new CoroutineQueue(1, StartCoroutine);
+            _changeHPQueue = new CoroutineQueue(1, StartCoroutine);
 
-            cachedTransform = transform;
+            _cachedTransform = transform;
 
             cubeStats = Resources.Load<CubeStats>("SO/CubeStats").Stats;
             _gold = cubeStats.gold;
             _health = cubeStats.HP;
-
-            //renderer = GetComponent<Renderer>();
-            //if (renderer == null)
-            //{
-            //    Debug.Log("SHFDSSDKL:F");
-            //}
-            //else
-            //{
-            //    if (renderer.material.HasProperty("_PlanePoint"))
-            //    {
-            //        cachedVec = renderer.material.GetVector("_PlanePoint");
-            //    }
-            //    newVec = new Vector4(cachedVec.x, transform.position.y + 1.0f * transform.localScale.y, cachedVec.z, cachedVec.w);
-            //    cachedVec = newVec;
-            //    renderer.material.SetVector("_PlanePoint", newVec);
-            //}
-        }
-
-        public void TakeDamage(float damage)
-        {
-            //Debug.Log("Cube.cs: TakeDamage()");
-            Health -= damage;
-            OnTakeDamage?.Invoke(this, new GenericEventArgs<float>(damage));
         }
 
         public void ShowHealth(float health)
         {
-            changeHPQueue.Run(ChangeHpRoutine(health));
+            _changeHPQueue.Run(ChangeHpRoutine(health));
+        }
+
+        public void Destroy()
+        {
+            _changeHPQueue.Run(DestroyRoutine());
         }
 
         private IEnumerator ChangeHpRoutine(float health)
@@ -90,9 +71,15 @@ namespace Game
             yield return new WaitForSeconds(cubeStats.takeDamageEffectDuration);
         }
 
-        public void Destroy()
+        private void Show(float hp)
         {
-            changeHPQueue.Run(DestroyRoutine());
+            if (hp <= 0)
+            {
+                return;
+            }
+
+            float wpDistance = _cachedTransform.localScale.y * 1.0f;
+            float x = wpDistance - (wpDistance * hp / 10.0f);
         }
 
         private IEnumerator DestroyRoutine()
@@ -114,20 +101,6 @@ namespace Game
                 MessageBus.Instance.SendMessage(new Message { Type = MessageType.CUBE_DEATH, objectValue = (Cube)this });
                 Destroy(this.gameObject);
             }
-        }
-
-
-
-        public void Show(float hp)
-        {
-            if (hp <= 0)
-            {
-                return;
-            }
-
-            float wpDistance = cachedTransform.localScale.y * 1.0f;
-            float x = wpDistance - (wpDistance * hp / 10.0f);
-            //renderer.material.SetVector("_PlanePoint", new Vector4(cachedVec.x, cachedVec.y - x, cachedVec.z, cachedVec.w));
         }
     }
 }
