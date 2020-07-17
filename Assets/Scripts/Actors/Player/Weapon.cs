@@ -8,12 +8,31 @@ using UnityEngine;
 namespace Game
 {
     [System.Serializable]
-    public class WeaponStatData
+    public class WeaponData
     {
-        public string weaponName;
-        public int dpsLevel;
-        public int dmgLevel;
-        public int upgradeLevel;
+
+        [SerializeField] private string _weaponName;
+        public string WeaponName { get => _weaponName; set { _weaponName = value; } }
+
+        [SerializeField] private StatData _dps;
+        // TODO: remove setter
+        public StatData DPS { get => _dps; set { _dps = value; } }
+
+        [SerializeField] private StatData _dmg;
+        // TODO: remove setter
+        public StatData DMG { get => _dmg; set { _dmg = value; } }
+
+        public WeaponAlgorithms algorithms;
+    }
+
+    [System.Serializable]
+    public class StatData
+    {
+        [SerializeField] private int _level;
+        public int Level { get => _level; set { _level = value; } }
+
+        [SerializeField] private int _upgradeLevel;
+        public int UpgradeLevel { get => _upgradeLevel; set { _upgradeLevel = value; } }
     }
 
     // TODO: 
@@ -50,7 +69,7 @@ namespace Game
         }
         #endregion
 
-        private WeaponStatsAlgorithm _algorithm;
+        private WeaponAlgorithm _algorithm;
 
         private PlayerStats _playerStats;
 
@@ -63,7 +82,7 @@ namespace Game
         public float NextPrice { get => _algorithm.GetNextPrice(Level);}
 
         private float _value;
-        public float Value { get => _algorithm.GetValue(Level, _upgradeLevel, _playerStats.dpsMultiplier); set { _value = value; } }
+        public float Value { get => _algorithm.GetValue(Level, _upgradeLevel, _playerStats.DPSMultiplier); set { _value = value; } }
 
         public float NextValue { get => _algorithm.GetNextValue(Level); }
 
@@ -73,29 +92,27 @@ namespace Game
         public float UpgradePrice { get => _algorithm.GetUpgradePrice(_upgradeLevel); }
         public float NextUpgradePrice { get => _algorithm.GetNextUpgradePrice(_upgradeLevel);}
 
-        public WeaponStat(int level, int price, int value)
-        {
-            Level = level;
-            Price = price;
-            Value = value;
-        }
-
-        public WeaponStat(int level)
-        {
-            Level = level;
-        }
-
-        public WeaponStat(int level, WeaponStatData weaponStats, PlayerStats playerStats, WeaponStatsAlgorithm algorithm)
+        public WeaponStat(int level, WeaponData weaponStats, PlayerStats playerStats, WeaponAlgorithm algorithm)
         {
             // Init this WeaponStat's stats
             Level = level;
-            _upgradeLevel = weaponStats.upgradeLevel;
+            //_upgradeLevel = weaponStats.;
 
             _algorithm = algorithm;
             _playerStats = playerStats;
         }
 
-        public WeaponStat(int level, int upgradeLevel, WeaponStatsAlgorithm algorithm)
+        public WeaponStat(StatData statData, PlayerStats playerStats, WeaponAlgorithm algorithm)
+        {
+            // Init this WeaponStat's stats
+            Level = statData.Level;
+            _upgradeLevel = statData.UpgradeLevel;
+
+            _algorithm = algorithm;
+            _playerStats = playerStats;
+        }
+
+        public WeaponStat(int level, int upgradeLevel, WeaponAlgorithm algorithm)
         {
             Level = level;
             _upgradeLevel = upgradeLevel;
@@ -106,11 +123,6 @@ namespace Game
         public void Upgrade()
         {
             _upgradeLevel++;
-        }
-
-        public void UpdateSelf()
-        {
-            
         }
     }
 
@@ -140,22 +152,22 @@ namespace Game
         public WeaponStat DMG { get; private set; }
 
         private PlayerStats _playerStats;
-        private WeaponStatsAlgorithmsHolder _algorithmHolder;
+        public WeaponAlgorithms Algorithms { get; private set; }
 
         private Wave _wave;
 
         private float _nextShotTime;
         private float _msBetweenShots = 200;
 
-        public void Init(WeaponStatsAlgorithmsHolder algorithmHolder, WeaponStatData data, PlayerStats playerStats)
+        public void Init(WeaponAlgorithms algorithmHolder, WeaponData data, PlayerStats playerStats)
         {
             InitMessageHandler();
 
-            _algorithmHolder = algorithmHolder;
+            Algorithms = algorithmHolder;
             _playerStats = playerStats;
 
-            DPS = new WeaponStat(data.dpsLevel, data, playerStats, algorithmHolder.DPS);
-            DMG = new WeaponStat(data.dmgLevel, data, playerStats, algorithmHolder.DMG);
+            DPS = new WeaponStat(data.DPS, playerStats, algorithmHolder.DPS);
+            DMG = new WeaponStat(data.DMG, playerStats, algorithmHolder.DMG);
         }
 
         private void Update()

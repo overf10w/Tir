@@ -6,21 +6,18 @@ using System.IO;
 
 namespace Game
 {
-    // TODO (LP): 
-    // 1. Resource.Load be called through the Init() chain all the way from GameManager;
-    // 2. PlayerDataFile is referenced (through inspector) by other SO's
-    [CustomEditor(typeof(Upgrades))]
-    public class UpgradesEditor : Editor
+    [CustomEditor(typeof(GunData))]
+    public class GunDataEditor : Editor
     {
-        private Upgrades _upgrades;
+        private GunData _gunData;
         private string _path;
         private string _backupPath;
 
         public void OnEnable()
         {
-            _path = Path.Combine(Application.persistentDataPath, "upgrades.dat");
-            _backupPath = Path.Combine(Application.persistentDataPath, "backupUpgrades.dat");
-            _upgrades = (Upgrades)target;
+            _path = Path.Combine(Application.persistentDataPath, "clickGun.dat");
+            _backupPath = Path.Combine(Application.persistentDataPath, "backupClickGun.dat");
+            _gunData = (GunData)target;
         }
 
         public override void OnInspectorGUI()
@@ -38,28 +35,28 @@ namespace Game
 
             if (GUILayout.Button("Read"))
             {
-                _upgrades.upgrades = ResourceLoader.Load<Upgrades.Upgrade[]>(_path);
+                _gunData.gunStats = ResourceLoader.Load<WeaponData>(_path);
             }
 
             if (GUILayout.Button("Write"))
             {
-                ResourceLoader.Save<Upgrades.Upgrade[]>(_path, _upgrades.upgrades);
+                ResourceLoader.Save<WeaponData>(_path, _gunData.gunStats);
             }
 
             if (GUILayout.Button("Write Default", redStyle))
             {
-                ResourceLoader.Save<Upgrades.Upgrade[]>(_backupPath, _upgrades.upgrades);
+                ResourceLoader.Save<WeaponData>(_backupPath, _gunData.gunStats);
             }
 
             if (GUILayout.Button("Read Default", greenStyle))
             {
-                _upgrades.upgrades = ResourceLoader.Load<Upgrades.Upgrade[]>(_backupPath);
+                _gunData.gunStats = ResourceLoader.Load<WeaponData>(_backupPath);
             }
 
             if (GUILayout.Button("Reset to Default", blueStyle))
             {
-                _upgrades.upgrades = ResourceLoader.Load<Upgrades.Upgrade[]>(_backupPath);
-                ResourceLoader.Save<Upgrades.Upgrade[]>(_path, _upgrades.upgrades);
+                _gunData.gunStats = ResourceLoader.Load<WeaponData>(_backupPath);
+                ResourceLoader.Save<WeaponData>(_path, _gunData.gunStats);
             }
         }
     }

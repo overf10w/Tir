@@ -3,34 +3,24 @@
 namespace Game
 {
     [System.Serializable]
-    public class WeaponStatsAlgorithm
+    public class WeaponAlgorithm
     {
         [Header("Price/Value algorithm")]
-        public float basePrice;
+        [SerializeField] private float _basePrice;
         [Tooltip("Optimal between (1.07 - 1.15)")]
-        public float priceMultiplier;
-        
-        public float baseValue;
-        public float valueMultiplier;
+        [SerializeField] private float _priceMultiplier;
+        [SerializeField] private float _baseValue;
+        [SerializeField] private float _valueMultiplier;
 
         [Header("Upgrade algorithm")]
-        public float baseUpgradePrice;
-        public float upgradePriceMultiplier;
-        public int maxUpgradeLevel;
-        public float upgradeValueMultiplier = 2.0f;
-
-        // TODO: add these fields
-        // public float baseValue;
-        // public float valueMultiplier;
-
-        // TODO: add these fields:
-        // public float baseUpgradePrice;
-        // public float maxSkillLevel;
-        // public float skillMultiplier; <-- thus, we should add skillLevel field in the Weapon
+        [SerializeField] private float _baseUpgradePrice;
+        [SerializeField] private float _upgradePriceMultiplier;
+        [SerializeField] private int _maxUpgradeLevel;
+        [SerializeField] private float _upgradeValueMultiplier = 2.0f;
 
         public float GetPrice(int level)
         {
-            return basePrice * Mathf.Pow(priceMultiplier, level);
+            return _basePrice * Mathf.Pow(_priceMultiplier, level);
         }
 
         public float GetNextPrice(int level)
@@ -40,7 +30,7 @@ namespace Game
 
         public float GetUpgradePrice(int skillLevel)
         {
-            return baseUpgradePrice * Mathf.Pow(upgradePriceMultiplier, skillLevel);
+            return _baseUpgradePrice * Mathf.Pow(_upgradePriceMultiplier, skillLevel);
         }
 
         public float GetNextUpgradePrice(int level)
@@ -53,8 +43,8 @@ namespace Game
             // How value should be calculated: 
             // public float GetValue(int level, int skillLevel, int globalDPSMultiplier)
             // return level * baseValue * valueMultiplier * skillLevel * skillMultiplier * globalDPSMultiplier;
-            float upgradeValue = upgradeLevel <= 0 ? 1 : 1 * Mathf.Pow(upgradeValueMultiplier, upgradeLevel);
-            return baseValue * Mathf.Pow(valueMultiplier, level) * level * upgradeValue * dpsMultiplier;
+            float upgradeValue = upgradeLevel <= 0 ? 1 : 1 * Mathf.Pow(_upgradeValueMultiplier, upgradeLevel);
+            return _baseValue * Mathf.Pow(_valueMultiplier, level) * level * upgradeValue * dpsMultiplier;
         }
 
         public float GetNextValue(int level)
@@ -64,18 +54,19 @@ namespace Game
     }
 
     [System.Serializable]
-    public class WeaponStatsAlgorithmsHolder
+    public class WeaponAlgorithms
     {
         public string name;
 
-        public WeaponStatsAlgorithm DPS;
+        public WeaponAlgorithm DPS;
 
-        public WeaponStatsAlgorithm DMG;
+        public WeaponAlgorithm DMG;
     }
 
+    // TODO: remove it whatsoever
     [CreateAssetMenu(fileName = "WeaponStatsStrategies", menuName = "ScriptableObjects/WeaponStatsStrategies", order = 1)]
     public class WeaponStatsStrategies : ScriptableObject
     {
-        public WeaponStatsAlgorithmsHolder[] algorithms;
+        public WeaponAlgorithms[] algorithms;
     }
 }

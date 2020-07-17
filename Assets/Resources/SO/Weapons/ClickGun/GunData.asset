@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5089abff1f71f34eb73459c725946b9, type: 3}
+  m_Name: GunData
+  m_EditorClassIdentifier: 
+  gunStats:
+    _weaponName: Gun
+    _dps:
+      _level: 0
+      _upgradeLevel: 0
+    _dmg:
+      _level: 0
+      _upgradeLevel: 0
+    algorithms:
+      name: Gun
+      DPS:
+        _basePrice: 45
+        _priceMultiplier: 1.8
+        _baseValue: 12
+        _valueMultiplier: 1.12
+        _baseUpgradePrice: 55
+        _upgradePriceMultiplier: 1.089
+        _maxUpgradeLevel: 100
+        _upgradeValueMultiplier: 2
+      DMG:
+        _basePrice: 35
+        _priceMultiplier: 1.9
+        _baseValue: 55
+        _valueMultiplier: 1.13
+        _baseUpgradePrice: 55
+        _upgradePriceMultiplier: 1.1
+        _maxUpgradeLevel: 100
+        _upgradeValueMultiplier: 2

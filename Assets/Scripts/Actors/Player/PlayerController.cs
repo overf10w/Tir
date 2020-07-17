@@ -7,10 +7,9 @@ namespace Game
 {
     public class PlayerController
     {
-        private PlayerModel _model;
-        private PlayerView _view;
-
-        private InputManager _inputManager;
+        private readonly PlayerModel _model;
+        private readonly PlayerView _view;
+        private readonly InputManager _inputManager;
 
         public PlayerController(PlayerModel model, Upgrades.Upgrade[] upgrades, PlayerView view, InputManager inputManager)
         {
@@ -30,7 +29,7 @@ namespace Game
             _inputManager.OnKeyPress += HandleResearchKeyPress;
 
             _model.PropertyChanged += HandlePropertyChanged;
-            _model.OnGlobalStatChanged += HandleGlobalStatChanged;
+            _model.OnPlayerStatsChanged += HandlePlayerStatsChanged;
         }
 
         private void HandleUpgradeBtnClick(object sender, UpgradeBtnClickEventArgs e)
@@ -41,17 +40,23 @@ namespace Game
             e.Upgrade.IsActive = false;
         }
 
-        private void HandleGlobalStatChanged(object sender, GenericEventArgs<string> args)
+        private void HandlePlayerStatsChanged(object sender, GenericEventArgs<string> args)
         {
-            Debug.Log("PlayerController: Notified of GlobalDPSMultiplier change");
-            _view.TeamPanel.UpdateTeamPanel(_model.TeamWeapons);
+
+            if (args.Val == "Gold")
+            {
+                _view.Ui.PlayerGoldTxt.text = _model.PlayerStats.Gold.ToString();
+                return;
+            }
+
+            _view.TeamPanel.UpdateView(_model.TeamWeapons);
+            _view.ClickGunPanel.UpdateView(_model.DPS, _model.DMG);
         }
 
         // One important notice: 
         // 1. Abilities have nothing to do with WeaponStat.Price
         // 2. Abilities only work with WeaponStat.Value
         // 3. 
-
 
         // HandleAbilityClicked(object sender, string weapon /*Ability ability*/) 
         // {
@@ -93,7 +98,7 @@ namespace Game
                         {
                             wpn.DPS.Upgrade();
                             _model.SaveTeamWeapons(_model.TeamWeapons);
-                            _view.TeamPanel.UpdateTeamPanel(_model.TeamWeapons);
+                            _view.TeamPanel.UpdateView(_model.TeamWeapons);
                             Debug.Log("StandardPistol was upgraded");
                             // TODO: (LP):
                             // ideally, 
@@ -129,12 +134,10 @@ namespace Game
 
         private void HandleCubeDeath(object sender, CustomArgs e)
         {
-            _model.Gold += e.Val;
-        }
-
-        private void HandleGoldChanged(float value)
-        {
-            // view.ui.playerGoldLbl.text = value.ToString();
+            _model.PlayerStats.Gold += e.Val;
+            // TODO: save 'em every 15 seconds instead.
+            // This drastically decreases performance!!!
+            _model.SavePlayerStats();
         }
 
         private void HandlePropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -142,18 +145,7 @@ namespace Game
             if (sender is WeaponStat weaponStat)
             {
                 Debug.Log("PlayerController: HandlePropertyChanged: model.Changed: weaponStatObject: " + weaponStat.Level);
-                _view.ClickGunPanel.UpdateClickGunPanel(_model.DPS, _model.DMG);
-            }
-
-            //UnityEngine.Debug.Log("PlayerController: " + e.PropertyName);
-            //view.Ui.PlayerGoldTxt.text = e.PropertyName.ToString();
-            if (e.PropertyName == "Gold")
-            {
-                _view.Ui.PlayerGoldTxt.text = _model.Gold.ToString();
-            }
-            else
-            {
-                // 
+                _view.ClickGunPanel.UpdateView(_model.DPS, _model.DMG);
             }
         }
 
@@ -200,12 +192,12 @@ namespace Game
                         case "DPS":
                             wpn.DPS.Level++;
                             _model.SaveTeamWeapons(_model.TeamWeapons);
-                            _view.TeamPanel.UpdateTeamPanel(_model.TeamWeapons);
+                            _view.TeamPanel.UpdateView(_model.TeamWeapons);
                             break;
                         case "DMG":
                             wpn.DMG.Level++;
                             _model.SaveTeamWeapons(_model.TeamWeapons);
-                            _view.TeamPanel.UpdateTeamPanel(_model.TeamWeapons);
+                            _view.TeamPanel.UpdateView(_model.TeamWeapons);
                             break;
                         default:
                             break;

@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e41928f1458c48488933841db137b8a, type: 3}
+  m_Name: WeaponsData
+  m_EditorClassIdentifier: 
+  dpsMultiplier: 0
+  weapons:
+  - _weaponName: StandardPistol
+    _dps:
+      _level: 0
+      _upgradeLevel: 0
+    _dmg:
+      _level: 0
+      _upgradeLevel: 0
+    algorithms:
+      name: StandardPistol
+      DPS:
+        _basePrice: 20
+        _priceMultiplier: 1.6
+        _baseValue: 5
+        _valueMultiplier: 1.1
+        _baseUpgradePrice: 40
+        _upgradePriceMultiplier: 1
+        _maxUpgradeLevel: 0
+        _upgradeValueMultiplier: 2
+      DMG:
+        _basePrice: 15
+        _priceMultiplier: 1.12
+        _baseValue: 5
+        _valueMultiplier: 1.05
+        _baseUpgradePrice: 40
+        _upgradePriceMultiplier: 1
+        _maxUpgradeLevel: 100
+        _upgradeValueMultiplier: 2
+  - _weaponName: MachineGun
+    _dps:
+      _level: 0
+      _upgradeLevel: 0
+    _dmg:
+      _level: 0
+      _upgradeLevel: 0
+    algorithms:
+      name: MachineGun
+      DPS:
+        _basePrice: 40
+        _priceMultiplier: 1.22
+        _baseValue: 10
+        _valueMultiplier: 1.1
+        _baseUpgradePrice: 40
+        _upgradePriceMultiplier: 1
+        _maxUpgradeLevel: 100
+        _upgradeValueMultiplier: 2
+      DMG:
+        _basePrice: 25
+        _priceMultiplier: 1.095
+        _baseValue: 20
+        _valueMultiplier: 1.1
+        _baseUpgradePrice: 40
+        _upgradePriceMultiplier: 1
+        _maxUpgradeLevel: 100
+        _upgradeValueMultiplier: 2

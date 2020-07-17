@@ -18,10 +18,10 @@ namespace Game
         private Ray _ray;
         private RaycastHit _hit;
 
-        public void Init(WeaponStatData gunData, WeaponStatsAlgorithm dpsAlgorithm, WeaponStatsAlgorithm dmgAlgorithm)
+        public void Init(WeaponData gunData)
         {
-            DPS = new WeaponStat(gunData.dpsLevel, gunData.upgradeLevel, dpsAlgorithm);
-            DMG = new WeaponStat(gunData.dmgLevel, gunData.upgradeLevel, dmgAlgorithm);
+            DPS = new WeaponStat(gunData.DPS.Level, gunData.DPS.UpgradeLevel, gunData.algorithms.DPS);
+            DMG = new WeaponStat(gunData.DMG.Level, gunData.DMG.UpgradeLevel, gunData.algorithms.DMG);
         }
 
         public void UpdateGunRotation()

@@ -41,12 +41,13 @@ namespace Game
         public void Init(PlayerModel playerModel)
         {
             InitMessageHandler();
+
             // TODO: drag & drop
             _levelListUI = FindObjectOfType<LevelListUI>();
 
             // playerStats
             PlayerGoldTxt = GameObject.Find("GoldLbl").GetComponent<Text>();
-            PlayerGoldTxt.text = playerModel.Gold.ToString();
+            PlayerGoldTxt.text = playerModel.PlayerStats.Gold.ToString();
 
             _playerCurrentWaveTxt = GameObject.Find("CurrentWaveLbl").GetComponent<Text>();
 
@@ -58,7 +59,7 @@ namespace Game
             //ResourceLoader.gameData.OnLevelChanged += HandleLevelChanged;
 
             _elapsedTimeSpanTxt = GameObject.Find("ElapsedTimeSpanLbl").GetComponent<Text>();
-            TimeSpan idleTimeSpan = new TimeSpan(playerModel.IdleTimeSpan);
+            TimeSpan idleTimeSpan = new TimeSpan(playerModel.PlayerStats.IdleTimeSpan);
             _elapsedTimeSpanTxt.text = idleTimeSpan.ToString("hh\\:mm\\:ss");
         }
 

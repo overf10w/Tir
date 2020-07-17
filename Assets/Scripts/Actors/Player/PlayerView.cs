@@ -79,7 +79,7 @@ namespace Game
 
             ClickGunPanel = Ui.GetComponentInChildren<ClickGunPanel>();
             
-            ClickGunPanel.Init(model.GunData.weaponName, model.DPS, model.DMG);
+            ClickGunPanel.Init(model.GunData.WeaponName, model.DPS, model.DMG);
             if (ClickGunPanel)
             {
                 ClickGunPanel.WeaponBtnClick.PlayerView = this;
@@ -94,7 +94,7 @@ namespace Game
 
             Gun = GetComponentInChildren<Gun>();
 
-            Gun.Init(model.GunData, model.GunAlgorithmHolder.DPS, model.GunAlgorithmHolder.DMG);
+            Gun.Init(model.GunData);
         }
 
         private void Update()

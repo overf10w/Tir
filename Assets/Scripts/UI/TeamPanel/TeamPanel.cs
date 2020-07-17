@@ -57,7 +57,7 @@ namespace Game
         private GameObject _weaponUiEntryPrefab;
         private List<GameObject> _weaponUiEntries;
 
-        public void UpdateTeamPanel(Dictionary<string, Weapon> weapons)
+        public void UpdateView(Dictionary<string, Weapon> weapons)
         {
             if (weapons != null)
             {

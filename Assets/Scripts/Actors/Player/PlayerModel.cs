@@ -9,6 +9,9 @@ using UnityEngine;
 
 namespace Game
 {
+    // TODO: 
+    // 1. All disk init/saving/reading should be done in PlayerController through ResourceLoader:
+    //        1.1 PlayerCont.cs: model.HandleTeamWeaponsChanged(() => { ResourceLoader.SaveTeamWeapons(model.TeamWeapons) });
     [System.Serializable]
     public class PlayerModel
     {
@@ -28,61 +31,20 @@ namespace Game
         }
         #endregion
 
-        public event EventHandler<GenericEventArgs<string>> OnGlobalStatChanged;
+        public event EventHandler<GenericEventArgs<string>> OnPlayerStatsChanged;
 
-        // Player stats
         public PlayerStats PlayerStats { get; private set; }
-
-        // Player stats
-        private float _gold;
-        public float Gold
-        {
-            get => _gold;
-            set
-            {
-                SetField(ref _gold, value, "Gold");
-                SavePlayerStats();
-            }
-        }
-
-        private int _level;
-        public int Level
-        {
-            get => _level;
-            set
-            {
-                SetField(ref _level, value, "Level");
-            }
-        }
-
-        private long _timeLastPlayed;
-        private long _gameStartDateTime = -1;
-        public long IdleTimeSpan
-        {
-            get
-            {
-                if (_gameStartDateTime == -1)
-                {
-                    _gameStartDateTime = DateTime.Now.Ticks;
-                }
-                return _gameStartDateTime - _timeLastPlayed;
-            }
-        }
 
         public Dictionary<string, Weapon> TeamWeapons { get; private set; }
 
-        // Click Gun Stats
+        // Click Gun Data
+        public WeaponData GunData { get; private set; }
         public WeaponStat DPS { get; private set; }
         public WeaponStat DMG { get; private set; }
-        // endof Click Gun Stats
-
-        public WeaponStatData GunData { get; private set; }
-        public WeaponStatsAlgorithmsHolder GunAlgorithmHolder { get; private set; }
-        private WeaponStatsStrategies _weaponStatsStrategies;
+        // endof Click Gun Data
 
         public PlayerModel()
         {
-            _weaponStatsStrategies = Resources.Load<WeaponStatsStrategies>("SO/Weapons/TeamWeapons/WeaponStatsStrategies");
             InitPlayerStats();
             InitTeamWeapons(PlayerStats);
             InitClickGun();
@@ -95,78 +57,85 @@ namespace Game
 
             string path = Path.Combine(Application.persistentDataPath, "weapons.dat");
 
-            WeaponStatData[] weaponStats = ResourceLoader.Load<WeaponStatData[]>(path);
+            WeaponData[] weaponStats = ResourceLoader.Load<WeaponData[]>(path);
 
-            // TODO: init with special scriptable object injected here (through constructor chain) all the way down through GameManager
+            // TODO: init this with special default backup files...
             if (weaponStats == null)
             {
-                weaponStats = new WeaponStatData[2];
+                Debug.Log("This is not the case");
+                weaponStats = new WeaponData[2];
 
-                weaponStats[0] = new WeaponStatData();
-                weaponStats[0].dmgLevel = 0;
-                weaponStats[0].dpsLevel = 0;
-                weaponStats[0].upgradeLevel = 0;
-                weaponStats[0].weaponName = "StandardPistol";
+                weaponStats[0] = new WeaponData();
+                weaponStats[0].DMG.Level = 0;
+                weaponStats[0].DPS.Level = 0;
+                weaponStats[0].DPS.UpgradeLevel = 0;
+                weaponStats[0].DMG.UpgradeLevel = 0;
+                weaponStats[0].WeaponName = "StandardPistol";
 
-                weaponStats[1] = new WeaponStatData();
-                weaponStats[1].dmgLevel = 0;
-                weaponStats[1].dpsLevel = 0;
-                weaponStats[1].upgradeLevel = 0;
-                weaponStats[1].weaponName = "MachineGun";
+                weaponStats[1] = new WeaponData();
+                weaponStats[1].DMG.Level = 0;
+                weaponStats[1].DPS.Level = 0;
+                weaponStats[1].DPS.UpgradeLevel = 0;
+                weaponStats[1].DMG.UpgradeLevel = 0;
+                weaponStats[1].WeaponName = "MachineGun";
             }
 
             foreach (var weapon in weaponStats)
             {
-                foreach(var algo in _weaponStatsStrategies.algorithms)
-                {
-                    if (weapon.weaponName == algo.name)
-                    {
-                        GameObject obj = new GameObject(weapon.weaponName);
-                        Weapon weaponScript = obj.AddComponent<Weapon>();
-                        // TODO: 
-                        // 1. Subscribe to weaponScript.OnPropertyChanged
-                        // 2. Raise the event when notified OnPropertyChanged
-                        // 3. PlayerController subscribes to this event and changes view accordingly (it just updates the views with the ref to teamWeapons dictionary;
-
-                        weaponScript.Init(algo, weapon, playerStats);
-                        TeamWeapons.Add(weapon.weaponName, weaponScript);
-                        //Debug.Log("weapon.weaponName: [" + weapon.weaponName + "] == algo.name: [" + algo.name + "]");
-                        break;
-                    }
-                }
+                GameObject obj = new GameObject(weapon.WeaponName);
+                Weapon weaponScript = obj.AddComponent<Weapon>();
+                // TODO:
+                // 1. Subscribe to weaponScript.OnPropertyChanged
+                // 2. Raise the event when notified OnPropertyChanged
+                // 3. PlayerController subscribes to this event and changes view accordingly (it just updates the views with the ref to teamWeapons dictionary;
+                weaponScript.Init(weapon.algorithms, weapon, playerStats);
+                TeamWeapons.Add(weapon.WeaponName, weaponScript);
             }
         }
 
-        public void SaveClickGun(WeaponStat DPS, WeaponStat DMG)
+        public void SaveClickGun(WeaponStat dps, WeaponStat dmg, WeaponData gunData)
         {
-            WeaponStatData data = new WeaponStatData();
+            WeaponData data = new WeaponData();
 
-            data.weaponName = "Gun";
-            data.dpsLevel = DPS.Level;
-            data.dmgLevel = DMG.Level;
-            data.upgradeLevel = DPS.UpgradeLevel;
+            data.DPS = new StatData();
+            data.DMG = new StatData();
+
+            data.WeaponName = "Gun";
+            data.DPS.Level = dps.Level;
+            data.DMG.Level = dmg.Level;
+            data.DPS.UpgradeLevel = dps.UpgradeLevel;
+            data.DMG.UpgradeLevel = dmg.UpgradeLevel;
+
+            data.algorithms = gunData.algorithms;
 
             string path = Path.Combine(Application.persistentDataPath, "clickGun.dat");
-            ResourceLoader.Save<WeaponStatData>(path, data);
+            ResourceLoader.Save<WeaponData>(path, data);
         }
 
         public void SaveTeamWeapons(Dictionary<string, Weapon> teamWeapons)
         {
-            WeaponStatData[] teamWeaponsToSave = new WeaponStatData[teamWeapons.Count];
+            WeaponData[] teamWeaponsToSave = new WeaponData[teamWeapons.Count];
             int i = 0;
             foreach (var weapon in teamWeapons)
             {
-                WeaponStatData data = new WeaponStatData();
-                data.weaponName = weapon.Key;
-                data.dpsLevel = weapon.Value.DPS.Level;
-                data.dmgLevel = weapon.Value.DMG.Level;
-                data.upgradeLevel = weapon.Value.DPS.UpgradeLevel;
+                WeaponData data = new WeaponData();
+
+                data.DPS = new StatData();
+                data.DMG = new StatData();
+
+                data.WeaponName = weapon.Key;
+                
+                data.DPS.Level = weapon.Value.DPS.Level;
+                data.DMG.Level = weapon.Value.DMG.Level;
+                data.DPS.UpgradeLevel = weapon.Value.DPS.UpgradeLevel;
+                data.DMG.UpgradeLevel = weapon.Value.DMG.UpgradeLevel;
+                data.algorithms = weapon.Value.Algorithms;
 
                 teamWeaponsToSave[i++] = data;
             }
 
             string path = Path.Combine(Application.persistentDataPath, "weapons.dat");
-            ResourceLoader.Save<WeaponStatData[]>(path, teamWeaponsToSave);
+            ResourceLoader.Save<WeaponData[]>(path, teamWeaponsToSave);
         }
 
         public void SavePlayerStats()
@@ -175,39 +144,34 @@ namespace Game
 
             PlayerStats playerStats = new PlayerStats();
 
-            playerStats.gold = Gold;
-            playerStats.level = Level;
-            playerStats.timeLastPlayed = DateTime.Now.Ticks;
-            playerStats.dpsMultiplier = this.PlayerStats.dpsMultiplier;
+            playerStats.Gold = PlayerStats.Gold;
+            playerStats.Level = PlayerStats.Level;
+            playerStats.LastPlayTimestamp = DateTime.Now.Ticks;
+            playerStats.DPSMultiplier = this.PlayerStats.DPSMultiplier;
 
             ResourceLoader.Save<PlayerStats>(path, playerStats);
-        }
-
-        public void InitStats(PlayerStats playerStats)
-        {
-            _gold = playerStats.gold;
-            _level = playerStats.level;
-            _timeLastPlayed = playerStats.timeLastPlayed;
         }
 
         private void InitClickGun()
         {
             string path = Path.Combine(Application.persistentDataPath, "clickGun.dat");
 
-            GunData = ResourceLoader.Load<WeaponStatData>(path);
+            GunData = ResourceLoader.Load<WeaponData>(path);
+            // TODO: init this with special default backup files...
             if (GunData == null)
             {
-                GunData = new WeaponStatData();
-                GunData.dmgLevel = 0;
-                GunData.dpsLevel = 0;
-                GunData.upgradeLevel = 0;
-                GunData.weaponName = "Gun";
+                GunData = new WeaponData();
+                GunData.DMG.Level = 0;
+                GunData.DPS.Level = 0;
+                GunData.DPS.UpgradeLevel = 0;
+                GunData.DMG.UpgradeLevel = 0;
+                //GunData.WeaponName = "Gun";
+                // TODO: 
+                // GunData.algorithms = ...
             }
 
-            GunAlgorithmHolder = Resources.Load<GunStatsStrategy>("SO/Weapons/ClickGun/GunStatsStrategy").algorithm;
-
-            DPS = new WeaponStat(GunData.dpsLevel, GunData, PlayerStats, GunAlgorithmHolder.DPS);
-            DMG = new WeaponStat(GunData.dmgLevel, GunData, PlayerStats, GunAlgorithmHolder.DMG);
+            DPS = new WeaponStat(GunData.DPS, PlayerStats, GunData.algorithms.DPS);
+            DMG = new WeaponStat(GunData.DMG, PlayerStats, GunData.algorithms.DMG);
 
             DPS.PropertyChanged += HandleClickGunChanged;
             DMG.PropertyChanged += HandleClickGunChanged;
@@ -217,33 +181,29 @@ namespace Game
         {
             string path = Path.Combine(Application.persistentDataPath, "playerStats.dat");
 
-            this.PlayerStats = ResourceLoader.Load<PlayerStats>(path);
+            PlayerStats = ResourceLoader.Load<PlayerStats>(path);
 
-            if (this.PlayerStats == null)
+            if (PlayerStats == null)
             {
                 this.PlayerStats = new PlayerStats();
-                this.PlayerStats.gold = 0;
-                this.PlayerStats.level = 0;
-                this.PlayerStats.timeLastPlayed = DateTime.Now.Ticks;
-                this.PlayerStats.dpsMultiplier = 1.1f;
+                this.PlayerStats.Gold = 0;
+                this.PlayerStats.Level = 0;
+                this.PlayerStats.LastPlayTimestamp = DateTime.Now.Ticks;
+                this.PlayerStats.DPSMultiplier = 1.1f;
             }
 
-            Gold = this.PlayerStats.gold;
-            Level = this.PlayerStats.level;
-            _timeLastPlayed = this.PlayerStats.timeLastPlayed;
-
-            this.PlayerStats.PropertyChanged += HandlePlayerStatChanged;
+            PlayerStats.PropertyChanged += HandlePlayerStatChanged;
         }
 
         private void HandlePlayerStatChanged(object sender, PropertyChangedEventArgs args)
         {
-            OnGlobalStatChanged?.Invoke(sender, new GenericEventArgs<string>(args.PropertyName));
+            OnPlayerStatsChanged?.Invoke(sender, new GenericEventArgs<string>(args.PropertyName));
         }
 
         private void HandleClickGunChanged(object sender, PropertyChangedEventArgs e)
         {
             PropertyChanged?.Invoke(sender, e);
-            SaveClickGun(DPS, DMG);
+            SaveClickGun(DPS, DMG, GunData);
         }
     }
 
@@ -271,15 +231,21 @@ namespace Game
         #endregion
 
         [Header("Player")]
-        public float gold;
-        public int level;
-        public long timeLastPlayed;
+        [SerializeField] private float _gold;
+        public float Gold { get => _gold; set { SetField(ref _gold, value); } }
+
+        [SerializeField] private int _level;
+        public int Level { get => _level; set { SetField(ref _level, value); } }
+
+        [SerializeField] private long _lastPlayTimestamp;
+        public long LastPlayTimestamp { get => _lastPlayTimestamp; set { SetField(ref _lastPlayTimestamp, value); } }
 
         [Header("Team Stats")]
         [Tooltip("1.0 - 7.0")]
-        public float dpsMultiplier;
+        [SerializeField] private float _dpsMultiplier;
+        public float DPSMultiplier { get => _dpsMultiplier; set { SetField(ref _dpsMultiplier, value); } }
 
-        public float DPSMultiplier { get => dpsMultiplier; set { SetField(ref dpsMultiplier, value); } }
+        public long IdleTimeSpan => _lastPlayTimestamp == 0 ? 0 : DateTime.Now.Ticks - _lastPlayTimestamp;
 
         // Indexer (will be used by Upgrade system a lot)
         public object this[string propertyName]

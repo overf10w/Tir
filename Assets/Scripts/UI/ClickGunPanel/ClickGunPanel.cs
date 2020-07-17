@@ -31,7 +31,7 @@ namespace Game
             _clickGunEntry.DMGButton.onClick.AddListener(() => { WeaponBtnClick.Dispatch(new WeaponStatBtnClickArgs("ClickGun", "DMG")); Debug.Log("CLickGunPanel. Click DMG"); });
         }
 
-        public void UpdateClickGunPanel(WeaponStat dps, WeaponStat dmg)
+        public void UpdateView(WeaponStat dps, WeaponStat dmg)
         {
             _clickGunEntry.UpdateSelf(dps, dmg);
         }
