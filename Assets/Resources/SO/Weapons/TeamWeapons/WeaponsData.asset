@@ -68,3 +68,30 @@ MonoBehaviour:
         _upgradePriceMultiplier: 1
         _maxUpgradeLevel: 100
         _upgradeValueMultiplier: 2
+  - _weaponName: Grenade
+    _dps:
+      _level: 0
+      _upgradeLevel: 0
+    _dmg:
+      _level: 0
+      _upgradeLevel: 0
+    algorithms:
+      name: Grenade
+      DPS:
+        _basePrice: 40000
+        _priceMultiplier: 1.22
+        _baseValue: 1000
+        _valueMultiplier: 1.1
+        _baseUpgradePrice: 40
+        _upgradePriceMultiplier: 1
+        _maxUpgradeLevel: 100
+        _upgradeValueMultiplier: 2
+      DMG:
+        _basePrice: 25000
+        _priceMultiplier: 1.095
+        _baseValue: 2000
+        _valueMultiplier: 1.1
+        _baseUpgradePrice: 40
+        _upgradePriceMultiplier: 1
+        _maxUpgradeLevel: 100
+        _upgradeValueMultiplier: 2

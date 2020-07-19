@@ -96,8 +96,11 @@ namespace Game
             if (_assetBundle)
             {
                 Texture2D tex = _assetBundle.LoadAsset<Texture2D>(name);
-                Sprite mySprite = Sprite.Create(tex, new Rect(0.0f, 0.0f, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100.0f);
-                _iconImg.sprite = mySprite;
+                if (tex != null)
+                {
+                    Sprite mySprite = Sprite.Create(tex, new Rect(0.0f, 0.0f, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100.0f);
+                    _iconImg.sprite = mySprite;
+                }
                 _assetBundle.Unload(false);
             }
         }

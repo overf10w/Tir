@@ -42,10 +42,10 @@ namespace Game
 
         private void HandlePlayerStatsChanged(object sender, GenericEventArgs<string> args)
         {
-
             if (args.Val == "Gold")
             {
                 _view.Ui.PlayerGoldTxt.text = _model.PlayerStats.Gold.ToString();
+                // Don't need to redraw panels if only gold changed
                 return;
             }
 
@@ -97,7 +97,7 @@ namespace Game
                         if (_model.TeamWeapons.TryGetValue("StandardPistol", out wpn))
                         {
                             wpn.DPS.Upgrade();
-                            _model.SaveTeamWeapons(_model.TeamWeapons);
+                            ResourceLoader.SaveTeamWeapons(_model.TeamWeapons);
                             _view.TeamPanel.UpdateView(_model.TeamWeapons);
                             Debug.Log("StandardPistol was upgraded");
                             // TODO: (LP):
@@ -137,7 +137,7 @@ namespace Game
             _model.PlayerStats.Gold += e.Val;
             // TODO: save 'em every 15 seconds instead.
             // This drastically decreases performance!!!
-            _model.SavePlayerStats();
+            ResourceLoader.SavePlayerStats(_model.PlayerStats);
         }
 
         private void HandlePropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -191,12 +191,12 @@ namespace Game
                     {
                         case "DPS":
                             wpn.DPS.Level++;
-                            _model.SaveTeamWeapons(_model.TeamWeapons);
+                            ResourceLoader.SaveTeamWeapons(_model.TeamWeapons);
                             _view.TeamPanel.UpdateView(_model.TeamWeapons);
                             break;
                         case "DMG":
                             wpn.DMG.Level++;
-                            _model.SaveTeamWeapons(_model.TeamWeapons);
+                            ResourceLoader.SaveTeamWeapons(_model.TeamWeapons);
                             _view.TeamPanel.UpdateView(_model.TeamWeapons);
                             break;
                         default:
