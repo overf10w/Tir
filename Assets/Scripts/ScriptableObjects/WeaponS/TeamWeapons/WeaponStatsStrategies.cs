@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Game
 {
@@ -47,12 +48,26 @@ namespace Game
             return _baseValue * Mathf.Pow(_valueMultiplier, level) * level * upgradeValue * dpsMultiplier;
         }
 
+        public float GetValue(PlayerStats playerStats, int level, int upgradeLevel)
+        {
+            List<PlayerStat> skills = playerStats.TeamSkills.Stats;
+
+            float upgradeValue = upgradeLevel <= 0 ? 1 : 1 * Mathf.Pow(_upgradeValueMultiplier, upgradeLevel);
+            float result = _baseValue * Mathf.Pow(_valueMultiplier, level) * level * upgradeValue;
+            foreach (var skill in skills)
+            {
+                result *= skill.Value;
+            }
+            return result;
+        }
+
         public float GetNextValue(int level)
         {
             return ++level;
         }
     }
 
+    // TODO (LP): public WeaponAlgorithm[] Algorithms;
     [System.Serializable]
     public class WeaponAlgorithms
     {

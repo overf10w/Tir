@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Game
 {
+    // TODO: rename to ClickGun
     public class Gun : MonoBehaviour
     {
         [SerializeField] private Transform _muzzle;
@@ -18,10 +19,10 @@ namespace Game
         private Ray _ray;
         private RaycastHit _hit;
 
-        public void Init(WeaponData gunData)
+        public void Init(WeaponData gunData, PlayerStats playerStats)
         {
-            DPS = new WeaponStat(gunData.DPS.Level, gunData.DPS.UpgradeLevel, gunData.algorithms.DPS);
-            DMG = new WeaponStat(gunData.DMG.Level, gunData.DMG.UpgradeLevel, gunData.algorithms.DMG);
+            DPS = new WeaponStat(gunData.DPS, playerStats, gunData.algorithms.DPS);
+            DMG = new WeaponStat(gunData.DMG, playerStats, gunData.algorithms.DMG);
         }
 
         public void UpdateGunRotation()

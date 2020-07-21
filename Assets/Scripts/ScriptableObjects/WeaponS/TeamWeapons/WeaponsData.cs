@@ -11,8 +11,6 @@ namespace Game
         private static WeaponsData _instance;
         public static WeaponsData Instance { get => _instance; }
 
-        public float dpsMultiplier;
-
         public WeaponData[] weapons;
     }
 }

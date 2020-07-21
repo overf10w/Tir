@@ -65,7 +65,7 @@ namespace Game
                 playerStats.Gold = 0;
                 playerStats.Level = 0;
                 playerStats.LastPlayTimestamp = DateTime.Now.Ticks;
-                playerStats.DPSMultiplier = 1.1f;
+                // TODO: playerStats.Skills = new Skill[] { new Skill() { Name="", Value = 1.1f}, new Skill{Name = "", Value = } }
             }
 
             return playerStats;
@@ -172,9 +172,9 @@ namespace Game
             if (playerStats == null)
             {
                 playerStats = new PlayerStats();
-                playerStats.DPSMultiplier = 1;
                 playerStats.Gold = 0;
                 playerStats.Level = 0;
+                // TODO: playerStats.Skills = new Skill[] { new Skill() { Name="", Value = 1.1f}, new Skill{Name = "", Value = } }
             }
 
             playerStats.LastPlayTimestamp = DateTime.Now.Ticks;

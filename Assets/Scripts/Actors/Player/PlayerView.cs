@@ -50,7 +50,7 @@ namespace Game
         public event EventHandler<CustomArgs> OnCubeDeath = (sender, e) => { };
         public event EventHandler<GenericEventArgs<WeaponStatBtnClickArgs>> OnTeamWeaponBtnClick = (sender, e) => { };
         public event EventHandler<GenericEventArgs<WeaponStatBtnClickArgs>> OnClickGunBtnClick = (sender, e) => { };
-        public event EventHandler<UpgradeBtnClickEventArgs> OnUpgradeBtnClick = (sender, e) => { };
+        public event EventHandler<UpgradeBtnClickEventArgs> OnResearchBtnClick = (sender, e) => { };
 
         [HideInInspector]
         public Gun Gun { get; private set; }
@@ -94,7 +94,7 @@ namespace Game
 
             Gun = GetComponentInChildren<Gun>();
 
-            Gun.Init(model.GunData);
+            Gun.Init(model.GunData, model.PlayerStats);
         }
 
         private void Update()
@@ -140,7 +140,7 @@ namespace Game
 
         public void HandleUpgradeBtnClick(UpgradeBtnClickEventArgs clickInfo)
         {
-            OnUpgradeBtnClick?.Invoke(this, clickInfo);
+            OnResearchBtnClick?.Invoke(this, clickInfo);
         }
 
         //public void OnDisable()

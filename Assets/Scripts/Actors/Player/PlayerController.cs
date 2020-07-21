@@ -2,6 +2,7 @@
 using System.Collections;
 using System.ComponentModel;
 using UnityEngine;
+using System.Linq;
 
 namespace Game
 {
@@ -21,22 +22,22 @@ namespace Game
 
             _view.OnClicked += HandleClicked;
             _view.OnCubeDeath += HandleCubeDeath;
-
             _view.OnTeamWeaponBtnClick += HandleTeamWeaponBtnClick;
             _view.OnClickGunBtnClick += HandleClickGunBtnClick;
-            _view.OnUpgradeBtnClick += HandleUpgradeBtnClick;
-
-            _inputManager.OnKeyPress += HandleResearchKeyPress;
+            _view.OnResearchBtnClick += HandleResearchBtnClick;
+            _inputManager.OnKeyPress += HandleResearchKeyboardKeyPress;
 
             _model.PropertyChanged += HandlePropertyChanged;
             _model.OnPlayerStatsChanged += HandlePlayerStatsChanged;
         }
 
-        private void HandleUpgradeBtnClick(object sender, UpgradeBtnClickEventArgs e)
+        private void HandleResearchBtnClick(object sender, UpgradeBtnClickEventArgs e)
         {
             string indexer = e.Upgrade.Indexer;
-            float cached = (float)_model.PlayerStats[indexer];
-            _model.PlayerStats[indexer] = cached + 1;
+            PlayerStat skill = _model.PlayerStats.TeamSkills.Stats.Find(sk => sk.Name == indexer);
+            float cachedFloat = skill.Value;
+            skill.Value = cachedFloat + 1;
+
             e.Upgrade.IsActive = false;
         }
 
@@ -85,7 +86,7 @@ namespace Game
         // }
 
         // TODO: Instead of updating view manually here, react to teamWeapons updates
-        private void HandleResearchKeyPress(object sender, InputEventArgs e)
+        private void HandleResearchKeyboardKeyPress(object sender, InputEventArgs e)
         {
             switch(e.KeyCode)
             {
@@ -112,8 +113,8 @@ namespace Game
                     break;
 
                 case InputEventArgs.INPUT_KEY_CODE.DPS_MULTIPLIER:
-                    float cached = _model.PlayerStats.DPSMultiplier;
-                    _model.PlayerStats["DPSMultiplier"] = cached + 1;
+                    //float cached = _model.PlayerStats.DPSMultiplier;
+                    //_model.PlayerStats["DPSMultiplier"] = cached + 1;
                     break;
                 case InputEventArgs.INPUT_KEY_CODE.NUM_KEY_3:
                     Debug.Log("PlayerController: KeyCode_3");
@@ -134,7 +135,10 @@ namespace Game
 
         private void HandleCubeDeath(object sender, CustomArgs e)
         {
-            _model.PlayerStats.Gold += e.Val;
+            // TODO: null value handling
+            PlayerStat goldGainedMultiplier = _model.PlayerStats.ClickGunSkills.Stats.Find(stat => stat.Name == "GoldGainedMultiplier");
+            float goldGained = e.Val * goldGainedMultiplier.Value;
+            _model.PlayerStats.Gold += goldGained;
             // TODO: save 'em every 15 seconds instead.
             // This drastically decreases performance!!!
             ResourceLoader.SavePlayerStats(_model.PlayerStats);
