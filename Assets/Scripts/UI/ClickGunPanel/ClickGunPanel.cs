@@ -21,14 +21,32 @@ namespace Game
     {
         [SerializeField] private ClickGunEntry _clickGunEntry;
 
+        private StatsContainer _skills;
+
         public ClickGunBtnClick WeaponBtnClick { get; private set; }
 
-        public void Init(string name, WeaponStat dps, WeaponStat dmg)
+        private ClickGunSkillPanel clickGunSkillPanel;
+
+        public void Init(PlayerStats playerStats, string name, WeaponStat dps, WeaponStat dmg)
         {
+            _skills = playerStats.ClickGunSkills;
+            _skills.StatChanged += HandleSkillChanged;
+
+            clickGunSkillPanel = GetComponentInChildren<ClickGunSkillPanel>();
+            clickGunSkillPanel.Init(_skills.Stats);
+
             WeaponBtnClick = new ClickGunBtnClick();
             _clickGunEntry.Init(name, dps, dmg);
             _clickGunEntry.DPSButton.onClick.AddListener(() => { WeaponBtnClick.Dispatch(new WeaponStatBtnClickArgs("ClickGun", "DPS")); Debug.Log("CLickGunPanel. Click DPS"); }); 
             _clickGunEntry.DMGButton.onClick.AddListener(() => { WeaponBtnClick.Dispatch(new WeaponStatBtnClickArgs("ClickGun", "DMG")); Debug.Log("CLickGunPanel. Click DMG"); });
+        }
+
+        private void HandleSkillChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            PlayerStat stat = (PlayerStat)sender;
+
+            Debug.Log("ClickGunPanel: HandleSkillChanged: Skill.Name: " + stat.Name + ", Skill.Value: " + stat.Value);
+            clickGunSkillPanel.UpdateSelf(stat);
         }
 
         public void UpdateView(WeaponStat dps, WeaponStat dmg)

@@ -32,11 +32,15 @@ namespace Game
             public bool IsSatisfied { get => (float)playerStats[indexer] >= threshold; }
         }
 
+        // TODO: (?) remove setters
         [System.Serializable]
         public class Upgrade : INotifyPropertyChanged
         {
-            [SerializeField] private string _indexer;
-            public string Indexer { get => _indexer; set { } }
+            [SerializeField] private string _skillContainer;
+            public string SkillContainer => _skillContainer;
+
+            [SerializeField] private string _skill;
+            public string Skill { get => _skill; set { } }
 
             [SerializeField] private string _name;
             public string Name { get => _name; set { } }

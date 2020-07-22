@@ -33,8 +33,10 @@ namespace Game
 
         private void HandleResearchBtnClick(object sender, UpgradeBtnClickEventArgs e)
         {
-            string indexer = e.Upgrade.Indexer;
-            PlayerStat skill = _model.PlayerStats.TeamSkills.Stats.Find(sk => sk.Name == indexer);
+            string skillIndexer = e.Upgrade.Skill;
+
+            StatsContainer statsContainer = (StatsContainer)_model.PlayerStats[e.Upgrade.SkillContainer];
+            PlayerStat skill = statsContainer.Stats.Find(sk => sk.Name == skillIndexer);
             float cachedFloat = skill.Value;
             skill.Value = cachedFloat + 1;
 

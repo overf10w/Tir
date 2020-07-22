@@ -13,10 +13,31 @@ MonoBehaviour:
   m_Name: Upgrades
   m_EditorClassIdentifier: 
   upgrades:
-  - _indexer: DPSMultiplier
+  - _skillContainer: TeamSkills
+    _skill: DPSMultiplier
     _name: DPS++
     _description: Increase DPS/DMG by 100%
     _price: 1000
+    _amount: 100
+    criterias:
+    - indexer: DPSMultiplier
+      threshold: 0
+    _isActive: 1
+  - _skillContainer: ClickGunSkills
+    _skill: GoldGainedMultiplier
+    _name: Click Gun Madness
+    _description: Synthetize Click Gun Gold Gained Multiplier
+    _price: 25000
+    _amount: 100
+    criterias:
+    - indexer: DPSMultiplier
+      threshold: 0
+    _isActive: 1
+  - _skillContainer: ClickGunSkills
+    _skill: GoldGainedMultiplier
+    _name: Click Gun Madness
+    _description: Synthetize Click Gun Gold Gained Multiplier
+    _price: 25000
     _amount: 100
     criterias:
     - indexer: DPSMultiplier

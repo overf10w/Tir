@@ -78,8 +78,7 @@ namespace Game
             }
 
             ClickGunPanel = Ui.GetComponentInChildren<ClickGunPanel>();
-            
-            ClickGunPanel.Init(model.GunData.WeaponName, model.DPS, model.DMG);
+            ClickGunPanel.Init(model.PlayerStats, model.GunData.WeaponName, model.DPS, model.DMG);
             if (ClickGunPanel)
             {
                 ClickGunPanel.WeaponBtnClick.PlayerView = this;
