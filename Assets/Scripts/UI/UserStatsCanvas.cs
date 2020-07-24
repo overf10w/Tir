@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,15 +14,15 @@ namespace Game
         {
             MessageSubscriber msc = new MessageSubscriber();
             msc.Handler = this;
-            msc.MessageTypes = new MessageType[] { MessageType.LEVEL_CHANGED, MessageType.GAME_STARTED };
+            msc.MessageTypes = new MessageType[] { MessageType.LEVEL_PASSED, MessageType.GAME_STARTED };
             MessageBus.Instance.AddSubscriber(msc);
         }
 
         public override void HandleMessage(Message message)
         {
-            if (message.Type == MessageType.LEVEL_CHANGED)
+            if (message.Type == MessageType.LEVEL_PASSED)
             {
-                UpdateCurrentLevelLabel(message.IntValue);
+                return;
             }
             if (message.Type == MessageType.GAME_STARTED)
             {
@@ -30,11 +31,14 @@ namespace Game
         }
         #endregion
 
+        //[SerializeField] private ResearchPanelToggleCanvas _researchPanelToggleCanvas;
+
         private LevelListUI _levelListUI;
 
         public Text PlayerGoldTxt { get; private set; }
 
-        private Text _playerCurrentWaveTxt;
+        public TextMeshProUGUI PlayerLevelTxt { get; private set; }
+
         private Text _teamDPSTxt;
         private Text _elapsedTimeSpanTxt;
 
@@ -49,9 +53,11 @@ namespace Game
             PlayerGoldTxt = GameObject.Find("GoldLbl").GetComponent<Text>();
             PlayerGoldTxt.text = playerModel.PlayerStats.Gold.ToString();
 
-            _playerCurrentWaveTxt = GameObject.Find("CurrentWaveLbl").GetComponent<Text>();
+            PlayerLevelTxt = transform.Find("MainPanel/StatsPanel/LevelTxt").GetComponent<TextMeshProUGUI>();
 
             _teamDPSTxt = GameObject.Find("TeamDPSLbl").GetComponent<Text>();
+
+
 
             // --------------- //
             // TODO: use message bus
@@ -81,11 +87,6 @@ namespace Game
         public void UpdateElapsedTimeSpan(double timeSpan)
         {
             _elapsedTimeSpanTxt.text = "Delta time: " + timeSpan;
-        }
-
-        public void UpdateCurrentLevelLabel(int level)
-        {
-            _playerCurrentWaveTxt.text = "Round: " + level;
         }
 
         public void HandleLevelChanged(int level)

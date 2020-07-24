@@ -213,18 +213,24 @@ namespace Game
 
         // >>> ALPHA VERSION CHECKLIST: <<<
         // Upgrades.cs:
-        // Upgrade class: add an indexer pool field: string: will be used for referencing either _clickGunStats, _artifacts or _teamSkills
+        // Upgrade class: add a StatsContainer field: string: will be used for referencing either _clickGunStats, _artifacts or _teamSkills - [done]
         // Upgrade class: add an indexer weapon field: string: will be used for referencing weapons
         // GameDes element:
         // Upgrades.cs:
-        // New upgrade: Synthetize a click gun skill (i.e. click gun goldmultiplier: cube kill money earned (using the click gun) * 1.2) <-- the skill is actually always present, but we reveal it 
+        // New upgrade: Synthetize a click gun skill (i.e. click gun goldmultiplier: cube kill money earned (using the click gun) * 1.2) <- the skill is actually always present,we just reveal it when it's unlocked - [done]
         // New upgrade: synthetize a click gun active ability (basically, it's just a skill, but that lasts 30-40 secs and has a cooldown)
 
         // On GameCanvas: 
-        //      TeamWeaponsPanel: Add Skills panel (where _teamSkills purchased in Research Center will be revealed, (actually all the skills >= 1))
-        //      ClickGunPanel:    Add Skills panel (where _clickGunSkills purchased in Research Center will be revealed, (actually all the skills >= 1))
+        //      TeamWeaponsPanel: Add Skills panel (where _teamSkills purchased in Research Center will be revealed, (actually all the skills >= 1)) - [done]
+        //      ClickGunPanel:    Add Skills panel (where _clickGunSkills purchased in Research Center will be revealed, (actually all the skills >= 1)) - [done]
+        //      ResearchPanelToggle World Space Canvas: hide and show the Research Panel
+
+        // Game:
+        // Level progression: with each level cubes become more and more tough to kill - configured with a formula (in scriptable object)
+        // Cube waves: Some of the waves are slowly rotating around their Y axis
 
         // Player:
+        // 
         // Add an ability to move/look around our beautiful location (Lul wut?)
         // >>> ENDOF ALPHA VERSION CHECKLIST <<<
 

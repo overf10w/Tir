@@ -195,7 +195,9 @@ namespace Game
             if (Time.time > _nextShotTime)
             {
                 _nextShotTime = Time.time + _msBetweenShots / 1000;
+                // TODO: wave.Cubes.PickRandom()
                 IDestroyable cube = wave.Cubes.ElementAtOrDefault(new System.Random().Next(wave.Cubes.Count));
+                //IDestroyable cube = wave.Cubes.PickRandom();
                 if ((MonoBehaviour)cube != null)
                 {
                     cube.TakeDamage(DPS.Value);

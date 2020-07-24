@@ -32,7 +32,7 @@ namespace Game
         {
             MessageSubscriber msc = new MessageSubscriber();
             msc.Handler = this;
-            msc.MessageTypes = new MessageType[] { MessageType.CUBE_DEATH };
+            msc.MessageTypes = new MessageType[] { MessageType.CUBE_DEATH, MessageType.LEVEL_PASSED };
             MessageBus.Instance.AddSubscriber(msc);
         }
 
@@ -43,14 +43,20 @@ namespace Game
                 Cube cube = (Cube)message.objectValue;
                 OnCubeDeath?.Invoke(this, new CustomArgs(cube.Gold));
             }
+            else if (message.Type == MessageType.LEVEL_PASSED)
+            {
+                OnLevelPassed?.Invoke(this, new EventArgs());
+            }
         }
         #endregion
 
         public event EventHandler<EventArgs> OnClicked = (sender, e) => { };
         public event EventHandler<CustomArgs> OnCubeDeath = (sender, e) => { };
+        public event EventHandler<EventArgs> OnLevelPassed = (sender, e) => { };
         public event EventHandler<GenericEventArgs<WeaponStatBtnClickArgs>> OnTeamWeaponBtnClick = (sender, e) => { };
         public event EventHandler<GenericEventArgs<WeaponStatBtnClickArgs>> OnClickGunBtnClick = (sender, e) => { };
         public event EventHandler<UpgradeBtnClickEventArgs> OnResearchBtnClick = (sender, e) => { };
+        public event EventHandler<EventArgs> OnResearchCenterToggleBtnClick = (sender, e) => { };
 
         [HideInInspector]
         public Gun Gun { get; private set; }
@@ -71,7 +77,7 @@ namespace Game
             Ui.Init(model);
 
             TeamPanel = Ui.GetComponentInChildren<TeamPanel>();
-            TeamPanel.Init(model.TeamWeapons);
+            TeamPanel.Init(model.PlayerStats, model.TeamWeapons);
             if (TeamPanel)
             {
                 TeamPanel.WeaponBtnClick.PlayerView = this;
@@ -99,7 +105,7 @@ namespace Game
         private void Update()
         {
             Gun.UpdateGunRotation();
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButtonUp(0))
             {
                 OnClicked?.Invoke(this, EventArgs.Empty);
             }

@@ -34,10 +34,10 @@ MonoBehaviour:
       threshold: 0
     _isActive: 1
   - _skillContainer: ClickGunSkills
-    _skill: GoldGainedMultiplier
+    _skill: DMGMultiplier
     _name: Click Gun Madness
-    _description: Synthetize Click Gun Gold Gained Multiplier
-    _price: 25000
+    _description: Synthetize Click Gun DMG Multiplier
+    _price: 55000
     _amount: 100
     criterias:
     - indexer: DPSMultiplier

@@ -186,7 +186,7 @@ namespace Game
         {
             MessageSubscriber msc = new MessageSubscriber();
             msc.Handler = this;
-            msc.MessageTypes = new MessageType[] { MessageType.CUBE_DEATH, MessageType.LEVEL_CHANGED };
+            msc.MessageTypes = new MessageType[] { MessageType.CUBE_DEATH, MessageType.LEVEL_PASSED };
             MessageBus.Instance.AddSubscriber(msc);
         }
 
@@ -194,16 +194,16 @@ namespace Game
         {
             if (message.Type == MessageType.CUBE_DEATH)
             {
-                _cubesDestroyed++;
-                if (_cubesDestroyed == _cubesSpawned)
-                {
-                    //if (lvlInd >= 3)
-                    //{
-                    //    MessageBus.Instance.SendMessage(new Message() { Type = MessageType.GameOver });
-                    //    return;
-                    //}
-                    SpawnWave();
-                }
+                //_cubesDestroyed++;
+                //if (_cubesDestroyed == _cubesSpawned)
+                //{
+                //    //if (lvlInd >= 3)
+                //    //{
+                //    //    MessageBus.Instance.SendMessage(new Message() { Type = MessageType.GameOver });
+                //    //    return;
+                //    //}
+                //    SpawnWave();
+                //}
             }
             // TODO: this be checked by PlayerView/Controller
             //else if (message.Type == MessageType.LevelChanged)
@@ -215,16 +215,12 @@ namespace Game
         #endregion
 
         [SerializeField] private ResourceLoader _resourceLoader;
-        [SerializeField] private PlayerWaves _playerWaves;
+        [SerializeField] private WaveSpawner _waveSpawner;
         [SerializeField] private InputManager _inputManager;
 
         private AssetBundle _assetBundle;
         private Upgrades.Upgrade[] _upgrades;
         private string _upgradesPath;
-
-        private Wave _wave;
-        private int _cubesSpawned;
-        private int _cubesDestroyed;
 
         private IEnumerator Start()
         {
@@ -237,20 +233,12 @@ namespace Game
             PlayerModel model = new PlayerModel();
             PlayerController pc = new PlayerController(model, _upgrades, view, _inputManager);
 
+            _waveSpawner.Init(model.PlayerStats);
+
             yield return null;  // we need this so the InGameCanvas receives event on spawned wave (through MessageBus)
-            SpawnWave();
         }
 
-        private void SpawnWave()
-        {
-            var waves = _playerWaves.waves;
-            // TODO: Singleton Random
-            var wavePrefab = waves[UnityEngine.Random.Range(0, waves.Length)];
-            _wave = Instantiate(wavePrefab, wavePrefab.transform.position, Quaternion.identity) as Wave;
-            _cubesSpawned = _wave.CubesNumber;
-            _cubesDestroyed = 0;
-            MessageBus.Instance.SendMessage(new Message() { Type = MessageType.WAVE_CHANGED, objectValue = _wave });
-        }
+
 
         // TODO: this be moved to SceneEnvironmentManager
         //       (1) SceneEnvironmentManager listens to MessageBus.ChangeLevel event 

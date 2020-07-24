@@ -76,8 +76,18 @@ namespace Game
             }
         }
 
-        public void Init(Dictionary<string, Weapon> weapons)
+        private TeamSkillPanel _teamSkillPanel;
+        private StatsContainer _skills;
+
+
+        public void Init(PlayerStats playerStats, Dictionary<string, Weapon> weapons)
         {
+            _skills = playerStats.TeamSkills;
+            _skills.StatChanged += HandleSkillChanged;
+
+            _teamSkillPanel = GetComponentInChildren<TeamSkillPanel>();
+            _teamSkillPanel.Init(_skills.Stats);
+
             WeaponBtnClick = new WeaponBtnClick();
             _content = transform.Find("Scroll View/Viewport/Content").GetComponent<Transform>();
             _weaponUiEntryPrefab = Resources.Load<GameObject>("Prefabs/UI/TeamPanel/WeaponPanelEntry");
@@ -99,6 +109,14 @@ namespace Game
                     script.DMGButton.onClick.AddListener(() => { WeaponBtnClick.Dispatch(new WeaponStatBtnClickArgs(weapon.Key, "DMG")); });
                 }
             }
+        }
+
+        private void HandleSkillChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            PlayerStat stat = (PlayerStat)sender;
+
+            Debug.Log("ClickGunPanel: HandleSkillChanged: Skill.Name: " + stat.Name + ", Skill.Value: " + stat.Value);
+            _teamSkillPanel.UpdateSelf(stat);
         }
     }
 }

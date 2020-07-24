@@ -5,14 +5,11 @@ using UnityEngine;
 
 namespace Game
 {
-    // Cube ModelView
     public class Cube : MonoBehaviour, IDestroyable
     {
         #region IDestroyable
         public void TakeDamage(float damage)
         {
-            //Debug.Log("Cube.cs: TakeDamage()");
-            Health -= damage;
             OnTakeDamage?.Invoke(this, new GenericEventArgs<float>(damage));
         }
         #endregion
@@ -34,7 +31,7 @@ namespace Game
         private int _gold = 2;
         public int Gold => _gold;
 
-        private CubeStat cubeStats;
+        private CubeStat _cubeStat;
 
         private Transform _cachedTransform;
         private Vector4 _newVec;
@@ -43,16 +40,19 @@ namespace Game
         private CoroutineQueue _takeDamageQueue;
         private CoroutineQueue _changeHPQueue;
 
-        public void Init()
+        public void Init(float health)
         {
             _takeDamageQueue = new CoroutineQueue(1, StartCoroutine);
             _changeHPQueue = new CoroutineQueue(1, StartCoroutine);
 
             _cachedTransform = transform;
 
-            cubeStats = Resources.Load<CubeStats>("SO/CubeStats").Stats;
-            _gold = cubeStats.gold;
-            _health = cubeStats.HP;
+            _cubeStat = Resources.Load<CubeStats>("SO/CubeStats").Stats;
+            _gold = _cubeStat.gold;
+
+            Debug.Log("Cube.cs: health: " + health);
+
+            _health = health;
         }
 
         public void ShowHealth(float health)
@@ -68,7 +68,7 @@ namespace Game
         private IEnumerator ChangeHpRoutine(float health)
         {
             Show(health);
-            yield return new WaitForSeconds(cubeStats.takeDamageEffectDuration);
+            yield return new WaitForSeconds(_cubeStat.takeDamageEffectDuration);
         }
 
         private void Show(float hp)
@@ -91,7 +91,7 @@ namespace Game
 
         private IEnumerator TakeDamageRoutine(float damage)
         {
-            OnTakeDamage?.Invoke(this, new GenericEventArgs<float>(cubeStats.takeDamageEffectDuration));
+            OnTakeDamage?.Invoke(this, new GenericEventArgs<float>(_cubeStat.takeDamageEffectDuration));
             yield return new WaitForSeconds(0.5f);
             
             _health -= damage;

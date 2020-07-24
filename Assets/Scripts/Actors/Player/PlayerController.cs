@@ -22,6 +22,7 @@ namespace Game
 
             _view.OnClicked += HandleClicked;
             _view.OnCubeDeath += HandleCubeDeath;
+            _view.OnLevelPassed += HandleLevelPassed;
             _view.OnTeamWeaponBtnClick += HandleTeamWeaponBtnClick;
             _view.OnClickGunBtnClick += HandleClickGunBtnClick;
             _view.OnResearchBtnClick += HandleResearchBtnClick;
@@ -29,6 +30,17 @@ namespace Game
 
             _model.PropertyChanged += HandlePropertyChanged;
             _model.OnPlayerStatsChanged += HandlePlayerStatsChanged;
+        }
+
+        private void HandleLevelPassed(object sender, EventArgs e)
+        {
+            _model.PlayerStats.Level++;
+            Debug.Log("PlayerController: HandleLevelPassed");
+        }
+
+        private void HandleAbilityBtnClick(object sender, UpgradeBtnClickEventArgs e)
+        {
+            
         }
 
         private void HandleResearchBtnClick(object sender, UpgradeBtnClickEventArgs e)
@@ -49,6 +61,12 @@ namespace Game
             {
                 _view.Ui.PlayerGoldTxt.text = _model.PlayerStats.Gold.ToString();
                 // Don't need to redraw panels if only gold changed
+                return;
+            }
+
+            if (args.Val == "Level")
+            {
+                _view.Ui.PlayerLevelTxt.text = "Level: " + _model.PlayerStats.Level.ToString();
                 return;
             }
 

@@ -36,8 +36,12 @@ namespace Game
 
         public List<IDestroyable> Cubes { get; private set; }
 
-        private void Awake()
+        public float GlobalHP { get; set; }
+
+        public void Init(float globalHP)
         {
+            GlobalHP = globalHP;
+
             InitMessageHandler();
 
             Cubes = new List<IDestroyable>();
@@ -46,13 +50,17 @@ namespace Game
 
         private void SpawnCubes()
         {
+            float cubesCnt = _spawnGrid.childCount;
+
+            //float cubeHP = GlobalHP
+
             for (int i = _spawnGrid.childCount - 1; i >= 0; i--)
             {
                 var spawnTransform = _spawnGrid.GetChild(i);
                 var prefab = Resources.Load<Cube>("Prefabs/Cube") as Cube;
                 //float scaleMultiplier = prefab.transform
                 var cube = Instantiate(prefab, spawnTransform.transform) as Cube;
-                cube.Init();
+                cube.Init(GlobalHP / cubesCnt);
                 new CubeController(cube);
                 cube.transform.SetParent(this.gameObject.transform);
                 Cubes.Add(cube.GetComponent<IDestroyable>());
