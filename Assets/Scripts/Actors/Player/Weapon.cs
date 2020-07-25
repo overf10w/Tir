@@ -115,7 +115,7 @@ namespace Game
             if (sender is PlayerStat)
             {
                 PlayerStat skill = (PlayerStat)sender;
-                Debug.Log("Weapon.cs: Notified of Skill change: " + skill.Name);
+                Debug.Log("Weapon.cs: Notified of Skill change: skill.Name: " + skill.Name + ", skill.Value: " + skill.Value);
             }
 
         }

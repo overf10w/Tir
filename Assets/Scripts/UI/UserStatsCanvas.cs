@@ -31,7 +31,8 @@ namespace Game
         }
         #endregion
 
-        //[SerializeField] private ResearchPanelToggleCanvas _researchPanelToggleCanvas;
+        [SerializeField] private ResearchPanelToggleCanvas _researchPanelToggleCanvas;
+        public ResearchPanelToggleCanvas ResearchPanelToggleCanvas => _researchPanelToggleCanvas;
 
         private LevelListUI _levelListUI;
 
@@ -56,8 +57,6 @@ namespace Game
             PlayerLevelTxt = transform.Find("MainPanel/StatsPanel/LevelTxt").GetComponent<TextMeshProUGUI>();
 
             _teamDPSTxt = GameObject.Find("TeamDPSLbl").GetComponent<Text>();
-
-
 
             // --------------- //
             // TODO: use message bus

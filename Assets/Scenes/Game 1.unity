@@ -356,6 +356,41 @@ Transform:
   m_Father: {fileID: 1610835985}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!84 &75063046
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 669
+  m_Height: 376
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthFormat: 1
+  m_ColorFormat: 4
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 1
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &79114862
 GameObject:
   m_ObjectHideFlags: 0
@@ -1237,7 +1272,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0.00051312556}
-  m_SizeDelta: {x: 0, y: 152.6}
+  m_SizeDelta: {x: 0, y: 178.84}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &161348549
 MonoBehaviour:
@@ -1273,7 +1308,7 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 1
-  m_CellSize: {x: 178, y: 32}
+  m_CellSize: {x: 270, y: 32}
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
@@ -2320,6 +2355,41 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1022016079}
   m_PrefabAsset: {fileID: 0}
+--- !u!84 &261992168
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 669
+  m_Height: 376
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthFormat: 1
+  m_ColorFormat: 4
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 1
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &267290245
 GameObject:
   m_ObjectHideFlags: 0
@@ -8350,8 +8420,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.11000061, y: -6.8499985}
-  m_SizeDelta: {x: 181.89, y: 167.06}
+  m_AnchoredPosition: {x: 0.11000061, y: -0.96}
+  m_SizeDelta: {x: 273.5, y: 178.84}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &871869502
 MonoBehaviour:
@@ -11312,6 +11382,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f26cd8a4588d5746b1f0878d3861702, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _algorithm: {fileID: 11400000, guid: c83ae114ec75f6444a5deb512af5b7dd, type: 2}
   _playerWaves: {fileID: 11400000, guid: 32a584db6d08c78418b23be599e7843f, type: 2}
 --- !u!1 &1081419636
 GameObject:
@@ -12230,11 +12301,11 @@ RectTransform:
   m_Father: {fileID: 1013121936}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 10, y: 10}
-  m_SizeDelta: {x: 190, y: 181.54999}
-  m_Pivot: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 43.51}
+  m_SizeDelta: {x: 281.61, y: 214.17}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &1159545882
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -14265,6 +14336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6a94ce445a472044813e07a437d5f14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _researchPanelToggleCanvas: {fileID: 577094447}
 --- !u!114 &1459244230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14461,7 +14533,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0.000030517578, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 200, y: 74.22}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1501545999
@@ -15215,8 +15287,8 @@ MonoBehaviour:
   sourceCamera: {fileID: 1589548291}
   outlineCamera: {fileID: 1671561310}
   outlineShaderMaterial: {fileID: 0}
-  renderTexture: {fileID: 1951388703}
-  extraRenderTexture: {fileID: 2137728448}
+  renderTexture: {fileID: 261992168}
+  extraRenderTexture: {fileID: 75063046}
 --- !u!114 &1589548294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16185,7 +16257,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 0
   m_RenderingPath: 1
-  m_TargetTexture: {fileID: 1951388703}
+  m_TargetTexture: {fileID: 261992168}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 0
@@ -18365,41 +18437,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!84 &1951388703
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 3
-  m_Width: 844
-  m_Height: 475
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthFormat: 1
-  m_ColorFormat: 4
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 1
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &1959154506
 GameObject:
   m_ObjectHideFlags: 0
@@ -20103,41 +20140,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!84 &2137728448
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 3
-  m_Width: 844
-  m_Height: 475
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthFormat: 1
-  m_ColorFormat: 4
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 1
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &2140887434
 GameObject:
   m_ObjectHideFlags: 0

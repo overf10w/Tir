@@ -26,16 +26,32 @@ namespace Game
             _view.OnTeamWeaponBtnClick += HandleTeamWeaponBtnClick;
             _view.OnClickGunBtnClick += HandleClickGunBtnClick;
             _view.OnResearchBtnClick += HandleResearchBtnClick;
+            _view.OnResearchCenterToggleBtnClick += HandleResearchCenterBtnClick;
             _inputManager.OnKeyPress += HandleResearchKeyboardKeyPress;
 
             _model.PropertyChanged += HandlePropertyChanged;
             _model.OnPlayerStatsChanged += HandlePlayerStatsChanged;
+            _model.PlayerStats.TeamSkills.StatChanged += TeamSkills_StatChanged; ;
+        }
+
+        private void TeamSkills_StatChanged(object sender, PropertyChangedEventArgs e)
+        {
+            // TODO: more useful info can be retrieved here, rather than: e.PropertyName == "Value"
+            // Debug.Log("PlayerController: TeamSkills_StatChanged: " + e.PropertyName);
+            _view.TeamPanel.UpdateView(_model.TeamWeapons);
+            ResourceLoader.SavePlayerStats(_model.PlayerStats);
+        }
+
+        private void HandleResearchCenterBtnClick(object sender, EventArgs e)
+        {
+            _view.ResearchPanel.IsHidden = !_view.ResearchPanel.IsHidden;
+            //_view.ResearchPanel.Hide();
+            Debug.Log("PlayerController: HandleResearchCenterBtnClick");
         }
 
         private void HandleLevelPassed(object sender, EventArgs e)
         {
             _model.PlayerStats.Level++;
-            Debug.Log("PlayerController: HandleLevelPassed");
         }
 
         private void HandleAbilityBtnClick(object sender, UpgradeBtnClickEventArgs e)
@@ -57,6 +73,13 @@ namespace Game
 
         private void HandlePlayerStatsChanged(object sender, GenericEventArgs<string> args)
         {
+            ResourceLoader.SavePlayerStats(_model.PlayerStats);
+
+            //if (args.Val == "TeamSkills")
+            //{
+            //    _view.TeamPanel.UpdateView(_model.TeamWeapons);
+            //}
+
             if (args.Val == "Gold")
             {
                 _view.Ui.PlayerGoldTxt.text = _model.PlayerStats.Gold.ToString();
@@ -69,7 +92,6 @@ namespace Game
                 _view.Ui.PlayerLevelTxt.text = "Level: " + _model.PlayerStats.Level.ToString();
                 return;
             }
-
             _view.TeamPanel.UpdateView(_model.TeamWeapons);
             _view.ClickGunPanel.UpdateView(_model.DPS, _model.DMG);
         }
@@ -156,6 +178,7 @@ namespace Game
         private void HandleCubeDeath(object sender, CustomArgs e)
         {
             // TODO: null value handling
+            // TODO: Add TeamWeaponsSkill: GoldGainedMultiplier
             PlayerStat goldGainedMultiplier = _model.PlayerStats.ClickGunSkills.Stats.Find(stat => stat.Name == "GoldGainedMultiplier");
             float goldGained = e.Val * goldGainedMultiplier.Value;
             _model.PlayerStats.Gold += goldGained;

@@ -163,10 +163,7 @@ namespace Game
 
         public long IdleTimeSpan => _lastPlayTimestamp == 0 ? 0 : DateTime.Now.Ticks - _lastPlayTimestamp;
 
-
         [SerializeField] private List<PlayerStat> _teamSkills;
-        // TODO: seems we don't need a setter here, since _teamSkills can only be set through editor
-        //public List<PlayerStat> TeamSkills { get => _teamSkills; set { SetField(ref _teamSkills, value); } }
         [NonSerialized]
         private StatsContainer _teamSkillsContainer;
         public StatsContainer TeamSkills
@@ -223,19 +220,19 @@ namespace Game
         // On GameCanvas: 
         //      TeamWeaponsPanel: Add Skills panel (where _teamSkills purchased in Research Center will be revealed, (actually all the skills >= 1)) - [done]
         //      ClickGunPanel:    Add Skills panel (where _clickGunSkills purchased in Research Center will be revealed, (actually all the skills >= 1)) - [done]
-        //      ResearchPanelToggle World Space Canvas: hide and show the Research Panel
+        //      ResearchPanelToggle World Space Canvas: hide and show the Research Panel - [done]
 
         // Game:
-        // Level progression: with each level cubes become more and more tough to kill - configured with a formula (in scriptable object)
+        // Level progression: with each level cubes become more and more tough to kill - [done] - configured with a formula (in scriptable object) - [done]
+        // Refactor: 
+        //      1. PlayerStats to subscribe to StatsContainer (aka StatsList) events and be notified when TeamSkills.DPSMultiplier stat is changed, and fire its own event (add to an event chain) - [done]
+        //          - PlayerModel: ; PlayerController: HandlePlayerStatsChanged
         // Cube waves: Some of the waves are slowly rotating around their Y axis
+        // Handle when game starts without saved files
 
         // Player:
-        // 
         // Add an ability to move/look around our beautiful location (Lul wut?)
         // >>> ENDOF ALPHA VERSION CHECKLIST <<<
-
-
-        //public SkillsContainer SkillsContainer => _skillsContainer != null ? _skillsContainer : new SkillsContainer(Skills);
 
         // Indexer (will be used by Upgrade system a lot)
         public object this[string propertyName]
@@ -245,6 +242,7 @@ namespace Game
         }
     }
 
+    // TODO: rename to StatsList
     public class StatsContainer
     {
         public List<PlayerStat> Stats { get; private set; }
@@ -265,6 +263,7 @@ namespace Game
         private void Stat_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             StatChanged?.Invoke(sender, e);
+
         }
     }
 }

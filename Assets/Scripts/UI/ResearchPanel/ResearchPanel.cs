@@ -26,12 +26,37 @@ namespace Game
 
         private Upgrades.Upgrade[] _upgrades;
 
+        private CanvasGroup _canvasGroup;
         private GameObject _researchPanelEntryPrefab;
         private Transform _content;
+
+        private bool _isHidden;
+        public bool IsHidden
+        {
+            get
+            {
+                return _isHidden;
+            }
+
+            set
+            {
+                _isHidden = value;
+                if (_isHidden)
+                {
+                    Hide();
+                }
+                else
+                {
+                    Reveal();
+                }
+            }
+        }
 
         public void Init(Upgrades.Upgrade[] upgrades)
         {
             _upgrades = upgrades;
+
+            _canvasGroup = GetComponent<CanvasGroup>();
 
             UpgradeBtnClick = new UpgradeBtnClick();
 
@@ -68,6 +93,20 @@ namespace Game
                 string upgradesPath = Path.Combine(Application.persistentDataPath, "upgrades.dat");
                 ResourceLoader.Save<Upgrades.Upgrade[]>(upgradesPath, _upgrades);
             }
+        }
+
+        public void Hide()
+        {
+            _canvasGroup.interactable = false;
+            _canvasGroup.alpha = 0.0f;
+            _canvasGroup.blocksRaycasts = false;
+        }
+
+        public void Reveal()
+        {
+            _canvasGroup.interactable = true;
+            _canvasGroup.alpha = 1.0f;
+            _canvasGroup.blocksRaycasts = true;
         }
     }
 }

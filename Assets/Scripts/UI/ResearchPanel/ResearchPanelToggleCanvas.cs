@@ -5,14 +5,29 @@ using UnityEngine.UI;
 
 namespace Game
 {
+    public class ToggleBtnClick
+    {
+        public PlayerView PlayerView;
+
+        public void Dispatch()
+        {
+            if (PlayerView != null)
+            {
+                PlayerView.HandleResearchPanelToggleBtnClick();
+            }
+        }
+    }
 
     public class ResearchPanelToggleCanvas : MonoBehaviour
     {
         [SerializeField] private Button _researchPanelToggleBtn;
 
-        public void Awake()
+        public ToggleBtnClick ToggleBtnClick { get; private set; }
+
+        public void Init()
         {
-            _researchPanelToggleBtn.onClick.AddListener(() => { Debug.Log("ResearchPanelToggleCanvas: ToggleBtn Pressed"); });
+            ToggleBtnClick = new ToggleBtnClick();
+            _researchPanelToggleBtn.onClick.AddListener(() => { ToggleBtnClick.Dispatch(); });
         }
     }
 }

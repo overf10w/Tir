@@ -22,19 +22,15 @@ namespace Game
                 _cubesDestroyed++;
                 if (_cubesDestroyed == _cubesSpawned)
                 {
-                    Debug.Log("WaveSpawner: Hello there!");
-                    //if (lvlInd >= 3)
-                    //{
-                    //    MessageBus.Instance.SendMessage(new Message() { Type = MessageType.GameOver });
-                    //    return;
-                    //}
                     MessageBus.Instance.SendMessage(new Message { Type = MessageType.LEVEL_PASSED });
+                    Destroy(_wave.gameObject);
                     SpawnWave();
                 }
             }
         }
         #endregion
 
+        [SerializeField] private WaveSpawnerAlgorithm _algorithm;
         [SerializeField] private PlayerWaves _playerWaves;
 
         private PlayerStats _playerStats;
@@ -54,12 +50,12 @@ namespace Game
         private void SpawnWave()
         {
             var waves = _playerWaves.waves;
-
             var wavePrefab = waves.PickRandom();
 
             _wave = Instantiate(wavePrefab, wavePrefab.transform.position, Quaternion.identity) as Wave;
 
-            _wave.Init((_playerStats.Level + 1) * 10);
+            //_wave.Init((_playerStats.Level + 1) * 10);
+            _wave.Init(_algorithm.GetWaveHp(_playerStats.Level));
 
             _cubesSpawned = _wave.CubesNumber;
             _cubesDestroyed = 0;

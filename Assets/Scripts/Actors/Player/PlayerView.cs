@@ -67,7 +67,9 @@ namespace Game
 
         public ClickGunPanel ClickGunPanel { get; private set; }
 
-        private ResearchPanel _researchPanel;
+        public ResearchPanel ResearchPanel { get; private set; }
+
+        public ResearchPanelToggleCanvas ResearchToggleCanvas { get; private set; }
 
         public void Init(PlayerModel model, Upgrades.Upgrade[] upgrades)
         {
@@ -90,12 +92,16 @@ namespace Game
                 ClickGunPanel.WeaponBtnClick.PlayerView = this;
             }
 
-            _researchPanel = Ui.GetComponentInChildren<ResearchPanel>();
-            _researchPanel.Init(upgrades);
-            if (_researchPanel)
+            ResearchPanel = Ui.GetComponentInChildren<ResearchPanel>();
+            ResearchPanel.Init(upgrades);
+            if (ResearchPanel)
             {
-                _researchPanel.UpgradeBtnClick.PlayerView = this;
+                ResearchPanel.UpgradeBtnClick.PlayerView = this;
             }
+
+            ResearchToggleCanvas = Ui.ResearchPanelToggleCanvas;
+            ResearchToggleCanvas.Init();
+            ResearchToggleCanvas.ToggleBtnClick.PlayerView = this;
 
             Gun = GetComponentInChildren<Gun>();
 
@@ -105,7 +111,7 @@ namespace Game
         private void Update()
         {
             Gun.UpdateGunRotation();
-            if (Input.GetMouseButtonUp(0))
+            if (Input.GetMouseButtonDown(0))
             {
                 OnClicked?.Invoke(this, EventArgs.Empty);
             }
@@ -146,6 +152,11 @@ namespace Game
         public void HandleUpgradeBtnClick(UpgradeBtnClickEventArgs clickInfo)
         {
             OnResearchBtnClick?.Invoke(this, clickInfo);
+        }
+
+        internal void HandleResearchPanelToggleBtnClick()
+        {
+            OnResearchCenterToggleBtnClick?.Invoke(this, new EventArgs());
         }
 
         //public void OnDisable()
