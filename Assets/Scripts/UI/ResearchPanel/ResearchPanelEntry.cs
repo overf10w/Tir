@@ -23,7 +23,7 @@ namespace Game
 
             _name.text = upgrade.Name.ToString();
             _description.text = upgrade.Description.ToString();
-            _price.text = upgrade.Price.ToString();
+            _price.text = upgrade.Price.SciFormat();
 
             if (!upgrade.IsActive)
             {

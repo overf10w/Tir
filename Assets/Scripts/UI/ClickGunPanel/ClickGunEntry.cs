@@ -52,32 +52,30 @@ namespace Game
 
             _nameTxt.text = name;
 
-            _dpsNextPrice.text = dps.Price.ToString();
-            _dmgNextPrice.text = dmg.Price.ToString();
+            //numText.text = string.Format((num < 1000) ? "{0:F3}" : "{0:0.00e0}", num);
+            _dpsNextPrice.text = dps.Price.SciFormat();
+            _dmgNextPrice.text = dmg.Price.SciFormat();
 
-            _dpsValueTxt.text = dps.Value.ToString();
-            _dmgValueTxt.text = dmg.Value.ToString();
+            //_dpsNextPrice.text = string.Format((dps.Price < 1000) ? "{0}" : "{0:0.00e0}", dps.Price);
+            //_dmgNextPrice.text = string.Format((dmg.Price < 1000) ? "{0}" : "{0:0.00e0}", dmg.Price); 
 
-            _dpsNextValueTxt.text = dps.NextValue.ToString();
-            _dmgNextValueTxt.text = dmg.NextValue.ToString();
+            _dpsValueTxt.text = dps.Value.SciFormat();
+            _dmgValueTxt.text = dmg.Value.SciFormat();
+
+            _dpsNextValueTxt.text = dps.NextValue.SciFormat();
+            _dmgNextValueTxt.text = dmg.NextValue.SciFormat();
         }
 
         public void UpdateSelf(WeaponStat dps, WeaponStat dmg)
         {
-            _dpsNextPrice.text = dps.Price.ToString();
-            _dmgNextPrice.text = dmg.Price.ToString();
+            _dpsNextPrice.text = dps.Price.SciFormat();
+            _dmgNextPrice.text = dmg.Price.SciFormat();
 
-            _dpsValueTxt.text = dps.Value.ToString();
-            _dmgValueTxt.text = dmg.Value.ToString();
+            _dpsValueTxt.text = dps.Value.SciFormat();
+            _dmgValueTxt.text = dmg.Value.SciFormat();
 
-            _dpsNextValueTxt.text = dps.NextValue.ToString();
-            _dmgNextValueTxt.text = dmg.NextValue.ToString();
-        }
-
-        public void UpdateSelf(float dpsPrice, float dmgPrice)
-        {
-            //DPSPrice.text = dpsPrice.ToString();
-            //DMGPrice.text = dmgPrice.ToString();
+            _dpsNextValueTxt.text = dps.NextValue.SciFormat();
+            _dmgNextValueTxt.text = dmg.NextValue.SciFormat();
         }
 
         private void InitIcon(string name)

@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: f2b04bce1e2ecff46b52d79c553e15ed
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Biting My Nails
+  fontNames:
+  - Biting My Nails
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: c8c60704d49e56a4ba668d5adb90f401, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

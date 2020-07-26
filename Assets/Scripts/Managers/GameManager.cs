@@ -33,7 +33,7 @@ using UnityEngine;
 // 1. Refactor MessageBus (as in Trumpage) - [done]
 // 2. Reorganize project (hierarchy, etc.) - [done]
 // 3. Figure out if we really need GameData and GameStats as separate classes - [done]
-// 4. Refactor PlayerModel.cs class - make it like in Trumpage
+// 4. Refactor PlayerModel.cs class - make it like in Trumpage - [done]
 
 // 17-JUN-20:
 // 0. Reorganize project structure: files, folders, etc. - [done]
@@ -66,7 +66,7 @@ using UnityEngine;
 // 1. Create GunDataFile (just as WeaponDataFiles), which stores serialized info on disk about this gun - so that on startup we see curr. player's gun dmg - [done]
 // 2. Create PlayerDataFiles (just as WeaponDataFiles), with gold, lastTimePlayed, currLevel; so that on startup we see curr. player's gold - [done]
 // 3. Reconfigure how the environment is changed according to current level: introduce environment manager which gets notified through message bus when level changed
-// 4. When level changes to more advanced one, the cube stats and config (textures, sounds, particles, colors, hp) should also change
+// 4. When level changes to more advanced one, the cube stats and config (textures, sounds, particles, colors, hp) should also change - [done]
 
 // 24-JUN-20:
 // 0. Import all of the Sci-Fi fonts that are opened in Chrome
@@ -156,7 +156,7 @@ using UnityEngine;
 //-1. [LP] Each team weapon has its own margin of error, (some lower, some higher), and with upgrades player can narrow that error down to 0
 
 // 10-JUL-20:
-// 0. Introduce skill concept - same as ability concept, but without duration (i.e. lasts forever, some of the skills even after time wrap)
+// 0. Introduce skill concept - same as ability concept, but without duration (i.e. lasts forever, some of the skills even after time wrap) - [done]
 
 // 11-JUL-20:
 // 0. Add achievements

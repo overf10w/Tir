@@ -55,6 +55,8 @@ namespace Game
             PlayerGoldTxt.text = playerModel.PlayerStats.Gold.ToString();
 
             PlayerLevelTxt = transform.Find("MainPanel/StatsPanel/LevelTxt").GetComponent<TextMeshProUGUI>();
+            PlayerLevelTxt.text = "Level: " + playerModel.PlayerStats.Level.ToString();
+
 
             _teamDPSTxt = GameObject.Find("TeamDPSLbl").GetComponent<Text>();
 

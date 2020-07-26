@@ -52,32 +52,26 @@ namespace Game
 
             _nameTxt.text = name;
 
-            _dpsNextPrice.text = dps.Price.ToString();
-            _dmgNextPrice.text = dmg.Price.ToString();
+            _dpsNextPrice.text = dps.Price.SciFormat();
+            _dmgNextPrice.text = dmg.Price.SciFormat();
 
-            _dpsValueTxt.text = dps.Value.ToString();
-            _dmgValueTxt.text = dmg.Value.ToString();
+            _dpsValueTxt.text = dps.Value.SciFormat();
+            _dmgValueTxt.text = dmg.Value.SciFormat();
 
-            _dpsNextValueTxt.text = dps.NextValue.ToString();
-            _dmgNextValueTxt.text = dmg.NextValue.ToString();
+            _dpsNextValueTxt.text = dps.NextValue.SciFormat();
+            _dmgNextValueTxt.text = dmg.NextValue.SciFormat();
         }
 
         public void UpdateSelf(WeaponStat dps, WeaponStat dmg)
         {
-            _dpsNextPrice.text = dps.Price.ToString();
-            _dmgNextPrice.text = dmg.Price.ToString();
+            _dpsNextPrice.text = dps.Price.SciFormat();
+            _dmgNextPrice.text = dmg.Price.SciFormat();
 
-            _dpsValueTxt.text = dps.Value.ToString();
-            _dmgValueTxt.text = dmg.Value.ToString();
+            _dpsValueTxt.text = dps.Value.SciFormat();
+            _dmgValueTxt.text = dmg.Value.SciFormat();
 
-            _dpsNextValueTxt.text = dps.NextValue.ToString();
-            _dmgNextValueTxt.text = dmg.NextValue.ToString();
-        }
-
-        public void UpdateSelf(float dpsPrice, float dmgPrice)
-        {
-            //DPSPrice.text = dpsPrice.ToString();
-            //DMGPrice.text = dmgPrice.ToString();
+            _dpsNextValueTxt.text = dps.NextValue.SciFormat();
+            _dmgNextValueTxt.text = dmg.NextValue.SciFormat();
         }
 
         private void InitIcon(string name)
