@@ -13,7 +13,7 @@ namespace Game
         public WeaponStat DPS { get; private set; }
         public WeaponStat DMG { get; private set; } 
 
-        private float _msBetweenShots = 400.0f;
+        private float _msBetweenShots = 15.0f;
         private float _nextShotTime;
 
         private Ray _ray;

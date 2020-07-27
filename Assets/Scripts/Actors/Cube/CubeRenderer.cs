@@ -16,6 +16,8 @@ namespace Game
 
         private MeshRenderer _renderer;
 
+        [SerializeField] private GameObject _sides;
+
         private Vector3 _cachedScale;
         private Vector3 _cachedPosition;
 
@@ -39,8 +41,11 @@ namespace Game
 
         private void HandleHpChange(object sender, GenericEventArgs<float> hp)
         {
-            if (_currHP <= 0)
+            if (hp.Val <= 0)
             {
+                _sides.SetActive(false);
+                Debug.Log("CubeRenderer.enabled = false");
+                _renderer.enabled = false;
                 return;
             }
 

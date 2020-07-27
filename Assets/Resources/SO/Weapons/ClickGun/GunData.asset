@@ -26,17 +26,17 @@ MonoBehaviour:
         _basePrice: 45
         _priceMultiplier: 1.8
         _baseValue: 1
-        _valueMultiplier: 1
+        _valueMultiplier: 1.12
         _baseUpgradePrice: 55
         _upgradePriceMultiplier: 1.089
         _maxUpgradeLevel: 100
-        _upgradeValueMultiplier: 1
+        _upgradeValueMultiplier: 2
       DMG:
         _basePrice: 35
         _priceMultiplier: 1.9
         _baseValue: 1
-        _valueMultiplier: 1
+        _valueMultiplier: 1.13
         _baseUpgradePrice: 55
         _upgradePriceMultiplier: 1.1
         _maxUpgradeLevel: 100
-        _upgradeValueMultiplier: 1
+        _upgradeValueMultiplier: 2

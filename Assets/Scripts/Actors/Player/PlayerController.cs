@@ -46,7 +46,7 @@ namespace Game
         {
             _view.ResearchPanel.IsHidden = !_view.ResearchPanel.IsHidden;
             //_view.ResearchPanel.Hide();
-            Debug.Log("PlayerController: HandleResearchCenterBtnClick");
+            //Debug.Log("PlayerController: HandleResearchCenterBtnClick");
         }
 
         private void HandleLevelPassed(object sender, EventArgs e)
@@ -82,14 +82,15 @@ namespace Game
 
             if (args.Val == "Gold")
             {
-                _view.Ui.PlayerGoldTxt.text = _model.PlayerStats.Gold.ToString();
+                //_view.Ui.PlayerGoldTxt.text = _model.PlayerStats.Gold.ToString();
+                _view.Ui.PlayerGoldTxt.text = _model.PlayerStats.Gold.SciFormat();
                 // Don't need to redraw panels if only gold changed
                 return;
             }
 
             if (args.Val == "Level")
             {
-                _view.Ui.PlayerLevelTxt.text = "Level: " + _model.PlayerStats.Level.ToString();
+                _view.Ui.PlayerLevelTxt.text = _model.PlayerStats.Level.ToString();
                 return;
             }
             _view.TeamPanel.UpdateView(_model.TeamWeapons);

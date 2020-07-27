@@ -164,6 +164,11 @@ using UnityEngine;
 // The concept of game is this
 // 0. On each wave, the player can complete objectives: i.e: to shoot 2/3/4 blue/yellow/blinking/anime/wave blocks, etc., 
 //    when it's done, the player gets the gold award, thus, there's a good stimulus for player to be active in the game
+// - The drones that we have on scene can be used to go to outer space and obtain some cookies/money/artifacts etc. 
+//      - Each drone fly to outer space, gets some money/cookies/etc., gets some damage and returns back to our base when we call it back
+//      - Only when drone returns can we use the resources that drone found
+//      - There's a chance of drone getting hit by aliens and not returning back at all
+//      - Each drone can be upgraded through Research Center (like its skills and luck: probability and frequency of getting resources)
 //-1. LP. Like in fortnite mining system:
 //        - there should appear halo around one random cube visible to player
 //        - when player kills that cube, the halo should appear on next visible cube for player,

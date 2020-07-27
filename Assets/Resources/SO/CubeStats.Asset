@@ -15,7 +15,7 @@ MonoBehaviour:
   stats:
     HP: 10
     gold: 2
-    takeDamageEffectDuration: 0.1
+    takeDamageEffectDuration: 0.03
     materials:
     - {fileID: 2100000, guid: 69e62391699bc8e43b9f0a4617e079ac, type: 2}
     - {fileID: 2100000, guid: c6ea002d253ef804198283f05b3a27bd, type: 2}

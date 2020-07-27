@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 65663112709400636}
   - component: {fileID: 54100688980315184}
   - component: {fileID: 114621707728124066}
+  - component: {fileID: 6304882286414526618}
   m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
@@ -86,6 +87,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 678915ecbbbb15941a6eb1e37f8a4384, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _soundsMachine: {fileID: 6304882286414526618}
+--- !u!114 &6304882286414526618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1185771908995882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d399d75516ea9774583dd2b9a56b0110, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sounds:
+  - name: OnDestroy
+    clip: {fileID: 8300000, guid: e4bfa9ab69706844e81081c7d1d2c8be, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    distance: Infinity
+    spatialBlend: 1
+    source: {fileID: 0}
 --- !u!1 &1434414125246744
 GameObject:
   m_ObjectHideFlags: 0
@@ -4931,6 +4955,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17b5dfdd77e259646a449d69459ad82c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sides: {fileID: 966574261093420585}
 --- !u!114 &3366650385639307679
 MonoBehaviour:
   m_ObjectHideFlags: 0

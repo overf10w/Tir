@@ -14,6 +14,9 @@ namespace Game
         }
         #endregion
 
+        [SerializeField] private SoundsMachine _soundsMachine;
+        public SoundsMachine SoundsMachine => _soundsMachine;
+
         public event EventHandler<GenericEventArgs<float>> OnTakeDamage;
         public event EventHandler<GenericEventArgs<float>> OnHpChange;
 
@@ -49,8 +52,9 @@ namespace Game
 
             _cubeStat = Resources.Load<CubeStats>("SO/CubeStats").Stats;
             _gold = _cubeStat.gold;
+            _soundsMachine.Init();
 
-            Debug.Log("Cube.cs: health: " + health);
+            //Debug.Log("Cube.cs: health: " + health);
 
             _health = health;
         }
@@ -67,40 +71,26 @@ namespace Game
 
         private IEnumerator ChangeHpRoutine(float health)
         {
-            Show(health);
+            //Show(health);
             yield return new WaitForSeconds(_cubeStat.takeDamageEffectDuration);
+            //yield return null;
         }
 
-        private void Show(float hp)
-        {
-            if (hp <= 0)
-            {
-                return;
-            }
-
-            float wpDistance = _cachedTransform.localScale.y * 1.0f;
-            float x = wpDistance - (wpDistance * hp / 10.0f);
-        }
+        //private void Show(float hp)
+        //{
+        //    if (hp <= 0)
+        //    {
+        //        return;
+        //    }
+        //    float wpDistance = _cachedTransform.localScale.y * 1.0f;
+        //    float x = wpDistance - (wpDistance * hp / 10.0f);
+        //}
 
         private IEnumerator DestroyRoutine()
         {
             yield return new WaitForEndOfFrame();
             MessageBus.Instance.SendMessage(new Message { Type = MessageType.CUBE_DEATH, objectValue = (Cube)this });
             Destroy(this.gameObject);
-        }
-
-        private IEnumerator TakeDamageRoutine(float damage)
-        {
-            OnTakeDamage?.Invoke(this, new GenericEventArgs<float>(_cubeStat.takeDamageEffectDuration));
-            yield return new WaitForSeconds(0.5f);
-            
-            _health -= damage;
-            Show(_health);
-            if (_health <= 0.0f)
-            {
-                MessageBus.Instance.SendMessage(new Message { Type = MessageType.CUBE_DEATH, objectValue = (Cube)this });
-                Destroy(this.gameObject);
-            }
         }
     }
 }

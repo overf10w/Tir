@@ -25,7 +25,7 @@ MonoBehaviour:
       DPS:
         _basePrice: 20
         _priceMultiplier: 1.6
-        _baseValue: 1
+        _baseValue: 5
         _valueMultiplier: 1.1
         _baseUpgradePrice: 40
         _upgradePriceMultiplier: 1
@@ -34,7 +34,7 @@ MonoBehaviour:
       DMG:
         _basePrice: 15
         _priceMultiplier: 1.12
-        _baseValue: 1
+        _baseValue: 5
         _valueMultiplier: 1.05
         _baseUpgradePrice: 40
         _upgradePriceMultiplier: 1
@@ -52,7 +52,7 @@ MonoBehaviour:
       DPS:
         _basePrice: 40
         _priceMultiplier: 1.22
-        _baseValue: 3
+        _baseValue: 10
         _valueMultiplier: 1.1
         _baseUpgradePrice: 40
         _upgradePriceMultiplier: 1
@@ -61,7 +61,7 @@ MonoBehaviour:
       DMG:
         _basePrice: 25
         _priceMultiplier: 1.095
-        _baseValue: 3
+        _baseValue: 20
         _valueMultiplier: 1.1
         _baseUpgradePrice: 40
         _upgradePriceMultiplier: 1

@@ -34,9 +34,12 @@ namespace Game
         [SerializeField] private ResearchPanelToggleCanvas _researchPanelToggleCanvas;
         public ResearchPanelToggleCanvas ResearchPanelToggleCanvas => _researchPanelToggleCanvas;
 
+        [SerializeField] private TextMeshProUGUI _playerGoldText;
+        public TextMeshProUGUI PlayerGoldTxt => _playerGoldText;
+
         private LevelListUI _levelListUI;
 
-        public Text PlayerGoldTxt { get; private set; }
+        //public Text PlayerGoldTxt { get; private set; }
 
         public TextMeshProUGUI PlayerLevelTxt { get; private set; }
 
@@ -51,12 +54,13 @@ namespace Game
             _levelListUI = FindObjectOfType<LevelListUI>();
 
             // playerStats
-            PlayerGoldTxt = GameObject.Find("GoldLbl").GetComponent<Text>();
-            PlayerGoldTxt.text = playerModel.PlayerStats.Gold.ToString();
+            //PlayerGoldTxt = GameObject.Find("GoldLbl").GetComponent<Text>();
+            //PlayerGoldTxt.text = playerModel.PlayerStats.Gold.ToString();
+
+            PlayerGoldTxt.text = playerModel.PlayerStats.Gold.SciFormat();
 
             PlayerLevelTxt = transform.Find("MainPanel/StatsPanel/LevelTxt").GetComponent<TextMeshProUGUI>();
-            PlayerLevelTxt.text = "Level: " + playerModel.PlayerStats.Level.ToString();
-
+            PlayerLevelTxt.text = playerModel.PlayerStats.Level.ToString();
 
             _teamDPSTxt = GameObject.Find("TeamDPSLbl").GetComponent<Text>();
 

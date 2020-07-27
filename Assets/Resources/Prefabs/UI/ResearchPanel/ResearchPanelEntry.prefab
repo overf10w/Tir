@@ -441,7 +441,7 @@ GameObject:
   - component: {fileID: 2455419586059962558}
   - component: {fileID: 1174683407391123437}
   m_Layer: 5
-  m_Name: ResearchPanelEntry
+  m_Name: ResearchPanelEntryOld
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
