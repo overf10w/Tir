@@ -763,6 +763,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _iconImg: {fileID: 2455419585820820816}
   _nameTxt: {fileID: 3285291685623087350}
+  _statNameTxt: {fileID: 2455419587085145574}
   _dpsNextPrice: {fileID: 2455419587034692196}
   _dpsValueTxt: {fileID: 5214040367874698864}
   _dpsNextValueTxt: {fileID: 3606721936091511403}

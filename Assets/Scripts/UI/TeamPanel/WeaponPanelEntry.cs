@@ -14,8 +14,11 @@ namespace Game
         [SerializeField] private Image _iconImg;
 
         // name
+
         [SerializeField] private TextMeshProUGUI _nameTxt;
-        
+
+        [SerializeField] private TextMeshProUGUI _statNameTxt;
+
         // next price
         [SerializeField] private TextMeshProUGUI _dpsNextPrice;
         //[SerializeField] private TextMeshProUGUI _dmgNextPrice;
@@ -53,19 +56,33 @@ namespace Game
         public void Render(PlayerModel model, WeaponStat dps, WeaponStat dmg)
         {
             Debug.Log("WeaponPanelEntry: Render()");
+
+            Color green;
+            Color red;
+
+            ColorUtility.TryParseHtmlString("#CCFFC8", out green);
+            ColorUtility.TryParseHtmlString("#FF807C", out red);
+
             if (model.PlayerStats.Gold >= dps.Price)
             {
-                _dpsNextPrice.color = Color.green;
-                _dpsValueTxt.color = Color.green;
-                _dpsNextValueTxt.color = Color.green;
+                _nameTxt.color = green;
+                _statNameTxt.color = green;
+                _dpsNextPrice.color = green;
+                _dpsValueTxt.color = green;
+                _dpsNextValueTxt.color = green;
             } 
             else
             {
-                _dpsNextPrice.color = Color.red;
-                _dpsValueTxt.color = Color.red;
-                _dpsNextValueTxt.color = Color.red;
+                _nameTxt.color = red;
+                _statNameTxt.color = red;
+                _dpsNextPrice.color = red;
+                _dpsValueTxt.color = red;
+                _dpsNextValueTxt.color = red;
             }
+
+
             _dpsNextPrice.text = "$" + dps.Price.SciFormat();
+
             _dpsValueTxt.text = dps.Value.SciFormat();
             _dpsNextValueTxt.text = dps.NextValue.SciFormat();
         }
