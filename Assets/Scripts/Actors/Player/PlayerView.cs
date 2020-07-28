@@ -79,7 +79,7 @@ namespace Game
             Ui.Init(model);
 
             TeamPanel = Ui.GetComponentInChildren<TeamPanel>();
-            TeamPanel.Init(model.PlayerStats, model.TeamWeapons);
+            TeamPanel.Init(model);
             if (TeamPanel)
             {
                 TeamPanel.WeaponBtnClick.PlayerView = this;

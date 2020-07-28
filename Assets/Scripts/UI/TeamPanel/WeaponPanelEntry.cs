@@ -18,15 +18,15 @@ namespace Game
         
         // next price
         [SerializeField] private TextMeshProUGUI _dpsNextPrice;
-        [SerializeField] private TextMeshProUGUI _dmgNextPrice;
+        //[SerializeField] private TextMeshProUGUI _dmgNextPrice;
 
         // curr value
         [SerializeField] private TextMeshProUGUI _dpsValueTxt;
-        [SerializeField] private TextMeshProUGUI _dmgValueTxt;
+        //[SerializeField] private TextMeshProUGUI _dmgValueTxt;
         
         // next value
         [SerializeField] private TextMeshProUGUI _dpsNextValueTxt;
-        [SerializeField] private TextMeshProUGUI _dmgNextValueTxt;
+        //[SerializeField] private TextMeshProUGUI _dmgNextValueTxt;
 
         public Button DPSButton { get; private set; }
 
@@ -36,12 +36,7 @@ namespace Game
         public WeaponStat DPS { get; private set; }
         public WeaponStat DMG { get; private set; }
 
-        public void Init(float dpsPrice, float dmgPrice)
-        {
-            InitButtons();
-        }
-
-        public void Init(string name, WeaponStat dps, WeaponStat dmg)
+        public void Init(PlayerModel model, string name, WeaponStat dps, WeaponStat dmg)
         {
             InitButtons();
 
@@ -52,26 +47,27 @@ namespace Game
 
             _nameTxt.text = name;
 
-            _dpsNextPrice.text = dps.Price.SciFormat();
-            _dmgNextPrice.text = dmg.Price.SciFormat();
-
-            _dpsValueTxt.text = dps.Value.SciFormat();
-            _dmgValueTxt.text = dmg.Value.SciFormat();
-
-            _dpsNextValueTxt.text = dps.NextValue.SciFormat();
-            _dmgNextValueTxt.text = dmg.NextValue.SciFormat();
+            Render(model, dps, dmg);
         }
 
-        public void UpdateSelf(WeaponStat dps, WeaponStat dmg)
+        public void Render(PlayerModel model, WeaponStat dps, WeaponStat dmg)
         {
-            _dpsNextPrice.text = dps.Price.SciFormat();
-            _dmgNextPrice.text = dmg.Price.SciFormat();
-
+            Debug.Log("WeaponPanelEntry: Render()");
+            if (model.PlayerStats.Gold >= dps.Price)
+            {
+                _dpsNextPrice.color = Color.green;
+                _dpsValueTxt.color = Color.green;
+                _dpsNextValueTxt.color = Color.green;
+            } 
+            else
+            {
+                _dpsNextPrice.color = Color.red;
+                _dpsValueTxt.color = Color.red;
+                _dpsNextValueTxt.color = Color.red;
+            }
+            _dpsNextPrice.text = "$" + dps.Price.SciFormat();
             _dpsValueTxt.text = dps.Value.SciFormat();
-            _dmgValueTxt.text = dmg.Value.SciFormat();
-
             _dpsNextValueTxt.text = dps.NextValue.SciFormat();
-            _dmgNextValueTxt.text = dmg.NextValue.SciFormat();
         }
 
         private void InitIcon(string name)

@@ -57,8 +57,9 @@ namespace Game
         private GameObject _weaponUiEntryPrefab;
         private List<GameObject> _weaponUiEntries;
 
-        public void UpdateView(Dictionary<string, Weapon> weapons)
+        public void UpdateView(PlayerModel model)
         {
+            Dictionary<string, Weapon> weapons = model.TeamWeapons;
             if (weapons != null)
             {
                 foreach(var weapon in weapons)
@@ -68,7 +69,8 @@ namespace Game
                         if (entry.name == weapon.Key)
                         {
                             var script = entry.GetComponent<WeaponPanelEntry>();
-                            script.UpdateSelf(weapon.Value.DPS, weapon.Value.DMG);
+                            script.Render(model, weapon.Value.DPS, weapon.Value.DMG);
+                            //script.UpdateSelf(weapon.Value.DPS, weapon.Value.DMG);
                             break;
                         }
                     }
@@ -79,10 +81,10 @@ namespace Game
         private TeamSkillPanel _teamSkillPanel;
         private StatsContainer _skills;
 
-
-        public void Init(PlayerStats playerStats, Dictionary<string, Weapon> weapons)
+        public void Init(PlayerModel model)
         {
-            _skills = playerStats.TeamSkills;
+            //PlayerStats playerStats = model.PlayerStats;
+            _skills = model.PlayerStats.TeamSkills;
             _skills.StatChanged += HandleSkillChanged;
 
             _teamSkillPanel = GetComponentInChildren<TeamSkillPanel>();
@@ -92,6 +94,8 @@ namespace Game
             _content = transform.Find("Scroll View/Viewport/Content").GetComponent<Transform>();
             _weaponUiEntryPrefab = Resources.Load<GameObject>("Prefabs/UI/TeamPanel/WeaponPanelEntry");
             _weaponUiEntries = new List<GameObject>();
+
+            Dictionary<string, Weapon> weapons = model.TeamWeapons;
 
             if (weapons != null)
             {
@@ -103,7 +107,7 @@ namespace Game
                     entryGameObject.name = weapon.Key;
                     WeaponPanelEntry script = entryGameObject.GetComponent<WeaponPanelEntry>();
 
-                    script.Init(weapon.Key, weapon.Value.DPS, weapon.Value.DMG);
+                    script.Init(model, weapon.Key, weapon.Value.DPS, weapon.Value.DMG);
 
                     script.DPSButton.onClick.AddListener(() => { WeaponBtnClick.Dispatch(new WeaponStatBtnClickArgs(weapon.Key, "DPS")); });
                     script.DMGButton.onClick.AddListener(() => { WeaponBtnClick.Dispatch(new WeaponStatBtnClickArgs(weapon.Key, "DMG")); });

@@ -38,7 +38,7 @@ namespace Game
         {
             // TODO: more useful info can be retrieved here, rather than: e.PropertyName == "Value"
             // Debug.Log("PlayerController: TeamSkills_StatChanged: " + e.PropertyName);
-            _view.TeamPanel.UpdateView(_model.TeamWeapons);
+            _view.TeamPanel.UpdateView(_model);
             ResourceLoader.SavePlayerStats(_model.PlayerStats);
         }
 
@@ -84,6 +84,7 @@ namespace Game
             {
                 //_view.Ui.PlayerGoldTxt.text = _model.PlayerStats.Gold.ToString();
                 _view.Ui.PlayerGoldTxt.text = _model.PlayerStats.Gold.SciFormat();
+                _view.TeamPanel.UpdateView(_model);
                 // Don't need to redraw panels if only gold changed
                 return;
             }
@@ -93,7 +94,7 @@ namespace Game
                 _view.Ui.PlayerLevelTxt.text = _model.PlayerStats.Level.ToString();
                 return;
             }
-            _view.TeamPanel.UpdateView(_model.TeamWeapons);
+            _view.TeamPanel.UpdateView(_model);
             _view.ClickGunPanel.UpdateView(_model.DPS, _model.DMG);
         }
 
@@ -142,7 +143,7 @@ namespace Game
                         {
                             wpn.DPS.Upgrade();
                             ResourceLoader.SaveTeamWeapons(_model.TeamWeapons);
-                            _view.TeamPanel.UpdateView(_model.TeamWeapons);
+                            _view.TeamPanel.UpdateView(_model);
                             Debug.Log("StandardPistol was upgraded");
                             // TODO: (LP):
                             // ideally, 
@@ -238,14 +239,22 @@ namespace Game
                     switch (buttonName)
                     {
                         case "DPS":
-                            wpn.DPS.Level++;
+                            if (_model.PlayerStats.Gold >= wpn.DPS.Price)
+                            {
+                                _model.PlayerStats.Gold -= wpn.DPS.Price;
+                                wpn.DPS.Level++;
+                            }
                             ResourceLoader.SaveTeamWeapons(_model.TeamWeapons);
-                            _view.TeamPanel.UpdateView(_model.TeamWeapons);
+                            _view.TeamPanel.UpdateView(_model);
                             break;
                         case "DMG":
-                            wpn.DMG.Level++;
+                            if (_model.PlayerStats.Gold >= wpn.DMG.Price)
+                            {
+                                _model.PlayerStats.Gold -= wpn.DMG.Price;
+                                wpn.DMG.Level++;
+                            }
                             ResourceLoader.SaveTeamWeapons(_model.TeamWeapons);
-                            _view.TeamPanel.UpdateView(_model.TeamWeapons);
+                            _view.TeamPanel.UpdateView(_model);
                             break;
                         default:
                             break;

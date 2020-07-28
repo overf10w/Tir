@@ -85,7 +85,7 @@ namespace Game
         private float _value;
         public float Value { get => _algorithm.GetValue(_playerStats, Level, _upgradeLevel); set { _value = value; } }
         //public float Value { get => _algorithm.GetValue(Level, _upgradeLevel, _playerStats.DPSMultiplier); set { _value = value; } }
-        public float NextValue { get => _algorithm.GetNextValue(Level); }
+        public float NextValue { get => _algorithm.GetNextValue(_playerStats, Level, _upgradeLevel); }
 
         private int _upgradeLevel;
         public int UpgradeLevel { get => _upgradeLevel; set { SetField(ref _upgradeLevel, value); } }

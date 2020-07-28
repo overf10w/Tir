@@ -102,7 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sounds:
   - name: OnDestroy
-    clip: {fileID: 8300000, guid: e4bfa9ab69706844e81081c7d1d2c8be, type: 3}
+    clip: {fileID: 8300000, guid: d26c89b0fb2fc3b44a48f16a68899063, type: 3}
     volume: 1
     pitch: 1
     loop: 0

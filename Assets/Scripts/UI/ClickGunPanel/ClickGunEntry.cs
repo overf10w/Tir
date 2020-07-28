@@ -42,7 +42,6 @@ namespace Game
 
         public void Init(string name, WeaponStat dps, WeaponStat dmg)
         {
-
             InitButtons();
 
             DPS = dps;
@@ -52,12 +51,8 @@ namespace Game
 
             _nameTxt.text = name;
 
-            //numText.text = string.Format((num < 1000) ? "{0:F3}" : "{0:0.00e0}", num);
             _dpsNextPrice.text = dps.Price.SciFormat();
             _dmgNextPrice.text = dmg.Price.SciFormat();
-
-            //_dpsNextPrice.text = string.Format((dps.Price < 1000) ? "{0}" : "{0:0.00e0}", dps.Price);
-            //_dmgNextPrice.text = string.Format((dmg.Price < 1000) ? "{0}" : "{0:0.00e0}", dmg.Price); 
 
             _dpsValueTxt.text = dps.Value.SciFormat();
             _dmgValueTxt.text = dmg.Value.SciFormat();

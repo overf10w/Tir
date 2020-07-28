@@ -19,7 +19,7 @@ namespace Game
         {
             upgrade.PropertyChanged += HandleUpgradeModelChanged;
 
-            UpgradeBtn = transform.Find("UpgradeBtn").GetComponent<Button>();
+            UpgradeBtn = GetComponent<Button>();
 
             _name.text = upgrade.Name.ToString();
             _description.text = upgrade.Description.ToString();

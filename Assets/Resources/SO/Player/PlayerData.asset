@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   playerStats:
-    _gold: 0
-    _level: 0
-    _lastPlayTimestamp: 0
+    _gold: 842
+    _level: 34
+    _lastPlayTimestamp: 637315522806259789
     _teamSkills:
     - _name: DPSMultiplier
       _value: 1
