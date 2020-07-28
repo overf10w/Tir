@@ -38,17 +38,7 @@ namespace Game
             Upgrades.Upgrade[] upgrades = Load<Upgrades.Upgrade[]>(path);
             if (upgrades == null)
             {
-                upgrades = new Upgrades.Upgrade[1];
-                upgrades[0] = new Upgrades.Upgrade();
-                upgrades[0].Name = "DPS++";
-                upgrades[0].Description = "Increase DPS by Kek%";
-                upgrades[0].Price = 10000;
-                upgrades[0].Amount = 100;
-
-                upgrades[0].criterias = new Upgrades.Criteria[1];
-                upgrades[0].criterias[0] = new Upgrades.Criteria();
-                upgrades[0].criterias[0].indexer = "DPSMultiplier";
-                upgrades[0].criterias[0].threshold = 0;
+                upgrades = Resources.Load<Upgrades>("SO/Researches/Upgrades").upgrades;
             }
             return upgrades;
         }
@@ -57,14 +47,19 @@ namespace Game
         {
             string path = Path.Combine(Application.persistentDataPath, "playerStats.dat");
 
+            string scriptableObjectPath = "SO/Player/PlayerData";
+
             PlayerStats playerStats = Load<PlayerStats>(path);
 
             if (playerStats == null)
             {
-                playerStats = new PlayerStats();
-                playerStats.Gold = 0;
-                playerStats.Level = 0;
-                playerStats.LastPlayTimestamp = DateTime.Now.Ticks;
+                //playerStats = new PlayerStats();
+                //playerStats.Gold = 0;
+                //playerStats.Level = 0;
+                //playerStats.LastPlayTimestamp = DateTime.Now.Ticks;
+
+                playerStats = Resources.Load<PlayerData>("SO/Player/PlayerData").playerStats;
+
                 // TODO: playerStats.Skills = new Skill[] { new Skill() { Name="", Value = 1.1f}, new Skill{Name = "", Value = } }
             }
 
@@ -78,11 +73,7 @@ namespace Game
 
             if (data == null)
             {
-                data = new WeaponData();
-                data.DMG.Level = 0;
-                data.DPS.Level = 0;
-                data.DPS.UpgradeLevel = 0;
-                data.DMG.UpgradeLevel = 0;
+                data = Resources.Load<GunData>("SO/Weapons/ClickGun/GunData").gunStats;
                 //GunData.WeaponName = "Gun";
                 // TODO: 
                 // GunData.algorithms = ...
@@ -99,22 +90,23 @@ namespace Game
             // TODO: init this with special default backup files...
             if (weaponStats == null)
             {
-                Debug.Log("This is not the case");
-                weaponStats = new WeaponData[2];
+                weaponStats = Resources.Load<WeaponsData>("SO/Weapons/TeamWeapons/WeaponsData").weapons;
+                //Debug.Log("This is not the case");
+                //weaponStats = new WeaponData[2];
 
-                weaponStats[0] = new WeaponData();
-                weaponStats[0].DMG.Level = 0;
-                weaponStats[0].DPS.Level = 0;
-                weaponStats[0].DPS.UpgradeLevel = 0;
-                weaponStats[0].DMG.UpgradeLevel = 0;
-                weaponStats[0].WeaponName = "StandardPistol";
+                //weaponStats[0] = new WeaponData();
+                //weaponStats[0].DMG.Level = 0;
+                //weaponStats[0].DPS.Level = 0;
+                //weaponStats[0].DPS.UpgradeLevel = 0;
+                //weaponStats[0].DMG.UpgradeLevel = 0;
+                //weaponStats[0].WeaponName = "StandardPistol";
 
-                weaponStats[1] = new WeaponData();
-                weaponStats[1].DMG.Level = 0;
-                weaponStats[1].DPS.Level = 0;
-                weaponStats[1].DPS.UpgradeLevel = 0;
-                weaponStats[1].DMG.UpgradeLevel = 0;
-                weaponStats[1].WeaponName = "MachineGun";
+                //weaponStats[1] = new WeaponData();
+                //weaponStats[1].DMG.Level = 0;
+                //weaponStats[1].DPS.Level = 0;
+                //weaponStats[1].DPS.UpgradeLevel = 0;
+                //weaponStats[1].DMG.UpgradeLevel = 0;
+                //weaponStats[1].WeaponName = "MachineGun";
             }
 
             return weaponStats;
