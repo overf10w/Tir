@@ -224,7 +224,7 @@ namespace Game
         [SerializeField] private InputManager _inputManager;
 
         private AssetBundle _assetBundle;
-        private Upgrades.Upgrade[] _upgrades;
+        private Upgrades _upgrades;
         private string _upgradesPath;
 
         private IEnumerator Start()
@@ -234,6 +234,7 @@ namespace Game
             _upgradesPath = Path.Combine(Application.persistentDataPath, "upgrades.dat");
             _upgrades = _resourceLoader.LoadUpgrades(_upgradesPath);
 
+
             PlayerView view = Instantiate(Resources.Load<PlayerView>("Prefabs/Player"));
             PlayerModel model = new PlayerModel();
             PlayerController pc = new PlayerController(model, _upgrades, view, _inputManager);
@@ -242,8 +243,6 @@ namespace Game
 
             yield return null;  // we need this so the InGameCanvas receives event on spawned wave (through MessageBus)
         }
-
-
 
         // TODO: this be moved to SceneEnvironmentManager
         //       (1) SceneEnvironmentManager listens to MessageBus.ChangeLevel event 

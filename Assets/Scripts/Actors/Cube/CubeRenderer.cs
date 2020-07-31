@@ -39,9 +39,9 @@ namespace Game
             _hpScaleMultiplier = transform.localScale.y / _maxHP;
         }
 
-        private void HandleHpChange(object sender, GenericEventArgs<float> hp)
+        private void HandleHpChange(object sender, CubeHpChangeEventArgs hp)
         {
-            if (hp.Val <= 0)
+            if (hp.Value <= 0)
             {
                 _sides.SetActive(false);
                 Debug.Log("CubeRenderer.enabled = false");
@@ -49,7 +49,7 @@ namespace Game
                 return;
             }
 
-            float deltaHp = _currHP - hp.Val;
+            float deltaHp = _currHP - hp.Value;
             float deltaScale = deltaHp * _hpScaleMultiplier;
 
             Vector3 prevScale = transform.localScale;
@@ -67,7 +67,7 @@ namespace Game
 
             transform.localPosition = new Vector3(prevPos.x, prevPos.y - deltaPos, prevPos.z);
 
-            _currHP = hp.Val;
+            _currHP = hp.Value;
         }
     }
 }

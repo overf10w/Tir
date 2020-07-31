@@ -32,14 +32,32 @@ namespace Game
             }
         }
 
-        // TODO: if (upgrades == null) INIT upgrades with the backup SO
-        public Upgrades.Upgrade[] LoadUpgrades(string path)
+        public UpgradeData[] LoadUpgradesData(string path)
         {
-            Upgrades.Upgrade[] upgrades = Load<Upgrades.Upgrade[]>(path);
+            UpgradeData[] upgrades = Load<UpgradeData[]>(path);
             if (upgrades == null)
             {
-                upgrades = Resources.Load<Upgrades>("SO/Researches/Upgrades").upgrades;
+                //upgrades = Resources.Load<Upgrades>("SO/Researches/Upgrades").upgrades;
+                int length = Resources.Load<Upgrades>("SO/Researches/Upgrades").upgrades.Length;
+                upgrades = new UpgradeData[length];
+                for(int i = 0; i < upgrades.Length; i++)
+                {
+                    upgrades[i].id = i;
+                    upgrades[i].isActive = true;
+                }
             }
+            return upgrades;
+        }
+
+        // TODO: if (upgrades == null) INIT upgrades with the backup SO
+        public Upgrades LoadUpgrades(string path)
+        {
+            Upgrades upgrades = Resources.Load<Upgrades>("SO/Researches/Upgrades");
+
+            string _upgradesSave = Path.Combine(Application.persistentDataPath, "upgradesSave.dat");
+
+            upgrades.SetUpgradesData(LoadUpgradesData(_upgradesSave));
+
             return upgrades;
         }
 

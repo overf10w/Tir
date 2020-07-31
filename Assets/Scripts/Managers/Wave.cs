@@ -36,11 +36,22 @@ namespace Game
 
         public List<IDestroyable> Cubes { get; private set; }
 
-        public float GlobalHP { get; set; }
+        public float WaveHP { get; private set; }
+        public float WaveGold { get; private set; }
+        // TODO: what is internal set???
+        public EventHandler<GenericEventArgs<float>> OnWaveHpChange { get; internal set; } = (s, e) => { };
 
-        public void Init(float globalHP)
+        private float _remainingHP;
+
+        public void Init(float waveHp, float waveGold)
         {
-            GlobalHP = globalHP;
+            WaveHP = waveHp;
+            WaveGold = waveGold;
+
+            _remainingHP = waveHp;
+
+            Debug.Log("Wave.cs: Remaining HP: " + _remainingHP + ", waveHp: " + waveHp + ", WaveHP: " + WaveHP);
+
 
             InitMessageHandler();
 
@@ -60,8 +71,9 @@ namespace Game
                 var prefab = Resources.Load<Cube>("Prefabs/Cube") as Cube;
                 //float scaleMultiplier = prefab.transform
                 var cube = Instantiate(prefab, spawnTransform.transform) as Cube;
-                cube.Init(GlobalHP / cubesCnt);
+                cube.Init(WaveHP / cubesCnt, WaveGold / cubesCnt);
                 new CubeController(cube);
+                cube.OnHpChange += HandleCubeTakeDamage;
                 cube.transform.SetParent(this.gameObject.transform);
                 Cubes.Add(cube.GetComponent<IDestroyable>());
 
@@ -69,6 +81,13 @@ namespace Game
 
                 _cubesNumber++;
             }
+        }
+
+        private void HandleCubeTakeDamage(object sender, CubeHpChangeEventArgs e)
+        {
+            //Debug.Log("Wave.cs: Remaining HP: " + _remainingHP);
+            _remainingHP -= e.Diff;
+            OnWaveHpChange?.Invoke(this, new GenericEventArgs<float>(_remainingHP));
         }
     }
 }

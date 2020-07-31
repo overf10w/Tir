@@ -16,10 +16,13 @@ namespace Game
         private string _path;
         private string _backupPath;
 
+        private string _upgradesSave;
+
         public void OnEnable()
         {
             _path = Path.Combine(Application.persistentDataPath, "upgrades.dat");
             _backupPath = Path.Combine(Application.persistentDataPath, "backupUpgrades.dat");
+            _upgradesSave = Path.Combine(Application.persistentDataPath, "upgradesSave.dat");
             _upgrades = (Upgrades)target;
         }
 
@@ -60,6 +63,17 @@ namespace Game
             {
                 _upgrades.upgrades = ResourceLoader.Load<Upgrades.Upgrade[]>(_backupPath);
                 ResourceLoader.Save<Upgrades.Upgrade[]>(_path, _upgrades.upgrades);
+            }
+
+            if (GUILayout.Button("Read Upgrades Data"))
+            {
+                _upgrades.SetUpgradesData(ResourceLoader.Load<UpgradeData[]>(_upgradesSave));
+            }
+
+            if (GUILayout.Button("Save Upgrades Data"))
+            {
+                UpgradeData[] upgradesData = _upgrades.GetUpgradesData();
+                ResourceLoader.Save<UpgradeData[]>(_upgradesSave, upgradesData);
             }
         }
     }

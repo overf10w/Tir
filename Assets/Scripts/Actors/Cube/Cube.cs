@@ -5,6 +5,18 @@ using UnityEngine;
 
 namespace Game
 {
+    public class CubeHpChangeEventArgs : EventArgs
+    {
+        public float Value { get; private set; }
+        public float Diff { get; private set; }
+
+        public CubeHpChangeEventArgs(float value, float diff)
+        {
+            Value = value;
+            Diff = diff;
+        }
+    }
+
     public class Cube : MonoBehaviour, IDestroyable
     {
         #region IDestroyable
@@ -18,21 +30,31 @@ namespace Game
         public SoundsMachine SoundsMachine => _soundsMachine;
 
         public event EventHandler<GenericEventArgs<float>> OnTakeDamage;
-        public event EventHandler<GenericEventArgs<float>> OnHpChange;
+        public event EventHandler<CubeHpChangeEventArgs> OnHpChange;
 
         private float _health = 100.0f;
         public float Health 
         { 
             get => _health; 
             set 
-            { 
+            {
+                float prevHealth = _health;
                 _health = value;
-                OnHpChange?.Invoke(this, new GenericEventArgs<float>(_health));
+
+                float diff = prevHealth - _health;
+
+                if (_health < 0)
+                {
+                    diff = prevHealth;
+                    _health = 0;
+                }
+
+                OnHpChange?.Invoke(this, new CubeHpChangeEventArgs(_health, diff));
             } 
         }
 
-        private int _gold = 2;
-        public int Gold => _gold;
+        private float _gold = 2;
+        public float Gold => _gold;
 
         private CubeStat _cubeStat;
 
@@ -43,7 +65,7 @@ namespace Game
         private CoroutineQueue _takeDamageQueue;
         private CoroutineQueue _changeHPQueue;
 
-        public void Init(float health)
+        public void Init(float hp, float gold)
         {
             _takeDamageQueue = new CoroutineQueue(1, StartCoroutine);
             _changeHPQueue = new CoroutineQueue(1, StartCoroutine);
@@ -51,12 +73,12 @@ namespace Game
             _cachedTransform = transform;
 
             _cubeStat = Resources.Load<CubeStats>("SO/CubeStats").Stats;
-            _gold = _cubeStat.gold;
+            _gold = gold;
             _soundsMachine.Init();
 
             //Debug.Log("Cube.cs: health: " + health);
 
-            _health = health;
+            _health = hp;
         }
 
         public void ShowHealth(float health)

@@ -12,7 +12,7 @@ namespace Game
         private readonly PlayerView _view;
         private readonly InputManager _inputManager;
 
-        public PlayerController(PlayerModel model, Upgrades.Upgrade[] upgrades, PlayerView view, InputManager inputManager)
+        public PlayerController(PlayerModel model, Upgrades upgrades, PlayerView view, InputManager inputManager)
         {
             _model = model;
             _view = view;
@@ -59,16 +59,21 @@ namespace Game
             
         }
 
+        // TODO: move it to ResearchController
         private void HandleResearchBtnClick(object sender, UpgradeBtnClickEventArgs e)
         {
             string skillIndexer = e.Upgrade.Skill;
 
             StatsContainer statsContainer = (StatsContainer)_model.PlayerStats[e.Upgrade.SkillContainer];
             PlayerStat skill = statsContainer.Stats.Find(sk => sk.Name == skillIndexer);
-            float cachedFloat = skill.Value;
-            skill.Value = cachedFloat + 1;
 
-            e.Upgrade.IsActive = false;
+            if (_model.PlayerStats.Gold >= e.Upgrade.Price)
+            {
+                _model.PlayerStats.Gold -= e.Upgrade.Price;
+                float cachedFloat = skill.Value;
+                skill.Value = cachedFloat + 1;
+                e.Upgrade.IsActive = false;
+            }
         }
 
         private void HandlePlayerStatsChanged(object sender, GenericEventArgs<string> args)
@@ -85,6 +90,7 @@ namespace Game
                 //_view.Ui.PlayerGoldTxt.text = _model.PlayerStats.Gold.ToString();
                 _view.Ui.PlayerGoldTxt.text = _model.PlayerStats.Gold.SciFormat();
                 _view.TeamPanel.UpdateView(_model);
+                _view.ClickGunPanel.UpdateView(_model, _model.DPS, _model.DMG);
                 // Don't need to redraw panels if only gold changed
                 return;
             }
@@ -95,7 +101,7 @@ namespace Game
                 return;
             }
             _view.TeamPanel.UpdateView(_model);
-            _view.ClickGunPanel.UpdateView(_model.DPS, _model.DMG);
+            _view.ClickGunPanel.UpdateView(_model, _model.DPS, _model.DMG);
         }
 
         // One important notice: 
@@ -193,8 +199,8 @@ namespace Game
         {
             if (sender is WeaponStat weaponStat)
             {
-                Debug.Log("PlayerController: HandlePropertyChanged: model.Changed: weaponStatObject: " + weaponStat.Level);
-                _view.ClickGunPanel.UpdateView(_model.DPS, _model.DMG);
+                //Debug.Log("PlayerController: HandlePropertyChanged: model.Changed: weaponStatObject: " + weaponStat.Level);
+                _view.ClickGunPanel.UpdateView(_model, _model.DPS, _model.DMG);
             }
         }
 
@@ -209,11 +215,19 @@ namespace Game
                 {
                     case "DPS":
                         Debug.Log("PlayerController: HandleClickGunBtnClick: Update DPS");
-                        _model.DPS.Level++;
+                        if (_model.PlayerStats.Gold >= _model.DPS.Price)
+                        {
+                            _model.PlayerStats.Gold -= _model.DPS.Price;
+                            _model.DPS.Level++;
+                        }
                         break;
                     case "DMG":
                         Debug.Log("PlayerController: HandleClickGunBtnClick: Update DMG");
-                        _model.DMG.Level++;
+                        if (_model.PlayerStats.Gold >= _model.DMG.Price)
+                        {
+                            _model.PlayerStats.Gold -= _model.DMG.Price;
+                            _model.DMG.Level++;
+                        }
                         break;
                     default:
                         break;

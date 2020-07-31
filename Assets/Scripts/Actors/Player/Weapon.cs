@@ -169,7 +169,7 @@ namespace Game
         private Wave _wave;
 
         private float _nextShotTime;
-        private float _msBetweenShots = 200;
+        private float _msBetweenShots = 1000;
 
         public void Init(WeaponData data, PlayerStats playerStats)
         {

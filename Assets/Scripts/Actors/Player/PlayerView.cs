@@ -71,7 +71,7 @@ namespace Game
 
         public ResearchPanelToggleCanvas ResearchToggleCanvas { get; private set; }
 
-        public void Init(PlayerModel model, Upgrades.Upgrade[] upgrades)
+        public void Init(PlayerModel model, Upgrades upgrades)
         {
             InitMessageHandler();
 
@@ -86,14 +86,14 @@ namespace Game
             }
 
             ClickGunPanel = Ui.GetComponentInChildren<ClickGunPanel>();
-            ClickGunPanel.Init(model.PlayerStats, model.GunData.WeaponName, model.DPS, model.DMG);
+            ClickGunPanel.Init(model, model.GunData.WeaponName, model.DPS, model.DMG);
             if (ClickGunPanel)
             {
                 ClickGunPanel.WeaponBtnClick.PlayerView = this;
             }
 
             ResearchPanel = Ui.GetComponentInChildren<ResearchPanel>();
-            ResearchPanel.Init(upgrades);
+            ResearchPanel.Init(model, upgrades);
             if (ResearchPanel)
             {
                 ResearchPanel.UpgradeBtnClick.PlayerView = this;

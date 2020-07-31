@@ -27,9 +27,9 @@ namespace Game
 
         private bool isDead = false;
 
-        private void HandleCubeHpChange(object sender, GenericEventArgs<float> hp)
+        private void HandleCubeHpChange(object sender, CubeHpChangeEventArgs e)
         {
-            if (hp.Val <= 0 && !isDead)
+            if (e.Value <= 0 && !isDead)
             {
                 isDead = true;
                 DestroyMV();

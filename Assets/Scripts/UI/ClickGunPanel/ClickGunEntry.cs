@@ -17,6 +17,8 @@ namespace Game
         // name
         [SerializeField] private TextMeshProUGUI _nameTxt;
 
+        [SerializeField] private TextMeshProUGUI _statNameTxt;
+
         // next price
         [SerializeField] private TextMeshProUGUI _dpsNextPrice;
         [SerializeField] private TextMeshProUGUI _dmgNextPrice;
@@ -35,12 +37,7 @@ namespace Game
         public WeaponStat DPS { get; private set; }
         public WeaponStat DMG { get; private set; }
 
-        public void Init(float dpsPrice, float dmgPrice)
-        {
-            InitButtons();
-        }
-
-        public void Init(string name, WeaponStat dps, WeaponStat dmg)
+        public void Init(PlayerModel model, string name, WeaponStat dps, WeaponStat dmg)
         {
             InitButtons();
 
@@ -51,27 +48,74 @@ namespace Game
 
             _nameTxt.text = name;
 
-            _dpsNextPrice.text = dps.Price.SciFormat();
-            _dmgNextPrice.text = dmg.Price.SciFormat();
-
-            _dpsValueTxt.text = dps.Value.SciFormat();
-            _dmgValueTxt.text = dmg.Value.SciFormat();
-
-            _dpsNextValueTxt.text = dps.NextValue.SciFormat();
-            _dmgNextValueTxt.text = dmg.NextValue.SciFormat();
+            Render(model, dps, dmg);
         }
 
-        public void UpdateSelf(WeaponStat dps, WeaponStat dmg)
+        public void Render(PlayerModel model, WeaponStat dps, WeaponStat dmg)
         {
-            _dpsNextPrice.text = dps.Price.SciFormat();
-            _dmgNextPrice.text = dmg.Price.SciFormat();
+            Debug.Log("WeaponPanelEntry: Render()");
 
-            _dpsValueTxt.text = dps.Value.SciFormat();
+            Color green;
+            Color red;
+
+            ColorUtility.TryParseHtmlString("#CCFFC8", out green);
+            ColorUtility.TryParseHtmlString("#FF807C", out red);
+
+            if (model.PlayerStats.Gold >= dmg.Price)
+            {
+                _nameTxt.color = green;
+                _statNameTxt.color = green;
+                _dmgNextPrice.color = green;
+                _dmgValueTxt.color = green;
+                _dmgNextValueTxt.color = green;
+            }
+            else
+            {
+                _nameTxt.color = red;
+                _statNameTxt.color = red;
+                _dmgNextPrice.color = red;
+                _dmgValueTxt.color = red;
+                _dmgNextValueTxt.color = red;
+            }
+
+
+            _dmgNextPrice.text = "$" + dmg.Price.SciFormat();
             _dmgValueTxt.text = dmg.Value.SciFormat();
-
-            _dpsNextValueTxt.text = dps.NextValue.SciFormat();
             _dmgNextValueTxt.text = dmg.NextValue.SciFormat();
         }
+
+        //public void Init(string name, WeaponStat dps, WeaponStat dmg)
+        //{
+        //    InitButtons();
+
+        //    DPS = dps;
+        //    DMG = dmg;
+
+        //    InitIcon(name);
+
+        //    _nameTxt.text = name;
+
+        //    _dpsNextPrice.text = dps.Price.SciFormat();
+        //    _dmgNextPrice.text = dmg.Price.SciFormat();
+
+        //    _dpsValueTxt.text = dps.Value.SciFormat();
+        //    _dmgValueTxt.text = dmg.Value.SciFormat();
+
+        //    _dpsNextValueTxt.text = dps.NextValue.SciFormat();
+        //    _dmgNextValueTxt.text = dmg.NextValue.SciFormat();
+        //}
+
+        //public void Render(WeaponStat dps, WeaponStat dmg)
+        //{
+        //    _dpsNextPrice.text = dps.Price.SciFormat();
+        //    _dmgNextPrice.text = dmg.Price.SciFormat();
+
+        //    _dpsValueTxt.text = dps.Value.SciFormat();
+        //    _dmgValueTxt.text = dmg.Value.SciFormat();
+
+        //    _dpsNextValueTxt.text = dps.NextValue.SciFormat();
+        //    _dmgNextValueTxt.text = dmg.NextValue.SciFormat();
+        //}
 
         private void InitIcon(string name)
         {

@@ -223,7 +223,7 @@ namespace Game
         //      ResearchPanelToggle World Space Canvas: hide and show the Research Panel - [done]
 
         // Game:
-        // Level progression: with each level each cube destruction gains us more money
+        // Level progression: with each level each cube destruction gains us more money - [done]
         // Cube waves: Some of the waves are slowly rotating around their Y axis
         // Level progression: with each level cubes become more and more tough to kill - configured with a formula (in scriptable object) - [done]
         // Refactor: 

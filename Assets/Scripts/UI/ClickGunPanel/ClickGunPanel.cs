@@ -27,16 +27,16 @@ namespace Game
 
         private ClickGunSkillPanel clickGunSkillPanel;
 
-        public void Init(PlayerStats playerStats, string name, WeaponStat dps, WeaponStat dmg)
+        public void Init(PlayerModel model, string name, WeaponStat dps, WeaponStat dmg)
         {
-            _skills = playerStats.ClickGunSkills;
+            _skills = model.PlayerStats.ClickGunSkills;
             _skills.StatChanged += HandleSkillChanged;
 
             clickGunSkillPanel = GetComponentInChildren<ClickGunSkillPanel>();
             clickGunSkillPanel.Init(_skills.Stats);
 
             WeaponBtnClick = new ClickGunBtnClick();
-            _clickGunEntry.Init(name, dps, dmg);
+            _clickGunEntry.Init(model, name, dps, dmg);
             _clickGunEntry.DPSButton.onClick.AddListener(() => { WeaponBtnClick.Dispatch(new WeaponStatBtnClickArgs("ClickGun", "DPS")); Debug.Log("CLickGunPanel. Click DPS"); }); 
             _clickGunEntry.DMGButton.onClick.AddListener(() => { WeaponBtnClick.Dispatch(new WeaponStatBtnClickArgs("ClickGun", "DMG")); Debug.Log("CLickGunPanel. Click DMG"); });
         }
@@ -49,9 +49,9 @@ namespace Game
             clickGunSkillPanel.UpdateSelf(stat);
         }
 
-        public void UpdateView(WeaponStat dps, WeaponStat dmg)
+        public void UpdateView(PlayerModel model, WeaponStat dps, WeaponStat dmg)
         {
-            _clickGunEntry.UpdateSelf(dps, dmg);
+            _clickGunEntry.Render(model, dps, dmg);
         }
     }
 }

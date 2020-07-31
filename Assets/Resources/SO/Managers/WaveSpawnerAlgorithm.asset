@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b93b148a926b7847ad64891ae0cad0c, type: 3}
   m_Name: WaveSpawnerAlgorithm
   m_EditorClassIdentifier: 
-  baseValue: 2
-  coefficient: 0.1
-  offset: 30
+  waveHP:
+    baseValue: 1.4
+    coefficient: 0.1
+    offset: 32
+  waveGold:
+    baseValue: 1.2
+    coefficient: 0.02
+    offset: 30

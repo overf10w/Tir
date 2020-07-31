@@ -7,6 +7,13 @@ using UnityEngine;
 
 namespace Game
 {
+    [System.Serializable]
+    public class UpgradeData
+    {
+        public int id;
+        public bool isActive;
+    }
+
     public class UpgradeBtnClickEventArgs : EventArgs
     {
         public Upgrades.Upgrade Upgrade { get; }
@@ -36,6 +43,28 @@ namespace Game
         [System.Serializable]
         public class Upgrade : INotifyPropertyChanged
         {
+            #region INotifyPropertyChanged
+            // In our case the events shouldn't be serialized, because:
+            // 1. Had we try to serialize this event, all the MonoBehaviours subscribers would get serialized also (and MB cannot be serialized)
+            [field: NonSerialized]
+            public event PropertyChangedEventHandler PropertyChanged;
+            protected virtual void OnPropertyChanged(string propertyName)
+            {
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
+            protected bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+            {
+                Debug.Log("PlayerStats: SetField<T>(): Invoked");
+                if (EqualityComparer<T>.Default.Equals(field, value))
+                {
+                    return false;
+                }
+                field = value;
+                OnPropertyChanged(propertyName);
+                return true;
+            }
+            #endregion
+
             [SerializeField] private string _skillContainer;
             public string SkillContainer => _skillContainer;
 
@@ -58,43 +87,45 @@ namespace Game
 
             [SerializeField] private bool _isActive;
             public bool IsActive { get => _isActive; set { SetField(ref _isActive, value); } }
-            //public bool IsActive()
-            //{
-            //    foreach (var criteria in criterias)
-            //    {
-            //        if (criteria.IsSatisfied)
-            //        {
-            //            return true;
-            //        }
-            //    }
-            //    return false;
-            //}
+        }
 
-            #region INotifyPropertyChanged
-            // In our case the events shouldn't be serialized, because:
-            // 1. Had we try to serialize this event, all the MonoBehaviours subscribers would get serialized also (and MB cannot be serialized)
-            [field: NonSerialized]
-            public event PropertyChangedEventHandler PropertyChanged;
-            protected virtual void OnPropertyChanged(string propertyName)
+        public UpgradeData[] GetUpgradesData()
+        {
+            UpgradeData[] ret = new UpgradeData[upgrades.Length];
+            Debug.Log("upgrades.Length: " + upgrades.Length);
+            for (int i = 0; i < upgrades.Length; i++)
             {
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+                ret[i] = new UpgradeData();
+                ret[i].id = i;
+                ret[i].isActive = upgrades[i].IsActive;
             }
-            protected bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
-            {
-                Debug.Log("PlayerStats: SetField<T>(): Invoked");
-                if (EqualityComparer<T>.Default.Equals(field, value))
-                {
-                    return false;
-                }
-                field = value;
-                OnPropertyChanged(propertyName);
-                return true;
-            }
-            #endregion
+            return ret;
         }
 
         private PlayerStats _playerStats;
         // private Dictionary<string, Weapon> teamWeapons; // to keep an eye on weapons
         public Upgrade[] upgrades;
+
+        public void SetUpgradesData(UpgradeData[] upgradeDatas)
+        {
+            if (upgradeDatas.Length != upgrades.Length)
+            {
+                string warning =
+                    "Upgrades.cs: Upgrades Save File not in sync with Upgrades Scriptable Object\n" +
+                    "Setting all Upgrades: IsActive = true";
+                Debug.LogWarning(warning);
+                foreach (var upgrade in upgrades)
+                {
+                    upgrade.IsActive = true;
+                }
+            }
+            else
+            {
+                for (int i = 0; i < upgrades.Length; i++)
+                {
+                    upgrades[i].IsActive = upgradeDatas[i].isActive;
+                }
+            }
+        }
     }
 }
