@@ -85,7 +85,7 @@ namespace Game
         {
             //PlayerStats playerStats = model.PlayerStats;
             _skills = model.PlayerStats.TeamSkills;
-            _skills.StatChanged += HandleSkillChanged;
+            _skills.StatChanged += SkillChangedHandler;
 
             _teamSkillPanel = GetComponentInChildren<TeamSkillPanel>();
             _teamSkillPanel.Init(_skills.Stats);
@@ -115,11 +115,9 @@ namespace Game
             }
         }
 
-        private void HandleSkillChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void SkillChangedHandler(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             PlayerStat stat = (PlayerStat)sender;
-
-            Debug.Log("ClickGunPanel: HandleSkillChanged: Skill.Name: " + stat.Name + ", Skill.Value: " + stat.Value);
             _teamSkillPanel.UpdateSelf(stat);
         }
     }

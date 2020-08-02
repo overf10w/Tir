@@ -32,7 +32,6 @@ namespace Game
 
         [SerializeField] private WaveSpawnerAlgorithm _algorithm;
         [SerializeField] private PlayerWaves _playerWaves;
-
         [SerializeField] private WaveCanvas _waveCanvas;
 
         private PlayerStats _playerStats;
@@ -56,11 +55,10 @@ namespace Game
 
             _wave = Instantiate(wavePrefab, wavePrefab.transform.position, Quaternion.identity) as Wave;
 
-            //_wave.Init((_playerStats.Level + 1) * 10);
             float waveHP = _algorithm.GetWaveHp(_playerStats.Level);
             float waveGold = _algorithm.GetWaveGold(_playerStats.Level);
             _wave.Init(waveHP, waveGold);
-            _wave.OnWaveHpChange += HandleWaveHpChange;
+            _wave.WaveHpChanged += WaveHpChangedHandler;
 
             _cubesSpawned = _wave.CubesNumber;
             _cubesDestroyed = 0;
@@ -70,7 +68,7 @@ namespace Game
             _waveCanvas.WaveHPText.text = waveHP.SciFormat().ToString();
         }
 
-        private void HandleWaveHpChange(object sender, GenericEventArgs<float> hp)
+        private void WaveHpChangedHandler(object sender, EventArgs<float> hp)
         {
             _waveCanvas.WaveHPText.text = hp.Val.SciFormat().ToString();
         }

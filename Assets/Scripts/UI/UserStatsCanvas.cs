@@ -39,8 +39,6 @@ namespace Game
 
         private LevelListUI _levelListUI;
 
-        //public Text PlayerGoldTxt { get; private set; }
-
         public TextMeshProUGUI PlayerLevelTxt { get; private set; }
 
         private Text _teamDPSTxt;
@@ -53,21 +51,12 @@ namespace Game
             // TODO: drag & drop
             _levelListUI = FindObjectOfType<LevelListUI>();
 
-            // playerStats
-            //PlayerGoldTxt = GameObject.Find("GoldLbl").GetComponent<Text>();
-            //PlayerGoldTxt.text = playerModel.PlayerStats.Gold.ToString();
-
             PlayerGoldTxt.text = playerModel.PlayerStats.Gold.SciFormat();
 
             PlayerLevelTxt = transform.Find("MainPanel/StatsPanel/LevelTxt").GetComponent<TextMeshProUGUI>();
             PlayerLevelTxt.text = playerModel.PlayerStats.Level.ToString();
 
             _teamDPSTxt = GameObject.Find("TeamDPSLbl").GetComponent<Text>();
-
-            // --------------- //
-            // TODO: use message bus
-            //ResourceLoader.playerData.OnWeaponChanged += HandleWeaponChanged;
-            //ResourceLoader.gameData.OnLevelChanged += HandleLevelChanged;
 
             _elapsedTimeSpanTxt = GameObject.Find("ElapsedTimeSpanLbl").GetComponent<Text>();
             TimeSpan idleTimeSpan = new TimeSpan(playerModel.PlayerStats.IdleTimeSpan);
@@ -94,7 +83,7 @@ namespace Game
             _elapsedTimeSpanTxt.text = "Delta time: " + timeSpan;
         }
 
-        public void HandleLevelChanged(int level)
+        public void LevelChangedHandler(int level)
         {
             _levelListUI.SetLevel(level);
         }

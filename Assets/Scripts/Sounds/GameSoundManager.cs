@@ -21,7 +21,6 @@ namespace Game
             {
                 case MessageType.LEVEL_PASSED:
                     _soundsMachine.Play("FireWork");
-                    Debug.Log("GameSoundManager: _soundsMachine.Play('FireWork')");
                     break;
                 default:
                     break;

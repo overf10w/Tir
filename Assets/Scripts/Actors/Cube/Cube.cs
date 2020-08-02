@@ -22,15 +22,15 @@ namespace Game
         #region IDestroyable
         public void TakeDamage(float damage)
         {
-            OnTakeDamage?.Invoke(this, new GenericEventArgs<float>(damage));
+            DamageTaken?.Invoke(this, new EventArgs<float>(damage));
         }
         #endregion
 
         [SerializeField] private SoundsMachine _soundsMachine;
         public SoundsMachine SoundsMachine => _soundsMachine;
 
-        public event EventHandler<GenericEventArgs<float>> OnTakeDamage;
-        public event EventHandler<CubeHpChangeEventArgs> OnHpChange;
+        public event EventHandler<EventArgs<float>> DamageTaken;
+        public event EventHandler<CubeHpChangeEventArgs> HpChanged;
 
         private float _health = 100.0f;
         public float Health 
@@ -49,7 +49,7 @@ namespace Game
                     _health = 0;
                 }
 
-                OnHpChange?.Invoke(this, new CubeHpChangeEventArgs(_health, diff));
+                HpChanged?.Invoke(this, new CubeHpChangeEventArgs(_health, diff));
             } 
         }
 
@@ -76,8 +76,6 @@ namespace Game
             _gold = gold;
             _soundsMachine.Init();
 
-            //Debug.Log("Cube.cs: health: " + health);
-
             _health = hp;
         }
 
@@ -93,20 +91,8 @@ namespace Game
 
         private IEnumerator ChangeHpRoutine(float health)
         {
-            //Show(health);
             yield return new WaitForSeconds(_cubeStat.takeDamageEffectDuration);
-            //yield return null;
         }
-
-        //private void Show(float hp)
-        //{
-        //    if (hp <= 0)
-        //    {
-        //        return;
-        //    }
-        //    float wpDistance = _cachedTransform.localScale.y * 1.0f;
-        //    float x = wpDistance - (wpDistance * hp / 10.0f);
-        //}
 
         private IEnumerator DestroyRoutine()
         {

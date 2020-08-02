@@ -49,7 +49,6 @@ namespace Game
             return upgrades;
         }
 
-        // TODO: if (upgrades == null) INIT upgrades with the backup SO
         public Upgrades LoadUpgrades(string path)
         {
             Upgrades upgrades = Resources.Load<Upgrades>("SO/Researches/Upgrades");
@@ -64,21 +63,11 @@ namespace Game
         public static PlayerStats LoadPlayerStats()
         {
             string path = Path.Combine(Application.persistentDataPath, "playerStats.dat");
-
-            string scriptableObjectPath = "SO/Player/PlayerData";
-
             PlayerStats playerStats = Load<PlayerStats>(path);
 
             if (playerStats == null)
             {
-                //playerStats = new PlayerStats();
-                //playerStats.Gold = 0;
-                //playerStats.Level = 0;
-                //playerStats.LastPlayTimestamp = DateTime.Now.Ticks;
-
                 playerStats = Resources.Load<PlayerData>("SO/Player/PlayerData").playerStats;
-
-                // TODO: playerStats.Skills = new Skill[] { new Skill() { Name="", Value = 1.1f}, new Skill{Name = "", Value = } }
             }
 
             return playerStats;
@@ -92,9 +81,6 @@ namespace Game
             if (data == null)
             {
                 data = Resources.Load<GunData>("SO/Weapons/ClickGun/GunData").gunStats;
-                //GunData.WeaponName = "Gun";
-                // TODO: 
-                // GunData.algorithms = ...
             }
             return data;
         }
@@ -105,26 +91,9 @@ namespace Game
 
             WeaponData[] weaponStats = ResourceLoader.Load<WeaponData[]>(path);
 
-            // TODO: init this with special default backup files...
             if (weaponStats == null)
             {
                 weaponStats = Resources.Load<WeaponsData>("SO/Weapons/TeamWeapons/WeaponsData").weapons;
-                //Debug.Log("This is not the case");
-                //weaponStats = new WeaponData[2];
-
-                //weaponStats[0] = new WeaponData();
-                //weaponStats[0].DMG.Level = 0;
-                //weaponStats[0].DPS.Level = 0;
-                //weaponStats[0].DPS.UpgradeLevel = 0;
-                //weaponStats[0].DMG.UpgradeLevel = 0;
-                //weaponStats[0].WeaponName = "StandardPistol";
-
-                //weaponStats[1] = new WeaponData();
-                //weaponStats[1].DMG.Level = 0;
-                //weaponStats[1].DPS.Level = 0;
-                //weaponStats[1].DPS.UpgradeLevel = 0;
-                //weaponStats[1].DMG.UpgradeLevel = 0;
-                //weaponStats[1].WeaponName = "MachineGun";
             }
 
             return weaponStats;
@@ -179,12 +148,11 @@ namespace Game
         {
             string path = Path.Combine(Application.persistentDataPath, "playerStats.dat");
 
-            if (playerStats == null)
+            if (playerStats == null) // TODO: doesn't make sense, as playerStats cannot ever be null
             {
                 playerStats = new PlayerStats();
                 playerStats.Gold = 0;
                 playerStats.Level = 0;
-                // TODO: playerStats.Skills = new Skill[] { new Skill() { Name="", Value = 1.1f}, new Skill{Name = "", Value = } }
             }
 
             playerStats.LastPlayTimestamp = DateTime.Now.Ticks;

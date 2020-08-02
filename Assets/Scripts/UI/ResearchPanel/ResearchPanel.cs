@@ -9,40 +9,28 @@ namespace Game
 {
     public class UpgradeBtnClick
     {
-        public PlayerView PlayerView;
+        public UpgradesController UpgradesController { get; set; }
 
         public void Dispatch(UpgradeBtnClickEventArgs clickInfo)
         {
-            if (PlayerView != null)
+            if (UpgradesController != null)
             {
-                PlayerView.HandleUpgradeBtnClick(clickInfo);
+                UpgradesController.UpgradeBtnClickHandler(clickInfo);
             }
         }
     }
 
-    // Research buttons to turn red when money isn't enough - [done]
-    // ResearchPanelEntry to have a Render() method (just like the clickGunEntry) - [done]
-    // ResearchPanel to subscribe to _playerModel.PlayerStats.Gold Change and call ClickGunEntry.Render() - [done]
-    // Refactor
     public class ResearchPanel : MonoBehaviour
     {
-        public UpgradeBtnClick UpgradeBtnClick { get; private set; }
+        [SerializeField] private ResearchPanelToggleCanvas _toggleCanvas;
+        public ResearchPanelToggleCanvas ResearchPanelToggleCanvas => _toggleCanvas;
 
-        private Upgrades.Upgrade[] _upgrades;
-
-        private Upgrades _upgradesSo;
-
-        private CanvasGroup _canvasGroup;
-        private GameObject _researchPanelEntryPrefab;
-        private Transform _content;
+        public List<ResearchPanelEntry> ResearchPanelEntries { get; private set; }
 
         private bool _isHidden;
         public bool IsHidden
         {
-            get
-            {
-                return _isHidden;
-            }
+            get => _isHidden;
 
             set
             {
@@ -58,77 +46,46 @@ namespace Game
             }
         }
 
-        [field: NonSerialized]
-        private PlayerModel _playerModel;
+        public UpgradeBtnClick UpgradeBtnClick { get; private set; }
 
-        List<ResearchPanelEntry> _researchPanelEntries;
+        private Upgrades _upgradesSo;
+        private Upgrade[] _upgrades;
+
+        private CanvasGroup _canvasGroup;
+        private GameObject _prefab;
+        private Transform _content;
 
         public void Init(PlayerModel playerModel, Upgrades upgradesSO)
         {
-            _researchPanelEntries = new List<ResearchPanelEntry>();
-
-            _playerModel = playerModel;
-
-            _playerModel.PlayerStats.PropertyChanged += HandlePlayerStatsPropertyChanged;
-
+            ResearchPanelEntries = new List<ResearchPanelEntry>();
             _upgradesSo = upgradesSO;
-
             _upgrades = _upgradesSo.upgrades;
-
-            _canvasGroup = GetComponent<CanvasGroup>();
-
             UpgradeBtnClick = new UpgradeBtnClick();
 
-            _researchPanelEntryPrefab = Resources.Load<GameObject>("Prefabs/UI/ResearchPanel/ResearchPanelEntry");
+            _toggleCanvas.Init();
 
+            _canvasGroup = GetComponent<CanvasGroup>();
+            _prefab = Resources.Load<GameObject>("Prefabs/UI/ResearchPanel/ResearchPanelEntry");
             _content = transform.Find("ScrollView/Viewport/Content").GetComponent<Transform>();
 
             foreach (var upgrade in _upgrades)
             {
-                GameObject entryGameObject = Instantiate(_researchPanelEntryPrefab, _content);
+                GameObject entry = Instantiate(_prefab, _content);
 
-                ResearchPanelEntry script = entryGameObject.GetComponent<ResearchPanelEntry>();
+                ResearchPanelEntry script = entry.GetComponent<ResearchPanelEntry>();
                 script.Init(playerModel, upgrade);
                 script.UpgradeBtn.onClick.AddListener(() => { UpgradeBtnClick.Dispatch(new UpgradeBtnClickEventArgs(upgrade)); });
 
-                upgrade.PropertyChanged += HandleUpgradeModelChanged;
-
-                _researchPanelEntries.Add(script);
+                ResearchPanelEntries.Add(script);
             }
             StartCoroutine(AutoSave());
         }
 
-        private void HandlePlayerStatsPropertyChanged(object sender, PropertyChangedEventArgs e)
+        public void UpdateView()
         {
-            if (e.PropertyName == "Gold")
+            foreach (var script in ResearchPanelEntries)
             {
-                Debug.Log("ResearchPanel: notified of PlayerStats.Gold change");
-                foreach (var script in _researchPanelEntries)
-                {
-                    script.Render();
-                }
-            }
-        }
-
-        private void HandleUpgradeModelChanged(object sender, PropertyChangedEventArgs args)
-        {
-            Upgrades.Upgrade upgrade = (Upgrades.Upgrade)sender;
-            Debug.Log("ResearchPanelView: HandleResearchViewUpgradeViewModelChanged: " +
-                "upgrade.isActive: " + upgrade.IsActive);
-        }
-
-        private IEnumerator AutoSave()
-        {
-            while (true)
-            {
-                yield return new WaitForSeconds(5.0f);
-
-                UpgradeData[] upgradesData = _upgradesSo.GetUpgradesData();
-                string _upgradesSavePath = Path.Combine(Application.persistentDataPath, "upgradesSave.dat");
-                ResourceLoader.Save<UpgradeData[]>(_upgradesSavePath, upgradesData);
-
-                string upgradesPath = Path.Combine(Application.persistentDataPath, "upgrades.dat");
-                ResourceLoader.Save<Upgrades.Upgrade[]>(upgradesPath, _upgrades);
+                script.Render();
             }
         }
 
@@ -144,6 +101,24 @@ namespace Game
             _canvasGroup.interactable = true;
             _canvasGroup.alpha = 1.0f;
             _canvasGroup.blocksRaycasts = true;
+        }
+
+        private IEnumerator AutoSave()
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(5.0f);
+
+                // TODO: trigger 'save' event here
+
+                // TODO: move the logic below to controller
+                UpgradeData[] upgradesData = _upgradesSo.GetUpgradesData();
+                string _upgradesSavePath = Path.Combine(Application.persistentDataPath, "upgradesSave.dat");
+                ResourceLoader.Save<UpgradeData[]>(_upgradesSavePath, upgradesData);
+
+                string upgradesPath = Path.Combine(Application.persistentDataPath, "upgrades.dat");
+                ResourceLoader.Save<Upgrade[]>(upgradesPath, _upgrades);
+            }
         }
     }
 }

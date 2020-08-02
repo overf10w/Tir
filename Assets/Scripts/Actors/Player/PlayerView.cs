@@ -5,21 +5,11 @@ using UnityEngine;
 
 namespace Game
 {
-    public class CustomArgs : EventArgs
+    public class EventArgs<T> : EventArgs
     {
-        public float Val { get; }
+        public T Val { get; }
 
-        public CustomArgs(float val)
-        {
-            Val = val;
-        }
-    }
-
-    public class GenericEventArgs<T> : EventArgs
-    {
-        public T Val { get;}
-
-        public GenericEventArgs(T val) 
+        public EventArgs(T val) 
         {
             Val = val;
         }
@@ -41,22 +31,20 @@ namespace Game
             if (message.Type == MessageType.CUBE_DEATH)
             {
                 Cube cube = (Cube)message.objectValue;
-                OnCubeDeath?.Invoke(this, new CustomArgs(cube.Gold));
+                CubeDeath?.Invoke(this, new EventArgs<float>(cube.Gold));
             }
             else if (message.Type == MessageType.LEVEL_PASSED)
             {
-                OnLevelPassed?.Invoke(this, new EventArgs());
+                LevelPassed?.Invoke(this, new EventArgs());
             }
         }
         #endregion
 
-        public event EventHandler<EventArgs> OnClicked = (sender, e) => { };
-        public event EventHandler<CustomArgs> OnCubeDeath = (sender, e) => { };
-        public event EventHandler<EventArgs> OnLevelPassed = (sender, e) => { };
-        public event EventHandler<GenericEventArgs<WeaponStatBtnClickArgs>> OnTeamWeaponBtnClick = (sender, e) => { };
-        public event EventHandler<GenericEventArgs<WeaponStatBtnClickArgs>> OnClickGunBtnClick = (sender, e) => { };
-        public event EventHandler<UpgradeBtnClickEventArgs> OnResearchBtnClick = (sender, e) => { };
-        public event EventHandler<EventArgs> OnResearchCenterToggleBtnClick = (sender, e) => { };
+        public event EventHandler<EventArgs> Clicked = (sender, e) => { };
+        public event EventHandler<EventArgs<float>> CubeDeath = (sender, e) => { };
+        public event EventHandler<EventArgs> LevelPassed = (sender, e) => { };
+        public event EventHandler<EventArgs<WeaponStatBtnClickArgs>> TeamWeaponBtnClicked = (sender, e) => { };
+        public event EventHandler<EventArgs<WeaponStatBtnClickArgs>> ClickGunBtnClicked = (sender, e) => { };
 
         [HideInInspector]
         public Gun Gun { get; private set; }
@@ -66,10 +54,6 @@ namespace Game
         public TeamPanel TeamPanel { get; private set; }
 
         public ClickGunPanel ClickGunPanel { get; private set; }
-
-        public ResearchPanel ResearchPanel { get; private set; }
-
-        public ResearchPanelToggleCanvas ResearchToggleCanvas { get; private set; }
 
         public void Init(PlayerModel model, Upgrades upgrades)
         {
@@ -92,17 +76,6 @@ namespace Game
                 ClickGunPanel.WeaponBtnClick.PlayerView = this;
             }
 
-            ResearchPanel = Ui.GetComponentInChildren<ResearchPanel>();
-            ResearchPanel.Init(model, upgrades);
-            if (ResearchPanel)
-            {
-                ResearchPanel.UpgradeBtnClick.PlayerView = this;
-            }
-
-            ResearchToggleCanvas = Ui.ResearchPanelToggleCanvas;
-            ResearchToggleCanvas.Init();
-            ResearchToggleCanvas.ToggleBtnClick.PlayerView = this;
-
             Gun = GetComponentInChildren<Gun>();
 
             Gun.Init(model.GunData, model.PlayerStats);
@@ -113,7 +86,7 @@ namespace Game
             Gun.UpdateGunRotation();
             if (Input.GetMouseButtonDown(0))
             {
-                OnClicked?.Invoke(this, EventArgs.Empty);
+                Clicked?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -132,7 +105,6 @@ namespace Game
                 timeBetweenShots++;
                 if (timeBetweenShots >= 0.2f)
                 {
-                    // gun.Shoot(model.currentDamage);
                     timeBetweenShots = 0.0f;
                 }
                 yield return null;
@@ -141,30 +113,12 @@ namespace Game
 
         public void HandleWeaponBtnClick(WeaponStatBtnClickArgs weaponClickInfo)
         {
-            OnTeamWeaponBtnClick?.Invoke(this, new GenericEventArgs<WeaponStatBtnClickArgs>(weaponClickInfo));
+            TeamWeaponBtnClicked?.Invoke(this, new EventArgs<WeaponStatBtnClickArgs>(weaponClickInfo));
         }
 
         public void HandleClickGunBtnClick(WeaponStatBtnClickArgs clickGunClickInfo)
         {
-            OnClickGunBtnClick?.Invoke(this, new GenericEventArgs<WeaponStatBtnClickArgs>(clickGunClickInfo));
+            ClickGunBtnClicked?.Invoke(this, new EventArgs<WeaponStatBtnClickArgs>(clickGunClickInfo));
         }
-
-        public void HandleUpgradeBtnClick(UpgradeBtnClickEventArgs clickInfo)
-        {
-            OnResearchBtnClick?.Invoke(this, clickInfo);
-        }
-
-        internal void HandleResearchPanelToggleBtnClick()
-        {
-            OnResearchCenterToggleBtnClick?.Invoke(this, new EventArgs());
-        }
-
-        //public void OnDisable()
-        //{
-        //    //model.OnAutoFireUpdated -= OnAutoShoot;
-        //    //ResourceLoader.instance.Write(model.GetStats());
-        //}
-
-        //
     }
 }

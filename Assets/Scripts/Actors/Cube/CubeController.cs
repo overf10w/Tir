@@ -15,11 +15,11 @@ namespace Game
             _cubeMV = cubeMV;
             _soundsMachine = cubeMV.SoundsMachine;
 
-            _cubeMV.OnTakeDamage += HandleCubeTakeDamage;
-            _cubeMV.OnHpChange += HandleCubeHpChange;
+            _cubeMV.DamageTaken += TakeDamageHandler;
+            _cubeMV.HpChanged += HpChangedHandler;
         }
 
-        private void HandleCubeTakeDamage(object sender, GenericEventArgs<float> damage)
+        private void TakeDamageHandler(object sender, EventArgs<float> damage)
         {
             _cubeMV.Health -= damage.Val;
             _cubeMV.ShowHealth(_cubeMV.Health);
@@ -27,7 +27,7 @@ namespace Game
 
         private bool isDead = false;
 
-        private void HandleCubeHpChange(object sender, CubeHpChangeEventArgs e)
+        private void HpChangedHandler(object sender, CubeHpChangeEventArgs e)
         {
             if (e.Value <= 0 && !isDead)
             {
@@ -38,13 +38,8 @@ namespace Game
 
         private async void DestroyMV()
         {
-            //Debug.Log("DestroyMV: callCnt: " + (++callCnt).ToString());
-            //Debug.Log("CubeController.DestroyMV: 1");
-            //_cubeMV.
             await _soundsMachine.Play("OnDestroy");
             //await Task.Delay(100);
-            //Debug.Log("CubeController.DestroyMV: 2");
-
             _cubeMV.Destroy();
         }
     }

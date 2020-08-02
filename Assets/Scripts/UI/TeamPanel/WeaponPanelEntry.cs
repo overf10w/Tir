@@ -55,36 +55,34 @@ namespace Game
 
         public void Render(PlayerModel model, WeaponStat dps, WeaponStat dmg)
         {
-            Debug.Log("WeaponPanelEntry: Render()");
-
             Color green;
             Color red;
 
             ColorUtility.TryParseHtmlString("#CCFFC8", out green);
             ColorUtility.TryParseHtmlString("#FF807C", out red);
 
+            Color color;
+
             if (model.PlayerStats.Gold >= dps.Price)
             {
-                _nameTxt.color = green;
-                _statNameTxt.color = green;
-                _dpsNextPrice.color = green;
-                _dpsValueTxt.color = green;
-                _dpsNextValueTxt.color = green;
+                color = green;
             } 
             else
             {
-                _nameTxt.color = red;
-                _statNameTxt.color = red;
-                _dpsNextPrice.color = red;
-                _dpsValueTxt.color = red;
-                _dpsNextValueTxt.color = red;
+                color = red;
             }
 
+            _nameTxt.color = color;
+            _statNameTxt.color = color;
 
             _dpsNextPrice.text = "$" + dps.Price.SciFormat();
+            _dpsNextPrice.color = color;
 
             _dpsValueTxt.text = dps.Value.SciFormat();
+            _dpsValueTxt.color = color;
+
             _dpsNextValueTxt.text = dps.NextValue.SciFormat();
+            _dpsNextValueTxt.color = color;
         }
 
         private void InitIcon(string name)

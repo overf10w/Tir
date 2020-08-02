@@ -39,7 +39,7 @@ namespace Game
         public float WaveHP { get; private set; }
         public float WaveGold { get; private set; }
         // TODO: what is internal set???
-        public EventHandler<GenericEventArgs<float>> OnWaveHpChange { get; internal set; } = (s, e) => { };
+        public EventHandler<EventArgs<float>> WaveHpChanged { get; internal set; } = (s, e) => { };
 
         private float _remainingHP;
 
@@ -49,9 +49,6 @@ namespace Game
             WaveGold = waveGold;
 
             _remainingHP = waveHp;
-
-            Debug.Log("Wave.cs: Remaining HP: " + _remainingHP + ", waveHp: " + waveHp + ", WaveHP: " + WaveHP);
-
 
             InitMessageHandler();
 
@@ -63,8 +60,6 @@ namespace Game
         {
             float cubesCnt = _spawnGrid.childCount;
 
-            //float cubeHP = GlobalHP
-
             for (int i = _spawnGrid.childCount - 1; i >= 0; i--)
             {
                 var spawnTransform = _spawnGrid.GetChild(i);
@@ -73,7 +68,7 @@ namespace Game
                 var cube = Instantiate(prefab, spawnTransform.transform) as Cube;
                 cube.Init(WaveHP / cubesCnt, WaveGold / cubesCnt);
                 new CubeController(cube);
-                cube.OnHpChange += HandleCubeTakeDamage;
+                cube.HpChanged += CubeTakeDamageHandler;
                 cube.transform.SetParent(this.gameObject.transform);
                 Cubes.Add(cube.GetComponent<IDestroyable>());
 
@@ -83,11 +78,10 @@ namespace Game
             }
         }
 
-        private void HandleCubeTakeDamage(object sender, CubeHpChangeEventArgs e)
+        private void CubeTakeDamageHandler(object sender, CubeHpChangeEventArgs e)
         {
-            //Debug.Log("Wave.cs: Remaining HP: " + _remainingHP);
             _remainingHP -= e.Diff;
-            OnWaveHpChange?.Invoke(this, new GenericEventArgs<float>(_remainingHP));
+            WaveHpChanged?.Invoke(this, new EventArgs<float>(_remainingHP));
         }
     }
 }

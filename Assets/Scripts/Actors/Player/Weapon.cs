@@ -107,35 +107,22 @@ namespace Game
 
             //_playerStats.PropertyChanged += HandlePlayerStatsChange;
             //_playerStats.Skills.Changed += Skills_Changed;
-            _playerStats.TeamSkills.StatChanged += SkillsContainer_SkillChanged;
+            _playerStats.TeamSkills.StatChanged += SkillChangedHandler;
         }
 
-        private void SkillsContainer_SkillChanged(object sender, PropertyChangedEventArgs e)
+        private void SkillChangedHandler(object sender, PropertyChangedEventArgs e)
         {
             if (sender is PlayerStat)
             {
                 PlayerStat skill = (PlayerStat)sender;
-                Debug.Log("Weapon.cs: Notified of Skill change: skill.Name: " + skill.Name + ", skill.Value: " + skill.Value);
             }
-
         }
-
-        //private void Skills_Changed(int ind)
-        //{
-        //    Debug.Log("Weapon: Notified of PlayerSkills[" + ind + "] Change");
-        //    throw new System.NotImplementedException();
-        //}
 
         // TODO: setter
         public void Upgrade()
         {
             _upgradeLevel++;
         }
-
-        //private void HandlePlayerStatsChange(object sender, PropertyChangedEventArgs args)
-        //{
-        //    Debug.Log("Weapon: Notified of PlayerStatsChange");
-        //}
     }
 
     public class Weapon : MessageHandler
@@ -153,7 +140,6 @@ namespace Game
         {
             if (message.Type == MessageType.WAVE_CHANGED)
             {
-                //Debug.Log("Weapon.cs: On Wave Changed!");
                 this._wave = (Wave)message.objectValue;
             }
         }
@@ -195,9 +181,8 @@ namespace Game
             if (Time.time > _nextShotTime)
             {
                 _nextShotTime = Time.time + _msBetweenShots / 1000;
-                // TODO: wave.Cubes.PickRandom()
-                IDestroyable cube = wave.Cubes.ElementAtOrDefault(new System.Random().Next(wave.Cubes.Count));
-                //IDestroyable cube = wave.Cubes.PickRandom();
+                //IDestroyable cube = wave.Cubes.ElementAtOrDefault(new System.Random().Next(wave.Cubes.Count));
+                IDestroyable cube = wave.Cubes.PickRandom();
                 if ((MonoBehaviour)cube != null)
                 {
                     cube.TakeDamage(DPS.Value);

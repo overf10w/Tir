@@ -13,15 +13,15 @@ namespace Game
     public class UpgradesEditor : Editor
     {
         private Upgrades _upgrades;
-        private string _path;
-        private string _backupPath;
+        //private string _path;
+        //private string _backupPath;
 
         private string _upgradesSave;
 
         public void OnEnable()
         {
-            _path = Path.Combine(Application.persistentDataPath, "upgrades.dat");
-            _backupPath = Path.Combine(Application.persistentDataPath, "backupUpgrades.dat");
+            //_path = Path.Combine(Application.persistentDataPath, "upgrades.dat");
+            //_backupPath = Path.Combine(Application.persistentDataPath, "backupUpgrades.dat");
             _upgradesSave = Path.Combine(Application.persistentDataPath, "upgradesSave.dat");
             _upgrades = (Upgrades)target;
         }
@@ -39,31 +39,31 @@ namespace Game
 
             DrawDefaultInspector();
 
-            if (GUILayout.Button("Read"))
-            {
-                _upgrades.upgrades = ResourceLoader.Load<Upgrades.Upgrade[]>(_path);
-            }
+            //if (GUILayout.Button("Read"))
+            //{
+            //    _upgrades.upgrades = ResourceLoader.Load<Upgrade[]>(_path);
+            //}
 
-            if (GUILayout.Button("Write"))
-            {
-                ResourceLoader.Save<Upgrades.Upgrade[]>(_path, _upgrades.upgrades);
-            }
+            //if (GUILayout.Button("Write"))
+            //{
+            //    ResourceLoader.Save<Upgrade[]>(_path, _upgrades.upgrades);
+            //}
 
-            if (GUILayout.Button("Write Default", redStyle))
-            {
-                ResourceLoader.Save<Upgrades.Upgrade[]>(_backupPath, _upgrades.upgrades);
-            }
+            //if (GUILayout.Button("Write Default", redStyle))
+            //{
+            //    ResourceLoader.Save<Upgrade[]>(_backupPath, _upgrades.upgrades);
+            //}
 
-            if (GUILayout.Button("Read Default", greenStyle))
-            {
-                _upgrades.upgrades = ResourceLoader.Load<Upgrades.Upgrade[]>(_backupPath);
-            }
+            //if (GUILayout.Button("Read Default", greenStyle))
+            //{
+            //    _upgrades.upgrades = ResourceLoader.Load<Upgrade[]>(_backupPath);
+            //}
 
-            if (GUILayout.Button("Reset to Default", blueStyle))
-            {
-                _upgrades.upgrades = ResourceLoader.Load<Upgrades.Upgrade[]>(_backupPath);
-                ResourceLoader.Save<Upgrades.Upgrade[]>(_path, _upgrades.upgrades);
-            }
+            //if (GUILayout.Button("Reset to Default", blueStyle))
+            //{
+            //    _upgrades.upgrades = ResourceLoader.Load<Upgrade[]>(_backupPath);
+            //    ResourceLoader.Save<Upgrade[]>(_path, _upgrades.upgrades);
+            //}
 
             if (GUILayout.Button("Read Upgrades Data"))
             {

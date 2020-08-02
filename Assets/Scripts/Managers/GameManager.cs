@@ -184,44 +184,12 @@ using UnityEngine;
 
 namespace Game
 {
-    public class GameManager : MessageHandler
+    public class GameManager : MonoBehaviour
     {
-        #region MessageHandler
-        public override void InitMessageHandler()
-        {
-            MessageSubscriber msc = new MessageSubscriber();
-            msc.Handler = this;
-            msc.MessageTypes = new MessageType[] { MessageType.CUBE_DEATH, MessageType.LEVEL_PASSED };
-            MessageBus.Instance.AddSubscriber(msc);
-        }
-
-        public override void HandleMessage(Message message)
-        {
-            if (message.Type == MessageType.CUBE_DEATH)
-            {
-                //_cubesDestroyed++;
-                //if (_cubesDestroyed == _cubesSpawned)
-                //{
-                //    //if (lvlInd >= 3)
-                //    //{
-                //    //    MessageBus.Instance.SendMessage(new Message() { Type = MessageType.GameOver });
-                //    //    return;
-                //    //}
-                //    SpawnWave();
-                //}
-            }
-            // TODO: this be checked by PlayerView/Controller
-            //else if (message.Type == MessageType.LevelChanged)
-            //{
-            //    ChangeLevel(message.IntValue);
-            //    gameData._level = message.IntValue;
-            //}
-        }
-        #endregion
-
         [SerializeField] private ResourceLoader _resourceLoader;
         [SerializeField] private WaveSpawner _waveSpawner;
         [SerializeField] private InputManager _inputManager;
+        [SerializeField] private ResearchPanel _researchPanel;
 
         private AssetBundle _assetBundle;
         private Upgrades _upgrades;
@@ -229,15 +197,13 @@ namespace Game
 
         private IEnumerator Start()
         {
-            InitMessageHandler();
-
             _upgradesPath = Path.Combine(Application.persistentDataPath, "upgrades.dat");
             _upgrades = _resourceLoader.LoadUpgrades(_upgradesPath);
-
 
             PlayerView view = Instantiate(Resources.Load<PlayerView>("Prefabs/Player"));
             PlayerModel model = new PlayerModel();
             PlayerController pc = new PlayerController(model, _upgrades, view, _inputManager);
+            UpgradesController upgradesController = new UpgradesController(model, _upgrades, _researchPanel);
 
             _waveSpawner.Init(model.PlayerStats);
 

@@ -68,11 +68,4 @@ namespace Game
 
         public WeaponAlgorithm DMG;
     }
-
-    // TODO: remove it whatsoever
-    [CreateAssetMenu(fileName = "WeaponStatsStrategies", menuName = "ScriptableObjects/WeaponStatsStrategies", order = 1)]
-    public class WeaponStatsStrategies : ScriptableObject
-    {
-        public WeaponAlgorithms[] algorithms;
-    }
 }

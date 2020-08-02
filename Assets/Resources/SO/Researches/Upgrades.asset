@@ -42,4 +42,4 @@ MonoBehaviour:
     criterias:
     - indexer: DPSMultiplier
       threshold: 0
-    _isActive: 0
+    _isActive: 1

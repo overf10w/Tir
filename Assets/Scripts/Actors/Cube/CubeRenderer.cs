@@ -27,7 +27,7 @@ namespace Game
             _cachedPosition = transform.position;
 
             _cube = GetComponentInParent<Cube>();
-            _cube.OnHpChange += HandleHpChange;
+            _cube.HpChanged += HandleHpChange;
 
             _cubeStat = Resources.Load<CubeStats>("SO/CubeStats").Stats;
 
@@ -44,7 +44,6 @@ namespace Game
             if (hp.Value <= 0)
             {
                 _sides.SetActive(false);
-                Debug.Log("CubeRenderer.enabled = false");
                 _renderer.enabled = false;
                 return;
             }

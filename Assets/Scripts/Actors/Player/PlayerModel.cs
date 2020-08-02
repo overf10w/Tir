@@ -30,7 +30,7 @@ namespace Game
         }
         #endregion
 
-        public event EventHandler<GenericEventArgs<string>> OnPlayerStatsChanged;
+        public event EventHandler<EventArgs<string>> OnPlayerStatsChanged;
 
         public PlayerStats PlayerStats { get; private set; }
 
@@ -52,7 +52,7 @@ namespace Game
         private void InitPlayerStats()
         {
             PlayerStats = ResourceLoader.LoadPlayerStats();
-            PlayerStats.PropertyChanged += HandlePlayerStatChanged;
+            PlayerStats.PropertyChanged += PlayerStatChangedHandler;
         }
 
         // TODO (LP): instantiating of TeamWeapons should be moved to PlayerView
@@ -82,16 +82,16 @@ namespace Game
             DPS = new WeaponStat(GunData.DPS, PlayerStats, GunData.algorithms.DPS);
             DMG = new WeaponStat(GunData.DMG, PlayerStats, GunData.algorithms.DMG);
 
-            DPS.PropertyChanged += HandleClickGunChanged;
-            DMG.PropertyChanged += HandleClickGunChanged;
+            DPS.PropertyChanged += ClickGunChangedHandler;
+            DMG.PropertyChanged += ClickGunChangedHandler;
         }
 
-        private void HandlePlayerStatChanged(object sender, PropertyChangedEventArgs args)
+        private void PlayerStatChangedHandler(object sender, PropertyChangedEventArgs args)
         {
-            OnPlayerStatsChanged?.Invoke(sender, new GenericEventArgs<string>(args.PropertyName));
+            OnPlayerStatsChanged?.Invoke(sender, new EventArgs<string>(args.PropertyName));
         }
 
-        private void HandleClickGunChanged(object sender, PropertyChangedEventArgs e)
+        private void ClickGunChangedHandler(object sender, PropertyChangedEventArgs e)
         {
             PropertyChanged?.Invoke(sender, e);
             ResourceLoader.SaveClickGun(DPS, DMG, GunData);
@@ -110,7 +110,6 @@ namespace Game
         }
         protected bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
         {
-            //Debug.Log("PlayerStats: SetField<T>(): Invoked");
             if (EqualityComparer<T>.Default.Equals(field, value))
             {
                 return false;
@@ -140,7 +139,6 @@ namespace Game
         }
         protected bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
         {
-            //Debug.Log("PlayerStats: SetField<T>(): Invoked");
             if (EqualityComparer<T>.Default.Equals(field, value))
             {
                 return false;
@@ -256,14 +254,13 @@ namespace Game
 
             foreach(var stat in Stats)
             {
-                stat.PropertyChanged += Stat_PropertyChanged;
+                stat.PropertyChanged += PropertyChangedHandler;
             }
         }
 
-        private void Stat_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void PropertyChangedHandler(object sender, PropertyChangedEventArgs e)
         {
             StatChanged?.Invoke(sender, e);
-
         }
     }
 }

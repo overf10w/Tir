@@ -36,17 +36,17 @@ namespace Game
     /// </summary>
     public class InputManager : MonoBehaviour
     {
-        public event EventHandler<InputEventArgs> OnKeyPress;
+        public event EventHandler<InputEventArgs> KeyPressed;
 
         private void Update()
         {
             if (Input.GetKeyUp(KeyCode.Alpha1))
             {
-                OnKeyPress?.Invoke(this, new InputEventArgs(InputEventArgs.INPUT_KEY_CODE.NUM_KEY_1));
+                KeyPressed?.Invoke(this, new InputEventArgs(InputEventArgs.INPUT_KEY_CODE.NUM_KEY_1));
             }
             else if (Input.GetKeyUp(KeyCode.Alpha2))
             {
-                OnKeyPress?.Invoke(this, new InputEventArgs(InputEventArgs.INPUT_KEY_CODE.DPS_MULTIPLIER));
+                KeyPressed?.Invoke(this, new InputEventArgs(InputEventArgs.INPUT_KEY_CODE.DPS_MULTIPLIER));
             }
         }
     }

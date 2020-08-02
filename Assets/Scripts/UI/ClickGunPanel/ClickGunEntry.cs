@@ -53,8 +53,6 @@ namespace Game
 
         public void Render(PlayerModel model, WeaponStat dps, WeaponStat dmg)
         {
-            Debug.Log("WeaponPanelEntry: Render()");
-
             Color green;
             Color red;
 

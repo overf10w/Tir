@@ -20,36 +20,26 @@ namespace Game
 
             _view.Init(model, upgrades);
 
-            _view.OnClicked += HandleClicked;
-            _view.OnCubeDeath += HandleCubeDeath;
-            _view.OnLevelPassed += HandleLevelPassed;
-            _view.OnTeamWeaponBtnClick += HandleTeamWeaponBtnClick;
-            _view.OnClickGunBtnClick += HandleClickGunBtnClick;
-            _view.OnResearchBtnClick += HandleResearchBtnClick;
-            _view.OnResearchCenterToggleBtnClick += HandleResearchCenterBtnClick;
-            _inputManager.OnKeyPress += HandleResearchKeyboardKeyPress;
+            _view.Clicked += ClickedHandler;
+            _view.CubeDeath += CubeDeathHandler;
+            _view.LevelPassed += LevelPassedHandler;
+            _view.TeamWeaponBtnClicked += TeamWeaponBtnClickHandler;
+            _view.ClickGunBtnClicked += ClickGunBtnClickHandler;
+            _inputManager.KeyPressed += ResearchKeyboardKeyPressHandler;
 
-            _model.PropertyChanged += HandlePropertyChanged;
-            _model.OnPlayerStatsChanged += HandlePlayerStatsChanged;
-            _model.PlayerStats.TeamSkills.StatChanged += TeamSkills_StatChanged; ;
+            _model.PropertyChanged += ModelChangedHandler;
+            _model.OnPlayerStatsChanged += PlayerStatsChangedHandler;
+            _model.PlayerStats.TeamSkills.StatChanged += TeamSkillsChangedHandler;
         }
 
-        private void TeamSkills_StatChanged(object sender, PropertyChangedEventArgs e)
+        private void TeamSkillsChangedHandler(object sender, PropertyChangedEventArgs e)
         {
             // TODO: more useful info can be retrieved here, rather than: e.PropertyName == "Value"
-            // Debug.Log("PlayerController: TeamSkills_StatChanged: " + e.PropertyName);
             _view.TeamPanel.UpdateView(_model);
             ResourceLoader.SavePlayerStats(_model.PlayerStats);
         }
 
-        private void HandleResearchCenterBtnClick(object sender, EventArgs e)
-        {
-            _view.ResearchPanel.IsHidden = !_view.ResearchPanel.IsHidden;
-            //_view.ResearchPanel.Hide();
-            //Debug.Log("PlayerController: HandleResearchCenterBtnClick");
-        }
-
-        private void HandleLevelPassed(object sender, EventArgs e)
+        private void LevelPassedHandler(object sender, EventArgs e)
         {
             _model.PlayerStats.Level++;
         }
@@ -59,24 +49,7 @@ namespace Game
             
         }
 
-        // TODO: move it to ResearchController
-        private void HandleResearchBtnClick(object sender, UpgradeBtnClickEventArgs e)
-        {
-            string skillIndexer = e.Upgrade.Skill;
-
-            StatsContainer statsContainer = (StatsContainer)_model.PlayerStats[e.Upgrade.SkillContainer];
-            PlayerStat skill = statsContainer.Stats.Find(sk => sk.Name == skillIndexer);
-
-            if (_model.PlayerStats.Gold >= e.Upgrade.Price)
-            {
-                _model.PlayerStats.Gold -= e.Upgrade.Price;
-                float cachedFloat = skill.Value;
-                skill.Value = cachedFloat + 1;
-                e.Upgrade.IsActive = false;
-            }
-        }
-
-        private void HandlePlayerStatsChanged(object sender, GenericEventArgs<string> args)
+        private void PlayerStatsChangedHandler(object sender, EventArgs<string> args)
         {
             ResourceLoader.SavePlayerStats(_model.PlayerStats);
 
@@ -135,8 +108,8 @@ namespace Game
         //     }
         // }
 
-        // TODO: Instead of updating view manually here, react to teamWeapons updates
-        private void HandleResearchKeyboardKeyPress(object sender, InputEventArgs e)
+        // TODO: Remove 
+        private void ResearchKeyboardKeyPressHandler(object sender, InputEventArgs e)
         {
             switch(e.KeyCode)
             {
@@ -150,7 +123,6 @@ namespace Game
                             wpn.DPS.Upgrade();
                             ResourceLoader.SaveTeamWeapons(_model.TeamWeapons);
                             _view.TeamPanel.UpdateView(_model);
-                            Debug.Log("StandardPistol was upgraded");
                             // TODO: (LP):
                             // ideally, 
                             // (1) player controller updates the model, 
@@ -175,7 +147,7 @@ namespace Game
             }
         }
 
-        private void HandleClicked(object sender, EventArgs e)
+        private void ClickedHandler(object sender, EventArgs e)
         {
             // TODO (LP): view.Gun.Shoot(model.teamWeapons['PlayerPistol'].model.DPS);
             // For that matter, model.teamWeapons['PlayerPistol'] should be cached in PlayreController on a startup
@@ -183,7 +155,7 @@ namespace Game
             _view.Gun.Shoot(_model.DMG.Value);
         }
 
-        private void HandleCubeDeath(object sender, CustomArgs e)
+        private void CubeDeathHandler(object sender, EventArgs<float> e)
         {
             // TODO: null value handling
             // TODO: Add TeamWeaponsSkill: GoldGainedMultiplier
@@ -195,16 +167,15 @@ namespace Game
             ResourceLoader.SavePlayerStats(_model.PlayerStats);
         }
 
-        private void HandlePropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void ModelChangedHandler(object sender, PropertyChangedEventArgs e)
         {
             if (sender is WeaponStat weaponStat)
             {
-                //Debug.Log("PlayerController: HandlePropertyChanged: model.Changed: weaponStatObject: " + weaponStat.Level);
                 _view.ClickGunPanel.UpdateView(_model, _model.DPS, _model.DMG);
             }
         }
 
-        private void HandleClickGunBtnClick(object sender, GenericEventArgs<WeaponStatBtnClickArgs> e)
+        private void ClickGunBtnClickHandler(object sender, EventArgs<WeaponStatBtnClickArgs> e)
         {
             string weaponName = e.Val.WeaponName;
             string buttonName = e.Val.ButtonName;
@@ -214,7 +185,6 @@ namespace Game
                 switch (buttonName)
                 {
                     case "DPS":
-                        Debug.Log("PlayerController: HandleClickGunBtnClick: Update DPS");
                         if (_model.PlayerStats.Gold >= _model.DPS.Price)
                         {
                             _model.PlayerStats.Gold -= _model.DPS.Price;
@@ -222,7 +192,6 @@ namespace Game
                         }
                         break;
                     case "DMG":
-                        Debug.Log("PlayerController: HandleClickGunBtnClick: Update DMG");
                         if (_model.PlayerStats.Gold >= _model.DMG.Price)
                         {
                             _model.PlayerStats.Gold -= _model.DMG.Price;
@@ -235,7 +204,7 @@ namespace Game
             }
         }
 
-        private void HandleTeamWeaponBtnClick(object sender, GenericEventArgs<WeaponStatBtnClickArgs> e)
+        private void TeamWeaponBtnClickHandler(object sender, EventArgs<WeaponStatBtnClickArgs> e)
         {
             string weaponName = e.Val.WeaponName;
             string buttonName = e.Val.ButtonName;

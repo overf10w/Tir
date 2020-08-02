@@ -36,7 +36,6 @@ namespace Game
         public void SetLevel(int level)
         {
             _scrollRect.horizontalNormalizedPosition = Mathf.Clamp(_step * level, 0, 1);
-            Debug.Log("LevelListUI: SetLevel(): Level: " + level);
         }
     }
 }

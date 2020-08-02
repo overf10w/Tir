@@ -87,10 +87,9 @@ namespace Game
             await UniTask.Delay(TimeSpan.FromSeconds(s.clip.length));
         }
 
-        // TODO: Array extension method
         public async Task PlayRandomForced(params string[] names)
         {
-            string name = names[rnd.Next(0, names.Length)];
+            string name = names.PickRandom();
 
             Sound s = Array.Find(_sounds, sound => sound.name == name);
             if (s == null)
