@@ -10,6 +10,8 @@ namespace Game
         private readonly Cube _cubeMV;
         private readonly SoundsMachine _soundsMachine;
 
+        private bool isDead = false;
+
         public CubeController(Cube cubeMV)
         {
             _cubeMV = cubeMV;
@@ -25,8 +27,6 @@ namespace Game
             _cubeMV.ShowHealth(_cubeMV.Health);
         }
 
-        private bool isDead = false;
-
         private void HpChangedHandler(object sender, CubeHpChangeEventArgs e)
         {
             if (e.Value <= 0 && !isDead)
@@ -39,7 +39,6 @@ namespace Game
         private async void DestroyMV()
         {
             await _soundsMachine.Play("OnDestroy");
-            //await Task.Delay(100);
             _cubeMV.Destroy();
         }
     }

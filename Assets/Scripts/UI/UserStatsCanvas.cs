@@ -48,7 +48,6 @@ namespace Game
         {
             InitMessageHandler();
 
-            // TODO: drag & drop
             _levelListUI = FindObjectOfType<LevelListUI>();
 
             PlayerGoldTxt.text = playerModel.PlayerStats.Gold.SciFormat();
@@ -63,6 +62,7 @@ namespace Game
             _elapsedTimeSpanTxt.text = idleTimeSpan.ToString("hh\\:mm\\:ss");
         }
 
+        // TODO: clear this out
         public void OnUpdateDamage(int kek = 2)
         {
             //ResourceLoader.playerData.UpdateDamage();

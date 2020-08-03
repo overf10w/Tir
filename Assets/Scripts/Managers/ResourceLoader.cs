@@ -37,7 +37,6 @@ namespace Game
             UpgradeData[] upgrades = Load<UpgradeData[]>(path);
             if (upgrades == null)
             {
-                //upgrades = Resources.Load<Upgrades>("SO/Researches/Upgrades").upgrades;
                 int length = Resources.Load<Upgrades>("SO/Researches/Upgrades").upgrades.Length;
                 upgrades = new UpgradeData[length];
                 for(int i = 0; i < upgrades.Length; i++)
@@ -120,7 +119,7 @@ namespace Game
 
         public static void SaveTeamWeapons(Dictionary<string, Weapon> teamWeapons)
         {
-            WeaponData[] teamWeaponsToSave = new WeaponData[teamWeapons.Count];
+            WeaponData[] weapons = new WeaponData[teamWeapons.Count];
             int i = 0;
             foreach (var weapon in teamWeapons)
             {
@@ -137,11 +136,11 @@ namespace Game
                 data.DMG.UpgradeLevel = weapon.Value.DMG.UpgradeLevel;
                 data.algorithms = weapon.Value.Algorithms;
 
-                teamWeaponsToSave[i++] = data;
+                weapons[i++] = data;
             }
 
             string path = Path.Combine(Application.persistentDataPath, "weapons.dat");
-            Save<WeaponData[]>(path, teamWeaponsToSave);
+            Save<WeaponData[]>(path, weapons);
         }
 
         public static void SavePlayerStats(PlayerStats playerStats)

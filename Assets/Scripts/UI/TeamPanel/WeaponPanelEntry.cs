@@ -35,7 +35,6 @@ namespace Game
 
         public Button DMGButton { get; private set; }
 
-        // ViewModel
         public WeaponStat DPS { get; private set; }
         public WeaponStat DMG { get; private set; }
 

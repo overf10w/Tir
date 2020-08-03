@@ -53,7 +53,7 @@ namespace Game
             } 
         }
 
-        private float _gold = 2;
+        private float _gold;
         public float Gold => _gold;
 
         private CubeStat _cubeStat;

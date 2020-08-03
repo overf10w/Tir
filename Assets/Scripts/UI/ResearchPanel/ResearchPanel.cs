@@ -7,6 +7,15 @@ using UnityEngine;
 
 namespace Game
 {
+    public class UpgradeBtnClickEventArgs : EventArgs
+    {
+        public Upgrade Upgrade { get; }
+        public UpgradeBtnClickEventArgs(Upgrade upgrade)
+        {
+            Upgrade = upgrade;
+        }
+    }
+
     public class UpgradeBtnClick
     {
         public UpgradesController UpgradesController { get; set; }
@@ -48,7 +57,7 @@ namespace Game
 
         public UpgradeBtnClick UpgradeBtnClick { get; private set; }
 
-        private Upgrades _upgradesSo;
+        private Upgrades _upgradesSO;
         private Upgrade[] _upgrades;
 
         private CanvasGroup _canvasGroup;
@@ -58,8 +67,8 @@ namespace Game
         public void Init(PlayerModel playerModel, Upgrades upgradesSO)
         {
             ResearchPanelEntries = new List<ResearchPanelEntry>();
-            _upgradesSo = upgradesSO;
-            _upgrades = _upgradesSo.upgrades;
+            _upgradesSO = upgradesSO;
+            _upgrades = _upgradesSO.upgrades;
             UpgradeBtnClick = new UpgradeBtnClick();
 
             _toggleCanvas.Init();
@@ -89,14 +98,14 @@ namespace Game
             }
         }
 
-        public void Hide()
+        private void Hide()
         {
             _canvasGroup.interactable = false;
             _canvasGroup.alpha = 0.0f;
             _canvasGroup.blocksRaycasts = false;
         }
 
-        public void Reveal()
+        private void Reveal()
         {
             _canvasGroup.interactable = true;
             _canvasGroup.alpha = 1.0f;
@@ -112,7 +121,7 @@ namespace Game
                 // TODO: trigger 'save' event here
 
                 // TODO: move the logic below to controller
-                UpgradeData[] upgradesData = _upgradesSo.GetUpgradesData();
+                UpgradeData[] upgradesData = _upgradesSO.GetUpgradesData();
                 string _upgradesSavePath = Path.Combine(Application.persistentDataPath, "upgradesSave.dat");
                 ResourceLoader.Save<UpgradeData[]>(_upgradesSavePath, upgradesData);
 

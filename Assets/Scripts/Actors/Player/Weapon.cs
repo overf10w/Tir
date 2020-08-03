@@ -14,11 +14,9 @@ namespace Game
         public string WeaponName { get => _weaponName; set { _weaponName = value; } }
 
         [SerializeField] private StatData _dps;
-        // TODO: remove setter
         public StatData DPS { get => _dps; set { _dps = value; } }
 
         [SerializeField] private StatData _dmg;
-        // TODO: remove setter
         public StatData DMG { get => _dmg; set { _dmg = value; } }
 
         public WeaponAlgorithms algorithms;
@@ -79,19 +77,17 @@ namespace Game
         public int Level { get => _level; set { SetField(ref _level, value); } }
 
         // TODO: check for cases when _algorithm == null !!!!
-        public float Price { get => _algorithm.GetPrice(Level); private set { } }
-        public float NextPrice { get => _algorithm.GetNextPrice(Level);}
+        public float Price => _algorithm.GetPrice(Level);
+        public float NextPrice => _algorithm.GetNextPrice(Level);
 
-        private float _value;
-        public float Value { get => _algorithm.GetValue(_playerStats, Level, _upgradeLevel); set { _value = value; } }
-        //public float Value { get => _algorithm.GetValue(Level, _upgradeLevel, _playerStats.DPSMultiplier); set { _value = value; } }
-        public float NextValue { get => _algorithm.GetNextValue(_playerStats, Level, _upgradeLevel); }
+        public float Value => _algorithm.GetValue(_playerStats, Level, _upgradeLevel);
+        public float NextValue => _algorithm.GetNextValue(_playerStats, Level, _upgradeLevel);
 
         private int _upgradeLevel;
         public int UpgradeLevel { get => _upgradeLevel; set { SetField(ref _upgradeLevel, value); } }
 
-        public float UpgradePrice { get => _algorithm.GetUpgradePrice(_upgradeLevel); }
-        public float NextUpgradePrice { get => _algorithm.GetNextUpgradePrice(_upgradeLevel);}
+        public float UpgradePrice => _algorithm.GetUpgradePrice(_upgradeLevel);
+        public float NextUpgradePrice => _algorithm.GetNextUpgradePrice(_upgradeLevel);
 
         private WeaponAlgorithm _algorithm;
 
@@ -105,8 +101,6 @@ namespace Game
             _algorithm = algorithm;
             _playerStats = playerStats;
 
-            //_playerStats.PropertyChanged += HandlePlayerStatsChange;
-            //_playerStats.Skills.Changed += Skills_Changed;
             _playerStats.TeamSkills.StatChanged += SkillChangedHandler;
         }
 

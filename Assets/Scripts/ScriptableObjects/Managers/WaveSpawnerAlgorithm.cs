@@ -11,25 +11,31 @@ namespace Game
         [Serializable]
         private class AlgorithmData
         {
-            [SerializeField] public float baseValue;
-            [SerializeField] public float coefficient;
-            [SerializeField] public float offset;
+            [SerializeField] public float _baseValue;
+            public float BaseValue => _baseValue;
+
+            [SerializeField] public float _coefficient;
+            public float Coefficient => _coefficient;
+
+            [SerializeField] public float _offset;
+            public float Offset => _offset;
+
         }
 
         [Header("(BaseValue ^ Level) * Coefficient + Offset")]
-        [SerializeField] private AlgorithmData waveHP;
+        [SerializeField] private AlgorithmData _waveHP;
 
         [Header("(BaseValue ^ Level) * Coefficient + Offset")]
-        [SerializeField] private AlgorithmData waveGold;
+        [SerializeField] private AlgorithmData _waveGold;
 
         public float GetWaveHp(int level)
         {
-            return Mathf.Pow(waveHP.baseValue, level) * waveHP.coefficient + waveHP.offset;
+            return Mathf.Pow(_waveHP.BaseValue, level) * _waveHP.Coefficient + _waveHP.Offset;
         }
 
         public float GetWaveGold(int level)
         {
-            return Mathf.Pow(waveGold.baseValue, level) * waveGold.coefficient + waveGold.offset;
+            return Mathf.Pow(_waveGold.BaseValue, level) * _waveGold.Coefficient + _waveGold.Offset;
         }
     }
 }

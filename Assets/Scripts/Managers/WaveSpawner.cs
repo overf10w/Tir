@@ -35,7 +35,6 @@ namespace Game
         [SerializeField] private WaveCanvas _waveCanvas;
 
         private PlayerStats _playerStats;
-
         private Wave _wave;
 
         private int _cubesSpawned;

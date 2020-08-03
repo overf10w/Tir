@@ -6,17 +6,15 @@ namespace Game
 {
     public class CubeRenderer : MonoBehaviour
     {
+        [SerializeField] private GameObject _sides;
+
         private Cube _cube;
+        private CubeStat _cubeStat;
+        private MeshRenderer _renderer;
 
         private float _maxHP;
         private float _currHP;
         private float _hpScaleMultiplier;
-
-        private CubeStat _cubeStat;
-
-        private MeshRenderer _renderer;
-
-        [SerializeField] private GameObject _sides;
 
         private Vector3 _cachedScale;
         private Vector3 _cachedPosition;

@@ -8,19 +8,12 @@ using UnityEngine;
 namespace Game
 {
     [System.Serializable]
-    public class UpgradeData
+    public class UpgradeData // Won't be shown directly anywhere in the editor
     {
+        // TODO: [SerializeField] private int _id;
+        //                        public int Id => _id;
         public int id;
         public bool isActive;
-    }
-
-    public class UpgradeBtnClickEventArgs : EventArgs
-    {
-        public Upgrade Upgrade { get; }
-        public UpgradeBtnClickEventArgs(Upgrade upgrade)
-        {
-            Upgrade = upgrade;
-        }
     }
 
     [System.Serializable]
@@ -80,15 +73,14 @@ namespace Game
         public bool IsActive { get => _isActive; set { SetField(ref _isActive, value); } }
     }
 
-    // TODO: 
-    // 0. Create an Upgrades Research Center View ((with canvas and all), which listens to when playerModel.playerStats/playerModel.teamWeapons has changed) - [done]
-    // 1. Add such playerStats: SilverCookieArtifact, GoldCookieArtifact, BronzeCookieArtifact, 
-    //    HolyCookieGraal, PhilosophyCookie, MeteorCookie, CookieAntiMatterMult
     [CreateAssetMenu(fileName = "Upgrades", menuName = "ScriptableObjects/Ugprades", order = 6)]
     public class Upgrades : ScriptableObject
     {
         private PlayerStats _playerStats;
         // private Dictionary<string, Weapon> teamWeapons; // to keep an eye on weapons
+
+        // TODO: private Upgrade[] _upgrades;
+        //       public Upgrade[] Upgrades => _upgrades;
         public Upgrade[] upgrades;
 
         public UpgradeData[] GetUpgradesData()

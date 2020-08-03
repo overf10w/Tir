@@ -12,7 +12,7 @@ namespace Game
         {
             if (PlayerView != null)
             {
-                PlayerView.HandleClickGunBtnClick(weaponClickInfo);
+                PlayerView.ClickGunBtnClickHandler(weaponClickInfo);
             }
         }
     }

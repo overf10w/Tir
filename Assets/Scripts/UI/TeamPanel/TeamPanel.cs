@@ -26,7 +26,7 @@ namespace Game
         {
             if (PlayerView != null)
             {
-                PlayerView.HandleWeaponBtnClick(weaponClickInfo);
+                PlayerView.WeaponBtnClickHandler(weaponClickInfo);
             }
         }
     }
@@ -57,33 +57,11 @@ namespace Game
         private GameObject _weaponUiEntryPrefab;
         private List<GameObject> _weaponUiEntries;
 
-        public void UpdateView(PlayerModel model)
-        {
-            Dictionary<string, Weapon> weapons = model.TeamWeapons;
-            if (weapons != null)
-            {
-                foreach(var weapon in weapons)
-                {
-                    foreach (var entry in _weaponUiEntries)
-                    {
-                        if (entry.name == weapon.Key)
-                        {
-                            var script = entry.GetComponent<WeaponPanelEntry>();
-                            script.Render(model, weapon.Value.DPS, weapon.Value.DMG);
-                            //script.UpdateSelf(weapon.Value.DPS, weapon.Value.DMG);
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-
         private TeamSkillPanel _teamSkillPanel;
         private StatsContainer _skills;
 
         public void Init(PlayerModel model)
         {
-            //PlayerStats playerStats = model.PlayerStats;
             _skills = model.PlayerStats.TeamSkills;
             _skills.StatChanged += SkillChangedHandler;
 
@@ -111,6 +89,26 @@ namespace Game
 
                     script.DPSButton.onClick.AddListener(() => { WeaponBtnClick.Dispatch(new WeaponStatBtnClickArgs(weapon.Key, "DPS")); });
                     script.DMGButton.onClick.AddListener(() => { WeaponBtnClick.Dispatch(new WeaponStatBtnClickArgs(weapon.Key, "DMG")); });
+                }
+            }
+        }
+
+        public void UpdateView(PlayerModel model)
+        {
+            Dictionary<string, Weapon> weapons = model.TeamWeapons;
+            if (weapons != null)
+            {
+                foreach (var weapon in weapons)
+                {
+                    foreach (var entry in _weaponUiEntries)
+                    {
+                        if (entry.name == weapon.Key)
+                        {
+                            var script = entry.GetComponent<WeaponPanelEntry>();
+                            script.Render(model, weapon.Value.DPS, weapon.Value.DMG);
+                            break;
+                        }
+                    }
                 }
             }
         }

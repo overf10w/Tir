@@ -111,12 +111,12 @@ namespace Game
             }
         }
 
-        public void HandleWeaponBtnClick(WeaponStatBtnClickArgs weaponClickInfo)
+        public void WeaponBtnClickHandler(WeaponStatBtnClickArgs weaponClickInfo)
         {
             TeamWeaponBtnClicked?.Invoke(this, new EventArgs<WeaponStatBtnClickArgs>(weaponClickInfo));
         }
 
-        public void HandleClickGunBtnClick(WeaponStatBtnClickArgs clickGunClickInfo)
+        public void ClickGunBtnClickHandler(WeaponStatBtnClickArgs clickGunClickInfo)
         {
             ClickGunBtnClicked?.Invoke(this, new EventArgs<WeaponStatBtnClickArgs>(clickGunClickInfo));
         }

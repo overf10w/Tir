@@ -38,17 +38,12 @@ namespace Game
 
         public float WaveHP { get; private set; }
         public float WaveGold { get; private set; }
-        // TODO: what is internal set???
-        public EventHandler<EventArgs<float>> WaveHpChanged { get; internal set; } = (s, e) => { };
-
-        private float _remainingHP;
+        public EventHandler<EventArgs<float>> WaveHpChanged { get; set; } = (s, e) => { };
 
         public void Init(float waveHp, float waveGold)
         {
             WaveHP = waveHp;
             WaveGold = waveGold;
-
-            _remainingHP = waveHp;
 
             InitMessageHandler();
 
@@ -80,8 +75,8 @@ namespace Game
 
         private void CubeTakeDamageHandler(object sender, CubeHpChangeEventArgs e)
         {
-            _remainingHP -= e.Diff;
-            WaveHpChanged?.Invoke(this, new EventArgs<float>(_remainingHP));
+            WaveHP -= e.Diff;
+            WaveHpChanged?.Invoke(this, new EventArgs<float>(WaveHP));
         }
     }
 }
