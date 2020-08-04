@@ -11,16 +11,16 @@ namespace Game
         private readonly ResearchPanel _researchPanel;
 
         private readonly Upgrade[] _upgrades;
-        private readonly Upgrades _upgradesSo;
+        private readonly UpgradesSO _upgradesSo;
 
-        public UpgradesController(PlayerModel playerModel, Upgrades upgradesSO, ResearchPanel researchPanel)
+        public UpgradesController(PlayerModel playerModel, UpgradesSO upgradesSO, ResearchPanel researchPanel)
         {
             _researchPanel = researchPanel;
 
             _playerModel = playerModel;
             _playerModel.PlayerStats.PropertyChanged += PlayerStatsChangedHandler;
 
-            _upgrades = upgradesSO.upgrades;
+            _upgrades = upgradesSO.Upgrades;
 
             _researchPanel.Init(playerModel, upgradesSO);
             _researchPanel.UpgradeBtnClick.UpgradesController = this;

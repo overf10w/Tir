@@ -11,13 +11,13 @@ namespace Game
         [Serializable]
         private class AlgorithmData
         {
-            [SerializeField] public float _baseValue;
+            [SerializeField] private float _baseValue;
             public float BaseValue => _baseValue;
 
-            [SerializeField] public float _coefficient;
+            [SerializeField] private float _coefficient;
             public float Coefficient => _coefficient;
 
-            [SerializeField] public float _offset;
+            [SerializeField] private float _offset;
             public float Offset => _offset;
 
         }

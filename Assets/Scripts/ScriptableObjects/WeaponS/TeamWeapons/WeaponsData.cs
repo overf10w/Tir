@@ -10,9 +10,8 @@ namespace Game
     {
         private static WeaponsData _instance;
         public static WeaponsData Instance { get => _instance; }
-        // TODO:
-        // private WeaponData[] _weapons;
-        // public WeaponData[] Weapons => _weapons;
-        public WeaponData[] weapons;
+
+        [SerializeField] WeaponData[] _weapons;
+        public WeaponData[] Weapons { get => _weapons; set { _weapons = value; } }
     }
 }

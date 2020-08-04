@@ -58,21 +58,13 @@ namespace Game
         }
     }
 
-    // TODO (LP): 
-    // [SerializeField] private string _name;
-    // public string Name => _name;
-    // [SerializeField] private WeaponAlgorithm _dps;
-    // public WeaponAlgorithm DPS => _dps;
-    // [SerializeField] private WeaponAlgorithm _dmg;
-    // public WeaponAlgorithm DMG => _dmg;
-
     [System.Serializable]
     public class WeaponAlgorithms
     {
-        public string name;
+        [SerializeField] private WeaponAlgorithm _dps;
+        public WeaponAlgorithm DPS => _dps;
 
-        public WeaponAlgorithm DPS;
-
-        public WeaponAlgorithm DMG;
+        [SerializeField] private WeaponAlgorithm _dmg;
+        public WeaponAlgorithm DMG => _dmg;
     }
 }

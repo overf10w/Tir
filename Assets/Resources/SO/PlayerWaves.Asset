@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 941110015c4e4ab438893a014eea3389, type: 3}
   m_Name: PlayerWaves
   m_EditorClassIdentifier: 
-  waves:
+  _waves:
   - {fileID: 114398338289295854, guid: 080dea89b6bf1f945825589bcb67214b, type: 3}
   - {fileID: 114398338289295854, guid: 8f56fa4faaa4aea428d8dcb97aa918f1, type: 3}
   - {fileID: 114398338289295854, guid: 7fac2ccddc0cf6f4896c527e7cc86b17, type: 3}

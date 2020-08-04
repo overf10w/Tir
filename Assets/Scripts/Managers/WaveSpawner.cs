@@ -49,7 +49,7 @@ namespace Game
 
         private void SpawnWave()
         {
-            var waves = _playerWaves.waves;
+            var waves = _playerWaves.Waves;
             var wavePrefab = waves.PickRandom();
 
             _wave = Instantiate(wavePrefab, wavePrefab.transform.position, Quaternion.identity) as Wave;

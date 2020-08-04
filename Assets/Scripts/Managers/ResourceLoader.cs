@@ -37,20 +37,20 @@ namespace Game
             UpgradeData[] upgrades = Load<UpgradeData[]>(path);
             if (upgrades == null)
             {
-                int length = Resources.Load<Upgrades>("SO/Researches/Upgrades").upgrades.Length;
+                int length = Resources.Load<UpgradesSO>("SO/Researches/Upgrades").Upgrades.Length;
                 upgrades = new UpgradeData[length];
                 for(int i = 0; i < upgrades.Length; i++)
                 {
-                    upgrades[i].id = i;
-                    upgrades[i].isActive = true;
+                    upgrades[i].Id = i;
+                    upgrades[i].IsActive = true;
                 }
             }
             return upgrades;
         }
 
-        public Upgrades LoadUpgrades(string path)
+        public UpgradesSO LoadUpgrades(string path)
         {
-            Upgrades upgrades = Resources.Load<Upgrades>("SO/Researches/Upgrades");
+            UpgradesSO upgrades = Resources.Load<UpgradesSO>("SO/Researches/Upgrades");
 
             string _upgradesSave = Path.Combine(Application.persistentDataPath, "upgradesSave.dat");
 
@@ -92,7 +92,7 @@ namespace Game
 
             if (weaponStats == null)
             {
-                weaponStats = Resources.Load<WeaponsData>("SO/Weapons/TeamWeapons/WeaponsData").weapons;
+                weaponStats = Resources.Load<WeaponsData>("SO/Weapons/TeamWeapons/WeaponsData").Weapons;
             }
 
             return weaponStats;

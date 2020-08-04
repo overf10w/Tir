@@ -35,28 +35,28 @@ namespace Game
 
             if (GUILayout.Button("Read"))
             {
-                _weaponsData.weapons = ResourceLoader.Load<WeaponData[]>(_path);
+                _weaponsData.Weapons = ResourceLoader.Load<WeaponData[]>(_path);
             }
 
             if (GUILayout.Button("Write"))
             {
-                ResourceLoader.Save<WeaponData[]>(_path, _weaponsData.weapons);
+                ResourceLoader.Save<WeaponData[]>(_path, _weaponsData.Weapons);
             }
 
             if (GUILayout.Button("Write Default", redStyle))
             {
-                ResourceLoader.Save<WeaponData[]>(_backupPath, _weaponsData.weapons);
+                ResourceLoader.Save<WeaponData[]>(_backupPath, _weaponsData.Weapons);
             }
 
             if (GUILayout.Button("Read Default", greenStyle))
             {
-                _weaponsData.weapons = ResourceLoader.Load<WeaponData[]>(_backupPath);
+                _weaponsData.Weapons = ResourceLoader.Load<WeaponData[]>(_backupPath);
             }
 
             if (GUILayout.Button("Reset to Default", blueStyle))
             {
-                _weaponsData.weapons = ResourceLoader.Load<WeaponData[]>(_backupPath);
-                ResourceLoader.Save<WeaponData[]>(_path, _weaponsData.weapons);
+                _weaponsData.Weapons = ResourceLoader.Load<WeaponData[]>(_backupPath);
+                ResourceLoader.Save<WeaponData[]>(_path, _weaponsData.Weapons);
             }
         }
     }

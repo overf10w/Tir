@@ -12,7 +12,7 @@ namespace Game
         private readonly PlayerView _view;
         private readonly InputManager _inputManager;
 
-        public PlayerController(PlayerModel model, Upgrades upgrades, PlayerView view, InputManager inputManager)
+        public PlayerController(PlayerModel model, UpgradesSO upgrades, PlayerView view, InputManager inputManager)
         {
             _model = model;
             _view = view;

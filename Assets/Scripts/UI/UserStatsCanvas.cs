@@ -31,15 +31,15 @@ namespace Game
         }
         #endregion
 
-        [SerializeField] private ResearchPanelToggleCanvas _researchPanelToggleCanvas;
-        public ResearchPanelToggleCanvas ResearchPanelToggleCanvas => _researchPanelToggleCanvas;
+        [SerializeField] private ResearchPanelToggleCanvas _panelToggleCanvas;
+        public ResearchPanelToggleCanvas ResearchPanelToggleCanvas => _panelToggleCanvas;
 
         [SerializeField] private TextMeshProUGUI _playerGoldText;
         public TextMeshProUGUI PlayerGoldTxt => _playerGoldText;
 
-        private LevelListUI _levelListUI;
-
         public TextMeshProUGUI PlayerLevelTxt { get; private set; }
+
+        private LevelListUI _levelListUI;
 
         private Text _teamDPSTxt;
         private Text _elapsedTimeSpanTxt;
@@ -62,39 +62,9 @@ namespace Game
             _elapsedTimeSpanTxt.text = idleTimeSpan.ToString("hh\\:mm\\:ss");
         }
 
-        // TODO: clear this out
-        public void OnUpdateDamage(int kek = 2)
-        {
-            //ResourceLoader.playerData.UpdateDamage();
-        }
-
-        public void UpdatePistol()
-        {
-            //ResourceLoader.playerData.UpdatePistol();
-        }
-
-        public void UpdateDoublePistol()
-        {
-            //ResourceLoader.playerData.UpdateDoublePistol();
-        }
-
         public void UpdateElapsedTimeSpan(double timeSpan)
         {
             _elapsedTimeSpanTxt.text = "Delta time: " + timeSpan;
         }
-
-        public void LevelChangedHandler(int level)
-        {
-            _levelListUI.SetLevel(level);
-        }
-
-        //public void HandleWeaponChanged(WeaponArgs weapon)
-        //{
-        //    WeaponModel w = weapon.weaponModel;
-        //    string str = w.Cost.ToString() + "$, " + w.Dps.ToString() + " dps";
-        //    string strNxt = w.NextCost.ToString() + "$, " + w.NextDps.ToString() + " dps";
-
-        //    TeamDPSTxt.text = (pistolDps + doublePistolDps).ToString();
-        //}
     }
 }

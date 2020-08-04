@@ -36,7 +36,7 @@ namespace Game
 
         public List<ResearchPanelEntry> ResearchPanelEntries { get; private set; }
 
-        private bool _isHidden;
+        private bool _isHidden = true;
         public bool IsHidden
         {
             get => _isHidden;
@@ -44,31 +44,24 @@ namespace Game
             set
             {
                 _isHidden = value;
-                if (_isHidden)
-                {
-                    Hide();
-                }
-                else
-                {
-                    Reveal();
-                }
+                Render();
             }
         }
 
         public UpgradeBtnClick UpgradeBtnClick { get; private set; }
 
-        private Upgrades _upgradesSO;
+        private UpgradesSO _upgradesSO;
         private Upgrade[] _upgrades;
 
         private CanvasGroup _canvasGroup;
         private GameObject _prefab;
         private Transform _content;
 
-        public void Init(PlayerModel playerModel, Upgrades upgradesSO)
+        public void Init(PlayerModel playerModel, UpgradesSO upgradesSO)
         {
             ResearchPanelEntries = new List<ResearchPanelEntry>();
             _upgradesSO = upgradesSO;
-            _upgrades = _upgradesSO.upgrades;
+            _upgrades = _upgradesSO.Upgrades;
             UpgradeBtnClick = new UpgradeBtnClick();
 
             _toggleCanvas.Init();
@@ -87,6 +80,9 @@ namespace Game
 
                 ResearchPanelEntries.Add(script);
             }
+
+            Render();
+
             StartCoroutine(AutoSave());
         }
 
@@ -110,6 +106,18 @@ namespace Game
             _canvasGroup.interactable = true;
             _canvasGroup.alpha = 1.0f;
             _canvasGroup.blocksRaycasts = true;
+        }
+
+        private void Render()
+        {
+            if (_isHidden)
+            {
+                Hide();
+            }
+            else
+            {
+                Reveal();
+            }
         }
 
         private IEnumerator AutoSave()

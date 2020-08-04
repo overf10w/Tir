@@ -10,10 +10,11 @@ namespace Game
     [System.Serializable]
     public class UpgradeData // Won't be shown directly anywhere in the editor
     {
-        // TODO: [SerializeField] private int _id;
-        //                        public int Id => _id;
-        public int id;
-        public bool isActive;
+        [SerializeField] private int id;
+        public int Id { get => id; set { id = value; } }
+
+        [SerializeField] private bool isActive;
+        public bool IsActive { get => isActive; set { isActive = value; } }
     }
 
     [System.Serializable]
@@ -74,45 +75,44 @@ namespace Game
     }
 
     [CreateAssetMenu(fileName = "Upgrades", menuName = "ScriptableObjects/Ugprades", order = 6)]
-    public class Upgrades : ScriptableObject
+    public class UpgradesSO : ScriptableObject
     {
         private PlayerStats _playerStats;
         // private Dictionary<string, Weapon> teamWeapons; // to keep an eye on weapons
 
-        // TODO: private Upgrade[] _upgrades;
-        //       public Upgrade[] Upgrades => _upgrades;
-        public Upgrade[] upgrades;
+        [SerializeField] private Upgrade[] _upgrades;
+        public Upgrade[] Upgrades => _upgrades;
 
         public UpgradeData[] GetUpgradesData()
         {
-            UpgradeData[] ret = new UpgradeData[upgrades.Length];
-            for (int i = 0; i < upgrades.Length; i++)
+            UpgradeData[] ret = new UpgradeData[Upgrades.Length];
+            for (int i = 0; i < Upgrades.Length; i++)
             {
                 ret[i] = new UpgradeData();
-                ret[i].id = i;
-                ret[i].isActive = upgrades[i].IsActive;
+                ret[i].Id = i;
+                ret[i].IsActive = Upgrades[i].IsActive;
             }
             return ret;
         }
 
         public void SetUpgradesData(UpgradeData[] upgradeDatas)
         {
-            if (upgradeDatas.Length != upgrades.Length)
+            if (upgradeDatas.Length != Upgrades.Length)
             {
                 string warning =
                     "Upgrades.cs: Upgrades Save File not in sync with Upgrades Scriptable Object\n" +
                     "Setting all Upgrades: IsActive = true";
                 Debug.LogWarning(warning);
-                foreach (var upgrade in upgrades)
+                foreach (var upgrade in Upgrades)
                 {
                     upgrade.IsActive = true;
                 }
             }
             else
             {
-                for (int i = 0; i < upgrades.Length; i++)
+                for (int i = 0; i < Upgrades.Length; i++)
                 {
-                    upgrades[i].IsActive = upgradeDatas[i].isActive;
+                    Upgrades[i].IsActive = upgradeDatas[i].IsActive;
                 }
             }
         }

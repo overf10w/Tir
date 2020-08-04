@@ -192,7 +192,7 @@ namespace Game
         [SerializeField] private ResearchPanel _researchPanel;
 
         private AssetBundle _assetBundle;
-        private Upgrades _upgrades;
+        private UpgradesSO _upgrades;
         private string _upgradesPath;
 
         private void Start()

@@ -76,7 +76,6 @@ namespace Game
         private int _level;
         public int Level { get => _level; set { SetField(ref _level, value); } }
 
-        // TODO: check for cases when _algorithm == null !!!!
         public float Price => _algorithm.GetPrice(Level);
         public float NextPrice => _algorithm.GetNextPrice(Level);
 
@@ -104,18 +103,18 @@ namespace Game
             _playerStats.TeamSkills.StatChanged += SkillChangedHandler;
         }
 
+        // TODO: setter
+        public void Upgrade()
+        {
+            _upgradeLevel++;
+        }
+
         private void SkillChangedHandler(object sender, PropertyChangedEventArgs e)
         {
             if (sender is PlayerStat)
             {
                 PlayerStat skill = (PlayerStat)sender;
             }
-        }
-
-        // TODO: setter
-        public void Upgrade()
-        {
-            _upgradeLevel++;
         }
     }
 

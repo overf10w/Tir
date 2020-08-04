@@ -55,7 +55,7 @@ namespace Game
 
         public ClickGunPanel ClickGunPanel { get; private set; }
 
-        public void Init(PlayerModel model, Upgrades upgrades)
+        public void Init(PlayerModel model, UpgradesSO upgrades)
         {
             InitMessageHandler();
 

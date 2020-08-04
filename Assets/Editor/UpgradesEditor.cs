@@ -9,10 +9,10 @@ namespace Game
     // TODO (LP): 
     // 1. Resource.Load be called through the Init() chain all the way from GameManager;
     // 2. PlayerDataFile is referenced (through inspector) by other SO's
-    [CustomEditor(typeof(Upgrades))]
+    [CustomEditor(typeof(UpgradesSO))]
     public class UpgradesEditor : Editor
     {
-        private Upgrades _upgrades;
+        private UpgradesSO _upgrades;
         //private string _path;
         //private string _backupPath;
 
@@ -23,7 +23,7 @@ namespace Game
             //_path = Path.Combine(Application.persistentDataPath, "upgrades.dat");
             //_backupPath = Path.Combine(Application.persistentDataPath, "backupUpgrades.dat");
             _upgradesSave = Path.Combine(Application.persistentDataPath, "upgradesSave.dat");
-            _upgrades = (Upgrades)target;
+            _upgrades = (UpgradesSO)target;
         }
 
         public override void OnInspectorGUI()
