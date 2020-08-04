@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   playerStats:
-    _gold: 66000
-    _level: 37
-    _lastPlayTimestamp: 637321456659300416
+    _gold: 3600
+    _level: 4
+    _lastPlayTimestamp: 637321586641047265
     _teamSkills:
     - _name: DPSMultiplier
-      _value: 2
+      _value: 1
     _clickGunSkills:
     - _name: GoldGainedMultiplier
       _value: 1

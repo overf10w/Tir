@@ -34,8 +34,7 @@ namespace Game
         [SerializeField] private ResearchPanelToggleCanvas _panelToggleCanvas;
         public ResearchPanelToggleCanvas ResearchPanelToggleCanvas => _panelToggleCanvas;
 
-        [SerializeField] private TextMeshProUGUI _playerGoldText;
-        public TextMeshProUGUI PlayerGoldTxt => _playerGoldText;
+        [SerializeField] private PlayerGoldCanvas _playerGoldCanvas;
 
         public TextMeshProUGUI PlayerLevelTxt { get; private set; }
 
@@ -50,7 +49,8 @@ namespace Game
 
             _levelListUI = FindObjectOfType<LevelListUI>();
 
-            PlayerGoldTxt.text = playerModel.PlayerStats.Gold.SciFormat();
+            //PlayerGoldTxt.text = playerModel.PlayerStats.Gold.SciFormat();
+            _playerGoldCanvas.Init(playerModel.PlayerStats.Gold);
 
             PlayerLevelTxt = transform.Find("MainPanel/StatsPanel/LevelTxt").GetComponent<TextMeshProUGUI>();
             PlayerLevelTxt.text = playerModel.PlayerStats.Level.ToString();
@@ -60,6 +60,11 @@ namespace Game
             _elapsedTimeSpanTxt = GameObject.Find("ElapsedTimeSpanLbl").GetComponent<Text>();
             TimeSpan idleTimeSpan = new TimeSpan(playerModel.PlayerStats.IdleTimeSpan);
             _elapsedTimeSpanTxt.text = idleTimeSpan.ToString("hh\\:mm\\:ss");
+        }
+
+        public void UpdatePlayerGold(float gold)
+        {
+            _playerGoldCanvas.Show(gold);
         }
 
         public void UpdateElapsedTimeSpan(double timeSpan)

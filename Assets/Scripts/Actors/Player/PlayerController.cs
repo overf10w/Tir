@@ -61,7 +61,9 @@ namespace Game
             if (args.Val == "Gold")
             {
                 //_view.Ui.PlayerGoldTxt.text = _model.PlayerStats.Gold.ToString();
-                _view.Ui.PlayerGoldTxt.text = _model.PlayerStats.Gold.SciFormat();
+                //_view.Ui.PlayerGoldTxt.text = _model.PlayerStats.Gold.SciFormat();
+                _view.Ui.UpdatePlayerGold(_model.PlayerStats.Gold);
+
                 _view.TeamPanel.UpdateView(_model);
                 _view.ClickGunPanel.UpdateView(_model, _model.DPS, _model.DMG);
                 // Don't need to redraw panels if only gold changed

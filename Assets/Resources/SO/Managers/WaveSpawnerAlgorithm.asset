@@ -19,4 +19,4 @@ MonoBehaviour:
   _waveGold:
     _baseValue: 1.2
     _coefficient: 0.02
-    _offset: 30
+    _offset: 140
