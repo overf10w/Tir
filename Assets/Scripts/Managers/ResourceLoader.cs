@@ -41,8 +41,10 @@ namespace Game
                 upgrades = new UpgradeData[length];
                 for(int i = 0; i < upgrades.Length; i++)
                 {
+                    upgrades[i] = new UpgradeData();
                     upgrades[i].Id = i;
                     upgrades[i].IsActive = true;
+                    Debug.Log("HELLLOOOO");
                 }
             }
             return upgrades;

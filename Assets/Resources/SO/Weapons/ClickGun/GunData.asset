@@ -18,7 +18,7 @@ MonoBehaviour:
       _level: 0
       _upgradeLevel: 0
     _dmg:
-      _level: 1
+      _level: 0
       _upgradeLevel: 0
     algorithms:
       _dps:
@@ -31,11 +31,11 @@ MonoBehaviour:
         _maxUpgradeLevel: 0
         _upgradeValueMultiplier: 2
       _dmg:
-        _basePrice: 50
+        _basePrice: 30
         _priceMultiplier: 1.095
-        _baseValue: 40
+        _baseValue: 20
         _valueMultiplier: 1.1
-        _baseUpgradePrice: 40
+        _baseUpgradePrice: 30
         _upgradePriceMultiplier: 1
         _maxUpgradeLevel: 100
         _upgradeValueMultiplier: 2

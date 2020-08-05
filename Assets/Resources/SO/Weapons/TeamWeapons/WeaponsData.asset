@@ -22,18 +22,18 @@ MonoBehaviour:
       _upgradeLevel: 0
     algorithms:
       _dps:
-        _basePrice: 20
+        _basePrice: 60
         _priceMultiplier: 1.6
-        _baseValue: 5
+        _baseValue: 35
         _valueMultiplier: 1.1
-        _baseUpgradePrice: 40
+        _baseUpgradePrice: 60
         _upgradePriceMultiplier: 1
         _maxUpgradeLevel: 0
         _upgradeValueMultiplier: 2
       _dmg:
         _basePrice: 15
         _priceMultiplier: 1.12
-        _baseValue: 5
+        _baseValue: 35
         _valueMultiplier: 1.05
         _baseUpgradePrice: 40
         _upgradePriceMultiplier: 1
@@ -48,18 +48,18 @@ MonoBehaviour:
       _upgradeLevel: 0
     algorithms:
       _dps:
-        _basePrice: 40
+        _basePrice: 100
         _priceMultiplier: 1.22
-        _baseValue: 10
+        _baseValue: 50
         _valueMultiplier: 1.1
-        _baseUpgradePrice: 40
+        _baseUpgradePrice: 100
         _upgradePriceMultiplier: 1
         _maxUpgradeLevel: 100
         _upgradeValueMultiplier: 2
       _dmg:
         _basePrice: 25
         _priceMultiplier: 1.095
-        _baseValue: 20
+        _baseValue: 50
         _valueMultiplier: 1.1
         _baseUpgradePrice: 40
         _upgradePriceMultiplier: 1

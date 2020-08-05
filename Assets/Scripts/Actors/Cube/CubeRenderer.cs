@@ -47,22 +47,33 @@ namespace Game
             }
 
             float deltaHp = _currHP - hp.Value;
-            float deltaScale = deltaHp * _hpScaleMultiplier;
 
+            float deltaScaleY = deltaHp * _hpScaleMultiplier;
             Vector3 prevScale = transform.localScale;
-            float deltaScaleY = prevScale.y - deltaScale;
-            if (deltaScaleY <= 0)
+            float prevScaleY = prevScale.y;
+            float newScaleY = prevScaleY - deltaScaleY;
+            if (newScaleY <= 0)
             {
                 transform.localScale = new Vector3(prevScale.x, 0, prevScale.z);
                 transform.localPosition = new Vector3(transform.localPosition.x, _cachedPosition.y - (_cachedScale.y / 2.0f), transform.localPosition.z);
                 return;
             }
-            transform.localScale = new Vector3(prevScale.x, deltaScaleY, prevScale.z);
+            LeanTween.value(prevScaleY, newScaleY, 0.06f).setOnUpdate((float val) =>
+            {
+                transform.localScale = new Vector3(prevScale.x, val, prevScale.z);
+            });
+            
+            //transform.localScale = new Vector3(prevScale.x, newScaleY, prevScale.z);
 
             Vector3 prevPos = transform.localPosition;
-            float deltaPos = deltaScale / 2.0f;
-
-            transform.localPosition = new Vector3(prevPos.x, prevPos.y - deltaPos, prevPos.z);
+            float prevPosY = prevPos.y;
+            float deltaPosY = deltaScaleY / 2.0f;
+            float newPosY = prevPosY - deltaPosY;
+            LeanTween.value(prevPosY, newPosY, 0.06f).setOnUpdate((float val) =>
+            {
+                transform.localPosition = new Vector3(prevPos.x, val, prevPos.z);
+            });
+            //transform.localPosition = new Vector3(prevPos.x, prevPos.y - deltaPosY, prevPos.z);
 
             _currHP = hp.Value;
         }

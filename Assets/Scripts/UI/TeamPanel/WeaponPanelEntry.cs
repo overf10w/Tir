@@ -52,6 +52,12 @@ namespace Game
             Render(model, dps, dmg);
         }
 
+        private LTDescr tween;
+
+        private float _prevDps = 0;
+
+        private float duration = 0.5f;
+
         public void Render(PlayerModel model, WeaponStat dps, WeaponStat dmg)
         {
             Color green;
@@ -77,11 +83,35 @@ namespace Game
             _dpsNextPrice.text = "$" + dps.Price.SciFormat();
             _dpsNextPrice.color = color;
 
+            if (tween != null)
+            {
+                if (LeanTween.isTweening(tween.id))
+                {
+                    LeanTween.cancel(tween.id);
+                    tween = GetLTDescr(_prevDps, dps.Value, duration, color);
+                }
+            }
+
+            tween = GetLTDescr(_prevDps, dps.Value, duration, color).setEase(LeanTweenType.easeOutSine);
+
             _dpsValueTxt.text = dps.Value.SciFormat();
             _dpsValueTxt.color = color;
 
             _dpsNextValueTxt.text = dps.NextValue.SciFormat();
             _dpsNextValueTxt.color = color;
+        }
+
+        private LTDescr GetLTDescr(float from, float value, float duration, Color color)
+        {
+            return LeanTween.value(from, value, duration)
+                    //.setEase(LeanTweenType.easeOutSine)
+                    .setOnUpdate((float val) =>
+                    {
+                        _dpsValueTxt.text = val.SciFormat().ToString();
+                        _dpsValueTxt.color = color;
+                    })
+                    .setDelay(0f)
+                    .setOnComplete(() => _prevDps = value);
         }
 
         private void InitIcon(string name)
