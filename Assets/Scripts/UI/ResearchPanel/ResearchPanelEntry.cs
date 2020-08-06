@@ -15,6 +15,9 @@ namespace Game
         [SerializeField] private TextMeshProUGUI _name;
         [SerializeField] private TextMeshProUGUI _description;
         [SerializeField] private TextMeshProUGUI _price;
+        [SerializeField] private Image _image;
+        [SerializeField] private Image _maskImage;
+
 
         [field: NonSerialized]
         private PlayerModel _playerModel;
@@ -34,6 +37,7 @@ namespace Game
             _name.text = upgrade.Name.ToString();
             _description.text = upgrade.Description.ToString();
             _price.text = upgrade.Price.SciFormat();
+            _image.sprite = upgrade.Icon;
 
             Render();
         }
@@ -44,16 +48,20 @@ namespace Game
             {
                 _price.color = Color.red;
                 UpgradeBtn.interactable = false;
+                _maskImage.color = new Color(1, 1, 1, 0.8f);
+                gameObject.SetActive(false);
             }
             else if (_playerModel.PlayerStats.Gold < _upgrade.Price)
             {
                 _price.color = Color.red;
                 UpgradeBtn.interactable = false;
+                _maskImage.color = new Color(1, 1, 1, 0.8f);
             }
             else
             {
                 _price.color = Color.green;
                 UpgradeBtn.interactable = true;
+                _maskImage.color = new Color(1, 1, 1, 0.0f);
             }
         }
 

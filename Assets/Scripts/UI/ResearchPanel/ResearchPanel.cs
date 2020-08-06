@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Game
 {
@@ -34,6 +35,8 @@ namespace Game
         [SerializeField] private ResearchPanelToggleCanvas _toggleCanvas;
         public ResearchPanelToggleCanvas ResearchPanelToggleCanvas => _toggleCanvas;
 
+        [SerializeField] private Button _closeBtn;
+
         public List<ResearchPanelEntry> ResearchPanelEntries { get; private set; }
 
         private bool _isHidden = true;
@@ -59,16 +62,19 @@ namespace Game
 
         public void Init(PlayerModel playerModel, UpgradesSO upgradesSO)
         {
-            ResearchPanelEntries = new List<ResearchPanelEntry>();
             _upgradesSO = upgradesSO;
             _upgrades = _upgradesSO.Upgrades;
+            
+            _canvasGroup = GetComponent<CanvasGroup>();
+            _prefab = Resources.Load<GameObject>("Prefabs/UI/ResearchPanel/ResearchPanelEntry");
+            _content = transform.Find("ScrollView/Viewport/Content").GetComponent<Transform>();
+
+            ResearchPanelEntries = new List<ResearchPanelEntry>();
             UpgradeBtnClick = new UpgradeBtnClick();
 
             _toggleCanvas.Init();
 
-            _canvasGroup = GetComponent<CanvasGroup>();
-            _prefab = Resources.Load<GameObject>("Prefabs/UI/ResearchPanel/ResearchPanelEntry");
-            _content = transform.Find("ScrollView/Viewport/Content").GetComponent<Transform>();
+            _closeBtn.onClick.AddListener(() => { IsHidden = true; Debug.Log("closeBtn.OnClick Handler"); });
 
             foreach (var upgrade in _upgrades)
             {
@@ -132,9 +138,6 @@ namespace Game
                 UpgradeData[] upgradesData = _upgradesSO.GetUpgradesData();
                 string _upgradesSavePath = Path.Combine(Application.persistentDataPath, "upgradesSave.dat");
                 ResourceLoader.Save<UpgradeData[]>(_upgradesSavePath, upgradesData);
-
-                string upgradesPath = Path.Combine(Application.persistentDataPath, "upgrades.dat");
-                ResourceLoader.Save<Upgrade[]>(upgradesPath, _upgrades);
             }
         }
     }

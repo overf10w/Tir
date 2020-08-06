@@ -20,13 +20,7 @@ namespace Game
         {
             _prev = 0;
 
-            LeanTween.value(_prev, value, 0.3f)
-                .setEase(LeanTweenType.easeOutSine)
-                .setOnUpdate((float val) =>
-                {
-                    PlayerGoldTxt.text = val.SciFormat().ToString();
-                })
-                .setOnComplete(() => _prev = value);
+            Show(value);
         }
 
         public void Show(float value)

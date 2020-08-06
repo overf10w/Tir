@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   playerStats:
-    _gold: 30
+    _gold: 3480
     _level: 0
     _lastPlayTimestamp: 0
     _teamSkills:

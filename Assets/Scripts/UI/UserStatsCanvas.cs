@@ -31,16 +31,12 @@ namespace Game
         }
         #endregion
 
-        [SerializeField] private ResearchPanelToggleCanvas _panelToggleCanvas;
-        public ResearchPanelToggleCanvas ResearchPanelToggleCanvas => _panelToggleCanvas;
-
         [SerializeField] private PlayerGoldCanvas _playerGoldCanvas;
 
         public TextMeshProUGUI PlayerLevelTxt { get; private set; }
 
         private LevelListUI _levelListUI;
 
-        private Text _teamDPSTxt;
         private Text _elapsedTimeSpanTxt;
 
         public void Init(PlayerModel playerModel)
@@ -48,14 +44,10 @@ namespace Game
             InitMessageHandler();
 
             _levelListUI = FindObjectOfType<LevelListUI>();
-
-            //PlayerGoldTxt.text = playerModel.PlayerStats.Gold.SciFormat();
             _playerGoldCanvas.Init(playerModel.PlayerStats.Gold);
 
             PlayerLevelTxt = transform.Find("MainPanel/StatsPanel/LevelTxt").GetComponent<TextMeshProUGUI>();
             PlayerLevelTxt.text = playerModel.PlayerStats.Level.ToString();
-
-            _teamDPSTxt = GameObject.Find("TeamDPSLbl").GetComponent<Text>();
 
             _elapsedTimeSpanTxt = GameObject.Find("ElapsedTimeSpanLbl").GetComponent<Text>();
             TimeSpan idleTimeSpan = new TimeSpan(playerModel.PlayerStats.IdleTimeSpan);

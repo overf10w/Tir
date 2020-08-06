@@ -64,12 +64,14 @@ namespace Game
 
             MessageBus.Instance.SendMessage(new Message() { Type = MessageType.WAVE_CHANGED, objectValue = _wave });
 
-            _waveCanvas.WaveHPText.text = waveHP.SciFormat().ToString();
+            //_waveCanvas.WaveHPText.text = waveHP.SciFormat().ToString();
+            _waveCanvas.Show(waveHP);
         }
 
         private void WaveHpChangedHandler(object sender, EventArgs<float> hp)
         {
-            _waveCanvas.WaveHPText.text = hp.Val.SciFormat().ToString();
+            //_waveCanvas.WaveHPText.text = hp.Val.SciFormat().ToString();
+            _waveCanvas.Show(hp.Val);
         }
     }
 }

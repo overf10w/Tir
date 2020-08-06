@@ -206,7 +206,7 @@ namespace Game
             }
         }
 
-        // Indexer (will be used by Upgrade system a lot)
+        // Indexer
         public object this[string propertyName]
         {
             get { return this.GetType().GetProperty(propertyName).GetValue(this, null); }

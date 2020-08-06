@@ -51,6 +51,8 @@ namespace Game
 
     public class TeamPanel : MonoBehaviour
     {
+        [SerializeField] private TextMeshProUGUI _teamDpsTxt;
+
         public WeaponBtnClick WeaponBtnClick { get; private set; }
 
         private Transform _content;
@@ -59,6 +61,8 @@ namespace Game
 
         private TeamSkillPanel _teamSkillPanel;
         private StatsContainer _skills;
+
+        private float _prevDps = 0;
 
         public void Init(PlayerModel model)
         {
@@ -75,6 +79,7 @@ namespace Game
 
             Dictionary<string, Weapon> weapons = model.TeamWeapons;
 
+            float teamDps = 0;
             if (weapons != null)
             {
                 foreach (var weapon in weapons)
@@ -89,12 +94,18 @@ namespace Game
 
                     script.DPSButton.onClick.AddListener(() => { WeaponBtnClick.Dispatch(new WeaponStatBtnClickArgs(weapon.Key, "DPS")); });
                     script.DMGButton.onClick.AddListener(() => { WeaponBtnClick.Dispatch(new WeaponStatBtnClickArgs(weapon.Key, "DMG")); });
+
+                    teamDps += weapon.Value.DPS.Value;
                 }
             }
+
+            _teamDpsTxt.text = "Team DPS: " + teamDps.SciFormat().ToString();
         }
 
         public void UpdateView(PlayerModel model)
         {
+            float teamDps = 0;
+
             Dictionary<string, Weapon> weapons = model.TeamWeapons;
             if (weapons != null)
             {
@@ -106,11 +117,20 @@ namespace Game
                         {
                             var script = entry.GetComponent<WeaponPanelEntry>();
                             script.Render(model, weapon.Value.DPS, weapon.Value.DMG);
+                            teamDps += weapon.Value.DPS.Value;
                             break;
                         }
                     }
                 }
             }
+
+
+            LeanTween.value(_prevDps, teamDps, 0.45f).setOnUpdate((float val) =>
+            {
+                _teamDpsTxt.text = "Team DPS: " + val.SciFormat().ToString();
+            });
+            //_teamDpsTxt.text = "Team DPS: " + teamDps.SciFormat().ToString();
+            _prevDps = teamDps;
         }
 
         private void SkillChangedHandler(object sender, System.ComponentModel.PropertyChangedEventArgs e)

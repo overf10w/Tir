@@ -161,6 +161,12 @@ using UnityEngine;
 // 11-JUL-20:
 // 0. Add achievements
 
+// 07-AUG-20:
+// 0. Add tweening to ClickGun DMG
+// 1. Add icon paths to skills!
+// 2. Cube destroy particles
+// 3. Add the button from space gui I've got on mah home computer
+
 // The concept of game is this
 // 0. On each wave, the player can complete objectives: i.e: to shoot 2/3/4 blue/yellow/blinking/anime/wave blocks, etc., 
 //    when it's done, the player gets the gold award, thus, there's a good stimulus for player to be active in the game
@@ -175,7 +181,7 @@ using UnityEngine;
 //        - when player kills 3 cubes in such a manner, he is rewarded with gold and the whole wave HP is decreased slightly
 // 0. The Waves aren't really changed with levels. What changes is just Cube.cs configuration - its HP, bonusPoints and appearence (through SO config file)
 // 1. With each level completed the giant planet cookie on horizon comes a little bit closer to player, and in the end of game, it's like, very close
-// 2. There's achievement: "cookie hero", "cookieverse explosion", "cookieverse spacecookie warp", "5 clicks 5 kills"
+// 2. There's achievement: "son of a cookie", "cookie leutenant", "cookie hero", "cookieverse explosion", "cookieverse spacecookie warp", "5 clicks 5 kills"
 //    (when player kills 5 in a row 1 click per cube, ofc they need to have strong stats to achieve this)"
 // 3. We can only have one real visible weapon - player Orange Gun - Gun.cs - [done]
 // 4. All Fire() commands of that visible weapon should be queued : but why ? - actually we don't need to queue this, remember KISS principle
@@ -193,12 +199,10 @@ namespace Game
 
         private AssetBundle _assetBundle;
         private UpgradesSO _upgrades;
-        private string _upgradesPath;
 
         private void Start()
         {
-            _upgradesPath = Path.Combine(Application.persistentDataPath, "upgrades.dat");
-            _upgrades = _resourceLoader.LoadUpgrades(_upgradesPath);
+            _upgrades = Resources.Load<UpgradesSO>("SO/Researches/Upgrades");
 
             PlayerView view = Instantiate(Resources.Load<PlayerView>("Prefabs/Player"));
             PlayerModel model = new PlayerModel();

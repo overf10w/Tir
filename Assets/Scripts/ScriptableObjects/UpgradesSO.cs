@@ -50,7 +50,9 @@ namespace Game
         }
         #endregion
 
-        [SerializeField] private Sprite _icon;
+        
+        //[SerializeField]
+        public Sprite _icon;
         public Sprite Icon => _icon;
 
         [SerializeField] private string _skillContainer;
