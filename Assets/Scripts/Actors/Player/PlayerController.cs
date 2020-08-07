@@ -36,7 +36,7 @@ namespace Game
         {
             // TODO: more useful info can be retrieved here, rather than: e.PropertyName == "Value"
             _view.TeamPanel.UpdateView(_model);
-            ResourceLoader.SavePlayerStats(_model.PlayerStats);
+            ResourceLoader.SavePlayerStatsData(_model.PlayerStats);
         }
 
         private void LevelPassedHandler(object sender, EventArgs e)
@@ -51,7 +51,7 @@ namespace Game
 
         private void PlayerStatsChangedHandler(object sender, EventArgs<string> args)
         {
-            ResourceLoader.SavePlayerStats(_model.PlayerStats);
+            ResourceLoader.SavePlayerStatsData(_model.PlayerStats);
 
             //if (args.Val == "TeamSkills")
             //{
@@ -166,7 +166,7 @@ namespace Game
             _model.PlayerStats.Gold += goldGained;
             // TODO: save 'em every 15 seconds instead.
             // This drastically decreases performance!!!
-            ResourceLoader.SavePlayerStats(_model.PlayerStats);
+            ResourceLoader.SavePlayerStatsData(_model.PlayerStats);
         }
 
         private void ModelChangedHandler(object sender, PropertyChangedEventArgs e)

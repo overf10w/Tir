@@ -17,10 +17,15 @@ namespace Game
         private string _path;
         private string _backupPath;
 
+        private string _playerStatsDataPath;
+
+
         public void OnEnable()
         {
             _path = Path.Combine(Application.persistentDataPath, "playerStats.dat");
             _backupPath = Path.Combine(Application.persistentDataPath, "backupPlayerStats.dat");
+            _playerStatsDataPath = Path.Combine(Application.persistentDataPath, "playerStatsData.dat");
+
             _playerData = (PlayerData)target;
         }
 
@@ -37,31 +42,45 @@ namespace Game
 
             DrawDefaultInspector();
 
-            if (GUILayout.Button("Read"))
+            if (GUILayout.Button("Read PlayerStatsData"))
             {
-                _playerData.playerStats = ResourceLoader.Load<PlayerStats>(_path);
+                _playerData.playerStats.SetPlayerStats(ResourceLoader.Load<PlayerStatsData>(_playerStatsDataPath));
+                Debug.Log("_playerData.playerStats == null ? " + (_playerData.playerStats == null).ToString());
             }
 
-            if (GUILayout.Button("Write"))
+            if (GUILayout.Button("Save PlayerStatsData"))
             {
-                ResourceLoader.Save<PlayerStats>(_path, _playerData.playerStats);
+                PlayerStatsData playerStatsData = _playerData.playerStats.GetPlayerStatsData();
+                ResourceLoader.Save<PlayerStatsData>(_playerStatsDataPath, playerStatsData);
+                Debug.Log("playerStatsData == null ? : " + (playerStatsData.Gold).ToString());
             }
 
-            if (GUILayout.Button("Write Default", redStyle))
-            {
-                ResourceLoader.Save<PlayerStats>(_backupPath, _playerData.playerStats);
-            }
 
-            if (GUILayout.Button("Read Default", greenStyle))
-            {
-                _playerData.playerStats = ResourceLoader.Load<PlayerStats>(_backupPath);
-            }
+            //if (GUILayout.Button("Read"))
+            //{
+            //    _playerData.playerStats = ResourceLoader.Load<PlayerStats>(_path);
+            //}
 
-            if (GUILayout.Button("Reset to Default", blueStyle))
-            {
-                _playerData.playerStats = ResourceLoader.Load<PlayerStats>(_backupPath);
-                ResourceLoader.Save<PlayerStats>(_path, _playerData.playerStats);
-            }
+            //if (GUILayout.Button("Write"))
+            //{
+            //    ResourceLoader.Save<PlayerStats>(_path, _playerData.playerStats);
+            //}
+
+            //if (GUILayout.Button("Write Default", redStyle))
+            //{
+            //    ResourceLoader.Save<PlayerStats>(_backupPath, _playerData.playerStats);
+            //}
+
+            //if (GUILayout.Button("Read Default", greenStyle))
+            //{
+            //    _playerData.playerStats = ResourceLoader.Load<PlayerStats>(_backupPath);
+            //}
+
+            //if (GUILayout.Button("Reset to Default", blueStyle))
+            //{
+            //    _playerData.playerStats = ResourceLoader.Load<PlayerStats>(_backupPath);
+            //    ResourceLoader.Save<PlayerStats>(_path, _playerData.playerStats);
+            //}
         }
     }
 }

@@ -163,9 +163,10 @@ using UnityEngine;
 
 // 07-AUG-20:
 // 0. Add tweening to ClickGun DMG - [done]
-// 1. Add icon paths to skills! - 
-// 2. Cube destroy particles
-// 3. Add the button from space gui I've got on mah home computer
+// 1. Add icon paths to skills! - [done]
+// 2. Assign icons to skills via Drag&Drop in editor - [1/2]
+// 3. Cube destroy particles
+// 4. Add the button from space gui I've got on mah home computer
 
 // The concept of game is this
 // 0. On each wave, the player can complete objectives: i.e: to shoot 2/3/4 blue/yellow/blinking/anime/wave blocks, etc., 

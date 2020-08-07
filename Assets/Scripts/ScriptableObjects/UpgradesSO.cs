@@ -50,9 +50,7 @@ namespace Game
         }
         #endregion
 
-        
-        //[SerializeField]
-        public Sprite _icon;
+        [SerializeField] private Sprite _icon;
         public Sprite Icon => _icon;
 
         [SerializeField] private string _skillContainer;
@@ -100,7 +98,7 @@ namespace Game
             return ret;
         }
 
-        public void SetUpgradesData(UpgradeData[] upgradeDatas)
+        public void SetUpgrades(UpgradeData[] upgradeDatas)
         {
             if (upgradeDatas.Length != Upgrades.Length)
             {

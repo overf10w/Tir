@@ -50,16 +50,15 @@ namespace Game
             return upgrades;
         }
 
-        public UpgradesSO LoadUpgrades(string path)
-        {
-            UpgradesSO upgrades = Resources.Load<UpgradesSO>("SO/Researches/Upgrades");
+        //public static PlayerStats LoadPlayerStats(string _path)
+        //{
+        //    string path = Path.Combine(Application.persistentDataPath, "playerStatsData.dat");
 
-            string _upgradesSave = Path.Combine(Application.persistentDataPath, "upgradesSave.dat");
+        //    PlayerData playerData = Resources.Load<PlayerData>("SO/Player/PlayerData");
 
-            upgrades.SetUpgradesData(LoadUpgradesData(_upgradesSave));
 
-            return upgrades;
-        }
+
+        //}
 
         public static PlayerStats LoadPlayerStats()
         {
@@ -145,20 +144,31 @@ namespace Game
             Save<WeaponData[]>(path, weapons);
         }
 
-        public static void SavePlayerStats(PlayerStats playerStats)
-        {
-            string path = Path.Combine(Application.persistentDataPath, "playerStats.dat");
+        //public static void SavePlayerStats(PlayerStats playerStats)
+        //{
+        //    string path = Path.Combine(Application.persistentDataPath, "playerStats.dat");
 
-            if (playerStats == null) // TODO: doesn't make sense, as playerStats cannot ever be null
-            {
-                playerStats = new PlayerStats();
-                playerStats.Gold = 0;
-                playerStats.Level = 0;
-            }
+        //    if (playerStats == null) // TODO: doesn't make sense, as playerStats cannot ever be null
+        //    {
+        //        playerStats = new PlayerStats();
+        //        playerStats.Gold = 0;
+        //        playerStats.Level = 0;
+        //    }
+
+        //    playerStats.LastPlayTimestamp = DateTime.Now.Ticks;
+
+        //    Save<PlayerStats>(path, playerStats);
+        //}
+
+        public static void SavePlayerStatsData(PlayerStats playerStats)
+        {
+            string _playerStatsDataPath = Path.Combine(Application.persistentDataPath, "playerStatsData.dat");
 
             playerStats.LastPlayTimestamp = DateTime.Now.Ticks;
 
-            Save<PlayerStats>(path, playerStats);
+            PlayerStatsData playerStatsData = new PlayerStatsData(playerStats);
+
+            Save<PlayerStatsData>(_playerStatsDataPath, playerStatsData);
         }
     }
 }

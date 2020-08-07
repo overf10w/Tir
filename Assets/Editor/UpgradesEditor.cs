@@ -67,13 +67,14 @@ namespace Game
 
             if (GUILayout.Button("Read Upgrades Data"))
             {
-                _upgrades.SetUpgradesData(ResourceLoader.Load<UpgradeData[]>(_upgradesSave));
+                _upgrades.SetUpgrades(ResourceLoader.Load<UpgradeData[]>(_upgradesSave));
             }
 
             if (GUILayout.Button("Save Upgrades Data"))
             {
                 UpgradeData[] upgradesData = _upgrades.GetUpgradesData();
                 ResourceLoader.Save<UpgradeData[]>(_upgradesSave, upgradesData);
+
             }
         }
     }
