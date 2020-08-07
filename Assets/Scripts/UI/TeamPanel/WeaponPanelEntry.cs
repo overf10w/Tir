@@ -38,6 +38,10 @@ namespace Game
         public WeaponStat DPS { get; private set; }
         public WeaponStat DMG { get; private set; }
 
+        private LTDescr tween;
+        private float _prevDps = 0;
+        private float duration = 0.5f;
+
         public void Init(PlayerModel model, string name, WeaponStat dps, WeaponStat dmg)
         {
             InitButtons();
@@ -51,12 +55,6 @@ namespace Game
 
             Render(model, dps, dmg);
         }
-
-        private LTDescr tween;
-
-        private float _prevDps = 0;
-
-        private float duration = 0.5f;
 
         public void Render(PlayerModel model, WeaponStat dps, WeaponStat dmg)
         {

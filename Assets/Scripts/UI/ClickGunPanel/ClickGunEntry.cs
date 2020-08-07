@@ -37,6 +37,10 @@ namespace Game
         public WeaponStat DPS { get; private set; }
         public WeaponStat DMG { get; private set; }
 
+        private LTDescr tween;
+        private float _prevDmg = 0;
+        private float duration = 0.5f;
+
         public void Init(PlayerModel model, string name, WeaponStat dps, WeaponStat dmg)
         {
             InitButtons();
@@ -59,27 +63,51 @@ namespace Game
             ColorUtility.TryParseHtmlString("#CCFFC8", out green);
             ColorUtility.TryParseHtmlString("#FF807C", out red);
 
+            Color color;
+
             if (model.PlayerStats.Gold >= dmg.Price)
             {
-                _nameTxt.color = green;
-                _statNameTxt.color = green;
-                _dmgNextPrice.color = green;
-                _dmgValueTxt.color = green;
-                _dmgNextValueTxt.color = green;
+                color = green;
             }
             else
             {
-                _nameTxt.color = red;
-                _statNameTxt.color = red;
-                _dmgNextPrice.color = red;
-                _dmgValueTxt.color = red;
-                _dmgNextValueTxt.color = red;
+                color = red;
             }
 
+            _nameTxt.color = color;
+            _statNameTxt.color = color;
+
+            if (tween != null)
+            {
+                if (LeanTween.isTweening(tween.id))
+                {
+                    LeanTween.cancel(tween.id);
+                    tween = GetLTDescr(_prevDmg, dmg.Value, duration, color);
+                }
+            }
+            tween = GetLTDescr(_prevDmg, dmg.Value, duration, color).setEase(LeanTweenType.easeOutSine);
 
             _dmgNextPrice.text = "$" + dmg.Price.SciFormat();
+            _dmgNextPrice.color = color;
+
             _dmgValueTxt.text = dmg.Value.SciFormat();
+            _dmgValueTxt.color = color;
+
             _dmgNextValueTxt.text = dmg.NextValue.SciFormat();
+            _dmgNextValueTxt.color = color;
+        }
+
+        private LTDescr GetLTDescr(float from, float value, float duration, Color color)
+        {
+            return LeanTween.value(from, value, duration)
+                    //.setEase(LeanTweenType.easeOutSine)
+                    .setOnUpdate((float val) =>
+                    {
+                        _dmgValueTxt.text = val.SciFormat().ToString();
+                        _dmgValueTxt.color = color;
+                    })
+                    .setDelay(0f)
+                    .setOnComplete(() => _prevDmg = value);
         }
 
         //public void Init(string name, WeaponStat dps, WeaponStat dmg)

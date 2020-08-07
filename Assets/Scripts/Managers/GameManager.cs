@@ -162,8 +162,8 @@ using UnityEngine;
 // 0. Add achievements
 
 // 07-AUG-20:
-// 0. Add tweening to ClickGun DMG
-// 1. Add icon paths to skills!
+// 0. Add tweening to ClickGun DMG - [done]
+// 1. Add icon paths to skills! - 
 // 2. Cube destroy particles
 // 3. Add the button from space gui I've got on mah home computer
 
