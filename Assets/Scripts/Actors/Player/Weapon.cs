@@ -100,7 +100,7 @@ namespace Game
             _algorithm = algorithm;
             _playerStats = playerStats;
 
-            _playerStats.TeamSkills.StatChanged += SkillChangedHandler;
+            _playerStats.TeamSkillsList.StatChanged += SkillChangedHandler;
         }
 
         // TODO: setter

@@ -41,7 +41,7 @@ namespace Game
 
         public float GetValue(PlayerStats playerStats, int level, int upgradeLevel)
         {
-            List<PlayerStat> skills = playerStats.TeamSkills.Stats;
+            List<PlayerStat> skills = playerStats.TeamSkillsList.List;
 
             float upgradeValue = upgradeLevel <= 0 ? 1 : 1 * Mathf.Pow(_upgradeValueMultiplier, upgradeLevel);
             float result = _baseValue * Mathf.Pow(_valueMultiplier, level) * level * upgradeValue;

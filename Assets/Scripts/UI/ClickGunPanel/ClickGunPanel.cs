@@ -21,7 +21,7 @@ namespace Game
     {
         [SerializeField] private ClickGunEntry _clickGunEntry;
 
-        private StatsContainer _skills;
+        private StatsList _skills;
 
         public ClickGunBtnClick WeaponBtnClick { get; private set; }
 
@@ -29,11 +29,11 @@ namespace Game
 
         public void Init(PlayerModel model, string name, WeaponStat dps, WeaponStat dmg)
         {
-            _skills = model.PlayerStats.ClickGunSkills;
+            _skills = model.PlayerStats.ClickGunSkillsList;
             _skills.StatChanged += SkillChangedHandler;
 
             clickGunSkillPanel = GetComponentInChildren<ClickGunSkillPanel>();
-            clickGunSkillPanel.Init(_skills.Stats);
+            clickGunSkillPanel.Init(_skills.List);
 
             WeaponBtnClick = new ClickGunBtnClick();
             _clickGunEntry.Init(model, name, dps, dmg);

@@ -60,17 +60,17 @@ namespace Game
         private List<GameObject> _weaponUiEntries;
 
         private TeamSkillPanel _teamSkillPanel;
-        private StatsContainer _skills;
+        private StatsList _skills;
 
         private float _prevDps = 0;
 
         public void Init(PlayerModel model)
         {
-            _skills = model.PlayerStats.TeamSkills;
+            _skills = model.PlayerStats.TeamSkillsList;
             _skills.StatChanged += SkillChangedHandler;
 
             _teamSkillPanel = GetComponentInChildren<TeamSkillPanel>();
-            _teamSkillPanel.Init(_skills.Stats);
+            _teamSkillPanel.Init(_skills.List);
 
             WeaponBtnClick = new WeaponBtnClick();
             _content = transform.Find("Scroll View/Viewport/Content").GetComponent<Transform>();

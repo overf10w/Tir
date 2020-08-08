@@ -29,7 +29,7 @@ namespace Game
 
             _model.PropertyChanged += ModelChangedHandler;
             _model.OnPlayerStatsChanged += PlayerStatsChangedHandler;
-            _model.PlayerStats.TeamSkills.StatChanged += TeamSkillsChangedHandler;
+            _model.PlayerStats.TeamSkillsList.StatChanged += TeamSkillsChangedHandler;
         }
 
         private void TeamSkillsChangedHandler(object sender, PropertyChangedEventArgs e)
@@ -161,7 +161,7 @@ namespace Game
         {
             // TODO: null value handling
             // TODO: Add TeamWeaponsSkill: GoldGainedMultiplier
-            PlayerStat goldGainedMultiplier = _model.PlayerStats.ClickGunSkills.Stats.Find(stat => stat.Name == "GoldGainedMultiplier");
+            PlayerStat goldGainedMultiplier = _model.PlayerStats.ClickGunSkillsList.List.Find(stat => stat.Name == "GoldGainedMultiplier");
             float goldGained = e.Val * goldGainedMultiplier.Value;
             _model.PlayerStats.Gold += goldGained;
             // TODO: save 'em every 15 seconds instead.
