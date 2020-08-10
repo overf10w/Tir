@@ -44,7 +44,7 @@ namespace Game
             InitMessageHandler();
 
             _levelListUI = FindObjectOfType<LevelListUI>();
-            _playerGoldCanvas.Init(playerModel.PlayerStats.Gold);
+            _playerGoldCanvas.Render(playerModel.PlayerStats.Gold);
 
             PlayerLevelTxt = transform.Find("MainPanel/StatsPanel/LevelTxt").GetComponent<TextMeshProUGUI>();
             PlayerLevelTxt.text = playerModel.PlayerStats.Level.ToString();
@@ -56,7 +56,7 @@ namespace Game
 
         public void UpdatePlayerGold(float gold)
         {
-            _playerGoldCanvas.Show(gold);
+            _playerGoldCanvas.Render(gold);
         }
 
         public void UpdateElapsedTimeSpan(double timeSpan)

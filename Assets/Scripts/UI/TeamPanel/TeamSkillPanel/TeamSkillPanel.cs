@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Game
 {
@@ -9,47 +10,53 @@ namespace Game
         [SerializeField] private GameObject _skillEntryPrefab;
 
         private Transform _content;
-        private List<GameObject> _unlockedSkillEntries;
-
-        private List<PlayerStat> _skills;
+        private Dictionary<PlayerStat, GameObject> _unlockedEntries;
 
         public void Init(List<PlayerStat> skills)
         {
-            _unlockedSkillEntries = new List<GameObject>();
-
-            _skills = skills;
-
             _content = transform.Find("Viewport/Content").GetComponent<Transform>();
+            _unlockedEntries = new Dictionary<PlayerStat, GameObject>();
 
-            foreach (var skill in _skills)
+            foreach (var skill in skills)
             {
                 if (skill.Value > 1.0f)
                 {
                     GameObject skillEntry = Instantiate(_skillEntryPrefab, _content);
                     skillEntry.name = skill.Name;
-                    _unlockedSkillEntries.Add(skillEntry);
+                    var sr = skillEntry.GetComponent<Image>();
+                    if (skill.Icon != null)
+                    {
+                        sr.sprite = skill.Icon;
+                    }
+                    _unlockedEntries.Add(skill, skillEntry);
                 }
             }
         }
 
-        public void UpdateSelf(PlayerStat skill)
+        public void Render(PlayerStat skill)
         {
-            bool isUnlocked = false;
-
-            foreach (var sk in _unlockedSkillEntries)
+            if (_unlockedEntries.ContainsKey(skill))
             {
-                if (sk.name == skill.Name)
+                GameObject obj;
+                if (_unlockedEntries.TryGetValue(skill, out obj)) 
                 {
-                    isUnlocked = true;
-                    break;
+                    Debug.Log("TeamSkillPanel: Updating the skill entry");
+                    return;
                 }
             }
-
-            if (!isUnlocked)
+            else
             {
-                GameObject skillEntry = Instantiate(_skillEntryPrefab, _content);
-                skillEntry.name = skill.Name;
-                _unlockedSkillEntries.Add(skillEntry);
+                if (skill.Value > 1.0f)
+                {
+                    GameObject skillEntry = Instantiate(_skillEntryPrefab, _content);
+                    skillEntry.name = skill.Name;
+                    var sr = skillEntry.GetComponent<Image>();
+                    if (skill.Icon != null)
+                    {
+                        sr.sprite = skill.Icon;
+                    }
+                    _unlockedEntries.Add(skill, skillEntry);
+                }
             }
         }
     }

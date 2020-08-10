@@ -168,12 +168,31 @@ using UnityEngine;
 // 3. Do ToDo in PlayerModel.cs - [done]
 
 // 08-AUG-20:
-// 0. Refactor
+// 0. Refactor - [done]
 
 // 09-AUG-20:
-// 0. Show skills' icons in the game
+// 0. Show skills' icons in the game - [done]
 // 1. Cube destroy particles
 // 2. Add the button from space gui I've got on mah home computer
+
+// 10-AUG-20:
+// 0. Add a background sound to a game
+
+// 11-AUG-20:
+// 0. Experiment with the cubes materials/sprites/particles/sounds/etc. a little bit - maybe in another project
+// 1. Do ToDo in WeaponPanelEntry.cs - [done]
+
+// 12-AUG-20:
+// 0. Change how we configure and reconfigure player waves in editor mode, 
+//      0.1 Make the scale of each wave prefab (and thus its cubes) configurable through script
+//      0.2 Add WaveSpawnPoint (will be the center of the spawned wave)
+//      0.2 Find the Center of spawned wave
+//      0.3 Find the offset of Center os spawned wave with the WaveSpawnPoint
+//      0.4 Apply the counter-offset
+// 1. Add some cube structures that resemble buildings, cars, animals, etc.
+// 2. Play with cube outline (i.e.)
+// 2. Animate some of the waves (with unity animator)
+//      2.1 When cubes are spawned, make each a child of a spawnpoint
 
 // The concept of game is this
 // 0. On each wave, the player can complete objectives: i.e: to shoot 2/3/4 blue/yellow/blinking/anime/wave blocks, etc., 
@@ -212,10 +231,10 @@ namespace Game
         {
             _upgrades = Resources.Load<UpgradesSO>("SO/Researches/Upgrades");
 
-            PlayerView view = Instantiate(Resources.Load<PlayerView>("Prefabs/Player"));
             PlayerModel model = new PlayerModel();
-            PlayerController pc = new PlayerController(model, _upgrades, view, _inputManager);
-            UpgradesController upgradesController = new UpgradesController(model, _upgrades, _researchPanel);
+            PlayerView view = Instantiate(Resources.Load<PlayerView>("Prefabs/Player"));
+            new PlayerController(model, _upgrades, view, _inputManager);
+            new UpgradesController(model, _upgrades, _researchPanel);
 
             _waveSpawner.Init(model.PlayerStats);
         }

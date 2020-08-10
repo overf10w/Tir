@@ -50,27 +50,9 @@ namespace Game
             return upgrades;
         }
 
-        //public static PlayerStats LoadPlayerStats(string _path)
-        //{
-        //    string path = Path.Combine(Application.persistentDataPath, "playerStatsData.dat");
-
-        //    PlayerData playerData = Resources.Load<PlayerData>("SO/Player/PlayerData");
-
-
-
-        //}
-
         public static PlayerStats LoadPlayerStats()
         {
-            string path = Path.Combine(Application.persistentDataPath, "playerStats.dat");
-            PlayerStats playerStats = Load<PlayerStats>(path);
-
-            if (playerStats == null)
-            {
-                playerStats = Resources.Load<PlayerData>("SO/Player/PlayerData").playerStats;
-            }
-
-            return playerStats;
+            return Resources.Load<PlayerData>("SO/Player/PlayerData").playerStats;
         }
 
         public static WeaponData LoadClickGun()
@@ -143,22 +125,6 @@ namespace Game
             string path = Path.Combine(Application.persistentDataPath, "weapons.dat");
             Save<WeaponData[]>(path, weapons);
         }
-
-        //public static void SavePlayerStats(PlayerStats playerStats)
-        //{
-        //    string path = Path.Combine(Application.persistentDataPath, "playerStats.dat");
-
-        //    if (playerStats == null) // TODO: doesn't make sense, as playerStats cannot ever be null
-        //    {
-        //        playerStats = new PlayerStats();
-        //        playerStats.Gold = 0;
-        //        playerStats.Level = 0;
-        //    }
-
-        //    playerStats.LastPlayTimestamp = DateTime.Now.Ticks;
-
-        //    Save<PlayerStats>(path, playerStats);
-        //}
 
         public static void SavePlayerStatsData(PlayerStats playerStats)
         {

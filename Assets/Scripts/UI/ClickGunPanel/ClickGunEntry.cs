@@ -34,29 +34,22 @@ namespace Game
         public Button DPSButton { get; private set; }
         public Button DMGButton { get; private set; }
 
-        public WeaponStat DPS { get; private set; }
-        public WeaponStat DMG { get; private set; }
-
-        private LTDescr tween;
+        private LTDescr _tweenDmgText;
         private float _prevDmg = 0;
-        private float duration = 0.5f;
+        private float _duration = 0.5f;
 
-        public void Init(PlayerModel model, string name, WeaponStat dps, WeaponStat dmg)
+        private bool _initFlag = false;
+
+        public void Render(PlayerModel model, string name, WeaponStat dps, WeaponStat dmg)
         {
-            InitButtons();
+            if (!_initFlag)
+            {
+                InitButtons();
+                InitIcon(name);
+                _nameTxt.text = name;
+                _initFlag = true;
+            }
 
-            DPS = dps;
-            DMG = dmg;
-
-            InitIcon(name);
-
-            _nameTxt.text = name;
-
-            Render(model, dps, dmg);
-        }
-
-        public void Render(PlayerModel model, WeaponStat dps, WeaponStat dmg)
-        {
             Color green;
             Color red;
 
@@ -77,71 +70,27 @@ namespace Game
             _nameTxt.color = color;
             _statNameTxt.color = color;
 
-            if (tween != null)
+            if (_tweenDmgText != null)
             {
-                if (LeanTween.isTweening(tween.id))
+                if (LeanTween.isTweening(_tweenDmgText.id))
                 {
-                    LeanTween.cancel(tween.id);
-                    tween = GetLTDescr(_prevDmg, dmg.Value, duration, color);
+                    LeanTween.cancel(_tweenDmgText.id);
+
+                    _tweenDmgText = _dmgValueTxt.TweenTMProValue(_prevDmg, dmg.Value, _duration)
+                            .setOnComplete(_ => _prevDmg = dmg.Value);
                 }
             }
-            tween = GetLTDescr(_prevDmg, dmg.Value, duration, color).setEase(LeanTweenType.easeOutSine);
+            _tweenDmgText = _dmgValueTxt.TweenTMProValue(_prevDmg, dmg.Value, _duration)
+                    .setEase(LeanTweenType.easeOutSine)
+                    .setOnComplete(_ => _prevDmg = dmg.Value);
+            _dmgValueTxt.color = color;
 
             _dmgNextPrice.text = "$" + dmg.Price.SciFormat();
             _dmgNextPrice.color = color;
 
-            _dmgValueTxt.text = dmg.Value.SciFormat();
-            _dmgValueTxt.color = color;
-
             _dmgNextValueTxt.text = dmg.NextValue.SciFormat();
             _dmgNextValueTxt.color = color;
         }
-
-        private LTDescr GetLTDescr(float from, float value, float duration, Color color)
-        {
-            return LeanTween.value(from, value, duration)
-                    //.setEase(LeanTweenType.easeOutSine)
-                    .setOnUpdate((float val) =>
-                    {
-                        _dmgValueTxt.text = val.SciFormat().ToString();
-                        _dmgValueTxt.color = color;
-                    })
-                    .setDelay(0f)
-                    .setOnComplete(() => _prevDmg = value);
-        }
-
-        //public void Init(string name, WeaponStat dps, WeaponStat dmg)
-        //{
-        //    InitButtons();
-
-        //    DPS = dps;
-        //    DMG = dmg;
-
-        //    InitIcon(name);
-
-        //    _nameTxt.text = name;
-
-        //    _dpsNextPrice.text = dps.Price.SciFormat();
-        //    _dmgNextPrice.text = dmg.Price.SciFormat();
-
-        //    _dpsValueTxt.text = dps.Value.SciFormat();
-        //    _dmgValueTxt.text = dmg.Value.SciFormat();
-
-        //    _dpsNextValueTxt.text = dps.NextValue.SciFormat();
-        //    _dmgNextValueTxt.text = dmg.NextValue.SciFormat();
-        //}
-
-        //public void Render(WeaponStat dps, WeaponStat dmg)
-        //{
-        //    _dpsNextPrice.text = dps.Price.SciFormat();
-        //    _dmgNextPrice.text = dmg.Price.SciFormat();
-
-        //    _dpsValueTxt.text = dps.Value.SciFormat();
-        //    _dmgValueTxt.text = dmg.Value.SciFormat();
-
-        //    _dpsNextValueTxt.text = dps.NextValue.SciFormat();
-        //    _dmgNextValueTxt.text = dmg.NextValue.SciFormat();
-        //}
 
         private void InitIcon(string name)
         {

@@ -27,29 +27,38 @@ namespace Game
 
         private ClickGunSkillPanel clickGunSkillPanel;
 
-        public void Init(PlayerModel model, string name, WeaponStat dps, WeaponStat dmg)
+        private string _name;
+
+        private bool _initFlag = false;
+
+        public void Render(PlayerModel model, string name, WeaponStat dps, WeaponStat dmg)
         {
-            _skills = model.PlayerStats.ClickGunSkillsList;
-            _skills.StatChanged += SkillChangedHandler;
+            if (!_initFlag)
+            {
+                _skills = model.PlayerStats.ClickGunSkillsList;
+                _skills.StatChanged += SkillChangedHandler;
 
-            clickGunSkillPanel = GetComponentInChildren<ClickGunSkillPanel>();
-            clickGunSkillPanel.Init(_skills.List);
+                clickGunSkillPanel = GetComponentInChildren<ClickGunSkillPanel>();
+                clickGunSkillPanel.Init(_skills.List);
 
-            WeaponBtnClick = new ClickGunBtnClick();
-            _clickGunEntry.Init(model, name, dps, dmg);
-            _clickGunEntry.DPSButton.onClick.AddListener(() => { WeaponBtnClick.Dispatch(new WeaponStatBtnClickArgs("ClickGun", "DPS")); }); 
-            _clickGunEntry.DMGButton.onClick.AddListener(() => { WeaponBtnClick.Dispatch(new WeaponStatBtnClickArgs("ClickGun", "DMG")); });
+                WeaponBtnClick = new ClickGunBtnClick();
+
+                _clickGunEntry.Render(model, name, dps, dmg);
+
+                _clickGunEntry.DPSButton.onClick.AddListener(() => { WeaponBtnClick.Dispatch(new WeaponStatBtnClickArgs("ClickGun", "DPS")); });
+                _clickGunEntry.DMGButton.onClick.AddListener(() => { WeaponBtnClick.Dispatch(new WeaponStatBtnClickArgs("ClickGun", "DMG")); });
+
+                _initFlag = true;
+                return;
+            }
+
+            _clickGunEntry.Render(model, name, dps, dmg);
         }
 
         private void SkillChangedHandler(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             PlayerStat stat = (PlayerStat)sender;
-            clickGunSkillPanel.UpdateSelf(stat);
-        }
-
-        public void UpdateView(PlayerModel model, WeaponStat dps, WeaponStat dmg)
-        {
-            _clickGunEntry.Render(model, dps, dmg);
+            clickGunSkillPanel.Render(stat);
         }
     }
 }

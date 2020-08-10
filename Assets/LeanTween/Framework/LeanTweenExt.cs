@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using TMPro;
+using Game;
 
 public static class LeanTweenExt
 {
@@ -184,4 +186,40 @@ public static class LeanTweenExt
     {
         return transform.GetComponent<Renderer>().material.color;
     }
+
+    public static LTDescr LeanAlphaText(this TextMesh textMesh, float to, float time)
+    {
+        var _color = textMesh.color;
+        var _tween = LeanTween
+            .value(textMesh.gameObject, _color.a, to, time)
+            .setOnUpdate((float _value) => {
+                _color.a = _value;
+                textMesh.color = _color;
+            });
+        return _tween;
+    }
+
+    public static LTDescr TweenTMProValue(this TextMeshProUGUI text, float from, float to, float duration)
+    {
+        return LeanTween
+            .value(text.gameObject, val => text.text = val.SciFormat(), from, to, duration);
+    }
+
+    public static LTDescr TweenTMProColor(this TextMeshProUGUI text, Color from, Color to, float duration)
+    {
+        return LeanTween
+            .value(text.gameObject, col => text.color = col, from, to, duration);
+    }
+
+    //private LTDescr TweenTMProTextVal(TextMeshProUGUI text, float from, float to, float duration)
+    //{
+    //    return LeanTween
+    //        .value(text.gameObject, val => _dpsValueTxt.text = val.SciFormat(), from, to, duration);
+    //}
+
+    //private LTDescr TweenTMProTextCol(TextMeshProUGUI text, Color from, Color to, float duration)
+    //{
+    //    return LeanTween
+    //        .value(text.gameObject, col => _dpsValueTxt.color = col, from, to, duration);
+    //}
 }

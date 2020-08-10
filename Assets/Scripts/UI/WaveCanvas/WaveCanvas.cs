@@ -10,35 +10,24 @@ namespace Game
         [SerializeField] private TextMeshProUGUI _waveHPText;
         public TextMeshProUGUI WaveHPText => _waveHPText;
 
-        private LTDescr tween;
+        private LTDescr _tweenHpText;
         private float _prev;
-        private float duration = 0.45f;
+        private float _duration = 0.45f;
 
-        public void Show(float value)
+        public void Render(float value)
         {
-            if (tween != null)
+            if (_tweenHpText != null)
             {
-                if (LeanTween.isTweening(tween.id))
+                if (LeanTween.isTweening(_tweenHpText.id))
                 {
-                    LeanTween.cancel(tween.id);
-                    tween = GetLTDescr(_prev, value, duration);
+                    LeanTween.cancel(_tweenHpText.id);
+                    _tweenHpText = _waveHPText.TweenTMProValue(_prev, value, _duration)
+                                   .setOnComplete(_ => _prev = value);
                 }
             }
-
-            tween = GetLTDescr(_prev, value, duration).setEase(LeanTweenType.easeOutSine);
-        }
-
-        private LTDescr GetLTDescr(float from, float value, float duration)
-        {
-            return LeanTween.value(from, value, duration)
-                    //.setEase(LeanTweenType.easeOutSine)
-                    .setOnUpdate((float val) =>
-                    {
-                        WaveHPText.text = (val).SciFormat().ToString();
-                        _prev = val;
-                    })
-                    .setDelay(0f)
-                    .setOnComplete(() => _prev = value);
+            _tweenHpText = _waveHPText.TweenTMProValue(_prev, value, _duration)
+                           .setEase(LeanTweenType.easeOutSine)
+                           .setOnComplete(_ => _prev = value);
         }
     }
 }

@@ -90,7 +90,7 @@ namespace Game
                     entryGameObject.name = weapon.Key;
                     WeaponPanelEntry script = entryGameObject.GetComponent<WeaponPanelEntry>();
 
-                    script.Init(model, weapon.Key, weapon.Value.DPS, weapon.Value.DMG);
+                    script.Render(model, weapon.Key, weapon.Value.DPS, weapon.Value.DMG);
 
                     script.DPSButton.onClick.AddListener(() => { WeaponBtnClick.Dispatch(new WeaponStatBtnClickArgs(weapon.Key, "DPS")); });
                     script.DMGButton.onClick.AddListener(() => { WeaponBtnClick.Dispatch(new WeaponStatBtnClickArgs(weapon.Key, "DMG")); });
@@ -116,7 +116,7 @@ namespace Game
                         if (entry.name == weapon.Key)
                         {
                             var script = entry.GetComponent<WeaponPanelEntry>();
-                            script.Render(model, weapon.Value.DPS, weapon.Value.DMG);
+                            script.Render(model, weapon.Key, weapon.Value.DPS, weapon.Value.DMG);
                             teamDps += weapon.Value.DPS.Value;
                             break;
                         }
@@ -136,7 +136,7 @@ namespace Game
         private void SkillChangedHandler(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             PlayerStat stat = (PlayerStat)sender;
-            _teamSkillPanel.UpdateSelf(stat);
+            _teamSkillPanel.Render(stat);
         }
     }
 }

@@ -15,7 +15,7 @@ MonoBehaviour:
   _upgrades:
   - _icon: {fileID: -1064736851709924467, guid: 9f51c2c2ff030524da06308215b550f4,
       type: 3}
-    _skillContainer: TeamSkills
+    _skillContainer: TeamSkillsList
     _skill: DPSMultiplier
     _name: DPS++
     _description: Increase Team DPS by 100%
@@ -26,7 +26,7 @@ MonoBehaviour:
       threshold: 0
     _isActive: 1
   - _icon: {fileID: 5327953333270261400, guid: 9f51c2c2ff030524da06308215b550f4, type: 3}
-    _skillContainer: ClickGunSkills
+    _skillContainer: ClickGunSkillsList
     _skill: GoldGainedMultiplier
     _name: Click Gun Madness
     _description: Synthetize Click Gun Gold Gained Multiplier
@@ -38,7 +38,7 @@ MonoBehaviour:
     _isActive: 1
   - _icon: {fileID: -6416387507145356639, guid: 9f51c2c2ff030524da06308215b550f4,
       type: 3}
-    _skillContainer: ClickGunSkills
+    _skillContainer: ClickGunSkillsList
     _skill: DMGMultiplier
     _name: Click Gun Madness
     _description: Synthetize Click Gun DMG Multiplier

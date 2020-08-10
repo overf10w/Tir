@@ -65,7 +65,7 @@ namespace Game
                 _view.Ui.UpdatePlayerGold(_model.PlayerStats.Gold);
 
                 _view.TeamPanel.UpdateView(_model);
-                _view.ClickGunPanel.UpdateView(_model, _model.DPS, _model.DMG);
+                _view.ClickGunPanel.Render(_model, _model.GunData.WeaponName, _model.DPS, _model.DMG);
                 // Don't need to redraw panels if only gold changed
                 return;
             }
@@ -76,7 +76,7 @@ namespace Game
                 return;
             }
             _view.TeamPanel.UpdateView(_model);
-            _view.ClickGunPanel.UpdateView(_model, _model.DPS, _model.DMG);
+            _view.ClickGunPanel.Render(_model, _model.GunData.WeaponName, _model.DPS, _model.DMG);
         }
 
         // One important notice: 
@@ -173,7 +173,7 @@ namespace Game
         {
             if (sender is WeaponStat weaponStat)
             {
-                _view.ClickGunPanel.UpdateView(_model, _model.DPS, _model.DMG);
+                _view.ClickGunPanel.Render(_model, _model.GunData.WeaponName, _model.DPS, _model.DMG);
             }
         }
 

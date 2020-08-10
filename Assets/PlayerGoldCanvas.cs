@@ -10,125 +10,25 @@ namespace Game
         [SerializeField] private TextMeshProUGUI _playerGoldText;
         public TextMeshProUGUI PlayerGoldTxt => _playerGoldText;
 
-        private float _prev;
+        private LTDescr _goldTextTween;
+        private float _prev = 0;
+        private float _duration = 0.9f;
 
-        private LTDescr tween;
-        
-        private float duration = 0.9f;
-
-        public void Init(float value)
+        public void Render(float value)
         {
-            _prev = 0;
-
-            Show(value);
-        }
-
-        public void Show(float value)
-        {
-            if (tween != null)
+            if (_goldTextTween != null)
             {
-                if (LeanTween.isTweening(tween.id))
+                if (LeanTween.isTweening(_goldTextTween.id))
                 {
-                    LeanTween.cancel(tween.id);
-                    tween = GetLTDescr(_prev, value, duration);
+                    LeanTween.cancel(_goldTextTween.id);
+
+                    _goldTextTween = _playerGoldText.TweenTMProValue(_prev, value, _duration)
+                                     .setOnComplete(_ => _prev = value);
                 }
             }
-
-            tween = GetLTDescr(_prev, value, duration).setEase(LeanTweenType.easeOutSine);
+            _goldTextTween = _playerGoldText.TweenTMProValue(_prev, value, _duration)
+                             .setEase(LeanTweenType.easeOutSine)
+                             .setOnComplete(_ => _prev = value);
         }
-
-        private LTDescr GetLTDescr(float from, float value, float duration)
-        {
-            return LeanTween.value(from, value, duration)
-                    //.setEase(LeanTweenType.easeOutSine)
-                    .setOnUpdate((float val) =>
-                    {
-                        PlayerGoldTxt.text = (val).SciFormat().ToString();
-                        _prev = val;
-                    })
-                    .setDelay(0f)
-                    .setOnComplete(() => _prev = value);
-        }
-
-        //// "GOOD"
-        //private LTDescr tween;
-        //public void Show(float value)
-        //{
-        //    if (tween != null)
-        //    {
-        //        Debug.Log("tween.isTweening: " + (LeanTween.isTweening(tween.id).ToString()));
-        //    }
-        //    tween = LeanTween.value(_currValue, value, 0.3f)
-        //    .setEase(LeanTweenType.easeOutSine)
-        //    .setOnUpdate((float val) =>
-        //    {
-        //        PlayerGoldTxt.text = ((int)val).ToString();
-        //        //Debug.Log("Elapsed Time: " + Time.time);
-        //        _currValue = val;
-        //    })
-        //    .setDelay(0f)
-        //    .setOnComplete(() => _currValue = value);
-        //}
-        //// ENDOF "GOOD"
-
-
-
-        //private float defaultPlaytime = 0.3f;
-        ////private float prevTimestamp;
-
-        //private LTDescr id;
-        //public void Show(float value)
-        //{
-        //    if (id != null)
-        //    {
-        //        defaultPlaytime += defaultPlaytime;
-        //        id.setTime(defaultPlaytime);
-        //        //id.setValue3();
-        //        return;
-        //    }
-        //    else
-        //    {
-        //        defaultPlaytime = 0.3f;
-
-        //        id = LeanTween.value(_currValue, value, defaultPlaytime)
-        //                .setEase(LeanTweenType.easeOutSine)
-        //                .setOnUpdate((float val) =>
-        //                {
-        //                    PlayerGoldTxt.text = ((int)val).ToString();
-        //                                //Debug.Log("Elapsed Time: " + Time.time);
-        //                                //_currValue = val;
-        //                            })
-        //                .setDelay(0f)
-        //                .setOnComplete(() => _currValue = value);
-        //    }
-        //    //if (Time.time - prevTimestamp <= 2.0f)
-        //    //{
-        //    //    // change the currently running tween by adding to its time
-        //    //}
-        //    //else
-        //    //{
-        //    //    // call sequence
-        //    //}
-        //    //prevTimestamp = Time.time;
-        //}
-
-
-
-
-
-
-        //public IEnumerator Show(float value)
-        //{
-        //    isActive = true;
-        //    LeanTween.value(_currValue, value, 1.6f)
-        //    .setEase(LeanTweenType.easeOutCirc)
-        //    .setOnUpdate((float val) =>
-        //    {
-        //        PlayerGoldTxt.text = ((int)val).ToString();
-        //        Debug.Log("Elapsed Time: " + Time.time);
-        //    }).setOnComplete(() => { _currValue = value; isActive = false; });
-
-        //    _showGoldQueue.Run()
-        //}
     }
 }

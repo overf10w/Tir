@@ -36,8 +36,9 @@ namespace Game
         {
             string skillIndexer = e.Upgrade.Skill;
 
-            StatsList statsContainer = (StatsList)_playerModel.PlayerStats[e.Upgrade.SkillContainer];
-            PlayerStat skill = statsContainer.List.Find(sk => sk.Name == skillIndexer);
+            StatsList statsList = (StatsList)_playerModel.PlayerStats[e.Upgrade.SkillContainer];
+
+            PlayerStat skill = statsList.List.Find(sk => sk.Name == skillIndexer);
 
             if (_playerModel.PlayerStats.Gold >= e.Upgrade.Price)
             {

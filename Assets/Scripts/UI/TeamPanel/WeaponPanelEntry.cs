@@ -12,52 +12,34 @@ namespace Game
         private AssetBundle _assetBundle;
 
         [SerializeField] private Image _iconImg;
-
-        // name
-
         [SerializeField] private TextMeshProUGUI _nameTxt;
-
         [SerializeField] private TextMeshProUGUI _statNameTxt;
 
-        // next price
         [SerializeField] private TextMeshProUGUI _dpsNextPrice;
-        //[SerializeField] private TextMeshProUGUI _dmgNextPrice;
-
-        // curr value
         [SerializeField] private TextMeshProUGUI _dpsValueTxt;
-        //[SerializeField] private TextMeshProUGUI _dmgValueTxt;
-        
-        // next value
         [SerializeField] private TextMeshProUGUI _dpsNextValueTxt;
-        //[SerializeField] private TextMeshProUGUI _dmgNextValueTxt;
 
         public Button DPSButton { get; private set; }
 
         public Button DMGButton { get; private set; }
 
-        public WeaponStat DPS { get; private set; }
-        public WeaponStat DMG { get; private set; }
-
-        private LTDescr tween;
+        private LTDescr _dpsTextTween;
         private float _prevDps = 0;
-        private float duration = 0.5f;
+        private float _duration = 0.5f;
 
-        public void Init(PlayerModel model, string name, WeaponStat dps, WeaponStat dmg)
+        private bool _initFlag = false;
+
+        public void Render(PlayerModel model, string name, WeaponStat dps, WeaponStat dmg)
         {
-            InitButtons();
+            if (!_initFlag)
+            {
+                InitButtons();
+                InitIcon(name);
+                _nameTxt.text = name;
 
-            DPS = dps;
-            DMG = dmg;
+                _initFlag = true;
+            }
 
-            InitIcon(name);
-
-            _nameTxt.text = name;
-
-            Render(model, dps, dmg);
-        }
-
-        public void Render(PlayerModel model, WeaponStat dps, WeaponStat dmg)
-        {
             Color green;
             Color red;
 
@@ -81,35 +63,25 @@ namespace Game
             _dpsNextPrice.text = "$" + dps.Price.SciFormat();
             _dpsNextPrice.color = color;
 
-            if (tween != null)
+            if (_dpsTextTween != null)
             {
-                if (LeanTween.isTweening(tween.id))
+                if (LeanTween.isTweening(_dpsTextTween.id))
                 {
-                    LeanTween.cancel(tween.id);
-                    tween = GetLTDescr(_prevDps, dps.Value, duration, color);
+                    _dpsValueTxt.color = color;
+                    LeanTween.cancel(_dpsTextTween.id);
+
+                    _dpsTextTween = _dpsValueTxt.TweenTMProValue(_prevDps, dps.Value, _duration)
+                                   .setOnComplete(_ => _prevDps = dps.Value);
                 }
             }
 
-            tween = GetLTDescr(_prevDps, dps.Value, duration, color).setEase(LeanTweenType.easeOutSine);
+            _dpsTextTween = _dpsValueTxt.TweenTMProValue(_prevDps, dps.Value, _duration)
+                           .setOnComplete(_ => _prevDps = dps.Value);
 
-            _dpsValueTxt.text = dps.Value.SciFormat();
             _dpsValueTxt.color = color;
 
             _dpsNextValueTxt.text = dps.NextValue.SciFormat();
             _dpsNextValueTxt.color = color;
-        }
-
-        private LTDescr GetLTDescr(float from, float value, float duration, Color color)
-        {
-            return LeanTween.value(from, value, duration)
-                    //.setEase(LeanTweenType.easeOutSine)
-                    .setOnUpdate((float val) =>
-                    {
-                        _dpsValueTxt.text = val.SciFormat().ToString();
-                        _dpsValueTxt.color = color;
-                    })
-                    .setDelay(0f)
-                    .setOnComplete(() => _prevDps = value);
         }
 
         private void InitIcon(string name)
