@@ -29,10 +29,10 @@ namespace Game
                 s.source.maxDistance = s.distance;
                 s.source.spatialBlend = s.spatialBlend;
 
-                //if (s.playOnAwake)
-                //{
-                //    Play(s.name);
-                //}
+                if (s.playOnAwake)
+                {
+                    Play(s.name);
+                }
             }
         }
 

@@ -172,15 +172,18 @@ using UnityEngine;
 
 // 09-AUG-20:
 // 0. Show skills' icons in the game - [done]
-// 1. Cube destroy particles
-// 2. Add the button from space gui I've got on mah home computer
+// 1. Add the button from space gui I've got on mah home computer - [done]
 
 // 10-AUG-20:
-// 0. Add a background sound to a game
+// 0. Add a background sound to a game - [done]
 
-// 11-AUG-20:
-// 0. Experiment with the cubes materials/sprites/particles/sounds/etc. a little bit - maybe in another project
-// 1. Do ToDo in WeaponPanelEntry.cs - [done]
+// 11-AUG-20
+// 0. Experiment with the cubes materials/sprites/particles/sounds/etc. a little bit - maybe in another project - [1/2]
+// 1. Add a sound when click gun shoots
+// 2. Add Cube destroy particles (gotta try a lot of particle systems)
+// 3. Add cube take damage particles (maybe UniqueProjectiles particles will be enough)
+// 4. Do ToDo in WeaponPanelEntry.cs - [done]
+// 5. Add projectile particles when click gun shoots - [done]
 
 // 12-AUG-20:
 // 0. Change how we configure and reconfigure player waves in editor mode, 
@@ -193,6 +196,9 @@ using UnityEngine;
 // 2. Play with cube outline (i.e.)
 // 2. Animate some of the waves (with unity animator)
 //      2.1 When cubes are spawned, make each a child of a spawnpoint
+
+// 13-AUG-20:
+// 0. Add camera shake like in Trumpage
 
 // The concept of game is this
 // 0. On each wave, the player can complete objectives: i.e: to shoot 2/3/4 blue/yellow/blinking/anime/wave blocks, etc., 

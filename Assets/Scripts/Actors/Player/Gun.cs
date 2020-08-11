@@ -8,22 +8,13 @@ namespace Game
     public class Gun : MonoBehaviour
     {
         [SerializeField] private Transform _muzzle;
-        // TODO: 
-        // Probably don't need these:
-        public WeaponStat DPS { get; private set; }
-        public WeaponStat DMG { get; private set; } 
+        [SerializeField] private GameObject _projectilePrefab;
 
         private float _msBetweenShots = 15.0f;
         private float _nextShotTime;
 
         private Ray _ray;
         private RaycastHit _hit;
-
-        public void Init(WeaponData gunData, PlayerStats playerStats)
-        {
-            DPS = new WeaponStat(gunData.DPS, playerStats, gunData.algorithms.DPS);
-            DMG = new WeaponStat(gunData.DMG, playerStats, gunData.algorithms.DMG);
-        }
 
         public void UpdateGunRotation()
         {
@@ -46,9 +37,21 @@ namespace Game
                     {
                         target.TakeDamage(damage);
                     }
-                    Debug.DrawRay(_ray.origin, _ray.direction * 10000, Color.red, 0.5f);
-                    Debug.DrawRay(_muzzle.position, _hit.point - _muzzle.position, Color.green, 0.7f);
+                    //Debug.DrawRay(_ray.origin, _ray.direction * 10000, Color.red, 0.5f);
+                    //Debug.DrawRay(_muzzle.position, _hit.point - _muzzle.position, Color.green, 0.7f);
+
+                    var dir = _hit.point - _muzzle.position;
+
+                    GameObject obj = Instantiate(_projectilePrefab, _muzzle.position, Quaternion.LookRotation(dir, Vector3.up));
+
+                    //obj.getcom
+
                 }
+                //bool kek = false;
+
+                //var dir = _ray.origin - _ray.direction;
+
+                //Instantiate(_projectilePrefab, _muzzle.position, Quaternion.LookRotation(_ray.direction, Vector3.up)); // good code (almost)
             }
         }
 

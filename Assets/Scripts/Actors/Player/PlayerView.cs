@@ -77,8 +77,6 @@ namespace Game
             }
 
             Gun = GetComponentInChildren<Gun>();
-
-            Gun.Init(model.GunData, model.PlayerStats);
         }
 
         private void Update()
