@@ -40,6 +40,9 @@ namespace Game
         }
         #endregion
 
+        [SerializeField] private SoundsMachine _soundsMachine;
+        public SoundsMachine SoundsMachine => _soundsMachine;
+
         public event EventHandler<EventArgs> Clicked = (sender, e) => { };
         public event EventHandler<EventArgs<float>> CubeDeath = (sender, e) => { };
         public event EventHandler<EventArgs> LevelPassed = (sender, e) => { };
@@ -58,6 +61,8 @@ namespace Game
         public void Init(PlayerModel model, UpgradesSO upgrades)
         {
             InitMessageHandler();
+
+            _soundsMachine.Init();
 
             Ui = FindObjectOfType<UserStatsCanvas>();
             Ui.Init(model);

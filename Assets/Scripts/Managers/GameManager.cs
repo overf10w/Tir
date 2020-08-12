@@ -179,7 +179,7 @@ using UnityEngine;
 
 // 11-AUG-20
 // 0. Experiment with the cubes materials/sprites/particles/sounds/etc. a little bit - maybe in another project - [1/2]
-// 1. Add a sound when click gun shoots
+// 1. Add a sound when click gun shoots - [done]
 // 2. Add Cube destroy particles (gotta try a lot of particle systems)
 // 3. Add cube take damage particles (maybe UniqueProjectiles particles will be enough)
 // 4. Do ToDo in WeaponPanelEntry.cs - [done]
@@ -240,6 +240,7 @@ namespace Game
             PlayerModel model = new PlayerModel();
             PlayerView view = Instantiate(Resources.Load<PlayerView>("Prefabs/Player"));
             new PlayerController(model, _upgrades, view, _inputManager);
+            new PlayerSoundController(view);
             new UpgradesController(model, _upgrades, _researchPanel);
 
             _waveSpawner.Init(model.PlayerStats);

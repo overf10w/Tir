@@ -26,32 +26,21 @@ namespace Game
         {
             if (Time.time > _nextShotTime)
             {
-                // Work only with 'Cube' layer
-                int layerMask = 1 << LayerMask.NameToLayer("Cube");
+                int layerMask = (1 << LayerMask.NameToLayer("Default")) | (1 << LayerMask.NameToLayer("Cube")) | (1 << LayerMask.NameToLayer("SpaceDecoration")) | (1 << LayerMask.NameToLayer("UI"));
 
                 if (Physics.Raycast(_ray.origin, _ray.direction, out _hit, Mathf.Infinity, layerMask))
                 {
+                    var dir = _hit.point - _muzzle.position;
+                    GameObject obj = Instantiate(_projectilePrefab, _muzzle.position, Quaternion.LookRotation(dir, Vector3.up));
+
                     _nextShotTime = Time.time + _msBetweenShots / 1000;
+
                     IDestroyable target = _hit.transform.GetComponent<IDestroyable>();
                     if (target != null)
                     {
                         target.TakeDamage(damage);
                     }
-                    //Debug.DrawRay(_ray.origin, _ray.direction * 10000, Color.red, 0.5f);
-                    //Debug.DrawRay(_muzzle.position, _hit.point - _muzzle.position, Color.green, 0.7f);
-
-                    var dir = _hit.point - _muzzle.position;
-
-                    GameObject obj = Instantiate(_projectilePrefab, _muzzle.position, Quaternion.LookRotation(dir, Vector3.up));
-
-                    //obj.getcom
-
                 }
-                //bool kek = false;
-
-                //var dir = _ray.origin - _ray.direction;
-
-                //Instantiate(_projectilePrefab, _muzzle.position, Quaternion.LookRotation(_ray.direction, Vector3.up)); // good code (almost)
             }
         }
 

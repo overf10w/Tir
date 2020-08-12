@@ -151,9 +151,6 @@ namespace Game
 
         private void ClickedHandler(object sender, EventArgs e)
         {
-            // TODO (LP): view.Gun.Shoot(model.teamWeapons['PlayerPistol'].model.DPS);
-            // For that matter, model.teamWeapons['PlayerPistol'] should be cached in PlayreController on a startup
-            // And also, for that matter, playerGun.DPS shouldn't be upgradeable at all, its dps.Multiplier should be 0.
             _view.Gun.Shoot(_model.DMG.Value);
         }
 
