@@ -29,6 +29,9 @@ namespace Game
         [SerializeField] private SoundsMachine _soundsMachine;
         public SoundsMachine SoundsMachine => _soundsMachine;
 
+        [SerializeField] private ParticleMachine _particleMachine;
+        public ParticleMachine ParticleMachine => _particleMachine;
+
         public event EventHandler<EventArgs<float>> DamageTaken;
         public event EventHandler<CubeHpChangeEventArgs> HpChanged;
 
@@ -98,6 +101,8 @@ namespace Game
         {
             yield return new WaitForEndOfFrame();
             MessageBus.Instance.SendMessage(new Message { Type = MessageType.CUBE_DEATH, objectValue = (Cube)this });
+            _particleMachine.Spawn("DestroyParticles", transform);
+            yield return new WaitForSeconds(0.15f);
             Destroy(this.gameObject);
         }
     }

@@ -39,7 +39,15 @@ namespace Game
                     if (target != null)
                     {
                         target.TakeDamage(damage);
+
                     }
+
+                    Cube cube = _hit.transform.GetComponent<Cube>();
+                    if (cube != null)
+                    {
+                        cube.ParticleMachine.Spawn("TakeDamageParticles", _hit.point);
+                    }
+
                 }
             }
         }

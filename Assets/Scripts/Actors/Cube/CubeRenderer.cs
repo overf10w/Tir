@@ -26,24 +26,39 @@ namespace Game
 
             _cube = GetComponentInParent<Cube>();
             _cube.HpChanged += HandleHpChange;
-
             _cubeStat = Resources.Load<CubeStats>("SO/CubeStats").Stats;
 
             _renderer = GetComponent<MeshRenderer>();
-
             _renderer.material = _cubeStat.materials.PickRandom();
 
             _currHP = _maxHP = _cube.Health;
             _hpScaleMultiplier = transform.localScale.y / _maxHP;
         }
 
+        private IEnumerator FadeRoutine()
+        {
+            yield return new WaitForSeconds(0.05f);
+            _sides.SetActive(false);
+            _renderer.enabled = false;
+        }
+
         private void HandleHpChange(object sender, CubeHpChangeEventArgs hp)
         {
             if (hp.Value <= 0)
             {
-                _sides.SetActive(false);
-                _renderer.enabled = false;
-                return;
+                // TODO: remove this, as this causes serious bugs
+                //LeanTween.value(0, 1, 0.05f).setOnComplete(() =>
+                //{
+                //    _sides.SetActive(false);
+                //    _renderer.enabled = false;
+                //    return;
+                //});
+
+                //_sides.SetActive(false);
+                //_renderer.enabled = false;
+                //return;
+
+                StartCoroutine(FadeRoutine());
             }
 
             float deltaHp = _currHP - hp.Value;
@@ -58,6 +73,8 @@ namespace Game
                 transform.localPosition = new Vector3(transform.localPosition.x, _cachedPosition.y - (_cachedScale.y / 2.0f), transform.localPosition.z);
                 return;
             }
+
+            // TODO: remove this code as it causes serious bugs
             LeanTween.value(prevScaleY, newScaleY, 0.06f).setOnUpdate((float val) =>
             {
                 transform.localScale = new Vector3(prevScale.x, val, prevScale.z);

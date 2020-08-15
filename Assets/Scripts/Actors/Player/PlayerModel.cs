@@ -55,7 +55,11 @@ namespace Game
             string _playerStatsDataPath = Path.Combine(Application.persistentDataPath, "playerStatsData.dat");
 
             PlayerStats = ResourceLoader.LoadPlayerStats();
-            PlayerStats.SetPlayerStats(ResourceLoader.Load<PlayerStatsData>(_playerStatsDataPath));
+            PlayerStatsData playerStatsData = ResourceLoader.Load<PlayerStatsData>(_playerStatsDataPath);
+            if (playerStatsData != null)
+            {
+                PlayerStats.SetPlayerStats(ResourceLoader.Load<PlayerStatsData>(_playerStatsDataPath));
+            }
             PlayerStats.PropertyChanged += PlayerStatChangedHandler;
         }
 

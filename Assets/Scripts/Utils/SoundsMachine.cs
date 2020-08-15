@@ -59,15 +59,16 @@ namespace Game
                 return;
             }
 
-            s.source.PlayOneShot(s.clip);
+            //s.source.PlayOneShot(s.clip);
+            s.source.Play();
 
-            //while (s.source.isPlaying)
-            //{
-            //    //Debug.Log("SoundsMachine: await Task.Yield: ");
-            //    await Task.Yield();
-            //}
+            while (s.source.isPlaying)
+            {
+                //Debug.Log("SoundsMachine: await Task.Yield: ");
+                await Task.Yield();
+            }
 
-            await UniTask.Delay(TimeSpan.FromSeconds(s.clip.length));
+            //await UniTask.Delay(TimeSpan.FromSeconds(s.clip.length));
         }
 
         public async Task PlayForced(string name)

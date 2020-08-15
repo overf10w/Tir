@@ -33,6 +33,8 @@ namespace Game
         public int CubesNumber => _cubesNumber;
 
         [SerializeField] private Transform _spawnGrid;
+        [SerializeField] private Transform _center;
+        [SerializeField] private float _cubeScaleMultiplier = 1.9f;
 
         public List<IDestroyable> Cubes { get; private set; }
 
@@ -40,7 +42,7 @@ namespace Game
         public float WaveGold { get; private set; }
         public EventHandler<EventArgs<float>> WaveHpChanged { get; set; } = (s, e) => { };
 
-        public void Init(float waveHp, float waveGold)
+        public void Init(float waveHp, float waveGold, Transform waveSpawnPoint)
         {
             WaveHP = waveHp;
             WaveGold = waveGold;
@@ -48,29 +50,53 @@ namespace Game
             InitMessageHandler();
 
             Cubes = new List<IDestroyable>();
-            SpawnCubes();
+            SpawnCubes(waveSpawnPoint);
         }
 
-        private void SpawnCubes()
+        // TODO: find the offset between centers - [seems to be done]
+        private void SpawnCubes(Transform waveSpawnPoint)
         {
+            Vector3 centerLocalPos = _center.localPosition;
+            Vector3 cubeScale = new Vector3(_cubeScaleMultiplier, _cubeScaleMultiplier, _cubeScaleMultiplier);
+            Vector3 gridScale = _spawnGrid.localScale;
+
+            Vector3 scaleMult = new Vector3(cubeScale.x * gridScale.x, cubeScale.y * gridScale.y, cubeScale.z * gridScale.z);
+
+            //Vector3 wavePosition = waveSpawnPoint.position; // here mitigate an offset between _center.position and waveSpawnPoint
+            Vector3 wavePosition = new Vector3(waveSpawnPoint.position.x - (centerLocalPos.x * scaleMult.x), waveSpawnPoint.position.y - (centerLocalPos.y * scaleMult.y), waveSpawnPoint.position.z - (centerLocalPos.z * scaleMult.z));
+
+
+
+            _spawnGrid.position = wavePosition;
+            _spawnGrid.localScale = scaleMult;
+
+            _center.position = new Vector3(wavePosition.x + (centerLocalPos.x * scaleMult.x), wavePosition.y + (centerLocalPos.y * scaleMult.y), wavePosition.z + (centerLocalPos.z * scaleMult.z));
+
             float cubesCnt = _spawnGrid.childCount;
 
             for (int i = _spawnGrid.childCount - 1; i >= 0; i--)
             {
                 var spawnTransform = _spawnGrid.GetChild(i);
+
+                Debug.Log("spawnTransform.position: " + spawnTransform.position + ", localPosition: " + spawnTransform.localPosition);
                 var prefab = Resources.Load<Cube>("Prefabs/Cube") as Cube;
-                //float scaleMultiplier = prefab.transform
-                var cube = Instantiate(prefab, spawnTransform.transform) as Cube;
+
+                var cube = Instantiate(prefab) as Cube;
+                cube.transform.position = spawnTransform.position;
+                cube.transform.localScale = cubeScale;
+                cube.transform.parent = spawnTransform;
+
                 cube.Init(WaveHP / cubesCnt, WaveGold / cubesCnt);
                 new CubeController(cube);
                 cube.HpChanged += CubeTakeDamageHandler;
-                cube.transform.SetParent(this.gameObject.transform);
                 Cubes.Add(cube.GetComponent<IDestroyable>());
 
-                Destroy(spawnTransform.gameObject);
+                //Destroy(spawnTransform.gameObject);
 
                 _cubesNumber++;
             }
+
+            //_center.position = wavePosition;
         }
 
         private void CubeTakeDamageHandler(object sender, CubeHpChangeEventArgs e)

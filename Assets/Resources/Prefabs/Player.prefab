@@ -119,7 +119,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1776852431311746}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.013999939, z: 3.31}
+  m_LocalPosition: {x: 0, y: 0.013999939, z: 2.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4678252087764638}
@@ -186,7 +186,7 @@ MonoBehaviour:
   _sounds:
   - name: ShootSound
     clip: {fileID: 8300000, guid: 40d2ea7c3a26f3a489e7899fd24e904c, type: 3}
-    volume: 1
+    volume: 0.3
     pitch: 1
     loop: 0
     playOnAwake: 0

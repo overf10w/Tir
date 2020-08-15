@@ -33,6 +33,7 @@ namespace Game
         [SerializeField] private WaveSpawnerAlgorithm _algorithm;
         [SerializeField] private PlayerWaves _playerWaves;
         [SerializeField] private WaveCanvas _waveCanvas;
+        [SerializeField] private Transform _waveSpawnPoint;
 
         private PlayerStats _playerStats;
         private Wave _wave;
@@ -56,7 +57,7 @@ namespace Game
 
             float waveHP = _algorithm.GetWaveHp(_playerStats.Level);
             float waveGold = _algorithm.GetWaveGold(_playerStats.Level);
-            _wave.Init(waveHP, waveGold);
+            _wave.Init(waveHP, waveGold, _waveSpawnPoint);
             _wave.WaveHpChanged += WaveHpChangedHandler;
 
             _cubesSpawned = _wave.CubesNumber;

@@ -13,20 +13,20 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   playerStats:
-    _gold: 1000
-    _level: 45
-    _lastPlayTimestamp: 637326845062095543
+    _gold: 0
+    _level: 0
+    _lastPlayTimestamp: 0
     _teamSkills:
     - _icon: {fileID: 21300000, guid: efd7585bdffbb24418840a036f6722d4, type: 3}
       _name: DPSMultiplier
-      _value: 2
+      _value: 1
     _clickGunSkills:
     - _icon: {fileID: 21300002, guid: 5b662844ab2574a4581238ffe0047880, type: 3}
       _name: GoldGainedMultiplier
-      _value: 2
+      _value: 1
     - _icon: {fileID: 21300000, guid: efd7585bdffbb24418840a036f6722d4, type: 3}
       _name: DMGMultiplier
-      _value: 2
+      _value: 1
     _artifacts:
     - _icon: {fileID: 21300000, guid: 0cf9ad425bac04349a2c2dbeb480b487, type: 3}
       _name: p

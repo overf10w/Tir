@@ -31,11 +31,11 @@ MonoBehaviour:
         _maxUpgradeLevel: 0
         _upgradeValueMultiplier: 2
       _dmg:
-        _basePrice: 30
+        _basePrice: 50
         _priceMultiplier: 1.095
-        _baseValue: 20
+        _baseValue: 40
         _valueMultiplier: 1.1
-        _baseUpgradePrice: 30
+        _baseUpgradePrice: 40
         _upgradePriceMultiplier: 1
         _maxUpgradeLevel: 100
         _upgradeValueMultiplier: 2

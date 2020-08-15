@@ -180,25 +180,31 @@ using UnityEngine;
 // 11-AUG-20
 // 0. Experiment with the cubes materials/sprites/particles/sounds/etc. a little bit - maybe in another project - [1/2]
 // 1. Add a sound when click gun shoots - [done]
-// 2. Add Cube destroy particles (gotta try a lot of particle systems)
-// 3. Add cube take damage particles (maybe UniqueProjectiles particles will be enough)
+// 2. Add Cube destroy particles (gotta try a lot of particle systems) - [done]
+// 3. Add cube take damage particles (maybe UniqueProjectiles particles will be enough) - [done]
 // 4. Do ToDo in WeaponPanelEntry.cs - [done]
 // 5. Add projectile particles when click gun shoots - [done]
+// 6. Add camera shake - https://github.com/andersonaddo/EZ-Camera-Shake-Unity
 
 // 12-AUG-20:
-// 0. Change how we configure and reconfigure player waves in editor mode, 
-//      0.1 Make the scale of each wave prefab (and thus its cubes) configurable through script
-//      0.2 Add WaveSpawnPoint (will be the center of the spawned wave)
-//      0.2 Find the Center of spawned wave
-//      0.3 Find the offset of Center os spawned wave with the WaveSpawnPoint
-//      0.4 Apply the counter-offset
-// 1. Add some cube structures that resemble buildings, cars, animals, etc.
+// 0. Change how we configure and reconfigure player waves in editor mode - [done]
+//      0.1 Make the scale of each wave prefab (and thus its cubes) configurable through script - [done]
+//      0.2 Add WaveSpawnPoint (will be the center of the spawned wave) - [done]
+//      0.2 Find the Center of spawned wave - [done]
+//      0.3 Find the offset of Center os spawned wave with the WaveSpawnPoint - [done]
+//      0.4 Apply the counter-offset - [done]
+// 1. Add some cube structures that resemble buildings, cars, animals, smiles, etc - [done]
 // 2. Play with cube outline (i.e.)
 // 2. Animate some of the waves (with unity animator)
 //      2.1 When cubes are spawned, make each a child of a spawnpoint
 
-// 13-AUG-20:
-// 0. Add camera shake like in Trumpage
+// 15-AUG-20:
+// 0. Experiment with particle systems
+// 1. Do ToDo in CubeRenderer.cs (Very important) - [done]
+
+// 17-AUG-20:
+// 0. Do ToDo in CubeRenderer.cs
+// 1. Animate waves (through the animator component) - [(?)done - at least the hardest part - in the Wave.cs: SpawnCubes()]
 
 // The concept of game is this
 // 0. On each wave, the player can complete objectives: i.e: to shoot 2/3/4 blue/yellow/blinking/anime/wave blocks, etc., 
