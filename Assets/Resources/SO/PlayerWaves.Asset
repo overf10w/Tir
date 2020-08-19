@@ -13,6 +13,4 @@ MonoBehaviour:
   m_Name: PlayerWaves
   m_EditorClassIdentifier: 
   _waves:
-  - {fileID: 114398338289295854, guid: 080dea89b6bf1f945825589bcb67214b, type: 3}
-  - {fileID: 114398338289295854, guid: f733f1d21d5794d4b838a40ae9431d06, type: 3}
-  - {fileID: 114398338289295854, guid: e94bcaf6cbd90894bb0b95341f0bc8fb, type: 3}
+  - {fileID: 114398338289295854, guid: 7e3a2a734e10cd44bbfa6dfe60eaa4d2, type: 3}

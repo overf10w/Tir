@@ -65,8 +65,6 @@ namespace Game
             //Vector3 wavePosition = waveSpawnPoint.position; // here mitigate an offset between _center.position and waveSpawnPoint
             Vector3 wavePosition = new Vector3(waveSpawnPoint.position.x - (centerLocalPos.x * scaleMult.x), waveSpawnPoint.position.y - (centerLocalPos.y * scaleMult.y), waveSpawnPoint.position.z - (centerLocalPos.z * scaleMult.z));
 
-
-
             _spawnGrid.position = wavePosition;
             _spawnGrid.localScale = scaleMult;
 
@@ -77,6 +75,7 @@ namespace Game
             for (int i = _spawnGrid.childCount - 1; i >= 0; i--)
             {
                 var spawnTransform = _spawnGrid.GetChild(i);
+                //spawnTransform.parent = _center;
 
                 Debug.Log("spawnTransform.position: " + spawnTransform.position + ", localPosition: " + spawnTransform.localPosition);
                 var prefab = Resources.Load<Cube>("Prefabs/Cube") as Cube;
@@ -90,8 +89,6 @@ namespace Game
                 new CubeController(cube);
                 cube.HpChanged += CubeTakeDamageHandler;
                 Cubes.Add(cube.GetComponent<IDestroyable>());
-
-                //Destroy(spawnTransform.gameObject);
 
                 _cubesNumber++;
             }

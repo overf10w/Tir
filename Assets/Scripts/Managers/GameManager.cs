@@ -203,8 +203,12 @@ using UnityEngine;
 // 1. Do ToDo in CubeRenderer.cs (Very important) - [done]
 
 // 17-AUG-20:
-// 0. Do ToDo in CubeRenderer.cs
-// 1. Animate waves (through the animator component) - [(?)done - at least the hardest part - in the Wave.cs: SpawnCubes()]
+// 0. Do ToDos in CubeRenderer.cs - SUPER IMPORTANT - CAUSES SEVERE BUGS - [done]
+// 1. Animate waves (through the animator component) - [(?)done - at least the hardest part - in the Wave.cs: SpawnCubes()] - [in process]
+
+// 20-AUG-20:
+// 0. Make some cubes in some waves half-transparent
+// 1. Make an option to choose the color of spawned cube
 
 // The concept of game is this
 // 0. On each wave, the player can complete objectives: i.e: to shoot 2/3/4 blue/yellow/blinking/anime/wave blocks, etc., 

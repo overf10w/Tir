@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -58,7 +59,9 @@ namespace Game
                 //_renderer.enabled = false;
                 //return;
 
+                LeanTween.cancel(gameObject);
                 StartCoroutine(FadeRoutine());
+                return;
             }
 
             float deltaHp = _currHP - hp.Value;
@@ -67,32 +70,72 @@ namespace Game
             Vector3 prevScale = transform.localScale;
             float prevScaleY = prevScale.y;
             float newScaleY = prevScaleY - deltaScaleY;
+
             if (newScaleY <= 0)
             {
-                transform.localScale = new Vector3(prevScale.x, 0, prevScale.z);
-                transform.localPosition = new Vector3(transform.localPosition.x, _cachedPosition.y - (_cachedScale.y / 2.0f), transform.localPosition.z);
+                //transform.localScale = new Vector3(prevScale.x, 0, prevScale.z);
+                //transform.localPosition = new Vector3(transform.localPosition.x, _cachedPosition.y - (_cachedScale.y / 2.0f), transform.localPosition.z);
                 return;
             }
 
-            // TODO: remove this code as it causes serious bugs
-            LeanTween.value(prevScaleY, newScaleY, 0.06f).setOnUpdate((float val) =>
-            {
-                transform.localScale = new Vector3(prevScale.x, val, prevScale.z);
-            });
-            
+            // TODO: rewrite this code with coroutines as it causes some really severe bugs
+            //LTDescr kek1 = LeanTween.value(prevScaleY, newScaleY, 0.06f).setOnUpdate((float val) =>
+            //{
+            //    if (transform.gameObject.activeInHierarchy && transform != null && prevScale != null)
+            //    {
+            //        transform.localScale = new Vector3(prevScale.x, val, prevScale.z);
+            //    }
+            //});
+            StartCoroutine(
+                Lerp(prevScaleY, newScaleY, 0.06f,
+                     (float val) =>
+                     {
+                         transform.localScale = new Vector3(prevScale.x, val, prevScale.z);
+                     })
+            );
+
+
+
             //transform.localScale = new Vector3(prevScale.x, newScaleY, prevScale.z);
 
             Vector3 prevPos = transform.localPosition;
             float prevPosY = prevPos.y;
             float deltaPosY = deltaScaleY / 2.0f;
             float newPosY = prevPosY - deltaPosY;
-            LeanTween.value(prevPosY, newPosY, 0.06f).setOnUpdate((float val) =>
-            {
-                transform.localPosition = new Vector3(prevPos.x, val, prevPos.z);
-            });
+            
+            // TODO: rewrite this code with coroutines as it causes some really severe bugs
+            //LTDescr kek2 = LeanTween.value(prevPosY, newPosY, 0.06f).setOnUpdate((float val) =>
+            //{
+            //    if (transform.gameObject.activeInHierarchy && transform != null && prevPos != null)
+            //    {
+            //        transform.localPosition = new Vector3(prevPos.x, val, prevPos.z);
+            //    }
+            //});
+
+            StartCoroutine(
+                Lerp(prevPosY, newPosY, 0.06f, 
+                     (float val) => 
+                     {
+                         transform.localPosition = new Vector3(prevPos.x, val, prevPos.z);
+                     })
+            );
+
             //transform.localPosition = new Vector3(prevPos.x, prevPos.y - deltaPosY, prevPos.z);
 
             _currHP = hp.Value;
+        }
+
+        private IEnumerator Lerp(float a, float b, float time, Action<float> callback)
+        {
+            float elapsedTime = 0;
+            while (elapsedTime < time)
+            {
+                elapsedTime += Time.deltaTime;
+                float value = Mathf.SmoothStep(a, b, elapsedTime / time);
+                callback?.Invoke(value);
+                yield return null;
+            }
+            callback?.Invoke(b);
         }
     }
 }

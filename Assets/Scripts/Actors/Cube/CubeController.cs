@@ -32,6 +32,8 @@ namespace Game
             if (e.Value <= 0 && !isDead)
             {
                 isDead = true;
+                // TODO: wtf remove????
+                LeanTween.cancel(_cubeMV.gameObject, false);
                 DestroyMV();
             }
         }
