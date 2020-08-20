@@ -24,7 +24,7 @@ namespace Game
                 {
                     MessageBus.Instance.SendMessage(new Message { Type = MessageType.LEVEL_PASSED });
                     Destroy(_wave.gameObject);
-                    SpawnWave();
+                    StartCoroutine(SpawnWave());
                 }
             }
         }
@@ -45,11 +45,13 @@ namespace Game
         {
             InitMessageHandler();
             _playerStats = playerStats;
-            SpawnWave();
+            StartCoroutine(SpawnWave());
         }
 
-        private void SpawnWave()
+        private IEnumerator SpawnWave()
         {
+            yield return new WaitForSeconds(0.5f);
+
             var waves = _playerWaves.Waves;
             var wavePrefab = waves.PickRandom();
 

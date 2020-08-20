@@ -18,7 +18,6 @@ namespace Game
         [SerializeField] private Image _image;
         [SerializeField] private Image _maskImage;
 
-
         [field: NonSerialized]
         private PlayerModel _playerModel;
 
@@ -42,27 +41,42 @@ namespace Game
             Render();
         }
 
+        // TODO: do we really need this method here?
         public void Render()
         {
             if (!_upgrade.IsActive)
             {
-                _price.color = Color.red;
-                UpgradeBtn.interactable = false;
-                _maskImage.color = new Color(1, 1, 1, 0.8f);
-                gameObject.SetActive(false);
+                ShowInactive(0.99f);
+            }
+            else if (_playerModel.PlayerStats.Gold < _upgrade.Price / 10.0f)
+            {
+                ShowInactive(0.75f);
             }
             else if (_playerModel.PlayerStats.Gold < _upgrade.Price)
             {
-                _price.color = Color.red;
-                UpgradeBtn.interactable = false;
-                _maskImage.color = new Color(1, 1, 1, 0.8f);
+                ShowInactive(0.3f);
             }
             else
             {
-                _price.color = Color.green;
-                UpgradeBtn.interactable = true;
-                _maskImage.color = new Color(1, 1, 1, 0.0f);
+                ShowActive();
             }
+        }
+
+        // TODO: make this method easier to understand
+        public void ShowInactive(float normalizedStrength)
+        {
+            float strength = Mathf.Clamp01(normalizedStrength);
+
+            _price.color = Color.red;
+            UpgradeBtn.interactable = false;
+            _maskImage.color = new Color(1, 1, 1, strength);
+        }
+
+        public void ShowActive()
+        {
+            _price.color = Color.green;
+            UpgradeBtn.interactable = true;
+            _maskImage.color = new Color(1, 1, 1, 0.0f);
         }
 
         private void UpgradeChangedHandler(object sender, PropertyChangedEventArgs args)

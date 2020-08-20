@@ -33,6 +33,7 @@ namespace Game
         public int CubesNumber => _cubesNumber;
 
         [SerializeField] private Transform _spawnGrid;
+        // TODO (LP): rename this to _ancher
         [SerializeField] private Transform _center;
         [SerializeField] private float _cubeScaleMultiplier = 1.9f;
 
@@ -53,7 +54,6 @@ namespace Game
             SpawnCubes(waveSpawnPoint);
         }
 
-        // TODO: find the offset between centers - [seems to be done]
         private void SpawnCubes(Transform waveSpawnPoint)
         {
             Vector3 centerLocalPos = _center.localPosition;
@@ -62,7 +62,6 @@ namespace Game
 
             Vector3 scaleMult = new Vector3(cubeScale.x * gridScale.x, cubeScale.y * gridScale.y, cubeScale.z * gridScale.z);
 
-            //Vector3 wavePosition = waveSpawnPoint.position; // here mitigate an offset between _center.position and waveSpawnPoint
             Vector3 wavePosition = new Vector3(waveSpawnPoint.position.x - (centerLocalPos.x * scaleMult.x), waveSpawnPoint.position.y - (centerLocalPos.y * scaleMult.y), waveSpawnPoint.position.z - (centerLocalPos.z * scaleMult.z));
 
             _spawnGrid.position = wavePosition;
@@ -75,9 +74,6 @@ namespace Game
             for (int i = _spawnGrid.childCount - 1; i >= 0; i--)
             {
                 var spawnTransform = _spawnGrid.GetChild(i);
-                //spawnTransform.parent = _center;
-
-                Debug.Log("spawnTransform.position: " + spawnTransform.position + ", localPosition: " + spawnTransform.localPosition);
                 var prefab = Resources.Load<Cube>("Prefabs/Cube") as Cube;
 
                 var cube = Instantiate(prefab) as Cube;
@@ -92,8 +88,6 @@ namespace Game
 
                 _cubesNumber++;
             }
-
-            //_center.position = wavePosition;
         }
 
         private void CubeTakeDamageHandler(object sender, CubeHpChangeEventArgs e)

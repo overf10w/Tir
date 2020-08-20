@@ -13,4 +13,16 @@ MonoBehaviour:
   m_Name: PlayerWaves
   m_EditorClassIdentifier: 
   _waves:
+  - {fileID: 114398338289295854, guid: 13456d70b5378694dbf72c31d841c70b, type: 3}
+  - {fileID: 114398338289295854, guid: e2b49e2aa95498441a46ed8446ab7fe2, type: 3}
+  - {fileID: 114398338289295854, guid: 6d5c722584f219842843ff1650860cfd, type: 3}
+  - {fileID: 114398338289295854, guid: fe917de104fd78148b20ac4a4b31678a, type: 3}
   - {fileID: 114398338289295854, guid: 7e3a2a734e10cd44bbfa6dfe60eaa4d2, type: 3}
+  - {fileID: 114398338289295854, guid: 86ac8d82a67ffe24aa8d2d068e3bc5a6, type: 3}
+  - {fileID: 114398338289295854, guid: 4f6f8799ac900784f972699e14aa45ee, type: 3}
+  - {fileID: 114398338289295854, guid: f63a8ba60b6179348b607507eaae0700, type: 3}
+  - {fileID: 114398338289295854, guid: 11364ead3385b4c439ef0ec3c1a74d43, type: 3}
+  - {fileID: 114398338289295854, guid: af892904e5b475349af5a5917ceb9c29, type: 3}
+  - {fileID: 114398338289295854, guid: 3267af6e660f3c545b0098cb16ee355e, type: 3}
+  - {fileID: 114398338289295854, guid: 3e5b1347cf6520249a3c949ecd7f7c95, type: 3}
+  - {fileID: 114398338289295854, guid: 77cca7eb2ff0d2f46a64d22830a46f2e, type: 3}

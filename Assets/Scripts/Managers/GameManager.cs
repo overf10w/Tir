@@ -208,7 +208,17 @@ using UnityEngine;
 
 // 20-AUG-20:
 // 0. Make some cubes in some waves half-transparent
-// 1. Make an option to choose the color of spawned cube
+// 1. Make an option to choose the color of a spawned cube (in the editor)
+
+// 21-AUG-20:
+// 0. Refactor ResearchPanel/ResearchPanelEntry/UpgradesController
+// 1. Add some more content: waves, upgrades, artifacts
+
+// 25-AUG-20:
+// 0. Add blinking outline shader indicator that the cube is taking damage
+
+// 01-SEP-20:
+// 0. Add ascending system
 
 // The concept of game is this
 // 0. On each wave, the player can complete objectives: i.e: to shoot 2/3/4 blue/yellow/blinking/anime/wave blocks, etc., 
@@ -247,7 +257,9 @@ namespace Game
         {
             _upgrades = Resources.Load<UpgradesSO>("SO/Researches/Upgrades");
 
-            PlayerModel model = new PlayerModel();
+            string _playerStatsDataPath = Path.Combine(Application.persistentDataPath, "playerStatsData.dat");
+
+            PlayerModel model = new PlayerModel(_playerStatsDataPath);
             PlayerView view = Instantiate(Resources.Load<PlayerView>("Prefabs/Player"));
             new PlayerController(model, _upgrades, view, _inputManager);
             new PlayerSoundController(view);

@@ -43,17 +43,15 @@ namespace Game
         public WeaponStat DMG { get; private set; }
         // endof Click Gun Data
 
-        public PlayerModel()
+        public PlayerModel(string _playerStatsDataPath)
         {
-            InitPlayerStats();
+            InitPlayerStats(_playerStatsDataPath);
             InitTeamWeapons(PlayerStats);
             InitClickGun();
         }
 
-        private void InitPlayerStats()
+        private void InitPlayerStats(string _playerStatsDataPath)
         {
-            string _playerStatsDataPath = Path.Combine(Application.persistentDataPath, "playerStatsData.dat");
-
             PlayerStats = ResourceLoader.LoadPlayerStats();
             PlayerStatsData playerStatsData = ResourceLoader.Load<PlayerStatsData>(_playerStatsDataPath);
             if (playerStatsData != null)

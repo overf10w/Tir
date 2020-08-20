@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cubesNumber: 0
-  _spawnGrid: {fileID: 4527973315028046686}
+  _spawnGrid: {fileID: 7908193954559720179}
   _center: {fileID: 7908193954559720179}
   _cubeScaleMultiplier: 2.4
 --- !u!1 &409710967456707754

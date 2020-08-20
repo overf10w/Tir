@@ -129,7 +129,7 @@ namespace Game
             {
                 _teamDpsTxt.text = "Team DPS: " + val.SciFormat().ToString();
             });
-            //_teamDpsTxt.text = "Team DPS: " + teamDps.SciFormat().ToString();
+
             _prevDps = teamDps;
         }
 

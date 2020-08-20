@@ -37,7 +37,7 @@ namespace Game
 
         [SerializeField] private Button _closeBtn;
 
-        public List<ResearchPanelEntry> ResearchPanelEntries { get; private set; }
+        public Dictionary<Upgrade, ResearchPanelEntry> UpgradeEntries { get; private set; }
 
         private bool _isHidden = true;
         public bool IsHidden
@@ -60,8 +60,13 @@ namespace Game
         private GameObject _prefab;
         private Transform _content;
 
+        private PlayerModel _playerModel;
+
         public void Init(PlayerModel playerModel, UpgradesSO upgradesSO)
         {
+            UpgradeEntries = new Dictionary<Upgrade, ResearchPanelEntry>();
+
+            _playerModel = playerModel;
             _upgradesSO = upgradesSO;
             _upgrades = _upgradesSO.Upgrades;
             
@@ -69,7 +74,6 @@ namespace Game
             _prefab = Resources.Load<GameObject>("Prefabs/UI/ResearchPanel/ResearchPanelEntry");
             _content = transform.Find("ScrollView/Viewport/Content").GetComponent<Transform>();
 
-            ResearchPanelEntries = new List<ResearchPanelEntry>();
             UpgradeBtnClick = new UpgradeBtnClick();
 
             _toggleCanvas.Init();
@@ -78,13 +82,13 @@ namespace Game
 
             foreach (var upgrade in _upgrades)
             {
-                GameObject entry = Instantiate(_prefab, _content);
+                GameObject entryGO = Instantiate(_prefab, _content);
 
-                ResearchPanelEntry script = entry.GetComponent<ResearchPanelEntry>();
-                script.Init(playerModel, upgrade);
-                script.UpgradeBtn.onClick.AddListener(() => { UpgradeBtnClick.Dispatch(new UpgradeBtnClickEventArgs(upgrade)); });
+                ResearchPanelEntry entry = entryGO.GetComponent<ResearchPanelEntry>();
+                entry.Init(playerModel, upgrade);
+                entry.UpgradeBtn.onClick.AddListener(() => { UpgradeBtnClick.Dispatch(new UpgradeBtnClickEventArgs(upgrade)); });
 
-                ResearchPanelEntries.Add(script);
+                UpgradeEntries.Add(upgrade, entry);
             }
 
             Render();
@@ -94,9 +98,34 @@ namespace Game
 
         public void UpdateView()
         {
-            foreach (var script in ResearchPanelEntries)
+            if (UpgradeEntries == null)
             {
-                script.Render();
+                Debug.LogWarning("UpgradeEntries not found... Returning");
+                return;
+            }
+            foreach(var upgrade in UpgradeEntries)
+            {
+                Upgrade upgrd = upgrade.Key;
+                ResearchPanelEntry entry = upgrade.Value;
+                if (!upgrd.IsActive)
+                {
+                    entry.ShowInactive(0.99f);
+                    //entry.gameObject.SetActive(false);
+                }
+                else if (_playerModel.PlayerStats.Gold < upgrd.Price / 10.0f)
+                {
+                    entry.ShowInactive(0.75f);
+                }
+                else if (_playerModel.PlayerStats.Gold < upgrd.Price)
+                {
+                    entry.gameObject.SetActive(true);
+                    entry.ShowInactive(0.3f);
+                }
+                else
+                {
+                    entry.gameObject.SetActive(true);
+                    entry.ShowActive();
+                }
             }
         }
 
