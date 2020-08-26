@@ -211,11 +211,18 @@ using UnityEngine;
 // 1. Make an option to choose the color of a spawned cube (in the editor)
 
 // 21-AUG-20:
-// 0. Refactor ResearchPanel/ResearchPanelEntry/UpgradesController
-// 1. Add some more content: waves, upgrades, artifacts
+// 0. Add some more content: waves, upgrades, artifacts
 
 // 25-AUG-20:
-// 0. Add blinking outline shader indicator that the cube is taking damage
+// 0. Add blinking outline shader indicator that indicates the cube is taking damage - [done]
+
+// 26-AUG-20:
+// 0. Prettify Team(Skill)Panel, ClickGun(Skill)Panel
+// 1. Refactor ResearchPanel/ResearchPanelEntry/UpgradesController - [in the process]
+// 2. Profile the game a little bit
+
+// 31-AUG-20:
+// 0. Replace current Outline implementation with something better
 
 // 01-SEP-20:
 // 0. Add ascending system

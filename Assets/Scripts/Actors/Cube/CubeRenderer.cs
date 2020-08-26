@@ -1,4 +1,5 @@
-﻿using System;
+﻿using cakeslice;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,10 @@ namespace Game
     public class CubeRenderer : MonoBehaviour
     {
         [SerializeField] private GameObject _sides;
+        [SerializeField] private Outline _outline;
+
+        [SerializeField] private float _outlineEffectDuration = 0.1f;
+        private Coroutine _outlineRoutine;
 
         private Cube _cube;
         private CubeStat _cubeStat;
@@ -17,14 +22,8 @@ namespace Game
         private float _currHP;
         private float _hpScaleMultiplier;
 
-        private Vector3 _cachedScale;
-        private Vector3 _cachedPosition;
-
         private void Start()
         {
-            _cachedScale = transform.localScale;
-            _cachedPosition = transform.position;
-
             _cube = GetComponentInParent<Cube>();
             _cube.HpChanged += HandleHpChange;
             _cubeStat = Resources.Load<CubeStats>("SO/CubeStats").Stats;
@@ -38,7 +37,9 @@ namespace Game
 
         private IEnumerator FadeRoutine()
         {
+            _outline.enabled = true;
             yield return new WaitForSeconds(0.05f);
+            _outline.enabled = false;
             _sides.SetActive(false);
             _renderer.enabled = false;
         }
@@ -47,18 +48,6 @@ namespace Game
         {
             if (hp.Value <= 0)
             {
-                // TODO: remove this, as this causes serious bugs
-                //LeanTween.value(0, 1, 0.05f).setOnComplete(() =>
-                //{
-                //    _sides.SetActive(false);
-                //    _renderer.enabled = false;
-                //    return;
-                //});
-
-                //_sides.SetActive(false);
-                //_renderer.enabled = false;
-                //return;
-
                 LeanTween.cancel(gameObject);
                 StartCoroutine(FadeRoutine());
                 return;
@@ -73,19 +62,9 @@ namespace Game
 
             if (newScaleY <= 0)
             {
-                //transform.localScale = new Vector3(prevScale.x, 0, prevScale.z);
-                //transform.localPosition = new Vector3(transform.localPosition.x, _cachedPosition.y - (_cachedScale.y / 2.0f), transform.localPosition.z);
                 return;
             }
 
-            // TODO: rewrite this code with coroutines as it causes some really severe bugs
-            //LTDescr kek1 = LeanTween.value(prevScaleY, newScaleY, 0.06f).setOnUpdate((float val) =>
-            //{
-            //    if (transform.gameObject.activeInHierarchy && transform != null && prevScale != null)
-            //    {
-            //        transform.localScale = new Vector3(prevScale.x, val, prevScale.z);
-            //    }
-            //});
             StartCoroutine(
                 Lerp(prevScaleY, newScaleY, 0.06f,
                      (float val) =>
@@ -94,24 +73,11 @@ namespace Game
                      })
             );
 
-
-
-            //transform.localScale = new Vector3(prevScale.x, newScaleY, prevScale.z);
-
             Vector3 prevPos = transform.localPosition;
             float prevPosY = prevPos.y;
             float deltaPosY = deltaScaleY / 2.0f;
             float newPosY = prevPosY - deltaPosY;
             
-            // TODO: rewrite this code with coroutines as it causes some really severe bugs
-            //LTDescr kek2 = LeanTween.value(prevPosY, newPosY, 0.06f).setOnUpdate((float val) =>
-            //{
-            //    if (transform.gameObject.activeInHierarchy && transform != null && prevPos != null)
-            //    {
-            //        transform.localPosition = new Vector3(prevPos.x, val, prevPos.z);
-            //    }
-            //});
-
             StartCoroutine(
                 Lerp(prevPosY, newPosY, 0.06f, 
                      (float val) => 
@@ -120,8 +86,15 @@ namespace Game
                      })
             );
 
-            //transform.localPosition = new Vector3(prevPos.x, prevPos.y - deltaPosY, prevPos.z);
-
+            if (_outlineRoutine == null)
+            {
+                _outlineRoutine = StartCoroutine(ShowOutline(_outlineEffectDuration));
+            }
+            else
+            {
+                StopCoroutine(_outlineRoutine);
+                _outlineRoutine = StartCoroutine(ShowOutline(_outlineEffectDuration));
+            }
             _currHP = hp.Value;
         }
 
@@ -136,6 +109,13 @@ namespace Game
                 yield return null;
             }
             callback?.Invoke(b);
+        }
+
+        private IEnumerator ShowOutline(float outlineEffectDuration)
+        {
+            _outline.enabled = true;
+            yield return new WaitForSeconds(outlineEffectDuration);
+            _outline.enabled = false;
         }
     }
 }

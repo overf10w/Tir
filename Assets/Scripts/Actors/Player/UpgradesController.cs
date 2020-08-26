@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using UnityEngine;
 
 namespace Game
@@ -9,8 +11,6 @@ namespace Game
     {
         private readonly PlayerModel _playerModel;
         private readonly ResearchPanel _researchPanel;
-
-        private readonly Upgrade[] _upgrades;
         private readonly UpgradesSO _upgradesSo;
 
         public UpgradesController(PlayerModel playerModel, UpgradesSO upgradesSO, ResearchPanel researchPanel)
@@ -20,16 +20,12 @@ namespace Game
             _playerModel = playerModel;
             _playerModel.PlayerStats.PropertyChanged += PlayerStatsChangedHandler;
 
-            _upgrades = upgradesSO.Upgrades;
+            _upgradesSo = upgradesSO;
 
             _researchPanel.Init(playerModel, upgradesSO);
             _researchPanel.UpgradeBtnClick.UpgradesController = this;
             _researchPanel.ResearchPanelToggleCanvas.ToggleBtnClicked += ToggleBtnClickHandler;
-
-            foreach (var upgrade in _upgrades)
-            {
-                upgrade.PropertyChanged += UpgradeChangedHandler;
-            }
+            _researchPanel.AutoSaveTriggered += AutoSaveHandler;
         }
 
         public void UpgradeBtnClickHandler(UpgradeBtnClickEventArgs e)
@@ -54,17 +50,19 @@ namespace Game
             _researchPanel.IsHidden = !_researchPanel.IsHidden;
         }
 
-        private void UpgradeChangedHandler(object sender, PropertyChangedEventArgs args)
-        {
-            Upgrade upgrade = (Upgrade)sender;
-        }
-
         private void PlayerStatsChangedHandler(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "Gold")
             {
                 _researchPanel.UpdateView();
             }
+        }
+
+        private void AutoSaveHandler(object sender, EventArgs e)
+        {
+            UpgradeData[] upgradesData = _upgradesSo.GetUpgradesData();
+            string _upgradesSavePath = Path.Combine(Application.persistentDataPath, "upgradesSave.dat");
+            ResourceLoader.Save<UpgradeData[]>(_upgradesSavePath, upgradesData);
         }
     }
 }

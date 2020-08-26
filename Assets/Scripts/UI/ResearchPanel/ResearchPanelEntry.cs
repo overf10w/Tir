@@ -21,15 +21,9 @@ namespace Game
         [field: NonSerialized]
         private PlayerModel _playerModel;
 
-        [field: NonSerialized]
-        private Upgrade _upgrade;
-
         public void Init(PlayerModel playerModel, Upgrade upgrade)
         {
             _playerModel = playerModel;
-            _upgrade = upgrade;
-
-            upgrade.PropertyChanged += UpgradeChangedHandler;
 
             UpgradeBtn = GetComponent<Button>();
 
@@ -37,27 +31,26 @@ namespace Game
             _description.text = upgrade.Description.ToString();
             _price.text = upgrade.Price.SciFormat();
             _image.sprite = upgrade.Icon;
-
-            Render();
         }
 
-        // TODO: do we really need this method here?
-        public void Render()
+        public void Render(Upgrade upgrade)
         {
-            if (!_upgrade.IsActive)
+            if (!upgrade.IsActive)
             {
                 ShowInactive(0.99f);
             }
-            else if (_playerModel.PlayerStats.Gold < _upgrade.Price / 10.0f)
+            else if (_playerModel.PlayerStats.Gold < upgrade.Price / 10.0f)
             {
                 ShowInactive(0.75f);
             }
-            else if (_playerModel.PlayerStats.Gold < _upgrade.Price)
+            else if (_playerModel.PlayerStats.Gold < upgrade.Price)
             {
+                gameObject.SetActive(true);
                 ShowInactive(0.3f);
             }
             else
             {
+                gameObject.SetActive(true);
                 ShowActive();
             }
         }
@@ -77,12 +70,6 @@ namespace Game
             _price.color = Color.green;
             UpgradeBtn.interactable = true;
             _maskImage.color = new Color(1, 1, 1, 0.0f);
-        }
-
-        private void UpgradeChangedHandler(object sender, PropertyChangedEventArgs args)
-        {
-            Upgrade upgrade = (Upgrade)sender;
-            Render();
         }
     }
 }

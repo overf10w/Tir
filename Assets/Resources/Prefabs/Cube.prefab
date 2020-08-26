@@ -4977,6 +4977,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sides: {fileID: 966574261093420585}
+  _outline: {fileID: 3366650385639307679}
+  _outlineEffectDuration: 0.15
 --- !u!114 &3366650385639307679
 MonoBehaviour:
   m_ObjectHideFlags: 0
