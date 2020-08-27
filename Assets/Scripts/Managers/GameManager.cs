@@ -214,14 +214,24 @@ using UnityEngine;
 // 0. Add some more content: waves, upgrades, artifacts
 
 // 25-AUG-20:
-// 0. Add blinking outline shader indicator that indicates the cube is taking damage - [done]
+// 0. Add outline shader indicator that indicates the cube is taking damage - [done]
 
 // 26-AUG-20:
-// 0. Prettify Team(Skill)Panel, ClickGun(Skill)Panel
 // 1. Refactor ResearchPanel/ResearchPanelEntry/UpgradesController - [in the process]
-// 2. Profile the game a little bit
+
+// 27-AUG-20:
+// 0. Change the take damage outline shader color of cube to: - [done]
+//    - Purple, when the damage is taken from enemies
+//    - Blue, when the damage is taken from player
+
+// 28-AUG-20:
+// 0. Animate all of the existing waves - [2 hrs]
+// 1. Add some more updates - [2 hrs]
+// 2. Prettify Team(Skill)Panel, ClickGun(Skill)Panel
+// 3. Profile the game a little bit
 
 // 31-AUG-20:
+// 0. Cube: refactor TakeDamage, HealthChanged thingy (a little bit)
 // 0. Replace current Outline implementation with something better
 
 // 01-SEP-20:

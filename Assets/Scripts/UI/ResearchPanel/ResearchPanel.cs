@@ -30,6 +30,7 @@ namespace Game
         }
     }
 
+    // ModelView + View
     // 1. Raises events, to which UpgradesController subscribes
     // 2. A view that handles how upgrades info is shown
     public class ResearchPanel : MonoBehaviour
@@ -39,7 +40,6 @@ namespace Game
 
         [SerializeField] private Button _closeBtn;
 
-        // TODO: move this to controller (?)
         public Dictionary<Upgrade, ResearchPanelEntry> UpgradeEntries { get; private set; }
 
         private bool _isHidden = true;
@@ -146,7 +146,6 @@ namespace Game
             }
         }
 
-        // TODO: move this to controller (?)
         private void UpgradeChangedHandler(object sender, PropertyChangedEventArgs args)
         {
             Upgrade upgrade = (Upgrade)sender;

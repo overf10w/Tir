@@ -37,7 +37,7 @@ namespace Game
         [SerializeField] private Transform _center;
         [SerializeField] private float _cubeScaleMultiplier = 1.9f;
 
-        public List<IDestroyable> Cubes { get; private set; }
+        public List<ICube> Cubes { get; private set; }
 
         public float WaveHP { get; private set; }
         public float WaveGold { get; private set; }
@@ -50,7 +50,7 @@ namespace Game
 
             InitMessageHandler();
 
-            Cubes = new List<IDestroyable>();
+            Cubes = new List<ICube>();
             SpawnCubes(waveSpawnPoint);
         }
 
@@ -84,7 +84,7 @@ namespace Game
                 cube.Init(WaveHP / cubesCnt, WaveGold / cubesCnt);
                 new CubeController(cube);
                 cube.HpChanged += CubeTakeDamageHandler;
-                Cubes.Add(cube.GetComponent<IDestroyable>());
+                Cubes.Add(cube.GetComponent<ICube>());
 
                 _cubesNumber++;
             }

@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace Game
 {
-    public interface IDestroyable
+    public interface ICube
     {
-        void TakeDamage(float damage);
+        void TakeDamage(float damage, bool impactByPlayer);
     }
 }

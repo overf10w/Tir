@@ -9,20 +9,22 @@ namespace Game
     {
         public float Value { get; private set; }
         public float Diff { get; private set; }
+        public bool ImpactByPlayer { get; private set; }
 
-        public CubeHpChangeEventArgs(float value, float diff)
+        public CubeHpChangeEventArgs(float value, float diff, bool impactByPlayer)
         {
             Value = value;
             Diff = diff;
+            ImpactByPlayer = impactByPlayer;
         }
     }
 
-    public class Cube : MonoBehaviour, IDestroyable
+    public class Cube : MonoBehaviour, ICube
     {
         #region IDestroyable
-        public void TakeDamage(float damage)
+        public void TakeDamage(float damage, bool impactByPlayer)
         {
-            DamageTaken?.Invoke(this, new EventArgs<float>(damage));
+            DamageTaken?.Invoke(this, new CubeTakeDamageEventArgs(damage, impactByPlayer));
         }
         #endregion
 
@@ -32,28 +34,44 @@ namespace Game
         [SerializeField] private ParticleMachine _particleMachine;
         public ParticleMachine ParticleMachine => _particleMachine;
 
-        public event EventHandler<EventArgs<float>> DamageTaken;
+        public event EventHandler<CubeTakeDamageEventArgs> DamageTaken;
         public event EventHandler<CubeHpChangeEventArgs> HpChanged;
+
+        public void SetHealth(float value, bool impactByPlayer)
+        {
+            float prevHealth = _health;
+            _health = value;
+
+            float diff = prevHealth - _health;
+
+            if (_health < 0)
+            {
+                diff = prevHealth;
+                _health = 0;
+            }
+
+            HpChanged?.Invoke(this, new CubeHpChangeEventArgs(_health, diff, impactByPlayer));
+        }
 
         private float _health = 100.0f;
         public float Health 
         { 
             get => _health; 
-            set 
-            {
-                float prevHealth = _health;
-                _health = value;
+            //set 
+            //{
+            //    float prevHealth = _health;
+            //    _health = value;
 
-                float diff = prevHealth - _health;
+            //    float diff = prevHealth - _health;
 
-                if (_health < 0)
-                {
-                    diff = prevHealth;
-                    _health = 0;
-                }
+            //    if (_health < 0)
+            //    {
+            //        diff = prevHealth;
+            //        _health = 0;
+            //    }
 
-                HpChanged?.Invoke(this, new CubeHpChangeEventArgs(_health, diff));
-            } 
+            //    //HpChanged?.Invoke(this, new CubeHpChangeEventArgs(_health, diff));
+            //} 
         }
 
         private float _gold;

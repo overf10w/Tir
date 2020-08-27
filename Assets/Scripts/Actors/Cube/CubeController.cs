@@ -1,10 +1,25 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Game
 {
+    public class CubeTakeDamageEventArgs : EventArgs
+    {
+        public float Value { get; private set; }
+        public bool ImpactByPlayer { get; private set; }
+
+        public CubeTakeDamageEventArgs(float value, bool impactByPlayer)
+        {
+            Value = value;
+            ImpactByPlayer = impactByPlayer;
+        }
+
+        
+    }
+
     public class CubeController
     {
         private readonly Cube _cubeMV;
@@ -21,9 +36,11 @@ namespace Game
             _cubeMV.HpChanged += HpChangedHandler;
         }
 
-        private void TakeDamageHandler(object sender, EventArgs<float> damage)
+        private void TakeDamageHandler(object sender, CubeTakeDamageEventArgs e)
         {
-            _cubeMV.Health -= damage.Val;
+            //_cubeMV.Health -= e.Value;
+            float prevHp = _cubeMV.Health;
+            _cubeMV.SetHealth(prevHp - e.Value, e.ImpactByPlayer);
             _cubeMV.ShowHealth(_cubeMV.Health);
         }
 

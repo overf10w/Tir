@@ -37,16 +37,16 @@ namespace Game
         {
             if (!upgrade.IsActive)
             {
-                ShowInactive(0.99f);
+                ShowInactive(99f);
             }
             else if (_playerModel.PlayerStats.Gold < upgrade.Price / 10.0f)
             {
-                ShowInactive(0.75f);
+                ShowInactive(75f);
             }
             else if (_playerModel.PlayerStats.Gold < upgrade.Price)
             {
                 gameObject.SetActive(true);
-                ShowInactive(0.3f);
+                ShowInactive(30f);
             }
             else
             {
@@ -55,14 +55,14 @@ namespace Game
             }
         }
 
-        // TODO: make this method easier to understand
-        public void ShowInactive(float normalizedStrength)
+        public void ShowInactive(float shadeStrength)
         {
-            float strength = Mathf.Clamp01(normalizedStrength);
+            float maxShade = 100.0f;
+            float normalizedStrength = Mathf.Clamp01(shadeStrength / maxShade);
 
             _price.color = Color.red;
             UpgradeBtn.interactable = false;
-            _maskImage.color = new Color(1, 1, 1, strength);
+            _maskImage.color = new Color(1, 1, 1, normalizedStrength);
         }
 
         public void ShowActive()

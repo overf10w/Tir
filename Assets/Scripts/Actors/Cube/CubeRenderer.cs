@@ -88,12 +88,12 @@ namespace Game
 
             if (_outlineRoutine == null)
             {
-                _outlineRoutine = StartCoroutine(ShowOutline(_outlineEffectDuration));
+                _outlineRoutine = StartCoroutine(ShowOutline(_outlineEffectDuration, hp.ImpactByPlayer));
             }
             else
             {
                 StopCoroutine(_outlineRoutine);
-                _outlineRoutine = StartCoroutine(ShowOutline(_outlineEffectDuration));
+                _outlineRoutine = StartCoroutine(ShowOutline(_outlineEffectDuration, hp.ImpactByPlayer));
             }
             _currHP = hp.Value;
         }
@@ -111,8 +111,16 @@ namespace Game
             callback?.Invoke(b);
         }
 
-        private IEnumerator ShowOutline(float outlineEffectDuration)
+        private IEnumerator ShowOutline(float outlineEffectDuration, bool impactByPlayer)
         {
+            if (impactByPlayer)
+            {
+                _outline.color = 0;
+            }
+            else
+            {
+                _outline.color = 1;
+            }
             _outline.enabled = true;
             yield return new WaitForSeconds(outlineEffectDuration);
             _outline.enabled = false;

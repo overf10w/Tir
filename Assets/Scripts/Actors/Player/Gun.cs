@@ -35,13 +35,11 @@ namespace Game
 
                     _nextShotTime = Time.time + _msBetweenShots / 1000;
 
-                    IDestroyable target = _hit.transform.GetComponent<IDestroyable>();
+                    ICube target = _hit.transform.GetComponent<ICube>();
                     if (target != null)
                     {
-                        target.TakeDamage(damage);
-
+                        target.TakeDamage(damage, true);
                     }
-
                     Cube cube = _hit.transform.GetComponent<Cube>();
                     if (cube != null)
                     {
