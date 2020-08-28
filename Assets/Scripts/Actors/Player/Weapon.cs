@@ -178,7 +178,10 @@ namespace Game
                 ICube cube = wave.Cubes.PickRandom();
                 if ((MonoBehaviour)cube != null)
                 {
-                    cube.TakeDamage(DPS.Value, false);
+                    if (DPS.Value != 0)
+                    {
+                        cube.TakeDamage(DPS.Value, false);
+                    }
                 }
                 else
                 {

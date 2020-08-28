@@ -28,6 +28,7 @@ namespace Game
                     {
                         sr.sprite = skill.Icon;
                     }
+                    // TODO: skillEntry.GetComponent<TMProUGUI>().text = (skill.Value * 100).ToString();
                     _unlockedEntries.Add(skill, skillEntry);
                 }
             }
@@ -55,6 +56,7 @@ namespace Game
                     {
                         sr.sprite = skill.Icon;
                     }
+                    // TODO: skillEntry.GetComponent<TMProUGUI>().text = (skill.Value * 100).ToString();
                     _unlockedEntries.Add(skill, skillEntry);
                 }
             }

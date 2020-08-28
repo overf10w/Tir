@@ -27,7 +27,6 @@ using UnityEngine;
 // 4. Mark fields const/readonly where appropriate
 // 5. Do todos
 
-
 // 16-JUN-20:
 // 0. Do TODOs in WeaponModel.cs, Weapon.cs, PlayerController.cs - [done]
 // 1. Refactor MessageBus (as in Trumpage) - [done]
@@ -225,10 +224,14 @@ using UnityEngine;
 //    - Blue, when the damage is taken from player
 
 // 28-AUG-20:
-// 0. Animate all of the existing waves - [2 hrs]
+// 0. Animate all of the existing waves - [done]
 // 1. Add some more updates - [2 hrs]
-// 2. Prettify Team(Skill)Panel, ClickGun(Skill)Panel
-// 3. Profile the game a little bit
+// 3. Profile the game a little bit - [1 hrs]
+
+// 30-AUG-20:
+// 0. Do ToDo in TeamSkillPanel
+//      - same in ClickGunSkillPanel
+// 1. Assign appropriate (beautiful) icons to TeamSkills, ClickGunSkills
 
 // 31-AUG-20:
 // 0. Cube: refactor TakeDamage, HealthChanged thingy (a little bit)
