@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 namespace Game
 {
@@ -35,6 +37,8 @@ namespace Game
         [SerializeField] private WaveCanvas _waveCanvas;
         [SerializeField] private Transform _waveSpawnPoint;
 
+        private Queue<Wave> _wavesToSpawn;
+
         private PlayerStats _playerStats;
         private Wave _wave;
 
@@ -45,6 +49,7 @@ namespace Game
         {
             InitMessageHandler();
             _playerStats = playerStats;
+            _wavesToSpawn = new Queue<Wave>(_playerWaves.Waves.Shuffle());
             StartCoroutine(SpawnWave());
         }
 
@@ -53,7 +58,18 @@ namespace Game
             yield return new WaitForSeconds(0.5f);
 
             var waves = _playerWaves.Waves;
-            var wavePrefab = waves.PickRandom();
+
+            Wave wavePrefab;
+            // TODO: more elegant solution needed (?)
+            if (_wavesToSpawn.Count > 0)
+            {
+                wavePrefab = _wavesToSpawn.Dequeue();
+            }
+            else
+            {
+                _wavesToSpawn = new Queue<Wave>(_playerWaves.Waves.Shuffle());
+                wavePrefab = _wavesToSpawn.Dequeue();
+            }
 
             _wave = Instantiate(wavePrefab, wavePrefab.transform.position, Quaternion.identity) as Wave;
 
@@ -67,13 +83,11 @@ namespace Game
 
             MessageBus.Instance.SendMessage(new Message() { Type = MessageType.WAVE_CHANGED, objectValue = _wave });
 
-            //_waveCanvas.WaveHPText.text = waveHP.SciFormat().ToString();
             _waveCanvas.Render(waveHP);
         }
 
         private void WaveHpChangedHandler(object sender, EventArgs<float> hp)
         {
-            //_waveCanvas.WaveHPText.text = hp.Val.SciFormat().ToString();
             _waveCanvas.Render(hp.Val);
         }
     }
