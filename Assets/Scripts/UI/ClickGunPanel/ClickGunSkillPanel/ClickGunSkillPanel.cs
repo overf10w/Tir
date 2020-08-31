@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,17 +20,7 @@ namespace Game
 
             foreach (var skill in skills)
             {
-                if (skill.Value > 1.0f)
-                {
-                    GameObject skillEntry = Instantiate(_skillEntryPrefab, _content);
-                    skillEntry.name = skill.Name;
-                    var sr = skillEntry.GetComponent<Image>();
-                    if (skill.Icon != null)
-                    {
-                        sr.sprite = skill.Icon;
-                    }
-                    _unlockedEntries.Add(skill, skillEntry);
-                }
+                RenderNewIcon(skill);
             }
         }
 
@@ -37,27 +28,38 @@ namespace Game
         {
             if (_unlockedEntries.ContainsKey(skill))
             {
-                GameObject obj;
-                if (_unlockedEntries.TryGetValue(skill, out obj))
+                GameObject iconGO;
+                if (_unlockedEntries.TryGetValue(skill, out iconGO))
                 {
-                    Debug.Log("ClickGunSkillPanel: Updating the skill entry");
+                    RenderIcon(iconGO, skill);
                     return;
                 }
             }
             else
             {
-                if (skill.Value > 1.0f)
-                {
-                    GameObject skillEntry = Instantiate(_skillEntryPrefab, _content);
-                    skillEntry.name = skill.Name;
-                    var sr = skillEntry.GetComponent<Image>();
-                    if (skill.Icon != null)
-                    {
-                        sr.sprite = skill.Icon;
-                    }
-                    _unlockedEntries.Add(skill, skillEntry);
-                }
+                RenderNewIcon(skill);
             }
+        }
+
+        private void RenderNewIcon(PlayerStat skill)
+        {
+            if (skill.Value > 1.0f)
+            {
+                GameObject iconGO = Instantiate(_skillEntryPrefab, _content);
+                iconGO.name = skill.Name;
+                RenderIcon(iconGO, skill);
+                _unlockedEntries.Add(skill, iconGO);
+            }
+        }
+
+        private void RenderIcon(GameObject iconGO, PlayerStat skill)
+        {
+            SkillEntryIcon icon = iconGO.GetComponent<SkillEntryIcon>();
+            if (skill.Icon != null)
+            {
+                icon.Icon.sprite = skill.Icon;
+            }
+            icon.ValueTxt.text = (skill.Value * 100.0f).ToString();
         }
     }
 }
