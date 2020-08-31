@@ -216,12 +216,12 @@ using UnityEngine;
 // 0. Add outline shader indicator that indicates the cube is taking damage - [done]
 
 // 26-AUG-20:
-// 1. Refactor ResearchPanel/ResearchPanelEntry/UpgradesController - [in the process]
+// 1. Refactor ResearchPanel/ResearchPanelEntry/UpgradesController - [doing...]
 
 // 27-AUG-20:
 // 0. Change the take damage outline shader color of cube to: - [done]
-//    - Purple, when the damage is taken from enemies
-//    - Blue, when the damage is taken from player
+//    - Purple, when the damage is taken from enemies - [done]
+//    - Blue, when the damage is taken from player - [done]
 
 // 28-AUG-20:
 // 0. Animate all of the existing waves - [done]
@@ -229,13 +229,28 @@ using UnityEngine;
 // 3. Profile the game a little bit - [1 hrs]
 
 // 30-AUG-20:
-// 0. Do ToDo in TeamSkillPanel
-//      - same in ClickGunSkillPanel
-// 1. Assign appropriate (beautiful) icons to TeamSkills, ClickGunSkills
+// 0. Do ToDo in TeamSkillPanel - [done]
+//      - same in ClickGunSkillPanel - [done]
+// 1. Assign appropriate icons to TeamSkills, ClickGunSkills - [done]
+// 2. Make spawned waves non-recurring - [done]
+// 3. Fix some bugs in CubeRenderer, when the cube HP is 0 - [done]
 
 // 31-AUG-20:
+// 0. TeamPanel:TeamSkillPanel - Add background panel image, experiment with position of panel
+// 1. ClickGunPanel:ClickGunSkillPanel - Add background panel image, experiment with position of panel
+// 2. Refactor Upgrade system a bit (make it more useful)
+// 3. Assign appropriate icons to TeamSkills, ClickGunSkills - [done]
+
+// 01-SEP-20:
+// 0. Play with game balance;
+// 1. Add more artifacts
+
+// 10-SEP-20 (Important, not urgent):
 // 0. Cube: refactor TakeDamage, HealthChanged thingy (a little bit)
-// 0. Replace current Outline implementation with something better
+// 0. Replace current Cube Outline implementation with something better - [12 hrs]
+// 0. Add 'Save' button - [3 hrs]
+// 0. Refactor the whole Cube/CubeController/CubeRenderer thing - [12 hrs]
+// 0. SkillEntryIcon: tween ValueTxt.text - [2 hrs]
 
 // 01-SEP-20:
 // 0. Add ascending system

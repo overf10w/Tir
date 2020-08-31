@@ -100,9 +100,9 @@ namespace Game
             _health = hp;
         }
 
-        public void ShowHealth(float health)
+        public void ShowHealth()
         {
-            _changeHPQueue.Run(ChangeHpRoutine(health));
+            _changeHPQueue.Run(ChangeHpRoutine());
         }
 
         public void Destroy()
@@ -110,7 +110,7 @@ namespace Game
             _changeHPQueue.Run(DestroyRoutine());
         }
 
-        private IEnumerator ChangeHpRoutine(float health)
+        private IEnumerator ChangeHpRoutine()
         {
             yield return new WaitForSeconds(_cubeStat.takeDamageEffectDuration);
         }

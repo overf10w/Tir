@@ -16,8 +16,6 @@ namespace Game
             Value = value;
             ImpactByPlayer = impactByPlayer;
         }
-
-        
     }
 
     public class CubeController
@@ -41,7 +39,7 @@ namespace Game
             //_cubeMV.Health -= e.Value;
             float prevHp = _cubeMV.Health;
             _cubeMV.SetHealth(prevHp - e.Value, e.ImpactByPlayer);
-            _cubeMV.ShowHealth(_cubeMV.Health);
+            _cubeMV.ShowHealth();
         }
 
         private void HpChangedHandler(object sender, CubeHpChangeEventArgs e)

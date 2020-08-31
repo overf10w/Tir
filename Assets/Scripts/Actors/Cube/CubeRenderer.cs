@@ -35,11 +35,41 @@ namespace Game
             _hpScaleMultiplier = transform.localScale.y / _maxHP;
         }
 
-        private IEnumerator FadeRoutine()
+        private bool _outlineRunning = false;
+
+        private IEnumerator FadeRoutine(bool impactByPlayer)
         {
-            _outline.enabled = true;
-            yield return new WaitForSeconds(0.05f);
-            _outline.enabled = false;
+            if (_outlineRunning)
+            {
+                if (_outlineRoutine != null)
+                {
+                    StopCoroutine(_outlineRoutine);
+                    _outlineRunning = false;
+                }
+                //_outline.enabled = true;
+                yield return new WaitForSeconds(0.05f);
+                //_outline.enabled = false;
+            }
+            else
+            {
+                if (_outlineRoutine != null)
+                {
+                    StopCoroutine(_outlineRoutine);
+                    _outlineRunning = false;
+                }
+                _outline.enabled = true;
+                if (impactByPlayer)
+                {
+                    _outline.color = 0;
+                }
+                else
+                {
+                    _outline.color = 1;
+                }
+                yield return new WaitForSeconds(0.05f);
+                _outline.enabled = false;
+            }
+
             _sides.SetActive(false);
             _renderer.enabled = false;
         }
@@ -49,7 +79,7 @@ namespace Game
             if (hp.Value <= 0)
             {
                 LeanTween.cancel(gameObject);
-                StartCoroutine(FadeRoutine());
+                StartCoroutine(FadeRoutine(hp.ImpactByPlayer));
                 return;
             }
 
@@ -65,12 +95,10 @@ namespace Game
                 return;
             }
 
-            StartCoroutine(
-                Lerp(prevScaleY, newScaleY, 0.06f,
-                     (float val) =>
-                     {
-                         transform.localScale = new Vector3(prevScale.x, val, prevScale.z);
-                     })
+            StartCoroutine(Lerp(prevScaleY, newScaleY, 0.06f, (float val) =>
+                {
+                    transform.localScale = new Vector3(prevScale.x, val, prevScale.z);
+                })
             );
 
             Vector3 prevPos = transform.localPosition;
@@ -78,12 +106,10 @@ namespace Game
             float deltaPosY = deltaScaleY / 2.0f;
             float newPosY = prevPosY - deltaPosY;
             
-            StartCoroutine(
-                Lerp(prevPosY, newPosY, 0.06f, 
-                     (float val) => 
-                     {
-                         transform.localPosition = new Vector3(prevPos.x, val, prevPos.z);
-                     })
+            StartCoroutine(Lerp(prevPosY, newPosY, 0.06f, (float val) => 
+                {
+                    transform.localPosition = new Vector3(prevPos.x, val, prevPos.z);
+                })
             );
 
             if (_outlineRoutine == null)
@@ -113,6 +139,8 @@ namespace Game
 
         private IEnumerator ShowOutline(float outlineEffectDuration, bool impactByPlayer)
         {
+            _outlineRunning = true;
+            _outline.enabled = true;
             if (impactByPlayer)
             {
                 _outline.color = 0;
@@ -121,9 +149,10 @@ namespace Game
             {
                 _outline.color = 1;
             }
-            _outline.enabled = true;
             yield return new WaitForSeconds(outlineEffectDuration);
+            _outline.color = 0; // TODO: work out this dirty hack =))
             _outline.enabled = false;
+            _outlineRunning = false;
         }
     }
 }
