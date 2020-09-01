@@ -236,13 +236,17 @@ using UnityEngine;
 // 3. Fix some bugs in CubeRenderer, when the cube HP is 0 - [done]
 
 // 31-AUG-20:
-// 0. TeamPanel:TeamSkillPanel - Add background panel image, experiment with position of panel
-// 1. ClickGunPanel:ClickGunSkillPanel - Add background panel image, experiment with position of panel
-// 2. Refactor Upgrade system a bit (make it more useful)
+// 0. TeamPanel:TeamSkillPanel - Add background panel image, experiment with position of the panel
+// 1. ClickGunPanel:ClickGunSkillPanel - Add background panel image, experiment with position of the panel
+// 2. Refactor Upgrade system a bit (make it more useful) - [2/3 doing...]
+//      - Upgrade: Criteria: make criterias more sophisticated - [done]
+//      - WeaponStat: WeaponAlgorithm: Specify Multiplier Lists, so each weaponStat will be multiplied by selected multiplier lists - [done]
+//      - Upgrade, Criteria, WeaponStat: statsList selector shouldn't be a string, but rather an enum - []
+//      - Upgrade, Criteria, WeaponStat, PlayerStats(Especially lists names): Refactor names a bit, etc. - []
 // 3. Assign appropriate icons to TeamSkills, ClickGunSkills - [done]
 
 // 01-SEP-20:
-// 0. Play with game balance;
+// 0. Play with the game balance
 // 1. Add more artifacts
 
 // 10-SEP-20 (Important, not urgent):
@@ -288,13 +292,21 @@ namespace Game
         private AssetBundle _assetBundle;
         private UpgradesSO _upgrades;
 
+        private string _upgradesPath;
+
         private void Start()
         {
-            _upgrades = Resources.Load<UpgradesSO>("SO/Researches/Upgrades");
+            _upgradesPath = Path.Combine(Application.persistentDataPath, "upgradesSave.dat");
 
             string _playerStatsDataPath = Path.Combine(Application.persistentDataPath, "playerStatsData.dat");
 
             PlayerModel model = new PlayerModel(_playerStatsDataPath);
+
+
+            _upgrades = Resources.Load<UpgradesSO>("SO/Researches/Upgrades");
+            _upgrades.PlayerStats = model.PlayerStats;
+            _upgrades.SetUpgrades(ResourceLoader.Load<UpgradeData[]>(_upgradesPath));
+
             PlayerView view = Instantiate(Resources.Load<PlayerView>("Prefabs/Player"));
             new PlayerController(model, _upgrades, view, _inputManager);
             new PlayerSoundController(view);

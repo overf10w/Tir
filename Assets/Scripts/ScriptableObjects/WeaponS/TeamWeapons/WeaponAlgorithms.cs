@@ -6,6 +6,9 @@ namespace Game
     [System.Serializable]
     public class WeaponAlgorithm
     {
+        [Header("Multipliers Lists")]
+        [SerializeField] private string[] _statsLists;
+
         [Header("Price/Value algorithm")]
         [SerializeField] private float _basePrice;
         [Tooltip("Optimal between (1.07 - 1.15)")]
@@ -18,6 +21,8 @@ namespace Game
         [SerializeField] private float _upgradePriceMultiplier;
         [SerializeField] private int _maxUpgradeLevel;
         [SerializeField] private float _upgradeValueMultiplier = 2.0f;
+
+        
 
         public float GetPrice(int level)
         {
@@ -41,13 +46,19 @@ namespace Game
 
         public float GetValue(PlayerStats playerStats, int level, int upgradeLevel)
         {
-            List<PlayerStat> skills = playerStats.TeamSkillsList.List;
-
             float upgradeValue = upgradeLevel <= 0 ? 1 : 1 * Mathf.Pow(_upgradeValueMultiplier, upgradeLevel);
             float result = _baseValue * Mathf.Pow(_valueMultiplier, level) * level * upgradeValue;
-            foreach (var skill in skills)
+
+            foreach (var statList in _statsLists)
             {
-                result *= skill.Value;
+                // TODO: change this to more general approach 
+                // (so the TeamSKillsList's Weapon DPS won't affect ClickGun DMG)
+                StatsList statsList = (StatsList)playerStats[statList];
+                List<PlayerStat> skills = statsList.List;
+                foreach (var skill in skills)
+                {
+                    result *= skill.Value;
+                }
             }
             return result;
         }

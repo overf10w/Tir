@@ -43,7 +43,7 @@ namespace Game
             {
                 ShowInactive(75f);
             }
-            else if (_playerModel.PlayerStats.Gold < upgrade.Price)
+            else if (_playerModel.PlayerStats.Gold < upgrade.Price || !upgrade.CriteriasFulfilled)
             {
                 gameObject.SetActive(true);
                 ShowInactive(30f);

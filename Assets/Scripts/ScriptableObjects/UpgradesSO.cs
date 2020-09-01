@@ -20,10 +20,42 @@ namespace Game
     [System.Serializable]
     public class Criteria
     {
-        private PlayerStats playerStats;
-        public string indexer;
-        public float threshold;
-        public bool IsSatisfied { get => (float)playerStats[indexer] >= threshold; }
+        [field: NonSerialized]
+        public PlayerStats PlayerStats { get; set; }
+
+        [SerializeField] private string _statsList;
+        public string SkillContainer => _statsList;
+        [SerializeField] private string _stat;
+        [SerializeField] private float _threshold;
+
+        private enum Comparison
+        {
+            LESS,
+            EQUAL,
+            GREATER
+        }
+
+        [SerializeField] private Comparison _thresholdComparison;
+
+        public bool Satisfied
+        {
+            get
+            {
+                StatsList statsList = (StatsList)PlayerStats[_statsList];
+                PlayerStat skill = statsList.List.Find(sk => sk.Name == _stat);
+                switch(_thresholdComparison)
+                {
+                    case Comparison.EQUAL:
+                        return skill.Value == _threshold;
+                    case Comparison.GREATER:
+                        return skill.Value > _threshold;
+                    case Comparison.LESS:
+                        return skill.Value < _threshold;
+                    default:
+                        return skill.Value > _threshold;
+                }
+            }
+        }
     }
 
     [System.Serializable]
@@ -50,28 +82,63 @@ namespace Game
         }
         #endregion
 
+        public void Init(PlayerStats playerStats)
+        {
+            foreach (var crit in criterias)
+            {
+                crit.PlayerStats = playerStats;
+            }
+        }
+
+        public void Init(PlayerStats playerStats, UpgradeData upgradeData)
+        {
+            IsActive = upgradeData.IsActive;
+            foreach(var crit in criterias)
+            {
+                crit.PlayerStats = playerStats;
+            }
+        }
+
         [SerializeField] private Sprite _icon;
         public Sprite Icon => _icon;
 
-        [SerializeField] private string _skillContainer;
-        public string SkillContainer => _skillContainer;
-
-        [SerializeField] private string _skill;
-        public string Skill => _skill;
-
         [SerializeField] private string _name;
-        public string Name => _name; 
+        public string Name => _name;
 
         [SerializeField] private string _description;
         public string Description => _description;
 
+        [Header("Target Stat")]
+        [SerializeField] private string _statsList;
+        public string StatsList => _statsList;
+
+        [SerializeField] private string _stat;
+        public string Stat => _stat;
+
+        [Header("Characteristics")]
         [SerializeField] private float _price;
         public float Price => _price;
 
         [SerializeField] private float _amount;
         public float Amount => _amount;
 
+        [Header("Criterias")]
         public Criteria[] criterias;
+
+        public bool CriteriasFulfilled
+        {
+            get
+            {
+                foreach(var crit in criterias)
+                {
+                    if (!crit.Satisfied)
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+        }
 
         [SerializeField] private bool _isActive;
         public bool IsActive { get => _isActive; set { SetField(ref _isActive, value); } }
@@ -80,7 +147,7 @@ namespace Game
     [CreateAssetMenu(fileName = "Upgrades", menuName = "ScriptableObjects/Ugprades", order = 6)]
     public class UpgradesSO : ScriptableObject
     {
-        private PlayerStats _playerStats;
+        public PlayerStats PlayerStats { get; set; }
         // private Dictionary<string, Weapon> teamWeapons; // to keep an eye on weapons
 
         [SerializeField] private Upgrade[] _upgrades;
@@ -109,6 +176,7 @@ namespace Game
                 foreach (var upgrade in Upgrades)
                 {
                     upgrade.IsActive = true;
+                    upgrade.Init(PlayerStats);
                 }
             }
             else
@@ -116,6 +184,7 @@ namespace Game
                 for (int i = 0; i < Upgrades.Length; i++)
                 {
                     Upgrades[i].IsActive = upgradeDatas[i].IsActive;
+                    Upgrades[i].Init(PlayerStats, upgradeDatas[i]);
                 }
             }
         }

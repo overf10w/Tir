@@ -124,7 +124,6 @@ namespace Game
 
         public long IdleTimeSpan => _lastPlayTimestamp == 0 ? 0 : DateTime.Now.Ticks - _lastPlayTimestamp;
 
-
         [SerializeField] private List<PlayerStat> _teamSkills;
         [NonSerialized]
         private StatsList _teamSkillsList;

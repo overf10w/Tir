@@ -30,9 +30,9 @@ namespace Game
 
         public void UpgradeBtnClickHandler(UpgradeBtnClickEventArgs e)
         {
-            string skillIndexer = e.Upgrade.Skill;
+            string skillIndexer = e.Upgrade.Stat;
 
-            StatsList statsList = (StatsList)_playerModel.PlayerStats[e.Upgrade.SkillContainer];
+            StatsList statsList = (StatsList)_playerModel.PlayerStats[e.Upgrade.StatsList];
 
             PlayerStat skill = statsList.List.Find(sk => sk.Name == skillIndexer);
 
@@ -40,7 +40,7 @@ namespace Game
             {
                 _playerModel.PlayerStats.Gold -= e.Upgrade.Price;
                 float cachedFloat = skill.Value;
-                skill.Value = cachedFloat + 1;
+                skill.Value = cachedFloat + (e.Upgrade.Amount / 100.0f);
                 e.Upgrade.IsActive = false;
             }
         }
