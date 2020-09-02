@@ -238,11 +238,14 @@ using UnityEngine;
 // 31-AUG-20:
 // 0. TeamPanel:TeamSkillPanel - Add background panel image, experiment with position of the panel
 // 1. ClickGunPanel:ClickGunSkillPanel - Add background panel image, experiment with position of the panel
-// 2. Refactor Upgrade system a bit (make it more useful) - [2/3 doing...]
+// 2. Refactor Upgrade system a bit (make it more useful) - [2/5 doing...]
 //      - Upgrade: Criteria: make criterias more sophisticated - [done]
 //      - WeaponStat: WeaponAlgorithm: Specify Multiplier Lists, so each weaponStat will be multiplied by selected multiplier lists - [done]
-//      - Upgrade, Criteria, WeaponStat: statsList selector shouldn't be a string, but rather an enum - []
+//      - Upgrade, Criteria, WeaponStat, WeaponAlgorithm: StatsList selector shouldn't be a string, but rather an enum - [done]
+//      - Upgrade, Criteria, WeaponStat, WeaponAlgorithm: Stats name selector shouldn't be a string, but rather an enum - []
+//          - if (StatsList selected) {show corresponding enum of this list's items} - []
 //      - Upgrade, Criteria, WeaponStat, PlayerStats(Especially lists names): Refactor names a bit, etc. - []
+//      - Upgrade, Criteria: Add weapon indexers
 // 3. Assign appropriate icons to TeamSkills, ClickGunSkills - [done]
 
 // 01-SEP-20:

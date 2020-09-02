@@ -7,7 +7,7 @@ namespace Game
     public class WeaponAlgorithm
     {
         [Header("Multipliers Lists")]
-        [SerializeField] private string[] _statsLists;
+        [SerializeField] private StatsLists[] _statsLists;
 
         [Header("Price/Value algorithm")]
         [SerializeField] private float _basePrice;
@@ -53,7 +53,7 @@ namespace Game
             {
                 // TODO: change this to more general approach 
                 // (so the TeamSKillsList's Weapon DPS won't affect ClickGun DMG)
-                StatsList statsList = (StatsList)playerStats[statList];
+                StatsList statsList = (StatsList)playerStats[statList.ToString()];
                 List<PlayerStat> skills = statsList.List;
                 foreach (var skill in skills)
                 {

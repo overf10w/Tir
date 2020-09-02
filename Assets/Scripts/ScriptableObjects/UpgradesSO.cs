@@ -23,8 +23,8 @@ namespace Game
         [field: NonSerialized]
         public PlayerStats PlayerStats { get; set; }
 
-        [SerializeField] private string _statsList;
-        public string SkillContainer => _statsList;
+        [SerializeField] private StatsLists _statsList;
+        public string StatsList => _statsList.ToString();
         [SerializeField] private string _stat;
         [SerializeField] private float _threshold;
 
@@ -41,7 +41,7 @@ namespace Game
         {
             get
             {
-                StatsList statsList = (StatsList)PlayerStats[_statsList];
+                StatsList statsList = (StatsList)PlayerStats[StatsList];
                 PlayerStat skill = statsList.List.Find(sk => sk.Name == _stat);
                 switch(_thresholdComparison)
                 {
@@ -56,6 +56,13 @@ namespace Game
                 }
             }
         }
+    }
+
+    // Keep in sync with Resources/SO/PlayerData scriptable object
+    public enum StatsLists
+    {
+        TeamSkillsList,
+        ClickGunSkillsList
     }
 
     [System.Serializable]
@@ -109,8 +116,8 @@ namespace Game
         public string Description => _description;
 
         [Header("Target Stat")]
-        [SerializeField] private string _statsList;
-        public string StatsList => _statsList;
+        [SerializeField] private StatsLists _statsList;
+        public string StatsList => _statsList.ToString();
 
         [SerializeField] private string _stat;
         public string Stat => _stat;

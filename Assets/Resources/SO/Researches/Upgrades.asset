@@ -17,7 +17,7 @@ MonoBehaviour:
       type: 3}
     _name: DPS++
     _description: Increase Team DPS by 100%
-    _statsList: TeamSkillsList
+    _statsList: 0
     _stat: DPSMultiplier
     _price: 1000
     _amount: 100
@@ -26,19 +26,23 @@ MonoBehaviour:
   - _icon: {fileID: 5327953333270261400, guid: 9f51c2c2ff030524da06308215b550f4, type: 3}
     _name: Click Gun Madness
     _description: Synthetize Click Gun Gold Gained Multiplier
-    _statsList: ClickGunSkillsList
+    _statsList: 1
     _stat: DMGMultiplier
     _price: 2500
     _amount: 20
     criterias: []
-    _isActive: 1
+    _isActive: 0
   - _icon: {fileID: -6416387507145356639, guid: 9f51c2c2ff030524da06308215b550f4,
       type: 3}
     _name: Click Gun Madness
     _description: Synthetize Click Gun DMG Multiplier
-    _statsList: ClickGunSkillsList
+    _statsList: 1
     _stat: DMGMultiplier
     _price: 5500
     _amount: 25
-    criterias: []
+    criterias:
+    - _statsList: 0
+      _stat: DPSMultiplier
+      _threshold: 10
+      _thresholdComparison: 2
     _isActive: 1
