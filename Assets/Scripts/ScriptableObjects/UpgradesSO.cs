@@ -65,8 +65,9 @@ namespace Game
         ClickGunSkillsList
     }
 
+    [CreateAssetMenu(fileName = "Upgrade", menuName = "ScriptableObjects/Upgrade", order = 7)]
     [System.Serializable]
-    public class Upgrade : INotifyPropertyChanged
+    public class Upgrade : ScriptableObject, INotifyPropertyChanged
     {
         #region INotifyPropertyChanged
         // In our case the events shouldn't be serialized, because:

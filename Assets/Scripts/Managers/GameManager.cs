@@ -238,14 +238,21 @@ using UnityEngine;
 // 31-AUG-20:
 // 0. TeamPanel:TeamSkillPanel - Add background panel image, experiment with position of the panel
 // 1. ClickGunPanel:ClickGunSkillPanel - Add background panel image, experiment with position of the panel
-// 2. Refactor Upgrade system a bit (make it more useful) - [2/5 doing...]
-//      - Upgrade: Criteria: make criterias more sophisticated - [done]
-//      - WeaponStat: WeaponAlgorithm: Specify Multiplier Lists, so each weaponStat will be multiplied by selected multiplier lists - [done]
-//      - Upgrade, Criteria, WeaponStat, WeaponAlgorithm: StatsList selector shouldn't be a string, but rather an enum - [done]
-//      - Upgrade, Criteria, WeaponStat, WeaponAlgorithm: Stats name selector shouldn't be a string, but rather an enum - []
-//          - if (StatsList selected) {show corresponding enum of this list's items} - []
-//      - Upgrade, Criteria, WeaponStat, PlayerStats(Especially lists names): Refactor names a bit, etc. - []
-//      - Upgrade, Criteria: Add weapon indexers
+// 2. Refactor Upgrade system a bit (make it more useful) - [3/6 doing...]
+//      2.1 - Upgrade: Criteria: make criterias more sophisticated - [done]
+//      2.2 - WeaponStat: WeaponAlgorithm: Specify Multiplier Lists, so each weaponStat will be multiplied by selected multiplier lists - [done]
+//      2.3 - Upgrade, Criteria, WeaponStat, WeaponAlgorithm: StatsList selector shouldn't be a string, but rather an enum - [done]
+//      2.4 - Upgrade, Criteria, WeaponStat, PlayerStats(Especially lists names): Refactor names a bit, etc. - []
+//      2.5 - Upgrade, Criteria: Add weapon indexers - []
+//      2.6 - Upgrade, Criteria, WeaponStat, WeaponAlgorithm: Stats name selector shouldn't be a string, but rather a dropdown (enum or string array) - [almost done]
+//              - if (StatsList selected) {show corresponding enum of this list's items in form of enum or string arrray} - [almost done]
+//              - helpful links:
+//                  - 
+//                  - https://stackoverflow.com/questions/60864308/how-to-make-an-enum-like-unity-inspector-drop-down-menu-from-a-string-array-with
+//                  - https://forum.unity.com/threads/adding-items-to-an-enum-list-in-editor.310994/
+//                  - https://answers.unity.com/questions/1170350/editorscript-generate-enum-from-string.html
+//                  - https://answers.unity.com/questions/1454466/need-to-create-enum-out-of-array-of-string.html
+//                  - https://answers.unity.com/questions/1085035/how-can-i-create-a-enum-like-as-component-light.html
 // 3. Assign appropriate icons to TeamSkills, ClickGunSkills - [done]
 
 // 01-SEP-20:
