@@ -15,67 +15,111 @@ namespace Game
 
         private GUIContent[] availableOptions;
 
-        int index = 0;
-        string[] kekArray = new string[] { "DPSMultiplier", "DMGMultiplier", "GoldGainedMultiplier" };
+        private int _index = 0;
+        private string[] _teamSkills = new string[] { "DPSMultiplier" };
+        private string[] _clickGunSkills = new string[] { "DMGMultiplier", "GoldGainedMultiplier" };
+
+        private int _listIndex = 0;
 
         private void OnEnable()
         {
             upgrade = (Upgrade)target;
             var statProp = serializedObject.FindProperty("_stat");
-            index = Array.FindIndex(kekArray, item => item == statProp.stringValue);
-            //index = EditorGUI.Popup(new Rect(45, 150, 180, 20), new GUIContent(statProp.displayName), index, availableOptions);
+
+            if (upgrade.StatsList == StatsLists.TeamSkillsList.ToString())
+            {
+                _listIndex = 0;
+            }
+            else if (upgrade.StatsList == StatsLists.ClickGunSkillsList.ToString())
+            {
+                _listIndex = 1;
+            }
+
+            switch (_listIndex)
+            {
+                case 0:
+                    _index = Array.FindIndex(_teamSkills, item => item == statProp.stringValue);
+                    break;
+                case 1:
+                    _index = Array.FindIndex(_clickGunSkills, item => item == statProp.stringValue);
+                    break;
+            }
+            //_listIndex = Array.FindIndex()
+            //_index = Array.FindIndex(_teamSkills, item => item == statProp.stringValue);
         }
 
         public override void OnInspectorGUI()
         {
-            DrawScriptField();
-
             DrawDefaultInspector();
 
             // load real target values into SerializedProperties
             serializedObject.Update();
 
-            EditorGUI.BeginChangeCheck();
-            //charactersList.DoLayoutList();
-            if (EditorGUI.EndChangeCheck())
+            SerializedProperty _statProperty = serializedObject.FindProperty("_stat");
+            if (_statProperty != null)
             {
-                // Write back changed values into the real target
-                serializedObject.ApplyModifiedProperties();
-
-                // Update the existing character names as GuiContent[]
-                //availableOptions = dialogue.CharactersList.Select(item => new GUIContent(item)).ToArray();
+                if (upgrade.StatsList == StatsLists.TeamSkillsList.ToString())
+                {
+                    Debug.Log("UpgradeEditor: showing only ClickGunSkillsList...");
+                    availableOptions = _teamSkills.Select(item => new GUIContent(item)).ToArray();
+                }
+                else if (upgrade.StatsList == StatsLists.ClickGunSkillsList.ToString())
+                {
+                    Debug.Log("UpgradeEditor: showing only TeamSkillsList...");
+                    availableOptions = _clickGunSkills.Select(item => new GUIContent(item)).ToArray();
+                }
+                _index = EditorGUI.Popup(new Rect(185, 140, 300, 20), new GUIContent(""), _index, availableOptions);
+                var selectedString = availableOptions[_index].text;
+                _statProperty.stringValue = selectedString;
             }
 
-            var statProp = serializedObject.FindProperty("_stat");
+            //SerializedProperty _statProperty = serializedObject.FindProperty("criterias_stat");
 
-            Debug.Log("statProp == null: " + (statProp == null).ToString());
-            availableOptions = kekArray.Select(item => new GUIContent(item)).ToArray();
-
-            index = EditorGUI.Popup(new Rect(185, 160, 300, 20), new GUIContent(""), index, availableOptions);
-            //someIndex = EditorGUI.Popup(new Rect(45, 150, 180, 20), new GUIContent(statProp.displayName), someIndex, availableOptions);
-
-            var selectedString = availableOptions[index].text;
-
-            //EditorGUI.Popup(new Rect(45, 150, 180, 20), new GUIContent(statProp.displayName), someIndex, availableOptions);
-
-            //statProp.stringValue = availableOptions[Int32.Parse(statProp.stringValue)].text;
-            statProp.stringValue = selectedString;
-            //statProp.displayName = statProp.stringValue;
-            Debug.Log("statProp: stringValue: " + statProp.stringValue.ToString());
-
-            //dialogItemsList.DoLayoutList();
-
-            // Write back changed values into the real target
+            //var p = serializedObject.GetIterator();
+            //do
+            //{
+            //    if (p.name == "_stat")
+            //    {
+            //        if (upgrade.StatsList == StatsLists.TeamSkillsList.ToString())
+            //        {
+            //            Debug.Log("UpgradeEditor: showing only ClickGunSkillsList...");
+            //            availableOptions = _teamSkills.Select(item => new GUIContent(item)).ToArray();
+            //        }
+            //        else if (upgrade.StatsList == StatsLists.ClickGunSkillsList.ToString())
+            //        {
+            //            Debug.Log("UpgradeEditor: showing only TeamSkillsList...");
+            //            availableOptions = _clickGunSkills.Select(item => new GUIContent(item)).ToArray();
+            //        }
+            //        _index = EditorGUI.Popup(new Rect(185, 140, 300, 20), new GUIContent(""), _index, availableOptions);
+            //        var selectedString = availableOptions[_index].text;
+            //        p.stringValue = selectedString;
+            //    }
+            //}
+            //while (p.NextVisible(true));
             serializedObject.ApplyModifiedProperties();
-        }
 
-        private void DrawScriptField()
-        {
-            EditorGUI.BeginDisabledGroup(true);
-            EditorGUILayout.ObjectField("Script", MonoScript.FromScriptableObject((Upgrade)target), typeof(Upgrade), false);
-            EditorGUI.EndDisabledGroup();
+            //EditorGUI.BeginChangeCheck();
 
-            EditorGUILayout.Space();
+            //if (EditorGUI.EndChangeCheck())
+            //{
+            //    // Write back changed values into the real target
+            //    serializedObject.ApplyModifiedProperties();
+
+            //    // Update the existing character names as GuiContent[]
+            //    //availableOptions = dialogue.CharactersList.Select(item => new GUIContent(item)).ToArray();
+            //}
+
+            //var statProp = serializedObject.FindProperty("_stat");
+            //availableOptions = kekArray.Select(item => new GUIContent(item)).ToArray();
+
+            //index = EditorGUI.Popup(new Rect(185, 140, 300, 20), new GUIContent(""), index, availableOptions);
+
+
+            //var selectedString = availableOptions[index].text;
+            //statProp.stringValue = selectedString;
+
+            //// Write back changed values into the real target
+            //serializedObject.ApplyModifiedProperties();
         }
 
         //private Upgrade script;

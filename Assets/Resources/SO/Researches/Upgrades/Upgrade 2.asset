@@ -9,15 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Upgrade_1
-  m_EditorClassIdentifier: Assembly-CSharp:Game:Upgrade
-  _icon: {fileID: 517502746036574859, guid: 9f51c2c2ff030524da06308215b550f4, type: 3}
-  _name: DPS++
-  _description: 'DPS++++++++ WOWOOWOWOW hoeheoe '
+  m_Script: {fileID: 11500000, guid: 622d60d1c8909d6419ce925e02d4edfd, type: 3}
+  m_Name: Upgrade 2
+  m_EditorClassIdentifier: 
+  _icon: {fileID: 9205987583513214383, guid: ee010143be6b9004a87a40e3ae438917, type: 3}
+  _name: DMG++
+  _description: Increase DMG Multiplier by 100%
   _statsList: 0
   _stat: DPSMultiplier
-  _price: 1000
+  _price: 3000
   _amount: 100
   criterias: []
   _isActive: 1

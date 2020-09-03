@@ -244,15 +244,19 @@ using UnityEngine;
 //      2.3 - Upgrade, Criteria, WeaponStat, WeaponAlgorithm: StatsList selector shouldn't be a string, but rather an enum - [done]
 //      2.4 - Upgrade, Criteria, WeaponStat, PlayerStats(Especially lists names): Refactor names a bit, etc. - []
 //      2.5 - Upgrade, Criteria: Add weapon indexers - []
-//      2.6 - Upgrade, Criteria, WeaponStat, WeaponAlgorithm: Stats name selector shouldn't be a string, but rather a dropdown (enum or string array) - [almost done]
-//              - if (StatsList selected) {show corresponding enum of this list's items in form of enum or string arrray} - [almost done]
+//      2.6 - Upgrade: Target Stat name selector shouldn't be a string, but rather a dropdown (enum or string array) - [done]
+//              - if (StatsList selected) {show corresponding enum of this list's items in form of enum or string arrray} - [done]
 //              - helpful links:
-//                  - 
 //                  - https://stackoverflow.com/questions/60864308/how-to-make-an-enum-like-unity-inspector-drop-down-menu-from-a-string-array-with
 //                  - https://forum.unity.com/threads/adding-items-to-an-enum-list-in-editor.310994/
 //                  - https://answers.unity.com/questions/1170350/editorscript-generate-enum-from-string.html
 //                  - https://answers.unity.com/questions/1454466/need-to-create-enum-out-of-array-of-string.html
 //                  - https://answers.unity.com/questions/1085035/how-can-i-create-a-enum-like-as-component-light.html
+//      2.7 - Upgrade (or Criteria): Target Stat name selector (in Criteria, nested inside of Upgrade) shouldn't be a string, but a dropdown (enum or string array) - []
+//              - this be done either by:
+//                  - 1. UpgradeEditor.cs: accessing "criteria._stat", just like we accessed "_stat" (not preferred)
+//                  - 2. Move Criteria to its own file, and implement CustomPropertyDrawer for it - https://docs.unity3d.com/ScriptReference/PropertyDrawer.html (preffered)
+//                  - 3. Convert criteria to scriptable object, and do this thing as we've done in UpgradeEditor
 // 3. Assign appropriate icons to TeamSkills, ClickGunSkills - [done]
 
 // 01-SEP-20:

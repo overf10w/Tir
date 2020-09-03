@@ -22,8 +22,6 @@ namespace Game
         [SerializeField] private int _maxUpgradeLevel;
         [SerializeField] private float _upgradeValueMultiplier = 2.0f;
 
-        
-
         public float GetPrice(int level)
         {
             return _basePrice * Mathf.Pow(_priceMultiplier, level);

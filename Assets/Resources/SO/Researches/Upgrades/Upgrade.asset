@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 622d60d1c8909d6419ce925e02d4edfd, type: 3}
+  m_Name: Upgrade
+  m_EditorClassIdentifier: Assembly-CSharp:Game:Upgrade
+  _icon: {fileID: 21300000, guid: 5f7fa9a7940a64e79b5a42d9f661d42c, type: 3}
+  _name: DPS++
+  _description: Increase Team DPS by 100%
+  _statsList: 1
+  _stat: DMGMultiplier
+  _price: 1000
+  _amount: 100
+  criterias:
+  - _statsList: 1
+    _stat: fasf
+    _threshold: 0
+    _thresholdComparison: 0
+  _isActive: 1

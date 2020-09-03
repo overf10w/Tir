@@ -22,8 +22,7 @@ MonoBehaviour:
       _upgradeLevel: 0
     algorithms:
       _dps:
-        _statsLists:
-        - TeamSkillsList
+        _statsLists: 00000000
         _basePrice: 20
         _priceMultiplier: 1.6
         _baseValue: 5
@@ -33,8 +32,7 @@ MonoBehaviour:
         _maxUpgradeLevel: 0
         _upgradeValueMultiplier: 2
       _dmg:
-        _statsLists:
-        - TeamSkillsList
+        _statsLists: 00000000
         _basePrice: 15
         _priceMultiplier: 1.12
         _baseValue: 5
@@ -52,8 +50,7 @@ MonoBehaviour:
       _upgradeLevel: 0
     algorithms:
       _dps:
-        _statsLists:
-        - TeamSkillsList
+        _statsLists: 00000000
         _basePrice: 40
         _priceMultiplier: 1.22
         _baseValue: 10
@@ -63,8 +60,7 @@ MonoBehaviour:
         _maxUpgradeLevel: 100
         _upgradeValueMultiplier: 2
       _dmg:
-        _statsLists:
-        - TeamSkillsList
+        _statsLists: 00000000
         _basePrice: 25
         _priceMultiplier: 1.095
         _baseValue: 20
