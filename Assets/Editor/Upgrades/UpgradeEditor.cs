@@ -38,7 +38,7 @@ namespace Game
             switch (_listIndex)
             {
                 case 0:
-                    _index = Array.FindIndex(_teamSkills, item => item == statProp.stringValue);
+                    _index = Array.FindIndex(_teamSkills, item => item == statProp.stringValue); // TODO: this can be merged with if/else if clause above
                     break;
                 case 1:
                     _index = Array.FindIndex(_clickGunSkills, item => item == statProp.stringValue);
@@ -60,12 +60,12 @@ namespace Game
             {
                 if (upgrade.StatsList == StatsLists.TeamSkillsList.ToString())
                 {
-                    Debug.Log("UpgradeEditor: showing only ClickGunSkillsList...");
+                    //Debug.Log("UpgradeEditor: showing only ClickGunSkillsList...");
                     availableOptions = _teamSkills.Select(item => new GUIContent(item)).ToArray();
                 }
                 else if (upgrade.StatsList == StatsLists.ClickGunSkillsList.ToString())
                 {
-                    Debug.Log("UpgradeEditor: showing only TeamSkillsList...");
+                    //Debug.Log("UpgradeEditor: showing only TeamSkillsList...");
                     availableOptions = _clickGunSkills.Select(item => new GUIContent(item)).ToArray();
                 }
                 _index = EditorGUI.Popup(new Rect(185, 140, 300, 20), new GUIContent(""), _index, availableOptions);

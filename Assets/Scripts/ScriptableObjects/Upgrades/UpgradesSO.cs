@@ -17,47 +17,6 @@ namespace Game
         public bool IsActive { get => isActive; set { isActive = value; } }
     }
 
-    [System.Serializable]
-    public class Criteria
-    {
-        [field: NonSerialized]
-        public PlayerStats PlayerStats { get; set; }
-
-        [SerializeField] private StatsLists _statsList;
-        public string StatsList => _statsList.ToString();
-        [SerializeField] private string _stat;
-        [SerializeField] private float _threshold;
-
-        private enum Comparison
-        {
-            LESS,
-            EQUAL,
-            GREATER
-        }
-
-        [SerializeField] private Comparison _thresholdComparison;
-
-        public bool Satisfied
-        {
-            get
-            {
-                StatsList statsList = (StatsList)PlayerStats[StatsList];
-                PlayerStat skill = statsList.List.Find(sk => sk.Name == _stat);
-                switch(_thresholdComparison)
-                {
-                    case Comparison.EQUAL:
-                        return skill.Value == _threshold;
-                    case Comparison.GREATER:
-                        return skill.Value > _threshold;
-                    case Comparison.LESS:
-                        return skill.Value < _threshold;
-                    default:
-                        return skill.Value > _threshold;
-                }
-            }
-        }
-    }
-
     // Keep in sync with Resources/SO/PlayerData scriptable object
     public enum StatsLists
     {

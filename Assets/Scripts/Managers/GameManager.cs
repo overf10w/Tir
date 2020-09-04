@@ -252,16 +252,21 @@ using UnityEngine;
 //                  - https://answers.unity.com/questions/1170350/editorscript-generate-enum-from-string.html
 //                  - https://answers.unity.com/questions/1454466/need-to-create-enum-out-of-array-of-string.html
 //                  - https://answers.unity.com/questions/1085035/how-can-i-create-a-enum-like-as-component-light.html
-//      2.7 - Upgrade (or Criteria): Target Stat name selector (in Criteria, nested inside of Upgrade) shouldn't be a string, but a dropdown (enum or string array) - []
+//      2.7 - Criteria: Target Stat name selector (in Criteria, nested inside of Upgrade) shouldn't be a string, but a dropdown (enum or string array) - [done]
 //              - this be done either by:
 //                  - 1. UpgradeEditor.cs: accessing "criteria._stat", just like we accessed "_stat" (not preferred)
 //                  - 2. Move Criteria to its own file, and implement CustomPropertyDrawer for it - https://docs.unity3d.com/ScriptReference/PropertyDrawer.html (preffered)
 //                  - 3. Convert criteria to scriptable object, and do this thing as we've done in UpgradeEditor
+//      2.8 - Criteria: There should be optional Upgrade reference (assigned in inspector), so the upgrade becomes unlocked only if the referenced research isn't active - [done]
+//      2.9 - CriteriaPropertyDrawer, UpgradesEditor: refactor
+//      3.0 - Criteria, CriteriaDrawer (Not urgent):
+//              - There should be an optional array of Upgrade references(assigned in inspector), so the upgrade becomes unlocked only if all the referenced upgrades aren't active
 // 3. Assign appropriate icons to TeamSkills, ClickGunSkills - [done]
 
 // 01-SEP-20:
 // 0. Play with the game balance
 // 1. Add more artifacts
+// 2. 
 
 // 10-SEP-20 (Important, not urgent):
 // 0. Cube: refactor TakeDamage, HealthChanged thingy (a little bit)

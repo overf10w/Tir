@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cysharp.Threading.Tasks;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,7 +19,10 @@ namespace Game
             _researchPanel = researchPanel;
 
             _playerModel = playerModel;
+
             _playerModel.PlayerStats.PropertyChanged += PlayerStatsChangedHandler;
+            _playerModel.PlayerStats.TeamSkillsList.StatChanged += TeamSkillsListStatChanged;
+            _playerModel.PlayerStats.ClickGunSkillsList.StatChanged += ClickGunSkillsListStatChanged;
 
             _upgradesSo = upgradesSO;
 
@@ -26,6 +30,20 @@ namespace Game
             _researchPanel.UpgradeBtnClick.UpgradesController = this;
             _researchPanel.ResearchPanelToggleCanvas.ToggleBtnClicked += ToggleBtnClickHandler;
             _researchPanel.AutoSaveTriggered += AutoSaveHandler;
+        }
+
+        private /*async*/ void ClickGunSkillsListStatChanged(object sender, PropertyChangedEventArgs e)
+        {
+            //await UniTask.Delay(1);  // For Criteria to validate its referenced Upgrade (assigned in inspector) isn't IsActive no more
+            _researchPanel.UpdateView();
+            Debug.Log("_researchPanel.UpdateView");
+        }
+
+        private /*async*/ void TeamSkillsListStatChanged(object sender, PropertyChangedEventArgs e)
+        {
+            //await UniTask.Delay(1);  // For Criteria to validate its referenced Upgrade (assigned in inspector) isn't IsActive no more
+            _researchPanel.UpdateView();
+            Debug.Log("_researchPanel.UpdateView");
         }
 
         public void UpgradeBtnClickHandler(UpgradeBtnClickEventArgs e)
@@ -38,10 +56,14 @@ namespace Game
 
             if (_playerModel.PlayerStats.Gold >= e.Upgrade.Price)
             {
+                // Upgrade.IsActive should always come first, as 
+                //  1) By changing skill.Value we trigger events in _playerModel.PlayerStats.(Team/ClickGun)StatsList
+                //  2) To which the UpgradesController subscibes to with (Team/ClickGun)SkillsListStatChanged methods
+                //  3) (Team/ClickGun)SkillsListStatChanged: we check whether Upgrade.IsActive, so it's crucial to update it before setting skill.Value
+                e.Upgrade.IsActive = false;
                 _playerModel.PlayerStats.Gold -= e.Upgrade.Price;
                 float cachedFloat = skill.Value;
                 skill.Value = cachedFloat + (e.Upgrade.Amount / 100.0f);
-                e.Upgrade.IsActive = false;
             }
         }
 
