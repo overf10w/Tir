@@ -13,7 +13,7 @@ namespace Game
 
         [SerializeField] private StatsLists _statsList;
         public string StatsList => _statsList.ToString();
-        [SerializeField] private string _stat;
+        [SerializeField, HideInInspector] private string _stat; // SerializeField: accessible through FindPropertyRelative("_stat"); isn't shown in the inspector
         [SerializeField] private float _threshold;
         [SerializeField] private Upgrade _upgrade;
 

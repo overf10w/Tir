@@ -20,9 +20,9 @@ MonoBehaviour:
   _price: 2000
   _amount: 100
   criterias:
-  - _statsList: 0
-    _stat: DPSMultiplier
+  - _statsList: 1
+    _stat: GoldGainedMultiplier
     _threshold: 1.99
     _upgrade: {fileID: 0}
     _thresholdComparison: 2
-  _isActive: 1
+  _isActive: 0

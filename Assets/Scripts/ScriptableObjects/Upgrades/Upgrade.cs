@@ -62,9 +62,10 @@ namespace Game
         [SerializeField] private StatsLists _statsList;
         public string StatsList => _statsList.ToString();
 
-        [SerializeField] private string _stat;
+        [SerializeField, HideInInspector] private string _stat;
         public string Stat => _stat;
 
+        [Space(20.0f)]
         [Header("Characteristics")]
         [SerializeField] private float _price;
         public float Price => _price;

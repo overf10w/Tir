@@ -238,7 +238,7 @@ using UnityEngine;
 // 31-AUG-20:
 // 0. TeamPanel:TeamSkillPanel - Add background panel image, experiment with position of the panel
 // 1. ClickGunPanel:ClickGunSkillPanel - Add background panel image, experiment with position of the panel
-// 2. Refactor Upgrade system a bit (make it more useful) - [3/6 doing...]
+// 2. Refactor Upgrade system a bit (make it more useful) - [6/10 doing...]
 //      2.1 - Upgrade: Criteria: make criterias more sophisticated - [done]
 //      2.2 - WeaponStat: WeaponAlgorithm: Specify Multiplier Lists, so each weaponStat will be multiplied by selected multiplier lists - [done]
 //      2.3 - Upgrade, Criteria, WeaponStat, WeaponAlgorithm: StatsList selector shouldn't be a string, but rather an enum - [done]
@@ -258,10 +258,11 @@ using UnityEngine;
 //                  - 2. Move Criteria to its own file, and implement CustomPropertyDrawer for it - https://docs.unity3d.com/ScriptReference/PropertyDrawer.html (preffered)
 //                  - 3. Convert criteria to scriptable object, and do this thing as we've done in UpgradeEditor
 //      2.8 - Criteria: There should be optional Upgrade reference (assigned in inspector), so the upgrade becomes unlocked only if the referenced research isn't active - [done]
-//      2.9 - CriteriaPropertyDrawer, UpgradesEditor: refactor
+//      2.9 - CriteriaPropertyDrawer, UpgradesEditor: refactor - []
 //      3.0 - Criteria, CriteriaDrawer (Not urgent):
 //              - There should be an optional array of Upgrade references(assigned in inspector), so the upgrade becomes unlocked only if all the referenced upgrades aren't active
 // 3. Assign appropriate icons to TeamSkills, ClickGunSkills - [done]
+// 4. Prettify (Team/ClickGun)Skill(Panels/Items)
 
 // 01-SEP-20:
 // 0. Play with the game balance
