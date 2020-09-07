@@ -26,28 +26,11 @@ namespace Game
             EditorGUI.BeginProperty(position, label, property);
 
             var statsListProp = property.FindPropertyRelative("_statsList");
-
-            if (statsListProp.enumNames[statsListProp.enumValueIndex] == StatsLists.TeamSkillsList.ToString())
-            {
-                _listIndex = 0;
-                _availableOptions = _teamSkills.Select(item => new GUIContent(item)).ToArray();
-            }
-            else if (statsListProp.enumNames[statsListProp.enumValueIndex] == StatsLists.ClickGunSkillsList.ToString())
-            {
-                _listIndex = 1;
-                _availableOptions = _clickGunSkills.Select(item => new GUIContent(item)).ToArray();
-            }
-
             var stat = property.FindPropertyRelative("_stat");
-            switch (_listIndex)
-            {
-                case 0:
-                    _index = Array.FindIndex(_teamSkills, item => item == stat.stringValue);
-                    break;
-                case 1:
-                    _index = Array.FindIndex(_clickGunSkills, item => item == stat.stringValue);
-                    break;
-            }
+
+            FindListIndex(statsListProp, ref _listIndex);
+            SetAvailableOptions(_listIndex, ref _availableOptions);
+            FindIndex(_listIndex, stat, ref _index);
 
             // Draw label
             position = EditorGUI.PrefixLabel(position, GUIUtility.GetControlID(FocusType.Passive), label);
@@ -70,14 +53,52 @@ namespace Game
 
             EditorGUI.BeginChangeCheck();
             _index = EditorGUI.Popup(statRect, _index, _availableOptions);
-
             if (EditorGUI.EndChangeCheck())
             {
                 stat.stringValue = _availableOptions[_index].text;
             }
-            EditorGUI.indentLevel = indent;
 
+            EditorGUI.indentLevel = indent;
             EditorGUI.EndProperty();
+        }
+
+        private void FindListIndex(SerializedProperty statsListProp, ref int listIndex)
+        {
+            if (statsListProp.enumNames[statsListProp.enumValueIndex] == StatsLists.TeamSkillsList.ToString())
+            {
+                listIndex = 0;
+            }
+            else if (statsListProp.enumNames[statsListProp.enumValueIndex] == StatsLists.ClickGunSkillsList.ToString())
+            {
+                listIndex = 1;
+            }
+        }
+
+        private void SetAvailableOptions(int listIndex, ref GUIContent[] availableOptions)
+        {
+            switch(listIndex)
+            {
+                case 0:
+                    availableOptions = _teamSkills.Select(item => new GUIContent(item)).ToArray();
+                    break;
+                case 1:
+                    availableOptions = _clickGunSkills.Select(item => new GUIContent(item)).ToArray();
+                    break;
+            }
+            
+        }
+
+        private void FindIndex(int listIndex, SerializedProperty stat, ref int index)
+        {
+            switch (listIndex)
+            {
+                case 0:
+                    index = Array.FindIndex(_teamSkills, item => item == stat.stringValue);
+                    break;
+                case 1:
+                    index = Array.FindIndex(_clickGunSkills, item => item == stat.stringValue);
+                    break;
+            }
         }
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)

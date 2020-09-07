@@ -13,7 +13,7 @@ namespace Game
     {
         private Upgrade upgrade;
 
-        private GUIContent[] availableOptions;
+        private GUIContent[] _availableOptions;
 
         private int _index = 0;
         private string[] _teamSkills = new string[] { "DPSMultiplier" };
@@ -26,24 +26,8 @@ namespace Game
             upgrade = (Upgrade)target;
             var statProp = serializedObject.FindProperty("_stat");
 
-            if (upgrade.StatsList == StatsLists.TeamSkillsList.ToString())
-            {
-                _listIndex = 0;
-            }
-            else if (upgrade.StatsList == StatsLists.ClickGunSkillsList.ToString())
-            {
-                _listIndex = 1;
-            }
-
-            switch (_listIndex)
-            {
-                case 0:
-                    _index = Array.FindIndex(_teamSkills, item => item == statProp.stringValue); // TODO: this can be merged with if/else if clause above
-                    break;
-                case 1:
-                    _index = Array.FindIndex(_clickGunSkills, item => item == statProp.stringValue);
-                    break;
-            }
+            FindListIndex(upgrade, ref _listIndex);
+            FindIndex(_listIndex, statProp, ref _index);
         }
 
         public override void OnInspectorGUI()
@@ -57,24 +41,55 @@ namespace Game
 
             if (_statProperty != null)
             {
-                if (upgrade.StatsList == StatsLists.TeamSkillsList.ToString())
-                {
-                    availableOptions = _teamSkills.Select(item => new GUIContent(item)).ToArray();
-                }
-                else if (upgrade.StatsList == StatsLists.ClickGunSkillsList.ToString())
-                {
-                    availableOptions = _clickGunSkills.Select(item => new GUIContent(item)).ToArray();
-                }
+                SetAvailableOptions(upgrade, ref _availableOptions);
 
                 Rect lastRect = GUILayoutUtility.GetLastRect();
 
                 float rectWidth = lastRect.width / 1.85f;
-                _index = EditorGUI.Popup(new Rect(lastRect.max.x - rectWidth, 115, rectWidth, 15), new GUIContent(""), _index, availableOptions);
+                _index = EditorGUI.Popup(new Rect(lastRect.max.x - rectWidth, 115, rectWidth, 15), new GUIContent(""), _index, _availableOptions);
 
-                var selectedString = availableOptions[_index].text;
+                var selectedString = _availableOptions[_index].text;
                 _statProperty.stringValue = selectedString;
             }
             serializedObject.ApplyModifiedProperties();
+        }
+
+        private void FindListIndex(Upgrade upgrade, ref int listIndex)
+        {
+            if (upgrade.StatsList == StatsLists.TeamSkillsList.ToString())
+            {
+                listIndex = 0;
+            }
+            else if (upgrade.StatsList == StatsLists.ClickGunSkillsList.ToString())
+            {
+                listIndex = 1;
+            }
+        }
+
+        private void SetAvailableOptions(Upgrade upgrade, ref GUIContent[] availableOptions)
+        {
+            if (upgrade.StatsList == StatsLists.TeamSkillsList.ToString())
+            {
+                availableOptions = _teamSkills.Select(item => new GUIContent(item)).ToArray();
+            }
+            else if (upgrade.StatsList == StatsLists.ClickGunSkillsList.ToString())
+            {
+                availableOptions = _clickGunSkills.Select(item => new GUIContent(item)).ToArray();
+            }
+
+        }
+
+        private void FindIndex(int listIndex, SerializedProperty stat, ref int index)
+        {
+            switch (listIndex)
+            {
+                case 0:
+                    index = Array.FindIndex(_teamSkills, item => item == stat.stringValue);
+                    break;
+                case 1:
+                    index = Array.FindIndex(_clickGunSkills, item => item == stat.stringValue);
+                    break;
+            }
         }
     }
 }

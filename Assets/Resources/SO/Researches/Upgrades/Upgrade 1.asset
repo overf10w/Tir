@@ -21,7 +21,7 @@ MonoBehaviour:
   _amount: 100
   criterias:
   - _statsList: 1
-    _stat: GoldGainedMultiplier
+    _stat: DMGMultiplier
     _threshold: 1.99
     _upgrade: {fileID: 0}
     _thresholdComparison: 2

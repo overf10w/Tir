@@ -16,7 +16,7 @@ MonoBehaviour:
   _name: DMG++
   _description: Increase ClickGun DMG Multiplier by 100%
   _statsList: 1
-  _stat: GoldGainedMultiplier
+  _stat: DMGMultiplier
   _price: 3000
   _amount: 100
   criterias:

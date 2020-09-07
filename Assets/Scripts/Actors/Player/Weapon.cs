@@ -100,6 +100,7 @@ namespace Game
             _algorithm = algorithm;
             _playerStats = playerStats;
 
+            // TODO: this can be (?) safely removed
             _playerStats.TeamSkillsList.StatChanged += SkillChangedHandler;
         }
 
