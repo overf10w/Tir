@@ -20,8 +20,9 @@ namespace Game
     // Keep in sync with Resources/SO/PlayerData scriptable object
     public enum StatsLists
     {
-        TeamSkillsList,
-        ClickGunSkillsList
+        TeamSkills,
+        ClickGunSkills, 
+        WeaponsLevels
     }
 
     [CreateAssetMenu(fileName = "Upgrades", menuName = "ScriptableObjects/Ugprades", order = 6)]

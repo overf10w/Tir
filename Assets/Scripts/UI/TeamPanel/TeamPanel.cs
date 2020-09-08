@@ -66,7 +66,7 @@ namespace Game
 
         public void Init(PlayerModel model)
         {
-            _skills = model.PlayerStats.TeamSkillsList;
+            _skills = model.PlayerStats.TeamSkills;
             _skills.StatChanged += SkillChangedHandler;
 
             _teamSkillPanel = GetComponentInChildren<TeamSkillPanel>();

@@ -15,7 +15,7 @@ MonoBehaviour:
   _weapons:
   - _weaponName: StandardPistol
     _dps:
-      _level: 0
+      _level: 1
       _upgradeLevel: 0
     _dmg:
       _level: 0

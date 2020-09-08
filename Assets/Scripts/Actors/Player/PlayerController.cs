@@ -29,7 +29,7 @@ namespace Game
 
             _model.PropertyChanged += ModelChangedHandler;
             _model.OnPlayerStatsChanged += PlayerStatsChangedHandler;
-            _model.PlayerStats.TeamSkillsList.StatChanged += TeamSkillsChangedHandler;
+            _model.PlayerStats.TeamSkills.StatChanged += TeamSkillsChangedHandler;
         }
 
         private void TeamSkillsChangedHandler(object sender, PropertyChangedEventArgs e)
@@ -42,11 +42,6 @@ namespace Game
         private void LevelPassedHandler(object sender, EventArgs e)
         {
             _model.PlayerStats.Level++;
-        }
-
-        private void HandleAbilityBtnClick(object sender, UpgradeBtnClickEventArgs e)
-        {
-            
         }
 
         private void PlayerStatsChangedHandler(object sender, EventArgs<string> args)
@@ -158,7 +153,7 @@ namespace Game
         {
             // TODO: null value handling
             // TODO: Add TeamWeaponsSkill: GoldGainedMultiplier
-            PlayerStat goldGainedMultiplier = _model.PlayerStats.ClickGunSkillsList.List.Find(stat => stat.Name == "GoldGainedMultiplier");
+            PlayerStat goldGainedMultiplier = _model.PlayerStats.ClickGunSkills.List.Find(stat => stat.Name == "GoldGainedMultiplier");
             float goldGained = e.Val * goldGainedMultiplier.Value;
             _model.PlayerStats.Gold += goldGained;
             // TODO: save 'em every 15 seconds instead.
@@ -217,7 +212,7 @@ namespace Game
                     // TODO: (LP): 
                     // ideally, 
                     // (1) player controller updates the model, 
-                    // (2) player controller reacts to the model update by updating the view
+                    // (2) player controller reacts to the model update by updating the view, saving the data
                     switch (buttonName)
                     {
                         case "DPS":
@@ -225,10 +220,15 @@ namespace Game
                             {
                                 _model.PlayerStats.Gold -= wpn.DPS.Price;
                                 wpn.DPS.Level++;
+                                // Upgrade _model.PlayerStats...
+                                int index = _model.PlayerStats.WeaponsLevels.List.FindIndex(item => item.Name == wpn.name);
+                                _model.PlayerStats.WeaponsLevels.List[index].Value = wpn.DPS.Level;
                             }
+                            ResourceLoader.SavePlayerStatsData(_model.PlayerStats);
                             ResourceLoader.SaveTeamWeapons(_model.TeamWeapons);
                             _view.TeamPanel.UpdateView(_model);
                             break;
+
                         case "DMG":
                             if (_model.PlayerStats.Gold >= wpn.DMG.Price)
                             {

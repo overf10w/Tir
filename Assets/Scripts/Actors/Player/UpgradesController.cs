@@ -21,8 +21,9 @@ namespace Game
             _playerModel = playerModel;
 
             _playerModel.PlayerStats.PropertyChanged += PlayerStatsChangedHandler;
-            _playerModel.PlayerStats.TeamSkillsList.StatChanged += TeamSkillsListStatChanged;
-            _playerModel.PlayerStats.ClickGunSkillsList.StatChanged += ClickGunSkillsListStatChanged;
+            _playerModel.PlayerStats.TeamSkills.StatChanged += TeamSkillsListStatChangedHandler;
+            _playerModel.PlayerStats.ClickGunSkills.StatChanged += ClickGunSkillsListStatChangedHandler;
+            _playerModel.PlayerStats.WeaponsLevels.StatChanged += WeaponsStatsChangedHandler;
 
             _upgradesSo = upgradesSO;
 
@@ -32,14 +33,19 @@ namespace Game
             _researchPanel.AutoSaveTriggered += AutoSaveHandler;
         }
 
-        private /*async*/ void ClickGunSkillsListStatChanged(object sender, PropertyChangedEventArgs e)
+        private void WeaponsStatsChangedHandler(object sender, PropertyChangedEventArgs e)
+        {
+            _researchPanel.UpdateView();
+        }
+
+        private /*async*/ void ClickGunSkillsListStatChangedHandler(object sender, PropertyChangedEventArgs e)
         {
             //await UniTask.Delay(1);  // For Criteria to validate its referenced Upgrade (assigned in inspector) isn't IsActive no more
             _researchPanel.UpdateView();
             Debug.Log("_researchPanel.UpdateView");
         }
 
-        private /*async*/ void TeamSkillsListStatChanged(object sender, PropertyChangedEventArgs e)
+        private /*async*/ void TeamSkillsListStatChangedHandler(object sender, PropertyChangedEventArgs e)
         {
             //await UniTask.Delay(1);  // For Criteria to validate its referenced Upgrade (assigned in inspector) isn't IsActive no more
             _researchPanel.UpdateView();

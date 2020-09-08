@@ -35,7 +35,7 @@ namespace Game
         {
             if (!_initFlag)
             {
-                _skills = model.PlayerStats.ClickGunSkillsList;
+                _skills = model.PlayerStats.ClickGunSkills;
                 _skills.StatChanged += SkillChangedHandler;
 
                 clickGunSkillPanel = GetComponentInChildren<ClickGunSkillPanel>();

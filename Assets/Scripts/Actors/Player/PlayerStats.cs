@@ -50,7 +50,7 @@ namespace Game
     }
 
     [System.Serializable]
-    public class PlayerStatsData // gets stored on disk, will not be shown directly in the editor, but rather will initialize a playerData ScriptableObject
+    public class PlayerStatsData // stored on disk, will not be shown directly in the editor, but rather will initialize a playerData ScriptableObject
     {
         public PlayerStatsData(PlayerStats playerStats)
         {
@@ -59,13 +59,16 @@ namespace Game
             _lastPlayTimestamp = playerStats.LastPlayTimestamp;
 
             _teamSkills = new List<PlayerStatData>();
-            _teamSkills = playerStats.GetStatsDataList(playerStats.TeamSkillsList.List);
+            _teamSkills = playerStats.GetStatsDataList(playerStats.TeamSkills.List);
 
             _clickGunSkills = new List<PlayerStatData>();
-            _clickGunSkills = playerStats.GetStatsDataList(playerStats.ClickGunSkillsList.List);
+            _clickGunSkills = playerStats.GetStatsDataList(playerStats.ClickGunSkills.List);
 
             _artifacts = new List<PlayerStatData>();
-            _artifacts = playerStats.GetStatsDataList(playerStats.ArtifactsList.List);
+            _artifacts = playerStats.GetStatsDataList(playerStats.Artifacts.List);
+
+            _weaponsStats = new List<PlayerStatData>();
+            _weaponsStats = playerStats.GetStatsDataList(playerStats.WeaponsLevels.List);
         }
 
         [SerializeField] private float _gold;
@@ -88,6 +91,9 @@ namespace Game
 
         [SerializeField] private List<PlayerStatData> _artifacts;
         public List<PlayerStatData> Artifacts => _artifacts;
+
+        [SerializeField] private List<PlayerStatData> _weaponsStats;
+        public List<PlayerStatData> WeaponsLevels => _weaponsStats;
     }
 
     [System.Serializable]
@@ -127,7 +133,7 @@ namespace Game
         [SerializeField] private List<PlayerStat> _teamSkills;
         [NonSerialized]
         private StatsList _teamSkillsList;
-        public StatsList TeamSkillsList
+        public StatsList TeamSkills
         {
             get
             {
@@ -142,7 +148,7 @@ namespace Game
         [SerializeField] private List<PlayerStat> _clickGunSkills;
         [NonSerialized]
         private StatsList _clickGunSkillsList;
-        public StatsList ClickGunSkillsList
+        public StatsList ClickGunSkills
         {
             get
             {
@@ -157,7 +163,7 @@ namespace Game
         [SerializeField] private List<PlayerStat> _artifacts;
         [NonSerialized]
         private StatsList _artifactsList;
-        public StatsList ArtifactsList
+        public StatsList Artifacts
         {
             get
             {
@@ -169,6 +175,22 @@ namespace Game
             }
         }
 
+        [SerializeField] private List<PlayerStat> _weaponsLevelsList;
+        [NonSerialized]
+        private StatsList _weaponsLevels;
+        public StatsList WeaponsLevels
+        {
+            get
+            {
+                if (_weaponsLevels == null)
+                {
+                    _weaponsLevels = new StatsList(_weaponsLevelsList);
+                }
+                return _weaponsLevels;
+            }
+        }
+
+
         public void SetPlayerStats(PlayerStatsData playerStatsData)
         {
             _gold = playerStatsData.Gold;
@@ -178,6 +200,7 @@ namespace Game
             SetStatsList(_teamSkills, playerStatsData.TeamSkills);
             SetStatsList(_clickGunSkills, playerStatsData.ClickGunSkills);
             SetStatsList(_artifacts, playerStatsData.Artifacts);
+            SetStatsList(_weaponsLevelsList, playerStatsData.WeaponsLevels);
         }
 
         // Indexer
@@ -192,6 +215,7 @@ namespace Game
         #region BinarySerializerMethods
         public void SetStatsList(List<PlayerStat> stats, List<PlayerStatData> statsDatas)
         {
+            Debug.Log("stats == null: " + (stats == null).ToString() + "statsDatas == null: " + (statsDatas == null).ToString());
             if (statsDatas.Count != stats.Count)
             {
                 string warning =

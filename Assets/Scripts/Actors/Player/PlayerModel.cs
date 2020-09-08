@@ -70,14 +70,20 @@ namespace Game
 
             foreach (var weaponData in weaponDataArray)
             {
-                GameObject obj = new GameObject(weaponData.WeaponName);
-                Weapon weaponScript = obj.AddComponent<Weapon>();
+                string name = weaponData.WeaponName;
+
+                GameObject weaponObj = new GameObject(name);
+                Weapon weapon = weaponObj.AddComponent<Weapon>();
                 // TODO:
                 // 1. Subscribe to weaponScript.OnPropertyChanged
                 // 2. Raise the event when notified OnPropertyChanged
                 // 3. PlayerController subscribes to this event and changes view accordingly (it just updates the views with the ref to teamWeapons dictionary;
-                weaponScript.Init(weaponData, playerStats);
-                TeamWeapons.Add(weaponData.WeaponName, weaponScript);
+                weapon.Init(weaponData, playerStats);
+                TeamWeapons.Add(name, weapon);
+
+                // Set PlayerStats.WeaponsStats:
+                int index = PlayerStats.WeaponsLevels.List.FindIndex(item => item.Name == name);
+                PlayerStats.WeaponsLevels.List[index].Value = weapon.DPS.Level;
             }
         }
 

@@ -82,6 +82,7 @@ namespace Game
         public float Value => _algorithm.GetValue(_playerStats, Level, _upgradeLevel);
         public float NextValue => _algorithm.GetNextValue(_playerStats, Level, _upgradeLevel);
 
+        // TODO: remove it lol
         private int _upgradeLevel;
         public int UpgradeLevel { get => _upgradeLevel; set { SetField(ref _upgradeLevel, value); } }
 
@@ -101,8 +102,21 @@ namespace Game
             _playerStats = playerStats;
 
             // TODO: this can be (?) safely removed
-            _playerStats.TeamSkillsList.StatChanged += SkillChangedHandler;
+            _playerStats.TeamSkills.StatChanged += SkillChangedHandler;
         }
+
+        public WeaponStat(int DPS, StatData statData, PlayerStats playerStats, WeaponAlgorithm algorithm)
+        {
+            Level = DPS;
+            _upgradeLevel = statData.UpgradeLevel;
+
+            _algorithm = algorithm;
+            _playerStats = playerStats;
+
+            // TODO: this can be (?) safely removed
+            _playerStats.TeamSkills.StatChanged += SkillChangedHandler;
+        }
+
 
         // TODO: setter
         public void Upgrade()
@@ -159,6 +173,17 @@ namespace Game
             _playerStats = playerStats;
 
             DPS = new WeaponStat(data.DPS, playerStats, data.algorithms.DPS);
+            DMG = new WeaponStat(data.DMG, playerStats, data.algorithms.DMG);
+        }
+
+        public void Init(int DPSLevel, WeaponData data, PlayerStats playerStats)
+        {
+            InitMessageHandler();
+
+            Algorithms = data.algorithms;
+            _playerStats = playerStats;
+
+            DPS = new WeaponStat(DPSLevel, data.DPS, playerStats, data.algorithms.DPS);
             DMG = new WeaponStat(data.DMG, playerStats, data.algorithms.DMG);
         }
 

@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 622d60d1c8909d6419ce925e02d4edfd, type: 3}
+  m_Name: Upgrade 4
+  m_EditorClassIdentifier: 
+  _icon: {fileID: 5056229961613807097, guid: 9f51c2c2ff030524da06308215b550f4, type: 3}
+  _name: DPS++ [x2]
+  _description: Increase DPS by 10%
+  _statsList: 2
+  _stat: MachineGun
+  _price: 100
+  _amount: 100
+  criterias:
+  - _statsList: 2
+    _stat: MachineGun
+    _threshold: 8
+    _upgrade: {fileID: 0}
+    _thresholdComparison: 2
+  _isActive: 1

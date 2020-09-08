@@ -8,11 +8,13 @@ using UnityEngine.UIElements;
 namespace Game
 {
     [CustomPropertyDrawer(typeof(Criteria))]
-    public class CriteriaDrawer : PropertyDrawer   
+    public class CriteriaDrawer : PropertyDrawer
     {
         private int _index = 0;
+
         private string[] _teamSkills = new string[] { "DPSMultiplier" };
         private string[] _clickGunSkills = new string[] { "DMGMultiplier", "GoldGainedMultiplier" };
+        private string[] _weaponsStats = new string[] { "StandardPistol", "MachineGun" };
 
         private int _listIndex = 0;
 
@@ -64,13 +66,17 @@ namespace Game
 
         private void FindListIndex(SerializedProperty statsListProp, ref int listIndex)
         {
-            if (statsListProp.enumNames[statsListProp.enumValueIndex] == StatsLists.TeamSkillsList.ToString())
+            if (statsListProp.enumNames[statsListProp.enumValueIndex] == StatsLists.TeamSkills.ToString())
             {
                 listIndex = 0;
             }
-            else if (statsListProp.enumNames[statsListProp.enumValueIndex] == StatsLists.ClickGunSkillsList.ToString())
+            else if (statsListProp.enumNames[statsListProp.enumValueIndex] == StatsLists.ClickGunSkills.ToString())
             {
                 listIndex = 1;
+            }
+            else if (statsListProp.enumNames[statsListProp.enumValueIndex] == StatsLists.WeaponsLevels.ToString())
+            {
+                listIndex = 2;
             }
         }
 
@@ -83,6 +89,9 @@ namespace Game
                     break;
                 case 1:
                     availableOptions = _clickGunSkills.Select(item => new GUIContent(item)).ToArray();
+                    break;
+                case 2:
+                    availableOptions = _weaponsStats.Select(item => new GUIContent(item)).ToArray();
                     break;
             }
             
@@ -97,6 +106,9 @@ namespace Game
                     break;
                 case 1:
                     index = Array.FindIndex(_clickGunSkills, item => item == stat.stringValue);
+                    break;
+                case 2:
+                    index = Array.FindIndex(_weaponsStats, item => item == stat.stringValue);
                     break;
             }
         }

@@ -257,12 +257,19 @@ using UnityEngine;
 //                  - 3. Convert criteria to scriptable object, and do this thing as we've done in UpgradeEditor
 //      2.7 - Criteria: There should be optional Upgrade reference (assigned in inspector), so the upgrade becomes unlocked only if the referenced research isn't active - [done]
 //      2.8 - CriteriaPropertyDrawer, UpgradesEditor: refactor - [done]
-//      2.9 - Upgrade, Criteria, Weapon, PlayerModel, PlayerStats: Add weapon indexers - []
-//              - Just add yet another StatsList to PlayerStats: named WeaponsList
-//                  - PlayerModel: On PlayerModel():Init() init each gun with value from PlayerStats.WeaponList
-//                  - Weapon: on each weapon DPS change event, upgrade PlayerStats.WeaponList['index of this weapon'].Value. 
-//                      (All the subscribers of Weapon are still listening to its events and nothing really changes, except we store stat data in PlayerStats.WeaponList container)
+//      2.9 - Criteria: Add weapon indexers - so upgrade becomes unlocked when a selected weapon reaches specified level - [done]
+//              - Just add yet another StatsList to PlayerStats: named WeaponsLevels - [done]
+//                  - PlayerModel: On PlayerModel():Init() init each gun with value from PlayerStats.WeaponsLevels - [done]
+//                  - Weapon: on each weapon DPS change event, upgrade PlayerStats.WeaponLevels['index of this weapon'].Value. - [done]
+//                      (All the subscribers of Weapon are still listening to its events and nothing really changes, except we store stat data in PlayerStats.WeaponList container) - [done]
+//      3.0 - Upgrade: Add weapon indexers - so the Target Stat in Upgrade would be: WeaponsMultipliers["MachineGun"]
+//              - PlayerStats: add another StatsList: named WeaponsMultipliers (just like we did with WeaponsLevels)
+//              - WeaponStat: remove the thing called _upgradeLevel/UpgradeLevel: we don't need it anymore
+//              - PlayerModel: On PlayerModel():Init() init each gun and each gun algorithm with value from PlayerStats.WeaponsMultipliers
+//              - UpgradeEditor: add _weaponsMultipliers available options
+
 //      3.0 - Upgrade, Criteria, WeaponStat, PlayerStats(Especially lists names): Refactor names a bit, etc. - []
+//      3.1 - 
 //      3.2 - ResearchPanelEntry: show required criterias for an upgrade as icons (or slots)
 //      3.1 - Criteria, CriteriaDrawer (Not urgent):
 //              - There should be an optional array of Upgrade references(assigned in inspector), so the upgrade becomes unlocked only if all the referenced upgrades aren't active
