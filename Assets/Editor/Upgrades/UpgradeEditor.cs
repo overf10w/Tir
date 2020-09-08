@@ -18,7 +18,6 @@ namespace Game
         private int _index = 0;
         private string[] _teamSkills = new string[] { "DPSMultiplier" };
         private string[] _clickGunSkills = new string[] { "DMGMultiplier", "GoldGainedMultiplier" };
-        private string[] _weaponsStats = new string[] { "StandardPistol", "MachineGun" };
 
         private int _listIndex = 0;
 
@@ -47,7 +46,13 @@ namespace Game
                 Rect lastRect = GUILayoutUtility.GetLastRect();
 
                 float rectWidth = lastRect.width / 1.85f;
-                _index = EditorGUI.Popup(new Rect(lastRect.max.x - rectWidth, 115, rectWidth, 15), new GUIContent(""), _index, _availableOptions);
+
+                string warning = "";
+                if (upgrade.StatsList == StatsLists.WeaponsLevels.ToString())
+                {
+                    warning = "Error. Can't be selected.";
+                }
+                _index = EditorGUI.Popup(new Rect(lastRect.max.x - rectWidth, 115, rectWidth, 15), new GUIContent(warning), _index, _availableOptions);
 
                 var selectedString = _availableOptions[_index].text;
                 _statProperty.stringValue = selectedString;
@@ -65,10 +70,6 @@ namespace Game
             {
                 listIndex = 1;
             }
-            else if (upgrade.StatsList == StatsLists.WeaponsLevels.ToString())
-            {
-                listIndex = 2;
-            }
         }
 
         private void SetAvailableOptions(Upgrade upgrade, ref GUIContent[] availableOptions)
@@ -81,10 +82,6 @@ namespace Game
             {
                 availableOptions = _clickGunSkills.Select(item => new GUIContent(item)).ToArray();
             }
-            else if (upgrade.StatsList == StatsLists.WeaponsLevels.ToString())
-            {
-                availableOptions = _weaponsStats.Select(item => new GUIContent(item)).ToArray();
-            }
         }
 
         private void FindIndex(int listIndex, SerializedProperty stat, ref int index)
@@ -96,9 +93,6 @@ namespace Game
                     break;
                 case 1:
                     index = Array.FindIndex(_clickGunSkills, item => item == stat.stringValue);
-                    break;
-                case 2:
-                    index = Array.FindIndex(_weaponsStats, item => item == stat.stringValue);
                     break;
             }
         }

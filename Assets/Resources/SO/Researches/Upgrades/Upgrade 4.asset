@@ -15,13 +15,13 @@ MonoBehaviour:
   _icon: {fileID: 5056229961613807097, guid: 9f51c2c2ff030524da06308215b550f4, type: 3}
   _name: DPS++ [x2]
   _description: Increase DPS by 10%
-  _statsList: 2
-  _stat: MachineGun
+  _statsList: 1
+  _stat: GoldGainedMultiplier
   _price: 100
   _amount: 100
   criterias:
   - _statsList: 2
-    _stat: MachineGun
+    _stat: StandardPistol
     _threshold: 8
     _upgrade: {fileID: 0}
     _thresholdComparison: 2
