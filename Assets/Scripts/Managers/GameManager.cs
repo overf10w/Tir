@@ -263,14 +263,13 @@ using UnityEngine;
 //                  - Weapon: on each weapon DPS change event, upgrade PlayerStats.WeaponLevels['index of this weapon'].Value. - [done]
 //                      (All the subscribers of Weapon are still listening to its events and nothing really changes, except we store stat data in PlayerStats.WeaponList container) - [done]
 //      3.0 - Upgrade: Add weapon indexers - so the Target Stat in Upgrade would be: WeaponsMultipliers["MachineGun"]
-//              - PlayerStats: add another StatsList: named WeaponsMultipliers (just like we did with WeaponsLevels)
-//              - WeaponStat: remove the thing called _upgradeLevel/UpgradeLevel: we don't need it anymore
-//              - PlayerModel: On PlayerModel():Init() init each gun and each gun algorithm with value from PlayerStats.WeaponsMultipliers
-//              - UpgradeEditor: add _weaponsMultipliers available options
-
-//      3.0 - Upgrade, Criteria, WeaponStat, PlayerStats(Especially lists names): Refactor names a bit, etc. - []
-//      3.1 - 
+//              - PlayerStats: add another StatsList: named WeaponsMultipliers (just like we did with WeaponsLevels) - [done]
+//              - PlayerModel, Weapon: On PlayerModel():Init(): Init() each Weapon and each weapon algorithm with value from PlayerStats.WeaponsMultipliers - [done]
+//              - UpgradeEditor: add _weaponsMultipliers indexer - [done]
+//              - PlayerController: Handle PlayerStats.WeaponsMultipliers[] change: upgrade each Weapon in _model.TeamWeapons - [done]
+//      3.0 - Upgrade, Criteria, WeaponStat, PlayerStats(Especially lists names): Refactor names a bit, etc. - [done]
 //      3.2 - ResearchPanelEntry: show required criterias for an upgrade as icons (or slots)
+//      3.3 - WeaponStat: remove the thing called _upgradeLevel/UpgradeLevel: we don't need it anymore(?) - [doing...]
 //      3.1 - Criteria, CriteriaDrawer (Not urgent):
 //              - There should be an optional array of Upgrade references(assigned in inspector), so the upgrade becomes unlocked only if all the referenced upgrades aren't active
 // 3. Assign appropriate icons to TeamSkills, ClickGunSkills - [done]

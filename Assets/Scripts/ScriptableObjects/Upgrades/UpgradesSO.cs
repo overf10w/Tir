@@ -22,7 +22,8 @@ namespace Game
     {
         TeamSkills,
         ClickGunSkills, 
-        WeaponsLevels
+        WeaponsLevels,
+        WeaponsMultipliers
     }
 
     [CreateAssetMenu(fileName = "Upgrades", menuName = "ScriptableObjects/Ugprades", order = 6)]

@@ -15,6 +15,7 @@ namespace Game
         [SerializeField] private float _priceMultiplier;
         [SerializeField] private float _baseValue;
         [SerializeField] private float _valueMultiplier;
+        public float ValueMultiplier { get => _valueMultiplier; set { _valueMultiplier = value; } }
 
         [Header("Upgrade algorithm")]
         [SerializeField] private float _baseUpgradePrice;

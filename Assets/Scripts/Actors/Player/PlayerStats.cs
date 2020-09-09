@@ -67,8 +67,11 @@ namespace Game
             _artifacts = new List<PlayerStatData>();
             _artifacts = playerStats.GetStatsDataList(playerStats.Artifacts.List);
 
-            _weaponsStats = new List<PlayerStatData>();
-            _weaponsStats = playerStats.GetStatsDataList(playerStats.WeaponsLevels.List);
+            _weaponsLevels = new List<PlayerStatData>();
+            _weaponsLevels = playerStats.GetStatsDataList(playerStats.WeaponsLevels.List);
+
+            _weaponsMultipliers = new List<PlayerStatData>();
+            _weaponsMultipliers = playerStats.GetStatsDataList(playerStats.WeaponsMultipliers.List);
         }
 
         [SerializeField] private float _gold;
@@ -92,8 +95,11 @@ namespace Game
         [SerializeField] private List<PlayerStatData> _artifacts;
         public List<PlayerStatData> Artifacts => _artifacts;
 
-        [SerializeField] private List<PlayerStatData> _weaponsStats;
-        public List<PlayerStatData> WeaponsLevels => _weaponsStats;
+        [SerializeField] private List<PlayerStatData> _weaponsLevels;
+        public List<PlayerStatData> WeaponsLevels => _weaponsLevels;
+
+        [SerializeField] private List<PlayerStatData> _weaponsMultipliers;
+        public List<PlayerStatData> WeaponsMultipliers => _weaponsMultipliers;
     }
 
     [System.Serializable]
@@ -175,21 +181,35 @@ namespace Game
             }
         }
 
-        [SerializeField] private List<PlayerStat> _weaponsLevelsList;
+        [SerializeField] private List<PlayerStat> _weaponsLevels;
         [NonSerialized]
-        private StatsList _weaponsLevels;
+        private StatsList _weaponsLevelsList;
         public StatsList WeaponsLevels
         {
             get
             {
-                if (_weaponsLevels == null)
+                if (_weaponsLevelsList == null)
                 {
-                    _weaponsLevels = new StatsList(_weaponsLevelsList);
+                    _weaponsLevelsList = new StatsList(_weaponsLevels);
                 }
-                return _weaponsLevels;
+                return _weaponsLevelsList;
             }
         }
 
+        [SerializeField] private List<PlayerStat> _weaponsMultipliers;
+        [NonSerialized]
+        private StatsList _weaponsMultipliersList;
+        public StatsList WeaponsMultipliers
+        {
+            get
+            {
+                if (_weaponsMultipliersList == null)
+                {
+                    _weaponsMultipliersList = new StatsList(_weaponsMultipliers);
+                }
+                return _weaponsMultipliersList;
+            }
+        }
 
         public void SetPlayerStats(PlayerStatsData playerStatsData)
         {
@@ -200,7 +220,8 @@ namespace Game
             SetStatsList(_teamSkills, playerStatsData.TeamSkills);
             SetStatsList(_clickGunSkills, playerStatsData.ClickGunSkills);
             SetStatsList(_artifacts, playerStatsData.Artifacts);
-            SetStatsList(_weaponsLevelsList, playerStatsData.WeaponsLevels);
+            SetStatsList(_weaponsLevels, playerStatsData.WeaponsLevels);
+            SetStatsList(_weaponsMultipliers, playerStatsData.WeaponsMultipliers);
         }
 
         // Indexer

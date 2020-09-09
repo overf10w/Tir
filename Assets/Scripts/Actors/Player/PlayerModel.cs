@@ -74,15 +74,18 @@ namespace Game
 
                 GameObject weaponObj = new GameObject(name);
                 Weapon weapon = weaponObj.AddComponent<Weapon>();
-                // TODO:
+                // TODO (OLD):
                 // 1. Subscribe to weaponScript.OnPropertyChanged
                 // 2. Raise the event when notified OnPropertyChanged
                 // 3. PlayerController subscribes to this event and changes view accordingly (it just updates the views with the ref to teamWeapons dictionary;
-                weapon.Init(weaponData, playerStats);
+
+                int index = PlayerStats.WeaponsMultipliers.List.FindIndex(item => item.Name == name);
+                float multiplier = PlayerStats.WeaponsMultipliers.List[index].Value;
+                weapon.Init(multiplier, weaponData, playerStats);
                 TeamWeapons.Add(name, weapon);
 
                 // Set PlayerStats.WeaponsStats:
-                int index = PlayerStats.WeaponsLevels.List.FindIndex(item => item.Name == name);
+                index = PlayerStats.WeaponsLevels.List.FindIndex(item => item.Name == name);
                 PlayerStats.WeaponsLevels.List[index].Value = weapon.DPS.Level;
             }
         }

@@ -30,6 +30,19 @@ namespace Game
             _model.PropertyChanged += ModelChangedHandler;
             _model.OnPlayerStatsChanged += PlayerStatsChangedHandler;
             _model.PlayerStats.TeamSkills.StatChanged += TeamSkillsChangedHandler;
+
+            _model.PlayerStats.WeaponsMultipliers.StatChanged += WeaponsMultipliersChangedHandler;
+        }
+
+        private void WeaponsMultipliersChangedHandler(object sender, PropertyChangedEventArgs e)
+        {
+            foreach (var multiplier in _model.PlayerStats.WeaponsMultipliers.List)
+            {
+                _model.TeamWeapons[multiplier.Name].DPS.UpgradeValueMultiplier(multiplier.Value);
+            }
+
+            _view.TeamPanel.UpdateView(_model);
+            ResourceLoader.SavePlayerStatsData(_model.PlayerStats);
         }
 
         private void TeamSkillsChangedHandler(object sender, PropertyChangedEventArgs e)

@@ -105,18 +105,24 @@ namespace Game
             _playerStats.TeamSkills.StatChanged += SkillChangedHandler;
         }
 
-        public WeaponStat(int DPS, StatData statData, PlayerStats playerStats, WeaponAlgorithm algorithm)
+        public WeaponStat(float DpsMultiplier, StatData statData, PlayerStats playerStats, WeaponAlgorithm algorithm)
         {
-            Level = DPS;
+            Level = statData.Level;
             _upgradeLevel = statData.UpgradeLevel;
 
             _algorithm = algorithm;
+            _algorithm.ValueMultiplier = DpsMultiplier;
             _playerStats = playerStats;
+
 
             // TODO: this can be (?) safely removed
             _playerStats.TeamSkills.StatChanged += SkillChangedHandler;
         }
 
+        public void UpgradeValueMultiplier(float DpsMultiplier)
+        {
+            _algorithm.ValueMultiplier = DpsMultiplier;
+        }
 
         // TODO: setter
         public void Upgrade()
@@ -165,27 +171,32 @@ namespace Game
         private float _nextShotTime;
         private float _msBetweenShots = 1000;
 
-        public void Init(WeaponData data, PlayerStats playerStats)
+        public void Init(float DpsMultiplier, WeaponData data, PlayerStats playerStats)
         {
             InitMessageHandler();
 
             Algorithms = data.algorithms;
             _playerStats = playerStats;
 
-            DPS = new WeaponStat(data.DPS, playerStats, data.algorithms.DPS);
+            DPS = new WeaponStat(DpsMultiplier, data.DPS, playerStats, data.algorithms.DPS);
             DMG = new WeaponStat(data.DMG, playerStats, data.algorithms.DMG);
         }
 
-        public void Init(int DPSLevel, WeaponData data, PlayerStats playerStats)
+        public void Upgrade(float DpsMultiplier)
         {
-            InitMessageHandler();
-
-            Algorithms = data.algorithms;
-            _playerStats = playerStats;
-
-            DPS = new WeaponStat(DPSLevel, data.DPS, playerStats, data.algorithms.DPS);
-            DMG = new WeaponStat(data.DMG, playerStats, data.algorithms.DMG);
+            DPS.UpgradeValueMultiplier(DpsMultiplier);
         }
+
+        //public void Init(int DPSLevel, WeaponData data, PlayerStats playerStats)
+        //{
+        //    InitMessageHandler();
+
+        //    Algorithms = data.algorithms;
+        //    _playerStats = playerStats;
+
+        //    DPS = new WeaponStat(DPSLevel, data.DPS, playerStats, data.algorithms.DPS);
+        //    DMG = new WeaponStat(data.DMG, playerStats, data.algorithms.DMG);
+        //}
 
         private void Update()
         {

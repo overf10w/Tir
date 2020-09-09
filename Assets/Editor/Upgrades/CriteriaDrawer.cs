@@ -14,7 +14,8 @@ namespace Game
 
         private string[] _teamSkills = new string[] { "DPSMultiplier" };
         private string[] _clickGunSkills = new string[] { "DMGMultiplier", "GoldGainedMultiplier" };
-        private string[] _weaponsStats = new string[] { "StandardPistol", "MachineGun" };
+        private string[] _weaponsLevels = new string[] { "StandardPistol", "MachineGun" };
+        private string[] _weaponsMultipliers = new string[] { "StandardPistol", "MachineGun" };
 
         private int _listIndex = 0;
 
@@ -78,6 +79,10 @@ namespace Game
             {
                 listIndex = 2;
             }
+            else if (statsListProp.enumNames[statsListProp.enumValueIndex] == StatsLists.WeaponsMultipliers.ToString())
+            {
+                listIndex = 3;
+            }
         }
 
         private void SetAvailableOptions(int listIndex, ref GUIContent[] availableOptions)
@@ -91,7 +96,10 @@ namespace Game
                     availableOptions = _clickGunSkills.Select(item => new GUIContent(item)).ToArray();
                     break;
                 case 2:
-                    availableOptions = _weaponsStats.Select(item => new GUIContent(item)).ToArray();
+                    availableOptions = _weaponsLevels.Select(item => new GUIContent(item)).ToArray();
+                    break;
+                case 3:
+                    availableOptions = _weaponsMultipliers.Select(item => new GUIContent(item)).ToArray();
                     break;
             }
             
@@ -108,7 +116,10 @@ namespace Game
                     index = Array.FindIndex(_clickGunSkills, item => item == stat.stringValue);
                     break;
                 case 2:
-                    index = Array.FindIndex(_weaponsStats, item => item == stat.stringValue);
+                    index = Array.FindIndex(_weaponsLevels, item => item == stat.stringValue);
+                    break;
+                case 3:
+                    index = Array.FindIndex(_weaponsMultipliers, item => item == stat.stringValue);
                     break;
             }
         }

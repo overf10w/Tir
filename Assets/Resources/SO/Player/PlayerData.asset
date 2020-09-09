@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   playerStats:
-    _gold: 2000
+    _gold: 1516.8
     _level: 70
-    _lastPlayTimestamp: 637351839351291439
+    _lastPlayTimestamp: 637352521505272312
     _teamSkills:
     - _icon: {fileID: -1759227488970123559, guid: ee010143be6b9004a87a40e3ae438917,
         type: 3}
@@ -34,10 +34,17 @@ MonoBehaviour:
     - _icon: {fileID: 21300000, guid: 0cf9ad425bac04349a2c2dbeb480b487, type: 3}
       _name: p
       _value: 1
-    _weaponsLevelsList:
+    _weaponsLevels:
     - _icon: {fileID: 0}
       _name: StandardPistol
-      _value: 0
+      _value: 3
     - _icon: {fileID: 0}
       _name: MachineGun
-      _value: 0
+      _value: 10
+    _weaponsMultipliers:
+    - _icon: {fileID: 0}
+      _name: StandardPistol
+      _value: 1
+    - _icon: {fileID: 0}
+      _name: MachineGun
+      _value: 1

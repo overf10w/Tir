@@ -115,8 +115,8 @@ namespace Game
                     {
                         if (entry.name == weapon.Key)
                         {
-                            var script = entry.GetComponent<WeaponPanelEntry>();
-                            script.Render(model, weapon.Key, weapon.Value.DPS, weapon.Value.DMG);
+                            var panelEntry = entry.GetComponent<WeaponPanelEntry>();
+                            panelEntry.Render(model, weapon.Key, weapon.Value.DPS, weapon.Value.DMG);
                             teamDps += weapon.Value.DPS.Value;
                             break;
                         }
