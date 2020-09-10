@@ -46,7 +46,7 @@ namespace Game
             var statRect = new Rect(position.x, position.y + 20, position.width, 15);
             var thresholdRect = new Rect(position.x, position.y + 40, 40, 15);
             var thresholdComparisonRect = new Rect(position.x + 40, position.y + 40, position.width - 40, 15);
-            var upgradeRect = new Rect(position.x, position.y + 60, position.width, 15);
+            var upgradeRect = new Rect(position.x, position.y + 60, position.width, 16);
 
             // Draw fields - passs GUIContent.none to each so they are drawn without labels
             EditorGUI.PropertyField(statsListRect, property.FindPropertyRelative("_statsList"), GUIContent.none);

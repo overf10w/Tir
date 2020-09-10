@@ -268,7 +268,16 @@ using UnityEngine;
 //              - UpgradeEditor: add _weaponsMultipliers indexer - [done]
 //              - PlayerController: Handle PlayerStats.WeaponsMultipliers[] change: upgrade each Weapon in _model.TeamWeapons - [done]
 //      3.0 - Upgrade, Criteria, WeaponStat, PlayerStats(Especially lists names): Refactor names a bit, etc. - [done]
-//      3.2 - ResearchPanelEntry: show required criterias for an upgrade as icons (or slots)
+//      3.2 - ResearchPanelEntry: show required criterias for an upgrade as icons (or slots) - [...]
+//      3.3 - ResearchPanel: Redesign ResearchPanel: 
+//              - Each ResearchPanel element takes less (vertical) space 
+//              - Add vertical scroll bar
+//              - Add a sound when new Research is available
+//      3.3 - ResearchPanel: Redesign ResearchPanel: each ResearchPanel element takes less (vertical) space 
+//      3.5 - PlayerStat: make custom PropertyDrawer - [done]
+//              - https://catlikecoding.com/unity/tutorials/editor/custom-data/
+//              - https://answers.unity.com/questions/619829/how-to-set-editorguilayoutpropertyfield-label-colu.html
+//              - https://forum.unity.com/threads/solved-c-custom-property-drawers-label-text-not-showing.771122/
 //      3.3 - WeaponStat: remove the thing called _upgradeLevel/UpgradeLevel: we don't need it anymore(?) - [doing...]
 //      3.1 - Criteria, CriteriaDrawer (Not urgent):
 //              - There should be an optional array of Upgrade references(assigned in inspector), so the upgrade becomes unlocked only if all the referenced upgrades aren't active

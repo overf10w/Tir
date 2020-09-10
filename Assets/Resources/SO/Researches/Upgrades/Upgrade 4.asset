@@ -15,8 +15,8 @@ MonoBehaviour:
   _icon: {fileID: 5056229961613807097, guid: 9f51c2c2ff030524da06308215b550f4, type: 3}
   _name: Increase StandardPistol DPS by 100%
   _description: Increase StandardPistol DPS by 100%
-  _statsList: 3
-  _stat: StandardPistol
+  _statsList: 1
+  _stat: DMGMultiplier
   _price: 100
   _amount: 100
   criterias:
