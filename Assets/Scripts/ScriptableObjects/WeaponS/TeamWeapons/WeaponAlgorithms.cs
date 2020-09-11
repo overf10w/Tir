@@ -6,18 +6,18 @@ namespace Game
     [System.Serializable]
     public class WeaponAlgorithm
     {
-        [Header("Multipliers Lists")]
+        //[Header("Multipliers Lists")]
         [SerializeField] private StatsLists[] _statsLists;
 
-        [Header("Price/Value algorithm")]
+        //[Header("Price/Value algorithm")]
         [SerializeField] private float _basePrice;
-        [Tooltip("Optimal between (1.07 - 1.15)")]
+        //[Tooltip("Optimal between (1.07 - 1.15)")]
         [SerializeField] private float _priceMultiplier;
         [SerializeField] private float _baseValue;
         [SerializeField] private float _valueMultiplier;
         public float ValueMultiplier { get => _valueMultiplier; set { _valueMultiplier = value; } }
 
-        [Header("Upgrade algorithm")]
+        //[Header("Upgrade algorithm")]
         [SerializeField] private float _baseUpgradePrice;
         [SerializeField] private float _upgradePriceMultiplier;
         [SerializeField] private int _maxUpgradeLevel;
