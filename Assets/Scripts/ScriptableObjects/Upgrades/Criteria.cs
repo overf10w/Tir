@@ -15,13 +15,17 @@ namespace Game
         public string StatsList => _statsList.ToString();
         [SerializeField, HideInInspector] private string _stat; // SerializeField: accessible through FindPropertyRelative("_stat"); isn't shown in the inspector
         [SerializeField] private float _threshold;
-        [SerializeField] private Upgrade _upgrade;
+        [SerializeField] private Upgrade[] _upgrades;
 
         private enum Comparison
         {
             LESS,
             EQUAL,
-            GREATER
+            GREATER,
+            [InspectorName("<=")]
+            LESS_EQUAL,
+            [InspectorName(">=")]
+            GREATER_EQUAL
         }
 
         [SerializeField] private Comparison _thresholdComparison;
@@ -33,24 +37,31 @@ namespace Game
                 StatsList statsList = (StatsList)PlayerStats[StatsList];
                 PlayerStat skill = statsList.List.Find(sk => sk.Name == _stat);
 
-                if (_upgrade != null)
+                if (_upgrades != null)
                 {
-                    if (_upgrade.IsActive)
+                    foreach (var upgrade in _upgrades)
                     {
-                        return false;
+                        if (upgrade.IsActive)
+                        {
+                            return false;
+                        }
                     }
                 }
 
                 switch (_thresholdComparison)
                 {
-                    case Comparison.EQUAL:
-                        return skill.Value == _threshold;
-                    case Comparison.GREATER:
-                        return skill.Value > _threshold;
                     case Comparison.LESS:
                         return skill.Value < _threshold;
-                    default:
+                    case Comparison.LESS_EQUAL:
+                        return skill.Value <= _threshold;
+                    case Comparison.EQUAL:
+                        return skill.Value == _threshold;
+                    case Comparison.GREATER_EQUAL:
+                        return skill.Value >= _threshold;
+                    case Comparison.GREATER:
                         return skill.Value > _threshold;
+                    default:
+                        return skill.Value >= _threshold;
                 }
             }
         }

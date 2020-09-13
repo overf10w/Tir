@@ -13,7 +13,7 @@ namespace Game
             float rowLabelWidth = 58.0f;
             float elementHeight = 16.0f;
 
-            float additionalWidth = 25.0f;
+            float additionalWidth = 29.0f;
 
             label = GUIContent.none;
 

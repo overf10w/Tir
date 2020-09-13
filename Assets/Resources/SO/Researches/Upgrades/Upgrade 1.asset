@@ -22,7 +22,7 @@ MonoBehaviour:
   criterias:
   - _statsList: 1
     _stat: DMGMultiplier
-    _threshold: 1.99
-    _upgrade: {fileID: 0}
-    _thresholdComparison: 2
-  _isActive: 0
+    _threshold: 2
+    _upgrades: []
+    _thresholdComparison: 4
+  _isActive: 1

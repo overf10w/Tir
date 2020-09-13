@@ -26,7 +26,12 @@ namespace Game
         {
             // Using BeginProperty / EndProperty on the parent property means that
             // prefab override logic works on the entire property.
-            EditorGUI.BeginProperty(position, label, property);
+            EditorGUIUtility.labelWidth = 50.0f;
+
+            label = EditorGUI.BeginProperty(position, label, property);
+
+            EditorGUIUtility.labelWidth = 0;
+
 
             var statsListProp = property.FindPropertyRelative("_statsList");
             var stat = property.FindPropertyRelative("_stat");
@@ -52,7 +57,9 @@ namespace Game
             EditorGUI.PropertyField(statsListRect, property.FindPropertyRelative("_statsList"), GUIContent.none);
             EditorGUI.PropertyField(thresholdRect, property.FindPropertyRelative("_threshold"), GUIContent.none);
             EditorGUI.PropertyField(thresholdComparisonRect, property.FindPropertyRelative("_thresholdComparison"), GUIContent.none);
-            EditorGUI.PropertyField(upgradeRect, property.FindPropertyRelative("_upgrade"), GUIContent.none);
+
+            EditorGUIUtility.labelWidth = 40.0f;
+            EditorGUI.PropertyField(upgradeRect, property.FindPropertyRelative("_upgrades"), true);
 
             EditorGUI.BeginChangeCheck();
             _index = EditorGUI.Popup(statRect, _index, _availableOptions);
@@ -126,7 +133,16 @@ namespace Game
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
-            return 80.0f;
+            float height = 80.0f;
+
+            float kek = 16.0f;
+            if (property.FindPropertyRelative("_upgrades").isExpanded)
+            {
+                height += 48.0f;
+                kek *= property.FindPropertyRelative("_upgrades").arraySize;
+            }
+
+            return height + kek;
         }
     }
 }

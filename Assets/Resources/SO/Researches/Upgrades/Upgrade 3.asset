@@ -23,6 +23,9 @@ MonoBehaviour:
   - _statsList: 2
     _stat: MachineGun
     _threshold: 8
-    _upgrade: {fileID: 0}
+    _upgrades:
+    - {fileID: 11400000, guid: 923c6ed918a763e4aa1cedc6e6af3a6d, type: 2}
+    - {fileID: 11400000, guid: 173c8f278dfc5f344a18d2af37ab65e1, type: 2}
+    - {fileID: 11400000, guid: 8ede43987f8e23643a868a7300766584, type: 2}
     _thresholdComparison: 2
-  _isActive: 0
+  _isActive: 1
