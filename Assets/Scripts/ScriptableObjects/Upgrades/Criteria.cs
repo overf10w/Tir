@@ -35,7 +35,7 @@ namespace Game
             get
             {
                 StatsList statsList = (StatsList)PlayerStats[StatsList];
-                PlayerStat skill = statsList.List.Find(sk => sk.Name == _stat);
+                PlayerStat playerStat = statsList.List.Find(sk => sk.Name == _stat);
 
                 if (_upgrades != null)
                 {
@@ -51,19 +51,30 @@ namespace Game
                 switch (_thresholdComparison)
                 {
                     case Comparison.LESS:
-                        return skill.Value < _threshold;
+                        return playerStat.Value < _threshold;
                     case Comparison.LESS_EQUAL:
-                        return skill.Value <= _threshold;
+                        return playerStat.Value <= _threshold;
                     case Comparison.EQUAL:
-                        return skill.Value == _threshold;
+                        return playerStat.Value == _threshold;
                     case Comparison.GREATER_EQUAL:
-                        return skill.Value >= _threshold;
+                        return playerStat.Value >= _threshold;
                     case Comparison.GREATER:
-                        return skill.Value > _threshold;
+                        return playerStat.Value > _threshold;
                     default:
-                        return skill.Value >= _threshold;
+                        return playerStat.Value >= _threshold;
                 }
             }
+        }
+
+        public PlayerStat TargetStat
+        {
+            get
+            {
+                StatsList statsList = (StatsList)PlayerStats[StatsList];
+                PlayerStat playerStat = statsList.List.Find(sk => sk.Name == _stat);
+                return playerStat;
+            }
+            private set { }
         }
     }
 }

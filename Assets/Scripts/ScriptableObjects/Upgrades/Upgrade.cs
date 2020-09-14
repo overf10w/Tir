@@ -74,7 +74,8 @@ namespace Game
         public float Amount => _amount;
 
         [Header("Criterias")]
-        public Criteria[] criterias;
+        [SerializeField] private Criteria[] criterias;  // TODO: rename to _criterias
+        public Criteria[] Criterias => criterias;
 
         public bool CriteriasFulfilled
         {

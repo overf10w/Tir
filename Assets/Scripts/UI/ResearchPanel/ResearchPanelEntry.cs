@@ -18,6 +18,8 @@ namespace Game
         [SerializeField] private Image _image;
         [SerializeField] private Image _maskImage;
 
+        [SerializeField] private Transform _content;
+
         [field: NonSerialized]
         private PlayerModel _playerModel;
 
@@ -31,22 +33,55 @@ namespace Game
             _description.text = upgrade.Description.ToString();
             _price.text = upgrade.Price.SciFormat();
             _image.sprite = upgrade.Icon;
+
+
+            InitCriteriaSlots(upgrade);
+        }
+
+        private void InitCriteriaSlots(Upgrade upgrade)
+        {
+            int childInd = 0;
+            for (int i = 0; i < upgrade.Criterias.Length; i++)
+            {
+                var crit = upgrade.Criterias[i];
+                //GameObject criteriaIcon = new GameObject("Icon");
+                //Image img = criteriaIcon.AddComponent<Image>();
+                //img.sprite = crit.TargetStat.Icon;
+                //criteriaIcon.transform.parent = _content;
+
+                Transform iconTransform = _content.GetChild(childInd++);
+
+                Image icon = iconTransform.GetComponent<Image>();
+                icon.sprite = crit.TargetStat.Icon;
+                Color color = icon.color;
+
+                if (!crit.Satisfied)
+                {
+                    color.a = 0.2f;
+                }
+                
+                icon.color = color;
+
+                //icon.color.a = 0.2f;
+            }
         }
 
         public void Render(Upgrade upgrade)
         {
+            ShowCriterias(upgrade);
+
             if (!upgrade.IsActive)
             {
-                ShowInactive(99f);
+                Fade0100(99f);
             }
             else if (_playerModel.PlayerStats.Gold < upgrade.Price / 10.0f)
             {
-                ShowInactive(75f);
+                Fade0100(75f);
             }
             else if (_playerModel.PlayerStats.Gold < upgrade.Price || !upgrade.CriteriasFulfilled)
             {
                 gameObject.SetActive(true);
-                ShowInactive(30f);
+                Fade0100(30f);
             }
             else
             {
@@ -55,7 +90,34 @@ namespace Game
             }
         }
 
-        public void ShowInactive(float shadeStrength)
+        private void ShowCriterias(Upgrade upgrade)
+        {
+            int childInd = 0;
+            for (int i = 0; i < upgrade.Criterias.Length; i++)
+            {
+                var crit = upgrade.Criterias[i];
+                Transform iconTransform = _content.GetChild(childInd++);
+
+                Image icon = iconTransform.GetComponent<Image>();
+                //icon.sprite = crit.TargetStat.Icon;
+                Color color = icon.color;
+
+                if (!crit.Satisfied)
+                {
+                    color.a = 0.2f;
+                } 
+                else
+                {
+                    color.a = 1.0f;
+                }
+
+                icon.color = color;
+
+                //icon.color.a = 0.2f;
+            }
+        }
+
+        public void Fade0100(float shadeStrength)
         {
             float maxShade = 100.0f;
             float normalizedStrength = Mathf.Clamp01(shadeStrength / maxShade);

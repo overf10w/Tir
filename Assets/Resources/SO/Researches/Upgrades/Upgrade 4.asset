@@ -23,6 +23,11 @@ MonoBehaviour:
   - _statsList: 1
     _stat: GoldGainedMultiplier
     _threshold: 2
-    _upgrade: {fileID: 0}
+    _upgrades: []
+    _thresholdComparison: 2
+  - _statsList: 1
+    _stat: GoldGainedMultiplier
+    _threshold: 20
+    _upgrades: []
     _thresholdComparison: 2
   _isActive: 1

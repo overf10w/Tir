@@ -238,11 +238,11 @@ using UnityEngine;
 // 31-AUG-20:
 // 0. TeamPanel:TeamSkillPanel - Add background panel image, experiment with position of the panel
 // 1. ClickGunPanel:ClickGunSkillPanel - Add background panel image, experiment with position of the panel
-// 2. Refactor Upgrade system a bit (make it more useful) - [6/10 doing...]
+// 2. Refactor Upgrade system a bit (make it more useful) - [done]
 //      2.1 - Upgrade: Criteria: make criterias more sophisticated - [done]
 //      2.2 - WeaponStat: WeaponAlgorithm: Specify Multiplier Lists, so each weaponStat will be multiplied by selected multiplier lists - [done]
 //      2.3 - Upgrade, Criteria, WeaponStat, WeaponAlgorithm: StatsList selector shouldn't be a string, but rather an enum - [done]
-//      2.5 - Upgrade: Target Stat name selector shouldn't be a string, but rather a dropdown (enum or string array) - [done]
+//      2.4 - Upgrade: Target Stat name selector shouldn't be a string, but rather a dropdown (enum or string array) - [done]
 //              - if (StatsList selected) {show corresponding enum of this list's items in form of enum or string arrray} - [done]
 //              - helpful links:
 //                  - https://stackoverflow.com/questions/60864308/how-to-make-an-enum-like-unity-inspector-drop-down-menu-from-a-string-array-with
@@ -250,39 +250,47 @@ using UnityEngine;
 //                  - https://answers.unity.com/questions/1170350/editorscript-generate-enum-from-string.html
 //                  - https://answers.unity.com/questions/1454466/need-to-create-enum-out-of-array-of-string.html
 //                  - https://answers.unity.com/questions/1085035/how-can-i-create-a-enum-like-as-component-light.html
-//      2.6 - Criteria: Target Stat name selector (in Criteria, nested inside of Upgrade) shouldn't be a string, but a dropdown (enum or string array) - [done]
+//      2.5 - Criteria: Target Stat name selector (in Criteria, nested inside of Upgrade) shouldn't be a string, but a dropdown (enum or string array) - [done]
 //              - this be done either by:
 //                  - 1. UpgradeEditor.cs: accessing "criteria._stat", just like we accessed "_stat" (not preferred)
 //                  - 2. Move Criteria to its own file, and implement CustomPropertyDrawer for it - https://docs.unity3d.com/ScriptReference/PropertyDrawer.html (preffered)
 //                  - 3. Convert criteria to scriptable object, and do this thing as we've done in UpgradeEditor
-//      2.7 - Criteria: There should be optional Upgrade reference (assigned in inspector), so the upgrade becomes unlocked only if the referenced research isn't active - [done]
-//      2.8 - CriteriaPropertyDrawer, UpgradesEditor: refactor - [done]
-//      2.9 - Criteria: Add weapon indexers - so upgrade becomes unlocked when a selected weapon reaches specified level - [done]
+//      2.6 - Criteria: There should be optional Upgrade reference (assigned in inspector), so the upgrade becomes unlocked only if the referenced research isn't active - [done]
+//      2.7 - CriteriaPropertyDrawer, UpgradesEditor: refactor - [done]
+//      2.8 - Criteria: Add weapon indexers - so upgrade becomes unlocked when a selected weapon reaches specified level - [done]
 //              - Just add yet another StatsList to PlayerStats: named WeaponsLevels - [done]
 //                  - PlayerModel: On PlayerModel():Init() init each gun with value from PlayerStats.WeaponsLevels - [done]
 //                  - Weapon: on each weapon DPS change event, upgrade PlayerStats.WeaponLevels['index of this weapon'].Value. - [done]
 //                      (All the subscribers of Weapon are still listening to its events and nothing really changes, except we store stat data in PlayerStats.WeaponList container) - [done]
-//      3.0 - Upgrade: Add weapon indexers - so the Target Stat in Upgrade would be: WeaponsMultipliers["MachineGun"]
+//      2.9 - Upgrade: Add weapon indexers - so the Target Stat in Upgrade would be: WeaponsMultipliers["MachineGun"]
 //              - PlayerStats: add another StatsList: named WeaponsMultipliers (just like we did with WeaponsLevels) - [done]
 //              - PlayerModel, Weapon: On PlayerModel():Init(): Init() each Weapon and each weapon algorithm with value from PlayerStats.WeaponsMultipliers - [done]
 //              - UpgradeEditor: add _weaponsMultipliers indexer - [done]
 //              - PlayerController: Handle PlayerStats.WeaponsMultipliers[] change: upgrade each Weapon in _model.TeamWeapons - [done]
-//      3.0 - Upgrade, Criteria, WeaponStat, PlayerStats(Especially lists names): Refactor names a bit, etc. - [done]
-//      3.1 - Criteria, CriteriaDrawer: - [done]
+//      2.10 - Upgrade, Criteria, WeaponStat, PlayerStats(Especially lists names): Refactor names a bit, etc. - [done]
+//      2.11 - Criteria, CriteriaDrawer: - [done]
 //              - There should be an optional array of Upgrade references(assigned in inspector), so the upgrade becomes unlocked only if all the referenced upgrades aren't active - [done]
-//      3.5 - PlayerStat: make custom PropertyDrawer - [done]
+
+// 3 - PlayerStat: make custom PropertyDrawer - [done]
 //              - https://catlikecoding.com/unity/tutorials/editor/custom-data/
 //              - https://answers.unity.com/questions/619829/how-to-set-editorguilayoutpropertyfield-label-colu.html
 //              - https://forum.unity.com/threads/solved-c-custom-property-drawers-label-text-not-showing.771122/
-//      3.6 - WeaponAlgorithm: make custom PropertyDrawer - [done]
-//      3.n - WeaponAlgorithmDrawer: Refactor, do TODOS - [done]
-//      3.2 - ResearchPanelEntry: show required criterias for an upgrade as icons (or slots) - [...]
-//      3.3 - ResearchPanel: Redesign ResearchPanel: 
-//              - Each ResearchPanel element takes less (vertical) space 
-//              - Add vertical scroll bar
-//              - Add a sound when new Research is available
-//      3.3 - ResearchPanel: Redesign ResearchPanel: each ResearchPanel element takes less (vertical) space 
-//      3.3 - WeaponStat: remove the thing called _upgradeLevel/UpgradeLevel: we don't need it anymore(?) - [doing...]
+// 4 - WeaponAlgorithm: make custom PropertyDrawer - [done]
+// 5 - WeaponAlgorithmDrawer: Refactor, do TODOS - [done]
+
+// 6 - ResearchPanelEntry: show required criterias for an upgrade as icons (or slots) - [done]
+// 7 - ResearchPanelEntry: show tooltip (with name, list, target stat) when hovered over criteria icon - [doing...] + Do ToDo in Upgrade.cs
+//      - https://www.youtube.com/watch?v=pg4-7aSf_Co
+//      - https://medium.com/@yonem9/create-an-unity-inventory-part-6-generate-tooltip-c50dedcf7457
+//      - https://answers.unity.com/questions/1253570/creating-a-tooltip-when-hovering-over-a-ui-button.html
+//      - https://www.youtube.com/watch?v=uPmorHLPwnk
+//      - https://www.youtube.com/watch?v=d_qk7egZ8_c
+// 7 - ResearchPanel: Redesign ResearchPanel: 
+//      - Each ResearchPanelEntry element takes less (vertical) space
+//      - Add vertical scroll bar
+//      - Add a sound when new Research is available
+// 3.3 - ResearchPanel: Redesign ResearchPanel: each ResearchPanel element takes less (vertical) space 
+// 3.3 - WeaponStat: remove the thing called _upgradeLevel/UpgradeLevel: we don't need it anymore(?) - [doing...]
 
 // 3. Assign appropriate icons to TeamSkills, ClickGunSkills - [done]
 // 4. Prettify (Team/ClickGun)Skill(Panels/Items)
