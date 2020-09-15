@@ -34,7 +34,7 @@ namespace Game
 
         public void Init(PlayerStats playerStats)
         {
-            foreach (var crit in criterias)
+            foreach (var crit in _criterias)
             {
                 crit.PlayerStats = playerStats;
             }
@@ -43,7 +43,7 @@ namespace Game
         public void Init(PlayerStats playerStats, UpgradeData upgradeData)
         {
             IsActive = upgradeData.IsActive;
-            foreach (var crit in criterias)
+            foreach (var crit in _criterias)
             {
                 crit.PlayerStats = playerStats;
             }
@@ -74,14 +74,14 @@ namespace Game
         public float Amount => _amount;
 
         [Header("Criterias")]
-        [SerializeField] private Criteria[] criterias;  // TODO: rename to _criterias
-        public Criteria[] Criterias => criterias;
+        [SerializeField] private Criteria[] _criterias;  // TODO: rename to _criterias
+        public Criteria[] Criterias => _criterias;
 
         public bool CriteriasFulfilled
         {
             get
             {
-                foreach (var crit in criterias)
+                foreach (var crit in _criterias)
                 {
                     if (!crit.Satisfied)
                     {

@@ -35,34 +35,31 @@ namespace Game
             _image.sprite = upgrade.Icon;
 
 
-            InitCriteriaSlots(upgrade);
+            InitCriteriaIcons(upgrade);
         }
 
-        private void InitCriteriaSlots(Upgrade upgrade)
+        private void InitCriteriaIcons(Upgrade upgrade)
         {
             int childInd = 0;
             for (int i = 0; i < upgrade.Criterias.Length; i++)
             {
                 var crit = upgrade.Criterias[i];
-                //GameObject criteriaIcon = new GameObject("Icon");
-                //Image img = criteriaIcon.AddComponent<Image>();
-                //img.sprite = crit.TargetStat.Icon;
-                //criteriaIcon.transform.parent = _content;
 
                 Transform iconTransform = _content.GetChild(childInd++);
+                CriteriaIcon criteriaIcon = iconTransform.GetComponent<CriteriaIcon>();
+                if (criteriaIcon)
+                {
+                    criteriaIcon.Init(crit.Stat, crit.StatsList, crit.Threshold.ToString());
+                }
 
                 Image icon = iconTransform.GetComponent<Image>();
                 icon.sprite = crit.TargetStat.Icon;
                 Color color = icon.color;
-
                 if (!crit.Satisfied)
                 {
                     color.a = 0.2f;
                 }
-                
                 icon.color = color;
-
-                //icon.color.a = 0.2f;
             }
         }
 

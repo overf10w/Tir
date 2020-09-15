@@ -37,5 +37,5 @@ MonoBehaviour:
     _stat: GoldGainedMultiplier
     _threshold: 2
     _upgrades: []
-    _thresholdComparison: 2
+    _thresholdComparison: 4
   _isActive: 1

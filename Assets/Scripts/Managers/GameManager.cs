@@ -285,10 +285,9 @@ using UnityEngine;
 //      - https://answers.unity.com/questions/1253570/creating-a-tooltip-when-hovering-over-a-ui-button.html
 //      - https://www.youtube.com/watch?v=uPmorHLPwnk
 //      - https://www.youtube.com/watch?v=d_qk7egZ8_c
-// 7 - ResearchPanel: Redesign ResearchPanel: 
-//      - Each ResearchPanelEntry element takes less (vertical) space
+// 7 - ResearchPanel: Redesign ResearchPanel:
 //      - Add vertical scroll bar
-//      - Add a sound when new Research is available
+//      - Add a sound when new Research is available/unlocked
 // 3.3 - ResearchPanel: Redesign ResearchPanel: each ResearchPanel element takes less (vertical) space 
 // 3.3 - WeaponStat: remove the thing called _upgradeLevel/UpgradeLevel: we don't need it anymore(?) - [doing...]
 

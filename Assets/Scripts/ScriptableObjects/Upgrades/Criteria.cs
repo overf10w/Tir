@@ -14,7 +14,11 @@ namespace Game
         [SerializeField] private StatsLists _statsList;
         public string StatsList => _statsList.ToString();
         [SerializeField, HideInInspector] private string _stat; // SerializeField: accessible through FindPropertyRelative("_stat"); isn't shown in the inspector
+        public string Stat => _stat;
+
         [SerializeField] private float _threshold;
+        public float Threshold => _threshold;
+
         [SerializeField] private Upgrade[] _upgrades;
 
         private enum Comparison
