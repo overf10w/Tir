@@ -271,28 +271,34 @@ using UnityEngine;
 //      2.11 - Criteria, CriteriaDrawer: - [done]
 //              - There should be an optional array of Upgrade references(assigned in inspector), so the upgrade becomes unlocked only if all the referenced upgrades aren't active - [done]
 
-// 3 - PlayerStat: make custom PropertyDrawer - [done]
+// 3. PlayerStat: make custom PropertyDrawer - [done]
 //              - https://catlikecoding.com/unity/tutorials/editor/custom-data/
 //              - https://answers.unity.com/questions/619829/how-to-set-editorguilayoutpropertyfield-label-colu.html
 //              - https://forum.unity.com/threads/solved-c-custom-property-drawers-label-text-not-showing.771122/
-// 4 - WeaponAlgorithm: make custom PropertyDrawer - [done]
-// 5 - WeaponAlgorithmDrawer: Refactor, do TODOS - [done]
+// 4. WeaponAlgorithm: make custom PropertyDrawer - [done]
+// 5. WeaponAlgorithmDrawer: Refactor, do TODOS - [done]
 
-// 6 - ResearchPanelEntry: show required criterias for an upgrade as icons (or slots) - [done]
-// 7 - ResearchPanelEntry: show tooltip (with name, list, target stat) when hovered over criteria icon - [doing...] + Do ToDo in Upgrade.cs
+// 6. ResearchPanelEntry: show required criterias for an upgrade as icons (or slots) - [done]
+// 7. ResearchPanelEntry: show tooltip (with name, list, target stat) when hovered over criteria icon - [done]
 //      - https://www.youtube.com/watch?v=pg4-7aSf_Co
 //      - https://medium.com/@yonem9/create-an-unity-inventory-part-6-generate-tooltip-c50dedcf7457
 //      - https://answers.unity.com/questions/1253570/creating-a-tooltip-when-hovering-over-a-ui-button.html
 //      - https://www.youtube.com/watch?v=uPmorHLPwnk
 //      - https://www.youtube.com/watch?v=d_qk7egZ8_c
-// 7 - ResearchPanel: Redesign ResearchPanel:
-//      - Add vertical scroll bar
+// 8. ResearchPanel: Improve ResearchPanel:
+//      - Add vertical scroll bar - [done]
 //      - Add a sound when new Research is available/unlocked
-// 3.3 - ResearchPanel: Redesign ResearchPanel: each ResearchPanel element takes less (vertical) space 
-// 3.3 - WeaponStat: remove the thing called _upgradeLevel/UpgradeLevel: we don't need it anymore(?) - [doing...]
+//      - (?) Each ResearchPanel element takes less (vertical) space
+// 9. Optimize ResearchPanel scroll view when it's got ~20 elements - [done]
+//      - https://forum.unity.com/threads/scroll-rect-is-tooo-slow.396366/
+//      - https://stackoverflow.com/questions/53005040/what-i-have-learned-about-unity-scrollrect-scrollview-optimization-performan
+//      - https://learn.unity.com/tutorial/optimizing-unity-ui
+//      - https://learn.unity.com/tutorial/working-with-static-and-dynamic-canvases
+// 9. Prettify (Team/ClickGun)Skill(Panels/Items)
+// 10. WeaponStat: remove the thing called _upgradeLevel/UpgradeLevel: we don't need it anymore(?) - [doing...]
+
 
 // 3. Assign appropriate icons to TeamSkills, ClickGunSkills - [done]
-// 4. Prettify (Team/ClickGun)Skill(Panels/Items)
 
 // 01-SEP-20:
 // 0. Play with the game balance

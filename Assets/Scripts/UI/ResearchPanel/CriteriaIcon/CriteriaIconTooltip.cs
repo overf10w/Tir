@@ -10,13 +10,10 @@ namespace Game
         [SerializeField] private TextMeshProUGUI _statText;
         public TextMeshProUGUI StatText => _statText;
 
-
         [SerializeField] private TextMeshProUGUI _statsListText;
         public TextMeshProUGUI StatsListText => _statsListText;
 
-
         [SerializeField] private TextMeshProUGUI _valueText;
         public TextMeshProUGUI ValueText => _valueText;
-
     }
 }
