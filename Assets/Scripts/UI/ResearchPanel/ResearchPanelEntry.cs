@@ -34,12 +34,16 @@ namespace Game
             _price.text = upgrade.Price.SciFormat();
             _image.sprite = upgrade.Icon;
 
-
             InitCriteriaIcons(upgrade);
         }
 
         private void InitCriteriaIcons(Upgrade upgrade)
         {
+            if (upgrade.Criterias == null)
+            {
+                return;
+            }
+
             int childInd = 0;
             for (int i = 0; i < upgrade.Criterias.Length; i++)
             {
@@ -89,6 +93,11 @@ namespace Game
 
         private void ShowCriterias(Upgrade upgrade)
         {
+            if (upgrade.Criterias == null)
+            {
+                return;
+            }
+
             int childInd = 0;
             for (int i = 0; i < upgrade.Criterias.Length; i++)
             {
@@ -96,7 +105,6 @@ namespace Game
                 Transform iconTransform = _content.GetChild(childInd++);
 
                 Image icon = iconTransform.GetComponent<Image>();
-                //icon.sprite = crit.TargetStat.Icon;
                 Color color = icon.color;
 
                 if (!crit.Satisfied)
@@ -107,10 +115,7 @@ namespace Game
                 {
                     color.a = 1.0f;
                 }
-
                 icon.color = color;
-
-                //icon.color.a = 0.2f;
             }
         }
 

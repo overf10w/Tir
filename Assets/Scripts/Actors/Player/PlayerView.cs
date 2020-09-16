@@ -67,7 +67,7 @@ namespace Game
             Ui = FindObjectOfType<UserStatsCanvas>();
             Ui.Init(model);
 
-            TeamPanel = Ui.GetComponentInChildren<TeamPanel>();
+            TeamPanel = GameObject.FindObjectOfType<TeamPanel>();
             TeamPanel.Init(model);
             if (TeamPanel)
             {

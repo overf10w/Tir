@@ -14,7 +14,7 @@ namespace Game
         [SerializeField] private Image _iconImg;
         [SerializeField] private TextMeshProUGUI _nameTxt;
         [SerializeField] private TextMeshProUGUI _statNameTxt;
-
+        [SerializeField] private TextMeshProUGUI _levelTxt;
         [SerializeField] private TextMeshProUGUI _dpsNextPrice;
         [SerializeField] private TextMeshProUGUI _dpsValueTxt;
         [SerializeField] private TextMeshProUGUI _dpsNextValueTxt;
@@ -70,18 +70,22 @@ namespace Game
                     _dpsValueTxt.color = color;
                     LeanTween.cancel(_dpsTextTween.id);
 
-                    _dpsTextTween = _dpsValueTxt.TweenTMProValue(_prevDps, dps.Value, _duration)
-                                   .setOnComplete(_ => _prevDps = dps.Value);
+                    _dpsTextTween = _dpsValueTxt
+                        .TweenTMProValue(_prevDps, dps.Value, _duration)
+                        .setOnComplete(_ => _prevDps = dps.Value);
                 }
             }
 
-            _dpsTextTween = _dpsValueTxt.TweenTMProValue(_prevDps, dps.Value, _duration)
-                           .setOnComplete(_ => _prevDps = dps.Value);
-
+            _dpsTextTween = _dpsValueTxt
+                .TweenTMProValue(_prevDps, dps.Value, _duration)
+                .setOnComplete(_ => _prevDps = dps.Value);
             _dpsValueTxt.color = color;
 
             _dpsNextValueTxt.text = dps.NextValue.SciFormat();
             _dpsNextValueTxt.color = color;
+
+            _levelTxt.text = dps.Level.ToString();
+            _levelTxt.color = color;
         }
 
         private void InitIcon(string name)

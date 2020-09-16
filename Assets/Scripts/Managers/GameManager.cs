@@ -271,6 +271,8 @@ using UnityEngine;
 //      2.11 - Criteria, CriteriaDrawer: - [done]
 //              - There should be an optional array of Upgrade references(assigned in inspector), so the upgrade becomes unlocked only if all the referenced upgrades aren't active - [done]
 
+// 3. Assign appropriate icons to TeamSkills, ClickGunSkills - [done]
+
 // 3. PlayerStat: make custom PropertyDrawer - [done]
 //              - https://catlikecoding.com/unity/tutorials/editor/custom-data/
 //              - https://answers.unity.com/questions/619829/how-to-set-editorguilayoutpropertyfield-label-colu.html
@@ -290,15 +292,21 @@ using UnityEngine;
 //      - Add a sound when new Research is available/unlocked
 //      - (?) Each ResearchPanel element takes less (vertical) space
 // 9. Optimize ResearchPanel scroll view when it's got ~20 elements - [done]
+//      - Just put ResearchPanel in its own parent canvas in hierarchy (so RP isn't that nested)
 //      - https://forum.unity.com/threads/scroll-rect-is-tooo-slow.396366/
 //      - https://stackoverflow.com/questions/53005040/what-i-have-learned-about-unity-scrollrect-scrollview-optimization-performan
 //      - https://learn.unity.com/tutorial/optimizing-unity-ui
 //      - https://learn.unity.com/tutorial/working-with-static-and-dynamic-canvases
-// 9. Prettify (Team/ClickGun)Skill(Panels/Items)
+// 9. Prettify TeamSkill(Panels/Items) - [done]
+// 10. Prettify ResearchPanelEntry - [done]
+// 11. Optimize TeamPanel - [done]
+//      - Just put ResearchPanel in its own canvas in hierarchy (so TP is less nested)
+// 12. TeamSkillPanel, ClickGunSkillPanel: Add tooltipls to icons when hovered over
+// 13. ResearchPanelEntry: change an icon of empty slots to something less fancy & more default
+// 14. Play with the game balance
+// 15. Add more bosses, upgrades, weapons
 // 10. WeaponStat: remove the thing called _upgradeLevel/UpgradeLevel: we don't need it anymore(?) - [doing...]
 
-
-// 3. Assign appropriate icons to TeamSkills, ClickGunSkills - [done]
 
 // 01-SEP-20:
 // 0. Play with the game balance

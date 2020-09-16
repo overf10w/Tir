@@ -43,9 +43,12 @@ namespace Game
         public void Init(PlayerStats playerStats, UpgradeData upgradeData)
         {
             IsActive = upgradeData.IsActive;
-            foreach (var crit in _criterias)
+            if (_criterias != null)
             {
-                crit.PlayerStats = playerStats;
+                foreach (var crit in _criterias)
+                {
+                    crit.PlayerStats = playerStats;
+                }
             }
         }
 
@@ -81,11 +84,14 @@ namespace Game
         {
             get
             {
-                foreach (var crit in _criterias)
+                if (_criterias != null)
                 {
-                    if (!crit.Satisfied)
+                    foreach (var crit in _criterias)
                     {
-                        return false;
+                        if (!crit.Satisfied)
+                        {
+                            return false;
+                        }
                     }
                 }
                 return true;

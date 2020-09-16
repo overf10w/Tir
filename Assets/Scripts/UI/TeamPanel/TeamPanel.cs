@@ -74,7 +74,7 @@ namespace Game
 
             WeaponBtnClick = new WeaponBtnClick();
             _content = transform.Find("Scroll View/Viewport/Content").GetComponent<Transform>();
-            _weaponUiEntryPrefab = Resources.Load<GameObject>("Prefabs/UI/TeamPanel/WeaponPanelEntry");
+            _weaponUiEntryPrefab = Resources.Load<GameObject>("Prefabs/UI/TeamPanel/WeaponPanelEntry_01");
             _weaponUiEntries = new List<GameObject>();
 
             Dictionary<string, Weapon> weapons = model.TeamWeapons;
