@@ -301,7 +301,7 @@ using UnityEngine;
 // 10. Prettify ResearchPanelEntry - [done]
 // 11. Optimize TeamPanel - [done]
 //      - Just put ResearchPanel in its own canvas in hierarchy (so TP is less nested)
-// 12. TeamSkillPanel, ClickGunSkillPanel: Add tooltipls to icons when hovered over
+// 12. TeamSkillPanel, ClickGunSkillPanel: Add tooltipls to icons when hovered over - [doing...]
 // 13. ResearchPanelEntry: change an icon of empty slots to something less fancy & more default
 // 14. Play with the game balance
 // 15. Add more bosses, upgrades, weapons

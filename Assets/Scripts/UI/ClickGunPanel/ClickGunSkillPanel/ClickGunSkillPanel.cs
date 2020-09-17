@@ -9,6 +9,7 @@ namespace Game
     public class ClickGunSkillPanel : MonoBehaviour
     {
         [SerializeField] private GameObject _skillEntryPrefab;
+        [SerializeField] private Transform _tooltip;
 
         private Transform _content;
         private Dictionary<PlayerStat, GameObject> _unlockedEntries;
@@ -46,6 +47,9 @@ namespace Game
             if (skill.Value > 1.0f)
             {
                 GameObject iconGO = Instantiate(_skillEntryPrefab, _content);
+                iconGO.GetComponent<TooltipTrigger>().Skill = skill;
+                iconGO.GetComponent<TooltipTrigger>().ToolTip = _tooltip;
+
                 iconGO.name = skill.Name;
                 RenderIcon(iconGO, skill);
                 _unlockedEntries.Add(skill, iconGO);
