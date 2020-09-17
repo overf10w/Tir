@@ -49,6 +49,16 @@ namespace Game
 
         public void SetUpgrades(UpgradeData[] upgradeDatas)
         {
+            if (upgradeDatas == null)
+            {
+                for (int i = 0; i < Upgrades.Length; i++)
+                {
+                    Upgrades[i].IsActive = true;
+                    Upgrades[i].Init(PlayerStats);
+                }
+                return;
+            }
+
             if (upgradeDatas.Length != Upgrades.Length)
             {
                 string warning =

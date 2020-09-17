@@ -19,9 +19,9 @@ MonoBehaviour:
   _stat: GoldGainedMultiplier
   _price: 2000
   _amount: 100
-  criterias:
-  - _statsList: 1
-    _stat: DMGMultiplier
+  _criterias:
+  - _statsList: 0
+    _stat: DPSMultiplier
     _threshold: 2
     _upgrades: []
     _thresholdComparison: 4

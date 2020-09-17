@@ -19,13 +19,11 @@ namespace Game
 
             Vector2 scaledOffset = new Vector2(_offset.x * transform.lossyScale.x, _offset.y * transform.lossyScale.y);
             ToolTip.position = new Vector2(transform.position.x + scaledOffset.x, transform.position.y + scaledOffset.y);
-            Debug.Log("Hello friend");
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
             ToolTip.gameObject.SetActive(false);
-            Debug.Log("Bye friend");
         }
     }
 }

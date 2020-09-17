@@ -19,5 +19,5 @@ MonoBehaviour:
   _stat: DPSMultiplier
   _price: 1000
   _amount: 100
-  criterias: []
-  _isActive: 0
+  _criterias: []
+  _isActive: 1

@@ -14,15 +14,24 @@ namespace Game
         private string _statsList;
         private string _value;
 
+        private bool _initFlag = false;
+
         public void Init(string stat, string statsList, string value)
         {
             _stat = stat;
             _statsList = statsList;
             _value = value;
+
+            _initFlag = true;
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
+            if (!_initFlag)
+            {
+                return;
+            }
+
             _tooltip.gameObject.SetActive(true);
             CriteriaIconTooltip criteriaIconTooltip = _tooltip.gameObject.GetComponent<CriteriaIconTooltip>();
             criteriaIconTooltip.StatText.text = _stat;

@@ -19,10 +19,5 @@ MonoBehaviour:
   _stat: DMGMultiplier
   _price: 3000
   _amount: 100
-  criterias:
-  - _statsList: 1
-    _stat: DMGMultiplier
-    _threshold: 1
-    _upgrades: []
-    _thresholdComparison: 4
+  _criterias: []
   _isActive: 1

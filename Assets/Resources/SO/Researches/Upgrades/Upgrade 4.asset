@@ -13,21 +13,11 @@ MonoBehaviour:
   m_Name: Upgrade 4
   m_EditorClassIdentifier: 
   _icon: {fileID: 5056229961613807097, guid: 9f51c2c2ff030524da06308215b550f4, type: 3}
-  _name: Increase StandardPistol DPS by 100%
-  _description: Increase StandardPistol DPS by 100%
+  _name: Click Gun DMG++
+  _description: Increase ClickGun DMG by 100%
   _statsList: 1
   _stat: DMGMultiplier
-  _price: 100
+  _price: 7000
   _amount: 100
-  criterias:
-  - _statsList: 1
-    _stat: GoldGainedMultiplier
-    _threshold: 2
-    _upgrades: []
-    _thresholdComparison: 2
-  - _statsList: 1
-    _stat: GoldGainedMultiplier
-    _threshold: 20
-    _upgrades: []
-    _thresholdComparison: 2
+  _criterias: []
   _isActive: 1

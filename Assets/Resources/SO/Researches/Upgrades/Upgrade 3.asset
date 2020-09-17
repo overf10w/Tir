@@ -19,22 +19,9 @@ MonoBehaviour:
   _stat: DPSMultiplier
   _price: 100
   _amount: 100
-  criterias:
-  - _statsList: 2
-    _stat: MachineGun
-    _threshold: 8
-    _upgrades:
-    - {fileID: 11400000, guid: 923c6ed918a763e4aa1cedc6e6af3a6d, type: 2}
-    - {fileID: 11400000, guid: 173c8f278dfc5f344a18d2af37ab65e1, type: 2}
-    - {fileID: 11400000, guid: 8ede43987f8e23643a868a7300766584, type: 2}
-    _thresholdComparison: 2
-  - _statsList: 0
-    _stat: DPSMultiplier
-    _threshold: 5
-    _upgrades: []
-    _thresholdComparison: 2
+  _criterias:
   - _statsList: 1
-    _stat: GoldGainedMultiplier
+    _stat: DMGMultiplier
     _threshold: 2
     _upgrades: []
     _thresholdComparison: 4
