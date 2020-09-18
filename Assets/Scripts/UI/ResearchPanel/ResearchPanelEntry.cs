@@ -17,7 +17,6 @@ namespace Game
         [SerializeField] private TextMeshProUGUI _price;
         [SerializeField] private Image _image;
         [SerializeField] private Image _maskImage;
-
         [SerializeField] private Transform _content;
 
         [field: NonSerialized]

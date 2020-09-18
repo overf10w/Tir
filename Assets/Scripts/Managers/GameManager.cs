@@ -301,26 +301,31 @@ using UnityEngine;
 // 10. Prettify ResearchPanelEntry - [done]
 // 11. Optimize TeamPanel - [done]
 //      - Just put ResearchPanel in its own canvas in hierarchy (so TP is less nested)
-// 12. TeamSkillPanel, ClickGunSkillPanel: Add tooltipls to icons when hovered over - [doing...]
-// 13. ResearchPanelEntry: change an icon of empty slots to something less fancy & more default
-// 14. Play with the game balance
-// 15. Add more bosses, upgrades, weapons
+// 12. TeamSkillPanel, ClickGunSkillPanel: Add tooltipls to icons when hovered over - [done]
+// 13. ResearchPanelEntry: change an icon of empty slots to something less fancy & more default - [done]
 // 10. WeaponStat: remove the thing called _upgradeLevel/UpgradeLevel: we don't need it anymore(?) - [doing...]
 
+// 19-SEP-20:
+// 0. ResearchPanel: add tab switching between active upgrades and completed ones - [doing...]
+//      - https://www.youtube.com/watch?v=211t6r12XPQ
+// 1. Add 10 upgrades that make sense
+//      - For every 10th level of MachineGun, StandardPistol, increase their DPS by 100%
+// 2. Add 5 bosses (not animated):
+//      - https://www.rbxleaks.com/leak/2793
+//      - https://www.google.com/search?q=8+bit+horse&sxsrf=ALeKk00mO7NqbHQw3tj0ddJtw4GpzvfXhw:1600424566771&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjT2KqOvvLrAhVw-SoKHUgLD2cQ_AUoAXoECAsQAw&biw=1920&bih=1099#imgrc=omu2Iey4rARV9M
+// 3. Tweak the game balance to make it 100 level reachable
 
-// 01-SEP-20:
-// 0. Play with the game balance
-// 1. Add more artifacts
-// 2. 
+// 21-SEP-20:
+// 0. Player earns money each time a cube is hit, not each time the cube is destroyed
+// 1. Add "While you were away" panel
+// 2. Add 5 bosses
 
-// 10-SEP-20 (Important, not urgent):
+// (Important, not urgent):
 // 0. Cube: refactor TakeDamage, HealthChanged thingy (a little bit)
 // 0. Replace current Cube Outline implementation with something better - [12 hrs]
 // 0. Add 'Save' button - [3 hrs]
 // 0. Refactor the whole Cube/CubeController/CubeRenderer thing - [12 hrs]
 // 0. SkillEntryIcon: tween ValueTxt.text - [2 hrs]
-
-// 01-SEP-20:
 // 0. Add ascending system
 
 // The concept of game is this

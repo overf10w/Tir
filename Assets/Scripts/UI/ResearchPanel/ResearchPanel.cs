@@ -30,9 +30,6 @@ namespace Game
         }
     }
 
-    // ModelView + View
-    // 1. Raises events, to which UpgradesController subscribes
-    // 2. A view that handles how upgrades info is shown
     public class ResearchPanel : MonoBehaviour
     {
         [SerializeField] private ResearchPanelToggleCanvas _toggleCanvas;
@@ -40,7 +37,13 @@ namespace Game
 
         [SerializeField] private Button _closeBtn;
 
-        public Dictionary<Upgrade, ResearchPanelEntry> UpgradeEntries { get; private set; }
+        private Upgrade[] _upgrades;
+
+        public Dictionary<Upgrade, ResearchPanelEntry> ActiveUpgradeEntries { get; private set; }
+        public Dictionary<Upgrade, ResearchPanelEntry> CompletedUpgradeEntries { get; private set; }
+
+        public event EventHandler<EventArgs> AutoSaveTriggered = (s, e) => { };
+        public UpgradeBtnClick UpgradeBtnClick { get; private set; }
 
         private bool _isHidden = true;
         public bool IsHidden
@@ -54,25 +57,23 @@ namespace Game
             }
         }
 
-        public event EventHandler<EventArgs> AutoSaveTriggered = (s, e) => { };
-
-        public UpgradeBtnClick UpgradeBtnClick { get; private set; }
-
-        private Upgrade[] _upgrades;
-
         private CanvasGroup _canvasGroup;
         private GameObject _prefab;
-        private Transform _content;
+        private Transform _activeUpgrades;
+        private Transform _completedUpgrades;
 
         public void Init(PlayerModel playerModel, UpgradesSO upgradesSO)
         {
-            UpgradeEntries = new Dictionary<Upgrade, ResearchPanelEntry>();
+            ActiveUpgradeEntries = new Dictionary<Upgrade, ResearchPanelEntry>();
+            CompletedUpgradeEntries = new Dictionary<Upgrade, ResearchPanelEntry>();
+
             UpgradeBtnClick = new UpgradeBtnClick();
             _upgrades = upgradesSO.Upgrades;
 
             _canvasGroup = GetComponent<CanvasGroup>();
             _prefab = Resources.Load<GameObject>("Prefabs/UI/ResearchPanel/ResearchPanelEntry");
-            _content = transform.Find("ScrollView/Viewport/Content").GetComponent<Transform>();
+            _activeUpgrades = transform.Find("ScrollView/Viewport/Content").GetComponent<Transform>();
+            _completedUpgrades = transform.Find("CompletedUpgradesScrollView/Viewport/Content").GetComponent<Transform>();
 
             _toggleCanvas.Init();
             _closeBtn.onClick.AddListener(() => IsHidden = true);
@@ -80,14 +81,28 @@ namespace Game
             // TODO: move this to controller (?)
             foreach (var upgrade in _upgrades)
             {
-                GameObject entryGO = Instantiate(_prefab, _content);
+                if (upgrade.IsActive)
+                {
+                    GameObject entryGO = Instantiate(_prefab, _activeUpgrades);
 
-                ResearchPanelEntry entry = entryGO.GetComponent<ResearchPanelEntry>();
-                entry.Init(playerModel, upgrade);
-                entry.UpgradeBtn.onClick.AddListener(() => { UpgradeBtnClick.Dispatch(new UpgradeBtnClickEventArgs(upgrade)); });
-                upgrade.PropertyChanged += UpgradeChangedHandler;
+                    ResearchPanelEntry canvasEntry = entryGO.GetComponent<ResearchPanelEntry>();
+                    canvasEntry.Init(playerModel, upgrade);
+                    canvasEntry.UpgradeBtn.onClick.AddListener(() => { UpgradeBtnClick.Dispatch(new UpgradeBtnClickEventArgs(upgrade)); });
+                    upgrade.PropertyChanged += UpgradeChangedHandler;
 
-                UpgradeEntries.Add(upgrade, entry);
+                    ActiveUpgradeEntries.Add(upgrade, canvasEntry);
+                } 
+                else
+                {
+                    GameObject entryGO = Instantiate(_prefab, _completedUpgrades);
+
+                    ResearchPanelEntry canvasEntry = entryGO.GetComponent<ResearchPanelEntry>();
+                    canvasEntry.Init(playerModel, upgrade);
+                    canvasEntry.UpgradeBtn.onClick.AddListener(() => { UpgradeBtnClick.Dispatch(new UpgradeBtnClickEventArgs(upgrade)); });
+                    upgrade.PropertyChanged += UpgradeChangedHandler;
+
+                    CompletedUpgradeEntries.Add(upgrade, canvasEntry);
+                }
             }
 
             Render();
@@ -98,12 +113,37 @@ namespace Game
 
         public void UpdateView()
         {
-            if (UpgradeEntries == null)
+            if (ActiveUpgradeEntries == null)
             {
                 Debug.LogWarning("UpgradeEntries not found... Returning");
                 return;
             }
-            foreach(var upgradeEntry in UpgradeEntries)
+            Upgrade upgradeToMove = null;
+            ResearchPanelEntry entryToMove = null;
+            foreach (var upgradeEntry in ActiveUpgradeEntries)
+            {
+                Upgrade upgrade = upgradeEntry.Key;
+                ResearchPanelEntry entry = upgradeEntry.Value;
+
+                if (!upgrade.IsActive)
+                {
+                    upgradeToMove = upgrade;
+                    entryToMove = entry;
+                }
+                else
+                {
+                    entry.Render(upgrade);
+                }
+            }
+
+            if (upgradeToMove != null)
+            {
+                entryToMove.transform.SetParent(_completedUpgrades);
+                CompletedUpgradeEntries.Add(upgradeToMove, entryToMove);
+                ActiveUpgradeEntries.Remove(upgradeToMove);
+            }
+
+            foreach (var upgradeEntry in CompletedUpgradeEntries)
             {
                 Upgrade upgrade = upgradeEntry.Key;
                 ResearchPanelEntry entry = upgradeEntry.Value;
@@ -151,7 +191,7 @@ namespace Game
             Upgrade upgrade = (Upgrade)sender;
 
             ResearchPanelEntry entry;
-            UpgradeEntries.TryGetValue(upgrade, out entry);
+            ActiveUpgradeEntries.TryGetValue(upgrade, out entry);
             if (entry != null)
             {
                 entry.Render(upgrade);
