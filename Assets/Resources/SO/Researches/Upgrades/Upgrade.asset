@@ -20,4 +20,4 @@ MonoBehaviour:
   _price: 1000
   _amount: 100
   _criterias: []
-  _isActive: 1
+  _isActive: 0

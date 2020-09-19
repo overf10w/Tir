@@ -25,4 +25,4 @@ MonoBehaviour:
     _threshold: 2
     _upgrades: []
     _thresholdComparison: 4
-  _isActive: 1
+  _isActive: 0

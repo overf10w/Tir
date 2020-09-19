@@ -306,8 +306,8 @@ using UnityEngine;
 // 10. WeaponStat: remove the thing called _upgradeLevel/UpgradeLevel: we don't need it anymore(?) - [doing...]
 
 // 19-SEP-20:
-// 0. ResearchPanel: add tab switching between active upgrades and completed ones - [doing...]
-//      - https://www.youtube.com/watch?v=211t6r12XPQ
+// 0. ResearchPanel: add tab switching between active upgrades and completed ones - [done]
+//      - https://www.youtube.com/watch?v=211t6r12XPQ - [done]
 // 1. Add 10 upgrades that make sense
 //      - For every 10th level of MachineGun, StandardPistol, increase their DPS by 100%
 // 2. Add 5 bosses (not animated):
