@@ -317,8 +317,9 @@ using UnityEngine;
 
 // 21-SEP-20:
 // 0. Do ToDos in TabGroup.cs - [done]
-// 1. Player earns money each time a cube is hit, not each time the cube is destroyed
-// 2. Add "While you were away" panel
+// 1. Change the way the levels are spawned: - [done]
+//      - Before boss wave comes, there should be 4 'easy' waves - [done]
+// 2. Add "While you were away" panel - [doing...]
 // 3. Add 5 bosses
 
 // (Important, not urgent):

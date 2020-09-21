@@ -24,7 +24,10 @@ namespace Game
                 _cubesDestroyed++;
                 if (_cubesDestroyed == _cubesSpawned)
                 {
-                    MessageBus.Instance.SendMessage(new Message { Type = MessageType.LEVEL_PASSED });
+                    if (_waveInd == 0)
+                    {
+                        MessageBus.Instance.SendMessage(new Message { Type = MessageType.LEVEL_PASSED });
+                    }
                     Destroy(_wave.gameObject);
                     StartCoroutine(SpawnWave());
                 }
@@ -45,6 +48,8 @@ namespace Game
         private int _cubesSpawned;
         private int _cubesDestroyed;
 
+        private int _waveInd = 0;
+
         public void Init(PlayerStats playerStats)
         {
             InitMessageHandler();
@@ -56,10 +61,12 @@ namespace Game
         private IEnumerator SpawnWave()
         {
             yield return new WaitForSeconds(0.5f);
+            _waveInd++;
 
             var waves = _playerWaves.Waves;
 
             Wave wavePrefab;
+
             // TODO: more elegant solution needed (?)
             if (_wavesToSpawn.Count > 0)
             {
@@ -75,7 +82,17 @@ namespace Game
 
             float waveHP = _algorithm.GetWaveHp(_playerStats.Level);
             float waveGold = _algorithm.GetWaveGold(_playerStats.Level);
-            _wave.Init(waveHP, waveGold, _waveSpawnPoint);
+
+            if (_waveInd % 5 != 0)
+            {
+                _wave.Init(waveHP / 100.0f, waveGold / 100.0f, _waveSpawnPoint);
+            } 
+            else
+            {
+                _waveInd = 0;
+                _wave.Init(waveHP, waveGold, _waveSpawnPoint);
+            }
+
             _wave.WaveHpChanged += WaveHpChangedHandler;
 
             _cubesSpawned = _wave.CubesNumber;
