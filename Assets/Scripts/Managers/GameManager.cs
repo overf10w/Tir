@@ -316,9 +316,10 @@ using UnityEngine;
 // 3. Tweak the game balance to make it 100 level reachable
 
 // 21-SEP-20:
-// 0. Player earns money each time a cube is hit, not each time the cube is destroyed
-// 1. Add "While you were away" panel
-// 2. Add 5 bosses
+// 0. Do ToDos in TabGroup.cs - [done]
+// 1. Player earns money each time a cube is hit, not each time the cube is destroyed
+// 2. Add "While you were away" panel
+// 3. Add 5 bosses
 
 // (Important, not urgent):
 // 0. Cube: refactor TakeDamage, HealthChanged thingy (a little bit)

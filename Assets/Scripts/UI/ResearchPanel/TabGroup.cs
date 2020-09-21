@@ -6,8 +6,8 @@ namespace Game
 {
     public class TabGroup : MonoBehaviour
     {
-        [SerializeField] private List<GameObject> _pages;
-
+        // The index of each tab page must correspond the one of a button, which is intented to open the page
+        [SerializeField] private List<CanvasGroup> _pages;
         [SerializeField] private List<TabButton> _tabButtons;
 
         private TabButton _selectedTab;
@@ -29,6 +29,7 @@ namespace Game
         public void OnTabSelected(TabButton tabButton)
         {
             _selectedTab = tabButton;
+
             ResetButtons();
 
             int index = _tabButtons.IndexOf(tabButton);
@@ -36,15 +37,15 @@ namespace Game
             {
                 if (i == index)
                 {
-                    // TODO: SetActive causes lag spike, redo using canvasGroup.alpha/interactable/blockRaycasts
-                    // https://forum.unity.com/threads/how-to-disable-hide-ui-elements-without-disabling-them.282100/#post-2669210
-                    _pages[i].SetActive(true);
+                    _pages[i].alpha = 1;
+                    _pages[i].interactable = true;
+                    _pages[i].blocksRaycasts = true;
                 }
                 else
                 {
-                    // TODO: SetActive causes lag spike, redo using canvasGroup.alpha/interactable/blockRaycasts
-                    // https://forum.unity.com/threads/how-to-disable-hide-ui-elements-without-disabling-them.282100/#post-2669210                    
-                    _pages[i].SetActive(false);
+                    _pages[i].alpha = 0;
+                    _pages[i].interactable = false;
+                    _pages[i].blocksRaycasts = false;
                 }
             }
         }
