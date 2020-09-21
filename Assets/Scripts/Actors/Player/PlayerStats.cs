@@ -51,7 +51,6 @@ namespace Game
         [SerializeField] private long _lastPlayTimestamp;
         public long LastPlayTimestamp { get => _lastPlayTimestamp; set { _lastPlayTimestamp = value; } }
 
-        //pub
         public long IdleTimeSpan => _lastPlayTimestamp == 0 ? 0 : DateTime.Now.Ticks - _lastPlayTimestamp;
 
         [SerializeField] private List<PlayerStatData> _teamSkills;
@@ -103,6 +102,8 @@ namespace Game
         public long LastPlayTimestamp { get => _lastPlayTimestamp; set { SetField(ref _lastPlayTimestamp, value); } }
 
         public long IdleTimeSpan => _lastPlayTimestamp == 0 ? 0 : DateTime.Now.Ticks - _lastPlayTimestamp;
+
+        public float IdleEarnings { get; set; }
 
         [SerializeField] private List<PlayerStat> _teamSkills;
         [NonSerialized]

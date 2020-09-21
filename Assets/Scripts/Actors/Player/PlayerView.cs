@@ -67,15 +67,19 @@ namespace Game
             Ui = FindObjectOfType<UserStatsCanvas>();
             Ui.Init(model);
 
-            TeamPanel = GameObject.FindObjectOfType<TeamPanel>();
+            TeamPanel = FindObjectOfType<TeamPanel>();
             TeamPanel.Init(model);
             if (TeamPanel)
             {
                 TeamPanel.WeaponBtnClick.PlayerView = this;
             }
 
+            
+
+            // TODO: FindObjectOfType...
             ClickGunPanel = Ui.GetComponentInChildren<ClickGunPanel>();
             ClickGunPanel.Render(model, model.GunData.WeaponName, model.DPS, model.DMG);
+
             if (ClickGunPanel)
             {
                 ClickGunPanel.WeaponBtnClick.PlayerView = this;

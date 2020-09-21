@@ -8,6 +8,25 @@ namespace Game
     [CreateAssetMenu(fileName = "WaveSpawnerAlgorithm", menuName = "ScriptableObjects/WaveSpawnerAlgorithm")]
     public class WaveSpawnerAlgorithm : ScriptableObject
     {
+        #region Singleton
+        /* Singleton */
+        static WaveSpawnerAlgorithm instance;
+
+        public static WaveSpawnerAlgorithm Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new WaveSpawnerAlgorithm();
+                }
+                return instance;
+            }
+        }
+
+        private WaveSpawnerAlgorithm() { }
+        #endregion
+
         [Serializable]
         private class AlgorithmData
         {
@@ -36,6 +55,11 @@ namespace Game
         public float GetWaveGold(int level)
         {
             return Mathf.Pow(_waveGold.BaseValue, level) * _waveGold.Coefficient + _waveGold.Offset;
+        }
+
+        public static float GetLevelGold(int level)
+        {
+            return Mathf.Pow(instance._waveGold.BaseValue, level) * instance._waveGold.Coefficient + instance._waveGold.Offset;
         }
     }
 }

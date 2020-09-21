@@ -320,6 +320,9 @@ using UnityEngine;
 // 1. Change the way the levels are spawned: - [done]
 //      - Before boss wave comes, there should be 4 'easy' waves - [done]
 // 2. Add "While you were away" panel - [doing...]
+//      - Add IdleEarnings to Player(Model/Stats) - [done]
+//      - On game init: Calculate IdleEarnings using other Player stats - [done]
+//      - On game init: PlayerView.cs: Init IdleEarnings canvas with PlayerStats.IdleEarnings
 // 3. Add 5 bosses
 
 // (Important, not urgent):

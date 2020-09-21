@@ -11,7 +11,6 @@ using System.Linq;
 
 namespace Game
 {
-    // TODO: move PlayerStat(s), PlayerStat(s)Data to PlayerStats.cs file
     [System.Serializable]
     public class PlayerModel
     {
@@ -37,20 +36,21 @@ namespace Game
 
         public Dictionary<string, Weapon> TeamWeapons { get; private set; }
 
-        // Click Gun Data
+        // ClickGunData
         public WeaponData GunData { get; private set; }
         public WeaponStat DPS { get; private set; }
         public WeaponStat DMG { get; private set; }
-        // endof Click Gun Data
+        // endof ClickGunData
 
         public PlayerModel(string _playerStatsDataPath)
         {
-            InitPlayerStats(_playerStatsDataPath);
+            LoadPlayerStats(_playerStatsDataPath);
             InitTeamWeapons(PlayerStats);
             InitClickGun();
+            InitPlayerStats(); 
         }
 
-        private void InitPlayerStats(string _playerStatsDataPath)
+        private void LoadPlayerStats(string _playerStatsDataPath)
         {
             PlayerStats = ResourceLoader.LoadPlayerStats();
             PlayerStatsData playerStatsData = ResourceLoader.Load<PlayerStatsData>(_playerStatsDataPath);
@@ -59,6 +59,32 @@ namespace Game
                 PlayerStats.SetPlayerStats(ResourceLoader.Load<PlayerStatsData>(_playerStatsDataPath));
             }
             PlayerStats.PropertyChanged += PlayerStatChangedHandler;
+        }
+
+        private void InitPlayerStats()
+        {
+            PlayerStats.IdleEarnings = CalculateIdleEarnings(TeamWeapons, PlayerStats);
+            Debug.Log("PlayerStats.IdleEarnings: " + PlayerStats.IdleEarnings);
+        }
+
+        // TODO (?): move this to PlayerStats
+        private float CalculateIdleEarnings(Dictionary<string, Weapon> teamWeapons, PlayerStats playerStats)
+        {
+            float teamDPS = 0.0f;
+            foreach (var weapon in teamWeapons)
+            {
+                teamDPS += weapon.Value.DPS.Value;    
+            }
+
+            teamDPS /= 2.0f;
+
+            double timePassed = TimeSpan.FromTicks(playerStats.IdleTimeSpan).TotalMinutes;
+            Debug.Log("timePassed: " + timePassed);
+            //float levelGold = WaveSpawnerAlgorithm.GetLevelGold(PlayerStats.Level);
+
+            // TODO: calculation to be dependent on timePassed, levelGold
+
+            return teamDPS * (float)timePassed;
         }
 
         // TODO (LP): instantiating of TeamWeapons should be moved to PlayerView
