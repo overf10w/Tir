@@ -308,22 +308,31 @@ using UnityEngine;
 // 19-SEP-20:
 // 0. ResearchPanel: add tab switching between active upgrades and completed ones - [done]
 //      - https://www.youtube.com/watch?v=211t6r12XPQ - [done]
-// 1. Add 10 upgrades that make sense
-//      - For every 10th level of MachineGun, StandardPistol, increase their DPS by 100%
-// 2. Add 5 bosses (not animated):
-//      - https://www.rbxleaks.com/leak/2793
-//      - https://www.google.com/search?q=8+bit+horse&sxsrf=ALeKk00mO7NqbHQw3tj0ddJtw4GpzvfXhw:1600424566771&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjT2KqOvvLrAhVw-SoKHUgLD2cQ_AUoAXoECAsQAw&biw=1920&bih=1099#imgrc=omu2Iey4rARV9M
-// 3. Tweak the game balance to make it 100 level reachable
 
-// 21-SEP-20:
+// 21/22-SEP-20:
 // 0. Do ToDos in TabGroup.cs - [done]
 // 1. Change the way the levels are spawned: - [done]
 //      - Before boss wave comes, there should be 4 'easy' waves - [done]
-// 2. Add "While you were away" panel - [doing...]
+// 2. Add "While you were away" panel - [done]
 //      - Add IdleEarnings to Player(Model/Stats) - [done]
 //      - On game init: Calculate IdleEarnings using other Player stats - [done]
-//      - On game init: PlayerView.cs: Init IdleEarnings canvas with PlayerStats.IdleEarnings
+//      - On game init: PlayerView.cs: Init IdleEarnings canvas with PlayerStats.IdleEarnings - [done]
+
+// 23-SEP-20:
+// 0. Add 5 bosses (not animated):
+//      - https://www.rbxleaks.com/leak/2793
+//      - https://www.google.com/search?q=8+bit+horse&sxsrf=ALeKk00mO7NqbHQw3tj0ddJtw4GpzvfXhw:1600424566771&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjT2KqOvvLrAhVw-SoKHUgLD2cQ_AUoAXoECAsQAw&biw=1920&bih=1099#imgrc=omu2Iey4rARV9M
+// 1. Add 10 upgrades that make sense:
+//      - For every 10th level of MachineGun, StandardPistol, increase their DPS by 100% 
+// 2. Tweak the game balance to make it 100 level reachable
 // 3. Add 5 bosses
+// 4. Add a Debug Cheat Console: https://youtu.be/VzOEM-4A2OM
+
+// 24-SEP-20:
+// (?) UpgradesEditor: show Upgrades as Reordable list:
+//  - https://blog.terresquall.com/2020/03/creating-reorderable-lists-in-the-unity-inspector/
+//  - https://github.com/SubjectNerd-Unity/ReorderableInspector
+//  - https://forum.unity.com/threads/what-is-the-best-way-to-do-a-reorderable-list.511070/
 
 // (Important, not urgent):
 // 0. Cube: refactor TakeDamage, HealthChanged thingy (a little bit)

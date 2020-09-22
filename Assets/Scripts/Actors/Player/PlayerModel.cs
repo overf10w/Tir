@@ -63,12 +63,14 @@ namespace Game
 
         private void InitPlayerStats()
         {
-            PlayerStats.IdleEarnings = CalculateIdleEarnings(TeamWeapons, PlayerStats);
-            Debug.Log("PlayerStats.IdleEarnings: " + PlayerStats.IdleEarnings);
+            PlayerStats.IdleProfit = CalculateIdleProfit(TeamWeapons, PlayerStats);
+            PlayerStats.Gold += PlayerStats.IdleProfit;
+            
+            Debug.Log("PlayerStats.IdleProfit: " + PlayerStats.IdleProfit);
         }
 
         // TODO (?): move this to PlayerStats
-        private float CalculateIdleEarnings(Dictionary<string, Weapon> teamWeapons, PlayerStats playerStats)
+        private float CalculateIdleProfit(Dictionary<string, Weapon> teamWeapons, PlayerStats playerStats)
         {
             float teamDPS = 0.0f;
             foreach (var weapon in teamWeapons)

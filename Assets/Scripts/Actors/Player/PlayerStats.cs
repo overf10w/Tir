@@ -103,7 +103,7 @@ namespace Game
 
         public long IdleTimeSpan => _lastPlayTimestamp == 0 ? 0 : DateTime.Now.Ticks - _lastPlayTimestamp;
 
-        public float IdleEarnings { get; set; }
+        public float IdleProfit { get; set; }
 
         [SerializeField] private List<PlayerStat> _teamSkills;
         [NonSerialized]
@@ -205,7 +205,6 @@ namespace Game
         #region BinarySerializerMethods
         public void SetStatsList(List<PlayerStat> stats, List<PlayerStatData> statsDatas)
         {
-            Debug.Log("stats == null: " + (stats == null).ToString() + "statsDatas == null: " + (statsDatas == null).ToString());
             if (statsDatas.Count != stats.Count)
             {
                 string warning =

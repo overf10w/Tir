@@ -58,6 +58,8 @@ namespace Game
 
         public ClickGunPanel ClickGunPanel { get; private set; }
 
+        public IdleProfitCanvas IdleProfitCanvas { get; private set; }
+
         public void Init(PlayerModel model, UpgradesSO upgrades)
         {
             InitMessageHandler();
@@ -74,9 +76,10 @@ namespace Game
                 TeamPanel.WeaponBtnClick.PlayerView = this;
             }
 
-            
+            IdleProfitCanvas = FindObjectOfType<IdleProfitCanvas>();
+            IdleProfitCanvas.Init();
+            IdleProfitCanvas.IdleProfitTxt.SetText($"While you were away, your team has earned you \n <color=#1FD22C> {model.PlayerStats.IdleProfit.SciFormat()} </color> gold");
 
-            // TODO: FindObjectOfType...
             ClickGunPanel = Ui.GetComponentInChildren<ClickGunPanel>();
             ClickGunPanel.Render(model, model.GunData.WeaponName, model.DPS, model.DMG);
 
