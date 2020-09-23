@@ -11,7 +11,7 @@ namespace Game
         {
             MessageSubscriber msc = new MessageSubscriber();
             msc.Handler = this;
-            msc.MessageTypes = new MessageType[] { MessageType.LEVEL_PASSED };
+            msc.MessageTypes = new MessageType[] { MessageType.LEVEL_COMPLETE };
             MessageBus.Instance.AddSubscriber(msc);
         }
 
@@ -19,7 +19,7 @@ namespace Game
         {
             switch(message.Type)
             {
-                case MessageType.LEVEL_PASSED:
+                case MessageType.LEVEL_COMPLETE:
                     _soundsMachine.Play("FireWork");
                     break;
                 default:

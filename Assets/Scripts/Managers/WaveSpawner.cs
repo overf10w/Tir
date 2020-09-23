@@ -13,7 +13,7 @@ namespace Game
         {
             MessageSubscriber msc = new MessageSubscriber();
             msc.Handler = this;
-            msc.MessageTypes = new MessageType[] { MessageType.CUBE_DEATH, MessageType.LEVEL_PASSED };
+            msc.MessageTypes = new MessageType[] { MessageType.CUBE_DEATH, MessageType.LEVEL_COMPLETE, MessageType.LEVEL_RESTARTED };
             MessageBus.Instance.AddSubscriber(msc);
         }
 
@@ -26,11 +26,22 @@ namespace Game
                 {
                     if (_waveInd == 0)
                     {
-                        MessageBus.Instance.SendMessage(new Message { Type = MessageType.LEVEL_PASSED });
+                        MessageBus.Instance.SendMessage(new Message { Type = MessageType.LEVEL_COMPLETE });
                     }
                     Destroy(_wave.gameObject);
                     StartCoroutine(SpawnWave());
                 }
+            }
+            else if (message.Type == MessageType.LEVEL_RESTARTED)
+            {
+                _waveInd = 0;
+                if (_wave)
+                {
+                    Destroy(_wave.gameObject);
+                }
+                StartCoroutine(SpawnWave());
+
+                Debug.Log("WaveSpawner: I know the level was restarted!");
             }
         }
         #endregion
@@ -58,9 +69,17 @@ namespace Game
             StartCoroutine(SpawnWave());
         }
 
+        private bool _waveFlag = false;
         private IEnumerator SpawnWave()
         {
+            if (_waveFlag)
+            {
+                yield break;
+            }
+
+            _waveFlag = true;
             yield return new WaitForSeconds(0.5f);
+
             _waveInd++;
 
             var waves = _playerWaves.Waves;
@@ -101,6 +120,9 @@ namespace Game
             MessageBus.Instance.SendMessage(new Message() { Type = MessageType.WAVE_CHANGED, objectValue = _wave });
 
             _waveCanvas.Render(waveHP);
+
+            yield return null;
+            _waveFlag = false;
         }
 
         private void WaveHpChangedHandler(object sender, EventArgs<float> hp)

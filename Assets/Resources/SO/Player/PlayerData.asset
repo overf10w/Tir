@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   playerStats:
-    _gold: 945261.7
-    _level: 50
-    _lastPlayTimestamp: 637363007437889467
+    _gold: 1971085.2
+    _level: 45
+    _lastPlayTimestamp: 637364729123576869
     _teamSkills:
     - _icon: {fileID: -1759227488970123559, guid: ee010143be6b9004a87a40e3ae438917,
         type: 3}

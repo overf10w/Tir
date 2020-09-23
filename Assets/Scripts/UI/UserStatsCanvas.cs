@@ -14,13 +14,13 @@ namespace Game
         {
             MessageSubscriber msc = new MessageSubscriber();
             msc.Handler = this;
-            msc.MessageTypes = new MessageType[] { MessageType.LEVEL_PASSED, MessageType.GAME_STARTED };
+            msc.MessageTypes = new MessageType[] { MessageType.LEVEL_COMPLETE, MessageType.GAME_STARTED };
             MessageBus.Instance.AddSubscriber(msc);
         }
 
         public override void HandleMessage(Message message)
         {
-            if (message.Type == MessageType.LEVEL_PASSED)
+            if (message.Type == MessageType.LEVEL_COMPLETE)
             {
                 return;
             }
@@ -35,6 +35,8 @@ namespace Game
 
         public TextMeshProUGUI PlayerLevelTxt { get; private set; }
 
+        private Button _playerRestartLevelBtn;
+
         private LevelListUI _levelListUI;
 
         private Text _elapsedTimeSpanTxt;
@@ -46,8 +48,11 @@ namespace Game
             _levelListUI = FindObjectOfType<LevelListUI>();
             _playerGoldCanvas.Render(playerModel.PlayerStats.Gold);
 
-            PlayerLevelTxt = transform.Find("MainPanel/StatsPanel/LevelTxt").GetComponent<TextMeshProUGUI>();
+            PlayerLevelTxt = transform.Find("MainPanel/LevelPanel/LevelBtn/LevelTxt").GetComponent<TextMeshProUGUI>();
             PlayerLevelTxt.text = playerModel.PlayerStats.Level.ToString();
+
+            _playerRestartLevelBtn = transform.Find("MainPanel/LevelPanel/LevelBtn").GetComponent<Button>();
+            _playerRestartLevelBtn.onClick.AddListener(() => MessageBus.Instance.SendMessage(new Message { Type = MessageType.LEVEL_RESTARTED }));
 
             _elapsedTimeSpanTxt = GameObject.Find("ElapsedTimeSpanLbl").GetComponent<Text>();
             TimeSpan idleTimeSpan = new TimeSpan(playerModel.PlayerStats.IdleTimeSpan);

@@ -8,7 +8,7 @@ namespace Game
     {
         public void OnButtonClicked(int level)
         {
-            MessageBus.Instance.SendMessage(new Message() { Type = MessageType.LEVEL_PASSED, IntValue = level });
+            MessageBus.Instance.SendMessage(new Message() { Type = MessageType.LEVEL_COMPLETE, IntValue = level });
         }
     }
 }

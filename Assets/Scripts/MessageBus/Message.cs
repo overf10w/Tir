@@ -10,9 +10,10 @@ namespace Game
         GAMEOVER,
         CUBE_DEATH,
         WAVE_CHANGED,
-        LEVEL_PASSED,
+        LEVEL_COMPLETE,
         GAME_STARTED,
-        POINT_ADDED
+        POINT_ADDED,
+        LEVEL_RESTARTED
     }
 
     public struct Message

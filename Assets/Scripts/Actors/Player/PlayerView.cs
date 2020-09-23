@@ -22,7 +22,7 @@ namespace Game
         {
             MessageSubscriber msc = new MessageSubscriber();
             msc.Handler = this;
-            msc.MessageTypes = new MessageType[] { MessageType.CUBE_DEATH, MessageType.LEVEL_PASSED };
+            msc.MessageTypes = new MessageType[] { MessageType.CUBE_DEATH, MessageType.LEVEL_COMPLETE };
             MessageBus.Instance.AddSubscriber(msc);
         }
 
@@ -33,7 +33,7 @@ namespace Game
                 Cube cube = (Cube)message.objectValue;
                 CubeDeath?.Invoke(this, new EventArgs<float>(cube.Gold));
             }
-            else if (message.Type == MessageType.LEVEL_PASSED)
+            else if (message.Type == MessageType.LEVEL_COMPLETE)
             {
                 LevelPassed?.Invoke(this, new EventArgs());
             }

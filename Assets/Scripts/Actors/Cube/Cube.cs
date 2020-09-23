@@ -115,13 +115,15 @@ namespace Game
             yield return new WaitForSeconds(_cubeStat.takeDamageEffectDuration);
         }
 
+        private bool destroyRoutineFlag = false;
+
         private IEnumerator DestroyRoutine()
         {
             yield return new WaitForEndOfFrame();
             MessageBus.Instance.SendMessage(new Message { Type = MessageType.CUBE_DEATH, objectValue = (Cube)this });
             _particleMachine.Spawn("DestroyParticles", transform);
             yield return new WaitForSeconds(0.15f);
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
 }

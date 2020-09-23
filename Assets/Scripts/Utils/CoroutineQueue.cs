@@ -68,7 +68,10 @@ namespace Game
             if (_numActive < _maxActive)
             {
                 var runner = CoroutineRunner(coroutine);
-                _coroutineStarter(runner);
+                if (_coroutineStarter != null && runner != null)
+                {
+                    _coroutineStarter(runner);
+                }
             }
             else
             {
