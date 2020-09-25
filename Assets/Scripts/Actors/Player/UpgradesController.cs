@@ -70,6 +70,9 @@ namespace Game
                 _playerModel.PlayerStats.Gold -= e.Upgrade.Price;
                 float cachedFloat = skill.Value;
                 skill.Value = cachedFloat + (e.Upgrade.Amount / 100.0f);
+
+                Debug.Log("e.Upgrade.Amount: " + e.Upgrade.Amount);
+
             }
         }
 

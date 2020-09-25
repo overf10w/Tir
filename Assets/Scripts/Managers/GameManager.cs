@@ -319,6 +319,15 @@ using UnityEngine;
 //      - On game init: PlayerView.cs: Init IdleEarnings canvas with PlayerStats.IdleEarnings - [done]
 
 // 23-SEP-20:
+// 0. Refactor; - [done]
+// 1. LevelSelectButton.onClick: Restarts a level - [done]
+
+// 24-SEP-20:
+// 0. Upgrade: Add IterationMultiplier: - [done]
+//      - "For every Nth(1st/2nd/3rd, etc.) %PLAYER_STAT% level, increase %SOME_OTHER_PLAYERSTAT% by X percents" - [done]
+// 1. Upgrade: Add IterationMultiplier PropertyDrawer - [done]
+
+// 25-SEP-20:
 // 0. Add 5 bosses (not animated):
 //      - https://www.rbxleaks.com/leak/2793
 //      - https://www.google.com/search?q=8+bit+horse&sxsrf=ALeKk00mO7NqbHQw3tj0ddJtw4GpzvfXhw:1600424566771&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjT2KqOvvLrAhVw-SoKHUgLD2cQ_AUoAXoECAsQAw&biw=1920&bih=1099#imgrc=omu2Iey4rARV9M
@@ -328,8 +337,8 @@ using UnityEngine;
 // 3. Add 5 bosses
 // 4. Add a Debug Cheat Console: https://youtu.be/VzOEM-4A2OM
 
-// 24-SEP-20:
-// (?) UpgradesEditor: show Upgrades as Reordable list:
+// 26-SEP-20:
+// (?) UpgradesSO/UpgradesEditor: show Upgrades as Reordable list:
 //  - https://blog.terresquall.com/2020/03/creating-reorderable-lists-in-the-unity-inspector/
 //  - https://github.com/SubjectNerd-Unity/ReorderableInspector
 //  - https://forum.unity.com/threads/what-is-the-best-way-to-do-a-reorderable-list.511070/

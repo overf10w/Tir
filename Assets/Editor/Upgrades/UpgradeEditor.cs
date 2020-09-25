@@ -49,17 +49,24 @@ namespace Game
                 float rectWidth = lastRect.width / 1.85f;
 
                 string warning = "";
+                GUIStyle redStyleColor = new GUIStyle();
+                redStyleColor.normal.textColor = Color.red;
+
                 if (upgrade.StatsList == StatsLists.WeaponsLevels.ToString())
                 {
                     warning = "Error. Can't be selected.";
-                    GUIStyle redStyleColor = new GUIStyle();
-                    redStyleColor.normal.textColor = Color.red;
                     EditorGUI.LabelField(new Rect(lastRect.max.x - rectWidth, 115, rectWidth, 15), new GUIContent(warning), redStyleColor);
                     _index = -1;
                 }
                 else
                 {
                     _index = EditorGUI.Popup(new Rect(lastRect.max.x - rectWidth, 115, rectWidth, 15), new GUIContent(warning), _index, _availableOptions);
+                }
+
+                SerializedProperty _iterationMultipliers = serializedObject.FindProperty("_iterationMultipliers");
+                if (_iterationMultipliers.arraySize != 0)
+                {
+                    EditorGUI.LabelField(new Rect(65, 178, rectWidth, 15), new GUIContent("(ignored)"), redStyleColor);
                 }
 
                 var selectedString = _availableOptions[_index].text;

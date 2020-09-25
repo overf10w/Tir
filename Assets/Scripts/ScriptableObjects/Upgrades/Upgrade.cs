@@ -34,15 +34,33 @@ namespace Game
 
         public void Init(PlayerStats playerStats)
         {
-            foreach (var crit in _criterias)
+            if (_iterationMultipliers != null)
             {
-                crit.PlayerStats = playerStats;
+                foreach (var amountMultiplier in _iterationMultipliers)
+                {
+                    amountMultiplier.PlayerStats = playerStats;
+                }
+            }
+            if (_criterias != null)
+            {
+                foreach (var crit in _criterias)
+                {
+                    crit.PlayerStats = playerStats;
+                }
             }
         }
 
         public void Init(PlayerStats playerStats, UpgradeData upgradeData)
         {
             IsActive = upgradeData.IsActive;
+
+            if (_iterationMultipliers != null)
+            {
+                foreach (var amountMultiplier in _iterationMultipliers)
+                {
+                    amountMultiplier.PlayerStats = playerStats;
+                }
+            }
             if (_criterias != null)
             {
                 foreach (var crit in _criterias)
@@ -74,7 +92,27 @@ namespace Game
         public float Price => _price;
 
         [SerializeField] private float _amount;
-        public float Amount => _amount;
+        public float Amount
+        {
+            get
+            {
+                if (_iterationMultipliers == null)
+                {
+                    return _amount;
+                }
+                else
+                {
+                    float ret = 0;
+                    foreach (var mult in _iterationMultipliers)
+                    {
+                        ret += mult.Multiplier;
+                    }
+                    return ret;
+                }
+            }
+        }
+
+        [SerializeField] private IterationMultiplier[] _iterationMultipliers;
 
         [Header("Criterias")]
         [SerializeField] private Criteria[] _criterias;  // TODO: rename to _criterias
