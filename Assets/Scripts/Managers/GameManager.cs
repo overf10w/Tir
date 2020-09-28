@@ -352,7 +352,7 @@ using UnityEngine;
 // 28-SEP-20:
 // 0. Add camera shake when a wave is destroyed/level is changed - [done]
 // 1. Make some new waves by rotating old ones (as with Snake wave) - [doing...]
-// 2. WaveSpawner: Add some Particle effects (from Ultimate VFX particles) when wave is spawned
+// 2. WaveSpawner: Add some Particle effects (from Ultimate VFX particles) when wave is spawned - [doing...]
 
 
 // (Important, not urgent):

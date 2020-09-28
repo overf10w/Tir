@@ -48,6 +48,7 @@ namespace Game
                     if (WaveInd == 0)
                     {
                         MessageBus.Instance.SendMessage(new Message { Type = MessageType.LEVEL_COMPLETE });
+                        _particleSpawner.ShowEpic(3.0f);
                     }
                     Destroy(_wave.gameObject);
                     StartCoroutine(SpawnWave());
@@ -69,6 +70,7 @@ namespace Game
         [SerializeField] private PlayerWaves _playerWaves;
         [SerializeField] private WaveCanvas _waveCanvas;
         [SerializeField] private Transform _waveSpawnPoint;
+        [SerializeField] private WaveParticleSpawner _particleSpawner;
 
         private Queue<Wave> _wavesToSpawn;
 
@@ -138,6 +140,7 @@ namespace Game
             _cubesDestroyed = 0;
 
             MessageBus.Instance.SendMessage(new Message() { Type = MessageType.WAVE_CHANGED, objectValue = _wave });
+            _particleSpawner.Show(0.5f);
 
             _waveCanvas.Render(waveHP);
 
