@@ -350,8 +350,8 @@ using UnityEngine;
 //      - So the upgrades of type: "Increase StandardPistol DPSMultiplier by 10%" are calculated correctly - [doing...]
 
 // 28-SEP-20:
-// 0. Add camera shake when a wave is destroyed
-// 1. Make some new waves by rotating old ones (as with Snake wave)
+// 0. Add camera shake when a wave is destroyed/level is changed - [done]
+// 1. Make some new waves by rotating old ones (as with Snake wave) - [doing...]
 // 2. WaveSpawner: Add some Particle effects (from Ultimate VFX particles) when wave is spawned
 
 

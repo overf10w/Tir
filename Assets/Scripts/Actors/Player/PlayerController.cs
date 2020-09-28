@@ -2,6 +2,7 @@
 using System.Collections;
 using System.ComponentModel;
 using UnityEngine;
+using EZCameraShake;
 using System.Linq;
 
 namespace Game
@@ -40,6 +41,7 @@ namespace Game
             if (e.Val != 0)
             {
                 _view.Ui.PlayerWaveTxt.text = e.Val.ToString() + "/5";
+                CameraShaker.Instance.ShakeOnce(2.15f, 2.5f, 0.3f, 0.1f);
             }
         }
 
@@ -64,6 +66,7 @@ namespace Game
         private void LevelPassedHandler(object sender, EventArgs e)
         {
             _model.PlayerStats.Level++;
+            CameraShaker.Instance.ShakeOnce(4.5f, 4.5f, 0.5f, 0.2f);
         }
 
         private void PlayerStatsChangedHandler(object sender, EventArgs<string> args)
