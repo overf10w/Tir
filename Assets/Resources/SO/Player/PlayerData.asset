@@ -13,23 +13,26 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   playerStats:
-    _gold: 1971085.2
-    _level: 45
-    _lastPlayTimestamp: 637364729123576869
+    _gold: 20
+    _level: 0
+    _lastPlayTimestamp: 0
     _teamSkills:
-    - _icon: {fileID: -1759227488970123559, guid: ee010143be6b9004a87a40e3ae438917,
+    - _icon: {fileID: 5399768326320216540, guid: ee010143be6b9004a87a40e3ae438917,
         type: 3}
       _name: DPSMultiplier
-      _value: 3
+      _value: 1
     _clickGunSkills:
     - _icon: {fileID: 4074098706646798208, guid: ee010143be6b9004a87a40e3ae438917,
         type: 3}
       _name: GoldGainedMultiplier
-      _value: 2
+      _value: 1
     - _icon: {fileID: -2229173039900512548, guid: ee010143be6b9004a87a40e3ae438917,
         type: 3}
       _name: DMGMultiplier
-      _value: 23
+      _value: 1
+    - _icon: {fileID: 21300000, guid: 36b4c625f848eea4e8c898f733b5d293, type: 3}
+      _name: ClickGunLevel
+      _value: 0
     _artifacts:
     - _icon: {fileID: 21300000, guid: 0cf9ad425bac04349a2c2dbeb480b487, type: 3}
       _name: p
@@ -37,10 +40,10 @@ MonoBehaviour:
     _weaponsLevels:
     - _icon: {fileID: 21300000, guid: eeaf64dc0d35da74d9400aa6bd7ef6fc, type: 3}
       _name: StandardPistol
-      _value: 23
+      _value: 0
     - _icon: {fileID: 21300000, guid: 471098e7c279b7442a30f613d19d5af9, type: 3}
       _name: MachineGun
-      _value: 38
+      _value: 0
     _weaponsMultipliers:
     - _icon: {fileID: 21300000, guid: eeaf64dc0d35da74d9400aa6bd7ef6fc, type: 3}
       _name: StandardPistol

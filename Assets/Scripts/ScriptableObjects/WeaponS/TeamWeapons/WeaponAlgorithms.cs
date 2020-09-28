@@ -4,10 +4,20 @@ using UnityEngine;
 namespace Game
 {
     [System.Serializable]
+    public class WeaponAlgorithmStatSelector
+    {
+        [SerializeField] private StatsLists _statsList;
+        public string StatsList => _statsList.ToString();
+
+        [SerializeField] private string _stat;
+        public string Stat => _stat;
+    }
+
+    [System.Serializable]
     public class WeaponAlgorithm
     {
         //[Header("Multipliers Lists")]
-        [SerializeField] private StatsLists[] _statsLists;
+        [SerializeField] private WeaponAlgorithmStatSelector[] _stats;
 
         //[Header("Price/Value algorithm")]
         [SerializeField] private float _basePrice;
@@ -48,17 +58,26 @@ namespace Game
             float upgradeValue = upgradeLevel <= 0 ? 1 : 1 * Mathf.Pow(_upgradeValueMultiplier, upgradeLevel);
             float result = _baseValue * Mathf.Pow(_valueMultiplier, level) * level * upgradeValue;
 
-            foreach (var statList in _statsLists)
-            {
-                // TODO: change this to more general approach 
-                // (so the TeamSKillsList's Weapon DPS won't affect ClickGun DMG)
-                StatsList statsList = (StatsList)playerStats[statList.ToString()];
-                List<PlayerStat> skills = statsList.List;
-                foreach (var skill in skills)
+            //if (_stats != null)
+            //{
+                foreach (var stat in _stats)
                 {
-                    result *= skill.Value;
+                    // TODO: change this to more general approach 
+                    // (so the TeamSKillsList's Weapon DPS won't affect ClickGun DMG)
+
+                    StatsList statsList = (StatsList)playerStats[stat.StatsList];
+                    PlayerStat playerStat = statsList.List.Find(sk => sk.Name == stat.Stat);
+
+                    result *= playerStat.Value;
+
+                    //List<PlayerStat> skills = statsList.List;
+                    //foreach (var skill in skills)
+                    //{
+                    //    result *= skill.Value;
+                    //}
                 }
-            }
+            //}
+
             return result;
         }
 

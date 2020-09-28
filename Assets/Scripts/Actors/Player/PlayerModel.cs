@@ -30,6 +30,7 @@ namespace Game
         }
         #endregion
 
+        // TODO: not used (?)
         public event EventHandler<EventArgs<string>> OnPlayerStatsChanged;
 
         public PlayerStats PlayerStats { get; private set; }
@@ -65,8 +66,17 @@ namespace Game
         {
             PlayerStats.IdleProfit = CalculateIdleProfit(TeamWeapons, PlayerStats);
             PlayerStats.Gold += PlayerStats.IdleProfit;
-            
-            Debug.Log("PlayerStats.IdleProfit: " + PlayerStats.IdleProfit);
+
+
+            int index = PlayerStats.ClickGunSkills.List.FindIndex(item => item.Name == "ClickGunLevel");
+            if (index != -1)
+            {
+                PlayerStats.ClickGunSkills.List[index].Value = DMG.Level;
+            }
+
+            //PlayerStats.ClickGunSkills
+
+            Debug.Log("PlayerModel: DMG.Level: " + DMG.Level);
         }
 
         // TODO (?): move this to PlayerStats

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _waveHP:
     _baseValue: 1.4
-    _coefficient: 0.1
+    _coefficient: 0.06
     _offset: 32
   _waveGold:
     _baseValue: 1.2

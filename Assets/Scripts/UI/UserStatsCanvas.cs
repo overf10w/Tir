@@ -35,13 +35,15 @@ namespace Game
 
         public TextMeshProUGUI PlayerLevelTxt { get; private set; }
 
+        public TextMeshProUGUI PlayerWaveTxt { get; private set; }
+
         private Button _playerRestartLevelBtn;
 
         private LevelListUI _levelListUI;
 
         private Text _elapsedTimeSpanTxt;
 
-        public void Init(PlayerModel playerModel)
+        public void Init(PlayerModel playerModel, int waveInd)
         {
             InitMessageHandler();
 
@@ -51,8 +53,11 @@ namespace Game
             PlayerLevelTxt = transform.Find("MainPanel/LevelPanel/LevelBtn/LevelTxt").GetComponent<TextMeshProUGUI>();
             PlayerLevelTxt.text = playerModel.PlayerStats.Level.ToString();
 
-            _playerRestartLevelBtn = transform.Find("MainPanel/LevelPanel/LevelBtn").GetComponent<Button>();
+            _playerRestartLevelBtn = transform.Find("MainPanel/LevelPanel/RestartBtn").GetComponent<Button>();
             _playerRestartLevelBtn.onClick.AddListener(() => MessageBus.Instance.SendMessage(new Message { Type = MessageType.LEVEL_RESTARTED }));
+
+            PlayerWaveTxt = transform.Find("MainPanel/LevelPanel/LevelBtn/WaveTxt").GetComponent<TextMeshProUGUI>();
+            PlayerWaveTxt.text = waveInd.ToString() + "/5";
 
             _elapsedTimeSpanTxt = GameObject.Find("ElapsedTimeSpanLbl").GetComponent<Text>();
             TimeSpan idleTimeSpan = new TimeSpan(playerModel.PlayerStats.IdleTimeSpan);

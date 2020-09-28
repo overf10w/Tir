@@ -13,7 +13,7 @@ namespace Game
         private int _index = 0;
 
         private string[] _teamSkills = new string[] { "DPSMultiplier" };
-        private string[] _clickGunSkills = new string[] { "DMGMultiplier", "GoldGainedMultiplier" };
+        private string[] _clickGunSkills = new string[] { "DMGMultiplier", "GoldGainedMultiplier", "ClickGunLevel" };
         private string[] _weaponsLevels = new string[] { "StandardPistol", "MachineGun" };
         private string[] _weaponsMultipliers = new string[] { "StandardPistol", "MachineGun" };
 
@@ -24,7 +24,6 @@ namespace Game
         // Draw the property inside the given rect
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            Debug.Log("CriteriaDrawer: 0");
             // Using BeginProperty / EndProperty on the parent property means that
             // prefab override logic works on the entire property.
             EditorGUIUtility.labelWidth = 50.0f;

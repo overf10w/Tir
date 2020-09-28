@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.ComponentModel;
 using System.Runtime.Remoting.Channels;
 using UnityEngine;
 
@@ -48,6 +49,7 @@ namespace Game
         public event EventHandler<EventArgs> LevelPassed = (sender, e) => { };
         public event EventHandler<EventArgs<WeaponStatBtnClickArgs>> TeamWeaponBtnClicked = (sender, e) => { };
         public event EventHandler<EventArgs<WeaponStatBtnClickArgs>> ClickGunBtnClicked = (sender, e) => { };
+        public event EventHandler<EventArgs<int>> WaveChanged = (sender, e) => { };
 
         [HideInInspector]
         public Gun Gun { get; private set; }
@@ -60,14 +62,19 @@ namespace Game
 
         public IdleProfitCanvas IdleProfitCanvas { get; private set; }
 
+        public WaveSpawner WaveSpawner { get; private set; }
+
         public void Init(PlayerModel model, UpgradesSO upgrades)
         {
             InitMessageHandler();
 
             _soundsMachine.Init();
 
+            WaveSpawner = FindObjectOfType<WaveSpawner>();
+            WaveSpawner.PropertyChanged += WaveSpawner_PropertyChanged;
+
             Ui = FindObjectOfType<UserStatsCanvas>();
-            Ui.Init(model);
+            Ui.Init(model, WaveSpawner.WaveInd);
 
             TeamPanel = FindObjectOfType<TeamPanel>();
             TeamPanel.Init(model);
@@ -83,12 +90,24 @@ namespace Game
             ClickGunPanel = Ui.GetComponentInChildren<ClickGunPanel>();
             ClickGunPanel.Render(model, model.GunData.WeaponName, model.DPS, model.DMG);
 
+
+
             if (ClickGunPanel)
             {
                 ClickGunPanel.WeaponBtnClick.PlayerView = this;
             }
 
             Gun = GetComponentInChildren<Gun>();
+        }
+
+        private void WaveSpawner_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            WaveSpawner waveSpawner = (WaveSpawner)sender;
+            if (waveSpawner)
+            {
+                int waveInd = waveSpawner.WaveInd;
+                WaveChanged?.Invoke(this, new EventArgs<int>(waveInd));
+            }
         }
 
         private void Update()

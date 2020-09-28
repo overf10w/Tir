@@ -28,15 +28,23 @@ namespace Game
             // TODO: why we need it (?)
             EditorGUI.indentLevel = 1;
 
-            EditorGUI.PropertyField(contentRect, property.FindPropertyRelative("_statsLists"), true);
+            EditorGUI.PropertyField(contentRect, property.FindPropertyRelative("_stats"), true);
 
             // Price/Value algorithms
 
             float kek = 17.0f;
-            if (property.FindPropertyRelative("_statsLists").isExpanded)
+            if (property.FindPropertyRelative("_stats").isExpanded)
             {
-                contentRect.y += 48.0f;
-                kek *= property.FindPropertyRelative("_statsLists").arraySize;
+                for (int i = 0; i < property.FindPropertyRelative("_stats").arraySize; i++)
+                {
+                    if (property.FindPropertyRelative("_stats").GetArrayElementAtIndex(i).isExpanded)
+                    {
+                        contentRect.y += 37.0f;
+                    }
+                }
+
+                contentRect.y += 44.0f;
+                kek *= property.FindPropertyRelative("_stats").arraySize;
             }
 
             contentRect.y += kek;
@@ -121,10 +129,18 @@ namespace Game
             float height = 112.0f;
 
             float kek = 16.0f;
-            if (property.FindPropertyRelative("_statsLists").isExpanded)
+            if (property.FindPropertyRelative("_stats").isExpanded)
             {
-                height += 48.0f;
-                kek *= property.FindPropertyRelative("_statsLists").arraySize;
+                for (int i = 0; i < property.FindPropertyRelative("_stats").arraySize; i++)
+                {
+                    if (property.FindPropertyRelative("_stats").GetArrayElementAtIndex(i).isExpanded)
+                    {
+                        height += 38.0f;
+                    }
+                }
+
+                height += 44.0f;
+                kek *= property.FindPropertyRelative("_stats").arraySize;
             }
 
             return height + kek;

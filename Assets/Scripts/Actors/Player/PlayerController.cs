@@ -22,6 +22,7 @@ namespace Game
 
             _view.Clicked += ClickedHandler;
             _view.CubeDeath += CubeDeathHandler;
+            _view.WaveChanged += WaveChangedHandler;
             _view.LevelPassed += LevelPassedHandler;
             _view.TeamWeaponBtnClicked += TeamWeaponBtnClickHandler;
             _view.ClickGunBtnClicked += ClickGunBtnClickHandler;
@@ -32,6 +33,14 @@ namespace Game
             _model.PlayerStats.TeamSkills.StatChanged += TeamSkillsChangedHandler;
 
             _model.PlayerStats.WeaponsMultipliers.StatChanged += WeaponsMultipliersChangedHandler;
+        }
+
+        private void WaveChangedHandler(object sender, EventArgs<int> e)
+        {
+            if (e.Val != 0)
+            {
+                _view.Ui.PlayerWaveTxt.text = e.Val.ToString() + "/5";
+            }
         }
 
         private void WeaponsMultipliersChangedHandler(object sender, PropertyChangedEventArgs e)
@@ -191,6 +200,7 @@ namespace Game
             {
                 switch (buttonName)
                 {
+                    // TODO: remove this reduntant case (as we don't upgrade click gun's DPS)
                     case "DPS":
                         if (_model.PlayerStats.Gold >= _model.DPS.Price)
                         {
@@ -203,6 +213,9 @@ namespace Game
                         {
                             _model.PlayerStats.Gold -= _model.DMG.Price;
                             _model.DMG.Level++;
+
+                            int index = _model.PlayerStats.ClickGunSkills.List.FindIndex(item => item.Name == "ClickGunLevel");
+                            _model.PlayerStats.ClickGunSkills.List[index].Value = _model.DMG.Level;
                         }
                         break;
                     default:
@@ -242,6 +255,7 @@ namespace Game
                             _view.TeamPanel.UpdateView(_model);
                             break;
 
+                        // TODO: remove this reduntant case, as we don't upgrade weapons' dmg...
                         case "DMG":
                             if (_model.PlayerStats.Gold >= wpn.DMG.Price)
                             {

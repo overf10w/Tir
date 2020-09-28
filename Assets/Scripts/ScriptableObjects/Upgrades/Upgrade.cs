@@ -76,6 +76,7 @@ namespace Game
         [SerializeField] private string _name;
         public string Name => _name;
 
+        [TextArea]
         [SerializeField] private string _description;
         public string Description => _description;
 
@@ -96,7 +97,7 @@ namespace Game
         {
             get
             {
-                if (_iterationMultipliers == null)
+                if (_iterationMultipliers.Length == 0)
                 {
                     return _amount;
                 }

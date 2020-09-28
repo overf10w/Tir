@@ -12,17 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 622d60d1c8909d6419ce925e02d4edfd, type: 3}
   m_Name: Upgrade 3
   m_EditorClassIdentifier: 
-  _icon: {fileID: 5056229961613807097, guid: 9f51c2c2ff030524da06308215b550f4, type: 3}
-  _name: DPS++ [x2]
-  _description: Increase DPS by 10%
-  _statsList: 0
-  _stat: DPSMultiplier
-  _price: 100
-  _amount: 100
+  _icon: {fileID: 21300000, guid: 471098e7c279b7442a30f613d19d5af9, type: 3}
+  _name: MachineGunl::Increase DPS
+  _description: Increase Machine Gun DPS by 20%
+  _statsList: 3
+  _stat: MachineGun
+  _price: 800
+  _amount: 20
+  _iterationMultipliers: []
   _criterias:
-  - _statsList: 1
-    _stat: DMGMultiplier
-    _threshold: 2
+  - _statsList: 2
+    _stat: MachineGun
+    _threshold: 8
     _upgrades: []
     _thresholdComparison: 4
   _isActive: 1

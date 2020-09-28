@@ -55,12 +55,12 @@ namespace Game
                 if (upgrade.StatsList == StatsLists.WeaponsLevels.ToString())
                 {
                     warning = "Error. Can't be selected.";
-                    EditorGUI.LabelField(new Rect(lastRect.max.x - rectWidth, 115, rectWidth, 15), new GUIContent(warning), redStyleColor);
+                    EditorGUI.LabelField(new Rect(lastRect.max.x - rectWidth, 158, rectWidth, 15), new GUIContent(warning), redStyleColor);
                     _index = -1;
                 }
                 else
                 {
-                    _index = EditorGUI.Popup(new Rect(lastRect.max.x - rectWidth, 115, rectWidth, 15), new GUIContent(warning), _index, _availableOptions);
+                    _index = EditorGUI.Popup(new Rect(lastRect.max.x - rectWidth, 158, rectWidth, 15), new GUIContent(warning), _index, _availableOptions);
                 }
 
                 SerializedProperty _iterationMultipliers = serializedObject.FindProperty("_iterationMultipliers");

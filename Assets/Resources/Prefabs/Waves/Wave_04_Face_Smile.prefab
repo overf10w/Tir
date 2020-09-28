@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4670752890082938}
   - component: {fileID: 114398338289295854}
   m_Layer: 0
-  m_Name: Wave_04_Smile_00
+  m_Name: Wave_04_Face_Smile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -297,6 +297,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7908193954559720179}
+  - component: {fileID: 1093594356902716542}
   m_Layer: 0
   m_Name: Center
   m_TagString: Untagged
@@ -335,6 +336,19 @@ Transform:
   m_Father: {fileID: 4527973315028046686}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1093594356902716542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4459222666486419168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1303bd18eff139f4fa90032bb5bb2225, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
 --- !u!1 &4773620573309585477
 GameObject:
   m_ObjectHideFlags: 0

@@ -45,14 +45,14 @@ namespace Game
             if (GUILayout.Button("Read PlayerStatsData"))
             {
                 _playerData.playerStats.SetPlayerStats(ResourceLoader.Load<PlayerStatsData>(_playerStatsDataPath));
-                Debug.Log("_playerData.playerStats == null ? " + (_playerData.playerStats == null).ToString());
+                //Debug.Log("_playerData.playerStats == null ? " + (_playerData.playerStats == null).ToString());
             }
 
             if (GUILayout.Button("Save PlayerStatsData"))
             {
                 PlayerStatsData playerStatsData = _playerData.playerStats.GetPlayerStatsData();
                 ResourceLoader.Save<PlayerStatsData>(_playerStatsDataPath, playerStatsData);
-                Debug.Log("playerStatsData == null ? : " + (playerStatsData.Gold).ToString());
+                //Debug.Log("playerStatsData == null ? : " + (playerStatsData.Gold).ToString());
             }
 
 

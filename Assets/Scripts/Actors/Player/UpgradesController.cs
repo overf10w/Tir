@@ -42,14 +42,12 @@ namespace Game
         {
             //await UniTask.Delay(1);  // For Criteria to validate its referenced Upgrade (assigned in inspector) isn't IsActive no more
             _researchPanel.UpdateView();
-            Debug.Log("_researchPanel.UpdateView");
         }
 
         private /*async*/ void TeamSkillsListStatChangedHandler(object sender, PropertyChangedEventArgs e)
         {
             //await UniTask.Delay(1);  // For Criteria to validate its referenced Upgrade (assigned in inspector) isn't IsActive no more
             _researchPanel.UpdateView();
-            Debug.Log("_researchPanel.UpdateView");
         }
 
         public void UpgradeBtnClickHandler(UpgradeBtnClickEventArgs e)
@@ -71,7 +69,7 @@ namespace Game
                 float cachedFloat = skill.Value;
                 skill.Value = cachedFloat + (e.Upgrade.Amount / 100.0f);
 
-                Debug.Log("e.Upgrade.Amount: " + e.Upgrade.Amount);
+                //Debug.Log("e.Upgrade.Amount: " + e.Upgrade.Amount);
 
             }
         }

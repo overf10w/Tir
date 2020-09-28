@@ -3,11 +3,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace Game
 {
-    public class WaveSpawner : MessageHandler
+    public class WaveSpawner : MessageHandler, INotifyPropertyChanged
     {
+        #region INotifyPropertyChanged
+        [field: NonSerialized]
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        protected bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value))
+            {
+                return false;
+            }
+            field = value;
+            OnPropertyChanged(propertyName);
+            return true;
+        }
+        #endregion
+
         #region MessageHandler
         public override void InitMessageHandler()
         {
@@ -24,7 +45,7 @@ namespace Game
                 _cubesDestroyed++;
                 if (_cubesDestroyed == _cubesSpawned)
                 {
-                    if (_waveInd == 0)
+                    if (WaveInd == 0)
                     {
                         MessageBus.Instance.SendMessage(new Message { Type = MessageType.LEVEL_COMPLETE });
                     }
@@ -34,14 +55,12 @@ namespace Game
             }
             else if (message.Type == MessageType.LEVEL_RESTARTED)
             {
-                _waveInd = 0;
+                WaveInd = 0;
                 if (_wave)
                 {
                     Destroy(_wave.gameObject);
                 }
                 StartCoroutine(SpawnWave());
-
-                Debug.Log("WaveSpawner: I know the level was restarted!");
             }
         }
         #endregion
@@ -60,6 +79,7 @@ namespace Game
         private int _cubesDestroyed;
 
         private int _waveInd = 0;
+        public int WaveInd { get => _waveInd; set { SetField(ref _waveInd, value); } }
 
         public void Init(PlayerStats playerStats)
         {
@@ -80,7 +100,7 @@ namespace Game
             _waveFlag = true;
             yield return new WaitForSeconds(0.5f);
 
-            _waveInd++;
+            WaveInd++;
 
             var waves = _playerWaves.Waves;
 
@@ -102,13 +122,13 @@ namespace Game
             float waveHP = _algorithm.GetWaveHp(_playerStats.Level);
             float waveGold = _algorithm.GetWaveGold(_playerStats.Level);
 
-            if (_waveInd % 5 != 0)
+            if (WaveInd % 5 != 0)
             {
-                _wave.Init(waveHP / 100.0f, waveGold / 100.0f, _waveSpawnPoint);
+                _wave.Init(waveHP / 10.0f, waveGold / 5.0f, _waveSpawnPoint);
             } 
             else
             {
-                _waveInd = 0;
+                WaveInd = 0;
                 _wave.Init(waveHP, waveGold, _waveSpawnPoint);
             }
 

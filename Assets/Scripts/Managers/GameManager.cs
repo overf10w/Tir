@@ -328,20 +328,32 @@ using UnityEngine;
 // 1. Upgrade: Add IterationMultiplier PropertyDrawer - [done]
 
 // 25-SEP-20:
-// 0. Add 5 bosses (not animated):
-//      - https://www.rbxleaks.com/leak/2793
-//      - https://www.google.com/search?q=8+bit+horse&sxsrf=ALeKk00mO7NqbHQw3tj0ddJtw4GpzvfXhw:1600424566771&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjT2KqOvvLrAhVw-SoKHUgLD2cQ_AUoAXoECAsQAw&biw=1920&bih=1099#imgrc=omu2Iey4rARV9M
-// 1. Add 10 upgrades that make sense:
-//      - For every 10th level of MachineGun, StandardPistol, increase their DPS by 100% 
-// 2. Tweak the game balance to make it 100 level reachable
-// 3. Add 5 bosses
-// 4. Add a Debug Cheat Console: https://youtu.be/VzOEM-4A2OM
+// 0. Add 10 bosses - [done]
+// 1. Tweak the game balance to make it 100 level reachable - [done]
+// 2. Add a Debug Cheat Console: https://youtu.be/VzOEM-4A2OM
 
 // 26-SEP-20:
+// 0. Add a BonusSpawner.cs, which spawns bonus pixels
+//		- It uses PlayerStats.RandomPixel artifact to 
+// 1. Add Roblox horse boss: - 
+//      - https://www.rbxleaks.com/leak/2793
+//      - https://www.google.com/search?q=8+bit+horse&sxsrf=ALeKk00mO7NqbHQw3tj0ddJtw4GpzvfXhw:1600424566771&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjT2KqOvvLrAhVw-SoKHUgLD2cQ_AUoAXoECAsQAw&biw=1920&bih=1099#imgrc=omu2Iey4rARV9M
+// 2. Add 10 upgrades that make sense: - [done]
+//      - For every 10th level of MachineGun, StandardPistol, increase their DPS by 10% - [done]
 // (?) UpgradesSO/UpgradesEditor: show Upgrades as Reordable list:
 //  - https://blog.terresquall.com/2020/03/creating-reorderable-lists-in-the-unity-inspector/
 //  - https://github.com/SubjectNerd-Unity/ReorderableInspector
 //  - https://forum.unity.com/threads/what-is-the-best-way-to-do-a-reorderable-list.511070/
+
+// 27-SEP-20:
+// 0. WeaponAlgorithm. Add not only StatsList selector, but also Stat selector: - [done]
+//      - So the upgrades of type: "Increase StandardPistol DPSMultiplier by 10%" are calculated correctly - [doing...]
+
+// 28-SEP-20:
+// 0. Add camera shake when a wave is destroyed
+// 1. Make some new waves by rotating old ones (as with Snake wave)
+// 2. WaveSpawner: Add some Particle effects (from Ultimate VFX particles) when wave is spawned
+
 
 // (Important, not urgent):
 // 0. Cube: refactor TakeDamage, HealthChanged thingy (a little bit)

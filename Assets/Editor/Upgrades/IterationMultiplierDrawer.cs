@@ -13,7 +13,7 @@ namespace Game
         private int _index = 0;
 
         private string[] _teamSkills = new string[] { "DPSMultiplier" };
-        private string[] _clickGunSkills = new string[] { "DMGMultiplier", "GoldGainedMultiplier" };
+        private string[] _clickGunSkills = new string[] { "DMGMultiplier", "GoldGainedMultiplier", "ClickGunLevel" };
         private string[] _weaponsLevels = new string[] { "StandardPistol", "MachineGun" };
         private string[] _weaponsMultipliers = new string[] { "StandardPistol", "MachineGun" };
 
@@ -24,7 +24,7 @@ namespace Game
         // Draw the property inside the given rect
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            Debug.Log("AmountMultiplierDrawer: 0");
+            //Debug.Log("AmountMultiplierDrawer: 0");
             EditorGUIUtility.labelWidth = 50.0f;
 
             label = EditorGUI.BeginProperty(position, label, property);
