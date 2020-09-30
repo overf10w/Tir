@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: PlayerWavesTest
   m_EditorClassIdentifier: 
   _waves:
-  - {fileID: 114398338289295854, guid: 9e84db0ad491e9d49be49b9320b95d60, type: 3}
+  - {fileID: 114398338289295854, guid: 68ef4703f1afc5d4599c083c8d654282, type: 3}

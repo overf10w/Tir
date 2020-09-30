@@ -86,16 +86,22 @@ namespace Game
         private CoroutineQueue _takeDamageQueue;
         private CoroutineQueue _changeHPQueue;
 
-        public void Init(float hp, float gold)
+        public Color Color { get; set; }
+
+        public void Init(float hp, float gold, Color color)
         {
             _takeDamageQueue = new CoroutineQueue(1, StartCoroutine);
             _changeHPQueue = new CoroutineQueue(1, StartCoroutine);
+
+            Color = color;
 
             _cachedTransform = transform;
 
             _cubeStat = Resources.Load<CubeStats>("SO/CubeStats").Stats;
             _gold = gold;
             _soundsMachine.Init();
+
+
 
             _health = hp;
         }

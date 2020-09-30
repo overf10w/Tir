@@ -351,8 +351,18 @@ using UnityEngine;
 
 // 28-SEP-20:
 // 0. Add camera shake when a wave is destroyed/level is changed - [done]
-// 1. Make some new waves by rotating old ones (as with Snake wave) - [doing...]
-// 2. WaveSpawner: Add some Particle effects (from Ultimate VFX particles) when wave is spawned - [doing...]
+// 1. Make some new waves by rotating old ones (as with Snake wave) - [done]
+// 2. WaveSpawner: Add some Particle effects (from Ultimate VFX particles) when wave is spawned - [done]
+
+// 29-SEP-20:
+// 0. Experiment with weapons not shooting simultaneously, but rather in sequential order - [done]
+// 1. Add a timer for boss wave, if a player doesn't kill boss in time, they don't pass the level - 
+// 2. Spawn wave with the color of each cube set in the inspector - [done]
+//      - Cube gizmo to match the color set in the inspector - [done]
+//      - Ways to add transparency: 
+//      - Make Material Rendering Mode: Fade
+//      - https://forum.unity.com/threads/change-rendering-mode-via-script.476437/ - 
+//      - https://answers.unity.com/questions/1019974/how-to-access-emission-color-of-a-material-in-scri.html - 
 
 
 // (Important, not urgent):

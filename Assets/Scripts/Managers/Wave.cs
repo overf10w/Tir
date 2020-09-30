@@ -80,8 +80,16 @@ namespace Game
                 cube.transform.position = spawnTransform.position;
                 cube.transform.localScale = cubeScale;
                 cube.transform.parent = spawnTransform;
+                cube.transform.rotation = spawnTransform.rotation;
 
-                cube.Init(WaveHP / cubesCnt, WaveGold / cubesCnt);
+                Color cubecolor = UnityEngine.Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+                CubeSpawnColor cubeSpawnColor = spawnTransform.GetComponent<CubeSpawnColor>();
+                if (cubeSpawnColor != null)
+                {
+                    cubecolor = cubeSpawnColor.Color;
+                }
+
+                cube.Init(WaveHP / cubesCnt, WaveGold / cubesCnt, cubecolor);
                 new CubeController(cube);
                 cube.HpChanged += CubeTakeDamageHandler;
                 Cubes.Add(cube.GetComponent<ICube>());

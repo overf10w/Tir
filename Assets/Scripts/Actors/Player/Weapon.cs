@@ -19,6 +19,13 @@ namespace Game
         [SerializeField] private StatData _dmg;
         public StatData DMG { get => _dmg; set { _dmg = value; } }
 
+        [SerializeField] private float _shootInterval;
+        public float ShootInterval { get => _shootInterval; set { _shootInterval = value; } }
+
+        [SerializeField] private float _startTimeout;
+        public float StartTimeout { get => _startTimeout; set { _startTimeout = value; } }
+
+
         public WeaponAlgorithms algorithms;
     }
 
@@ -169,7 +176,9 @@ namespace Game
         private Wave _wave;
 
         private float _nextShotTime;
-        private float _msBetweenShots = 1000;
+
+        private float _startTimeout = 0.0f;
+        private float _shootInterval = 1000.0f;
 
         public void Init(float DpsMultiplier, WeaponData data, PlayerStats playerStats)
         {
@@ -177,6 +186,8 @@ namespace Game
 
             Algorithms = data.algorithms;
             _playerStats = playerStats;
+            _shootInterval = data.ShootInterval;
+            _startTimeout = data.StartTimeout;
 
             DPS = new WeaponStat(DpsMultiplier, data.DPS, playerStats, data.algorithms.DPS);
             DMG = new WeaponStat(data.DMG, playerStats, data.algorithms.DMG);
@@ -200,7 +211,7 @@ namespace Game
 
         private void Update()
         {
-            if (_wave != null)
+            if (_wave != null )
             {
                 Fire(_wave);
             }
@@ -208,9 +219,14 @@ namespace Game
 
         public void Fire(Wave wave)
         {
+            if (Time.time <= _startTimeout)
+            {
+                return;
+            }
+
             if (Time.time > _nextShotTime)
             {
-                _nextShotTime = Time.time + _msBetweenShots / 1000;
+                _nextShotTime = Time.time + _shootInterval / 1000;
                 //IDestroyable cube = wave.Cubes.ElementAtOrDefault(new System.Random().Next(wave.Cubes.Count));
                 ICube cube = wave.Cubes.PickRandom();
                 if ((MonoBehaviour)cube != null)

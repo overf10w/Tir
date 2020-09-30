@@ -619,6 +619,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7283486003149442301}
+  - component: {fileID: 7385231500168067606}
   m_Layer: 8
   m_Name: Cube_New (10)
   m_TagString: Untagged
@@ -640,6 +641,19 @@ Transform:
   m_Father: {fileID: 7908193954559720179}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7385231500168067606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7692177547325536982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &9059134825746549543
 GameObject:
   m_ObjectHideFlags: 0
