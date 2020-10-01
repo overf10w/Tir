@@ -25,7 +25,6 @@ namespace Game
         [SerializeField] private float _startTimeout;
         public float StartTimeout { get => _startTimeout; set { _startTimeout = value; } }
 
-
         public WeaponAlgorithms algorithms;
     }
 
@@ -177,8 +176,8 @@ namespace Game
 
         private float _nextShotTime;
 
-        private float _startTimeout = 0.0f;
-        private float _shootInterval = 1000.0f;
+        public float StartTimeout { get; private set; }
+        public float ShootInterval { get; private set; }
 
         public void Init(float DpsMultiplier, WeaponData data, PlayerStats playerStats)
         {
@@ -186,8 +185,10 @@ namespace Game
 
             Algorithms = data.algorithms;
             _playerStats = playerStats;
-            _shootInterval = data.ShootInterval;
-            _startTimeout = data.StartTimeout;
+            ShootInterval = data.ShootInterval;
+            StartTimeout = data.StartTimeout;
+
+            _nextShotTime = StartTimeout / 1000.0f;
 
             DPS = new WeaponStat(DpsMultiplier, data.DPS, playerStats, data.algorithms.DPS);
             DMG = new WeaponStat(data.DMG, playerStats, data.algorithms.DMG);
@@ -198,48 +199,32 @@ namespace Game
             DPS.UpgradeValueMultiplier(DpsMultiplier);
         }
 
-        //public void Init(int DPSLevel, WeaponData data, PlayerStats playerStats)
-        //{
-        //    InitMessageHandler();
-
-        //    Algorithms = data.algorithms;
-        //    _playerStats = playerStats;
-
-        //    DPS = new WeaponStat(DPSLevel, data.DPS, playerStats, data.algorithms.DPS);
-        //    DMG = new WeaponStat(data.DMG, playerStats, data.algorithms.DMG);
-        //}
-
-        private void Update()
+        private void Start()
         {
-            if (_wave != null )
-            {
-                Fire(_wave);
-            }
+            StartCoroutine(Fire());
         }
 
-        public void Fire(Wave wave)
+        private IEnumerator Fire()
         {
-            if (Time.time <= _startTimeout)
+            yield return new WaitForSeconds(StartTimeout / 1000.0f);
+            while (true)
             {
-                return;
-            }
-
-            if (Time.time > _nextShotTime)
-            {
-                _nextShotTime = Time.time + _shootInterval / 1000;
-                //IDestroyable cube = wave.Cubes.ElementAtOrDefault(new System.Random().Next(wave.Cubes.Count));
-                ICube cube = wave.Cubes.PickRandom();
-                if ((MonoBehaviour)cube != null)
+                if (_wave != null)
                 {
-                    if (DPS.Value != 0)
+                    ICube cube = _wave.Cubes.PickRandom();
+                    if ((MonoBehaviour)cube != null)
                     {
-                        cube.TakeDamage(DPS.Value, false);
+                        if (DPS.Value != 0)
+                        {
+                            cube.TakeDamage(DPS.Value, false);
+                        }
+                    }
+                    else
+                    {
+                        Debug.Log("Weapon: " + ": There's no cube there!");
                     }
                 }
-                else
-                {
-                    Debug.Log("Weapon: " + ": There's no cube there!");
-                }
+                yield return new WaitForSeconds(ShootInterval / 1000.0f);
             }
         }
     }

@@ -356,7 +356,10 @@ using UnityEngine;
 
 // 29-SEP-20:
 // 0. Experiment with weapons not shooting simultaneously, but rather in sequential order - [done]
-// 1. Add a timer for boss wave, if a player doesn't kill boss in time, they don't pass the level - 
+// 1. Add a timer for boss wave, if a player doesn't kill boss in time, they don't pass the level - [done]
+//      - Ways to improve:
+//      - WaveCanvas.cs: Show timer
+
 // 2. Spawn wave with the color of each cube set in the inspector - [done]
 //      - Cube gizmo to match the color set in the inspector - [done]
 //      - Ways to add transparency: 
@@ -364,6 +367,11 @@ using UnityEngine;
 //      - https://forum.unity.com/threads/change-rendering-mode-via-script.476437/ - 
 //      - https://answers.unity.com/questions/1019974/how-to-access-emission-color-of-a-material-in-scri.html - 
 
+// 30-SEP-20:
+// 0. Weapon.cs: Refactor Fire() with coroutines - [done]
+// 1. Add new upgrades
+// 2. Add save/exit buttons
+// 3. Do 29-SEP-20: WaysToImprove
 
 // (Important, not urgent):
 // 0. Cube: refactor TakeDamage, HealthChanged thingy (a little bit)

@@ -18,8 +18,10 @@ MonoBehaviour:
       _level: 0
       _upgradeLevel: 0
     _dmg:
-      _level: 1
+      _level: 0
       _upgradeLevel: 0
+    _shootInterval: 0
+    _startTimeout: 0
     algorithms:
       _dps:
         _stats:

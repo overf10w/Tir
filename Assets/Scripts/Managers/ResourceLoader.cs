@@ -112,6 +112,8 @@ namespace Game
                 data.DMG = new StatData();
 
                 data.WeaponName = weapon.Key;
+                data.ShootInterval = weapon.Value.ShootInterval;
+                data.StartTimeout = weapon.Value.StartTimeout;
 
                 data.DPS.Level = weapon.Value.DPS.Level;
                 data.DMG.Level = weapon.Value.DMG.Level;

@@ -22,7 +22,6 @@ namespace Game
         private float _currHP;
         private float _hpScaleMultiplier;
 
-
         private void Start()
         {
             _cube = GetComponentInParent<Cube>();
@@ -32,18 +31,11 @@ namespace Game
 
             _renderer = GetComponent<MeshRenderer>();
 
-
-            //_renderer.material = /*_cube.Color;*/
-
             _renderer.material = _cubeStat.materials.PickRandom();
 
-            //Debug.Log("The color gotta be: " + _cube.Color.r + ", " + _cube.Color.g + ", " + _cube.Color.b);
-
-            //Debug.Log("The color gotta be: " + _renderer.material.color.r + ", " + _renderer.material.color.g + ", " + _renderer.material.color.b);
             _renderer.material.color = _cube.Color;
-            Debug.Log("The color gotta be: " + _renderer.material.color.r + ", " + _renderer.material.color.g + ", " + _renderer.material.color.b);
             _renderer.material.SetColor("_EmissionColor", _cube.Color * 1.12f);
-            //_renderer.material.set
+
             _currHP = _maxHP = _cube.Health;
             _hpScaleMultiplier = transform.localScale.y / _maxHP;
         }

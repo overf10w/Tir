@@ -32,7 +32,7 @@ MonoBehaviour:
       _value: 1
     - _icon: {fileID: 21300000, guid: 36b4c625f848eea4e8c898f733b5d293, type: 3}
       _name: ClickGunLevel
-      _value: 0
+      _value: 1
     _artifacts:
     - _icon: {fileID: 21300000, guid: 0cf9ad425bac04349a2c2dbeb480b487, type: 3}
       _name: p

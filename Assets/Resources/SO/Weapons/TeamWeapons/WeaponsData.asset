@@ -15,13 +15,13 @@ MonoBehaviour:
   _weapons:
   - _weaponName: StandardPistol
     _dps:
-      _level: 6
+      _level: 0
       _upgradeLevel: 0
     _dmg:
       _level: 0
       _upgradeLevel: 0
-    _shootInterval: 50
-    _startTimeout: 0
+    _shootInterval: 1000
+    _startTimeout: 1000
     algorithms:
       _dps:
         _stats:
@@ -49,13 +49,13 @@ MonoBehaviour:
         _upgradeValueMultiplier: 2
   - _weaponName: MachineGun
     _dps:
-      _level: 3
+      _level: 0
       _upgradeLevel: 0
     _dmg:
       _level: 0
       _upgradeLevel: 0
-    _shootInterval: 50
-    _startTimeout: 500
+    _shootInterval: 1000
+    _startTimeout: 1500
     algorithms:
       _dps:
         _stats:

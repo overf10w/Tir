@@ -91,8 +91,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &392746847074489057
 GameObject:
   m_ObjectHideFlags: 0
@@ -136,8 +136,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &656670749537144625
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,8 +181,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &727235015152193997
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,8 +226,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &733359315234932679
 GameObject:
   m_ObjectHideFlags: 0
@@ -271,8 +271,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &798518360044737884
 GameObject:
   m_ObjectHideFlags: 0
@@ -361,8 +361,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &974465175880710095
 GameObject:
   m_ObjectHideFlags: 0
@@ -406,8 +406,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &997588560276357362
 GameObject:
   m_ObjectHideFlags: 0
@@ -451,8 +451,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &1317658860835398255
 GameObject:
   m_ObjectHideFlags: 0
@@ -496,8 +496,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &1627425389628898895
 GameObject:
   m_ObjectHideFlags: 0
@@ -586,8 +586,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &1878853516761732139
 GameObject:
   m_ObjectHideFlags: 0
@@ -631,8 +631,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &1932197713455177787
 GameObject:
   m_ObjectHideFlags: 0
@@ -676,8 +676,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &1978320604390762614
 GameObject:
   m_ObjectHideFlags: 0
@@ -721,8 +721,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &2138895206748646125
 GameObject:
   m_ObjectHideFlags: 0
@@ -766,8 +766,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &2283730930539837300
 GameObject:
   m_ObjectHideFlags: 0
@@ -811,8 +811,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &2455652537746689978
 GameObject:
   m_ObjectHideFlags: 0
@@ -856,8 +856,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &2542404802642984607
 GameObject:
   m_ObjectHideFlags: 0
@@ -946,8 +946,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &2681946930891995289
 GameObject:
   m_ObjectHideFlags: 0
@@ -991,8 +991,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &2736332755032113788
 GameObject:
   m_ObjectHideFlags: 0
@@ -1036,8 +1036,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &2827711498119641134
 GameObject:
   m_ObjectHideFlags: 0
@@ -1081,8 +1081,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &2875052507284897042
 GameObject:
   m_ObjectHideFlags: 0
@@ -1126,8 +1126,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &2922892186872658071
 GameObject:
   m_ObjectHideFlags: 0
@@ -1171,8 +1171,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &3031457692013001100
 GameObject:
   m_ObjectHideFlags: 0
@@ -1216,8 +1216,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &3099277337359338230
 GameObject:
   m_ObjectHideFlags: 0
@@ -1261,8 +1261,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &3230231329691435274
 GameObject:
   m_ObjectHideFlags: 0
@@ -1306,8 +1306,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &3373333585155154888
 GameObject:
   m_ObjectHideFlags: 0
@@ -1351,8 +1351,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &3608113747903494758
 GameObject:
   m_ObjectHideFlags: 0
@@ -1396,8 +1396,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &3666951327298382671
 GameObject:
   m_ObjectHideFlags: 0
@@ -1441,8 +1441,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &3728011821630536171
 GameObject:
   m_ObjectHideFlags: 0
@@ -1531,8 +1531,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &4187032651950759344
 GameObject:
   m_ObjectHideFlags: 0
@@ -1621,8 +1621,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &4326149765405634176
 GameObject:
   m_ObjectHideFlags: 0
@@ -1666,8 +1666,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &4459222666486419168
 GameObject:
   m_ObjectHideFlags: 0
@@ -1815,8 +1815,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &4679811686765843761
 GameObject:
   m_ObjectHideFlags: 0
@@ -1860,8 +1860,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &4688825098816016926
 GameObject:
   m_ObjectHideFlags: 0
@@ -1950,8 +1950,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &4874702251795380767
 GameObject:
   m_ObjectHideFlags: 0
@@ -1995,8 +1995,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &5110627502877707581
 GameObject:
   m_ObjectHideFlags: 0
@@ -2091,8 +2091,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &5354969433838089195
 GameObject:
   m_ObjectHideFlags: 0
@@ -2136,8 +2136,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &5498681340667049710
 GameObject:
   m_ObjectHideFlags: 0
@@ -2181,8 +2181,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &5879321732877085614
 GameObject:
   m_ObjectHideFlags: 0
@@ -2226,8 +2226,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &6075179690088460919
 GameObject:
   m_ObjectHideFlags: 0
@@ -2271,8 +2271,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &6132415219993526691
 GameObject:
   m_ObjectHideFlags: 0
@@ -2316,8 +2316,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &6203697359442783838
 GameObject:
   m_ObjectHideFlags: 0
@@ -2361,8 +2361,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &6215763208532176852
 GameObject:
   m_ObjectHideFlags: 0
@@ -2406,8 +2406,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &6492910235814257819
 GameObject:
   m_ObjectHideFlags: 0
@@ -2496,8 +2496,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &6972821190260562051
 GameObject:
   m_ObjectHideFlags: 0
@@ -2541,8 +2541,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &7387977073639500783
 GameObject:
   m_ObjectHideFlags: 0
@@ -2586,8 +2586,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &7792860171135717718
 GameObject:
   m_ObjectHideFlags: 0
@@ -2631,8 +2631,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &8002937872445285905
 GameObject:
   m_ObjectHideFlags: 0
@@ -2676,8 +2676,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &8326030151215166105
 GameObject:
   m_ObjectHideFlags: 0
@@ -2766,8 +2766,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &9132673762564690856
 GameObject:
   m_ObjectHideFlags: 0
@@ -2811,8 +2811,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &9180059460232447248
 GameObject:
   m_ObjectHideFlags: 0
@@ -2856,8 +2856,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
 --- !u!1 &9192904821612760593
 GameObject:
   m_ObjectHideFlags: 0
@@ -2901,5 +2901,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58357d99582040545bb4982b1682aa9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.9862842, g: 1, b: 0.2028302, a: 1}
-  _random: 1
+  _color: {r: 0.9892957, g: 1, b: 0, a: 1}
+  _random: 0
